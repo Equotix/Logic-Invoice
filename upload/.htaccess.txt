@@ -1,0 +1,51 @@
+# 1. To use this file, you need to be using Apache with mod_rewrite enabled.
+# 2. Rename this file to .htaccess (remove .txt from the end of this file name)
+
+Options +FollowSymlinks
+
+# Prevent Directory listing.
+Options -Indexes
+
+# Prevent Apache from returning a 404 error as the result of a rewrite when the directory with the same name does not exist.
+Options -MultiViews
+
+# Use UTF-8 encoding for anything served as text/html or text/plain.
+AddDefaultCharset utf-8
+
+# Force UTF-8 for certain file formats.
+<IfModule mod_mime.c>
+  AddCharset utf-8 .atom .css .js .json .jsonld .rss .vtt .webapp .xml
+</IfModule>
+
+# Prevent Direct Access to files
+<FilesMatch "(?i)((\.tpl|\.ini|\.log|(?<!robots)\.txt))">
+ Order deny,allow
+ Deny from all
+</FilesMatch>
+
+# Prevent some browsers from MIME-sniffing the response.
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+</IfModule>
+
+# SEO URL Settings
+RewriteEngine On
+
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !.*\.(ico|gif|jpg|jpeg|png|js|css)
+RewriteRule ^([^?]*) index.php?_load_=$1 [L,QSA]
+
+### Additional Settings that may need to be enabled for some servers 
+### Uncomment the commands by removing the # sign in front of it.
+### If you get an "Internal Server Error 500" after enabling any of the following settings, restore the # as this means your host doesn't allow that.
+
+# 1. Disable register globals
+# php_flag register_globals off
+
+# 2. Disable magic quotes
+# php_flag magic_quotes_gpc Off
+
+# 3. disable open_basedir limitations
+# php_admin_value open_basedir none
