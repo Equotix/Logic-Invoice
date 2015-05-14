@@ -1,4 +1,11 @@
-#Logic Invoice                                     
+#Logic Invoice
+
+**********Requirements**********
+
+1. PHP 5.3 and above
+2. MySQL database
+3. Linux / Windows web server (Apache preferred)
+
 
 **********Installation Instructions**********
 
