@@ -5,7 +5,7 @@
     <title><?php echo $heading_install; ?></title>
     <base href="<?php echo $base; ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="<?php echo $application; ?>share/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="<?php echo $application; ?>share/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="<?php echo $application; ?>share/bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="<?php echo $application; ?>share/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $application; ?>share/font-awesome/css/font-awesome.min.css" />
