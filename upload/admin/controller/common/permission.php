@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ControllerCommonPermission extends Controller {
     public function index() {
         $this->data = $this->load->language('common/permission');

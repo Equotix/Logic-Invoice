@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ControllerSystemError extends Controller {
     public function index() {
         $this->data = $this->load->language('system/error');
@@ -22,13 +24,7 @@ class ControllerSystemError extends Controller {
 
         $this->data['clear'] = $this->url->link('system/error/clear', 'token=' . $this->session->data['token'], 'SSL');
 
-        $file = DIR_LOGS . $this->config->get('config_error_filename');
-
-        if (file_exists($file)) {
-            $this->data['log'] = file_get_contents($file, FILE_USE_INCLUDE_PATH, null);
-        } else {
-            $this->data['log'] = '';
-        }
+        $this->data['log'] = $this->log->get();
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
@@ -42,7 +38,7 @@ class ControllerSystemError extends Controller {
         if (!$this->user->hasPermission('modify', 'system/error')) {
             $this->session->data['warning'] = $this->language->get('error_permission');
         } else {
-            $file = DIR_LOGS . $this->config->get('config_error_filename');
+            $file = DIR_SYSTEM . 'logs/' . $this->config->get('config_error_filename');
 
             $handle = fopen($file, 'w+');
 

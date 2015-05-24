@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ModelReportTransaction extends Model {
     public function getTotalByAccount($account_id, $data) {
         $sql = "SELECT SUM(credit) AS credit, SUM(debit) AS debit FROM " . DB_PREFIX . "transaction_account ta LEFT JOIN " . DB_PREFIX . "transaction t ON t.transaction_id = ta.transaction_id WHERE ta.account_id = '" . (int)$account_id . "'";

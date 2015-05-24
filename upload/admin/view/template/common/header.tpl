@@ -4,7 +4,7 @@
     <title><?php echo $title; ?></title>
     <base href="<?php echo $base; ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="text/javascript" src="<?php echo $application; ?>share/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="<?php echo $application; ?>share/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="<?php echo $application; ?>share/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="view/javascript/system.js"></script>
     <link rel="stylesheet" type="text/css" href="<?php echo $application; ?>share/bootstrap/css/bootstrap.min.css" />
@@ -22,10 +22,11 @@
     <header id="header">
       <img id="button-menu" src="view/image/icon.png" style="height:30px;" />
       <ul class="nav pull-right">
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-life-ring"></i></a>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-question-circle"></i></a>
           <ul class="dropdown-menu dropdown-menu-right">
             <li><a href="http://www.logicinvoice.com" target="_blank">Logic Invoice</a></li>
-            <li><a href="https://plus.google.com/+Equotix/posts" target="_blank">Google+</a></li>
+            <li><a href="http://docs.logicinvoice.com" target="_blank"><?php echo $text_documentation; ?></a></li>
+            <li><a href="http://forum.logicinvoice.com" target="_blank"><?php echo $text_forum; ?></a></li>
           </ul>
         </li>
         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><?php echo $username; ?></a>
@@ -67,6 +68,7 @@
         </li>
         <li><a class="parent"><i class="fa fa-puzzle-piece fa-fw"></i> <span><?php echo $text_extension; ?></span></a>
           <ul>
+            <li><a href="<?php echo $module; ?>"><span><?php echo $text_module; ?></span></a></li>
             <li><a href="<?php echo $payment; ?>"><span><?php echo $text_payment; ?></span></a></li>
             <li><a href="<?php echo $total; ?>"><span><?php echo $text_total; ?></span></a></li>
           </ul>

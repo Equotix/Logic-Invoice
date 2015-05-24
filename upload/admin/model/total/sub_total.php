@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ModelTotalSubTotal extends Model {
     public function getTotal(&$total_data, &$total, &$taxes) {
         $this->load->language('total/sub_total');

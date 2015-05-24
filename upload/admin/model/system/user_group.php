@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ModelSystemUserGroup extends Model {
     public function addUserGroup($data) {
         $this->db->query("INSERT INTO " . DB_PREFIX . "user_group SET name = '" . $this->db->escape($data['name']) . "', permission = '" . $this->db->escape(isset($data['permission']) ? serialize($data['permission']) : '') . "'");

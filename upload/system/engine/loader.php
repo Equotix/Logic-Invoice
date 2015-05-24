@@ -13,8 +13,26 @@ final class Loader {
     }
 
     public function model($model) {
-        $file = DIR_APPLICATION . 'model/' . $model . '.php';
-        $class = 'Model' . preg_replace('/[^a-zA-Z0-9]/', '', $model);
+		$parts = explode('/', str_replace('../', '', (string)$model));
+		
+		if (isset($parts[0]) && ($parts[0] == 'module' || $parts[0] == 'payment' || $parts[0] == 'total')) {
+			if (isset($parts[1])) {
+				$file = DIR_EXTENSION . $parts[0] . '/' . $parts[1] . '/model/';
+				
+				array_shift($parts);
+				
+				array_shift($parts);
+				
+				$file .= implode('/', $parts) . '.php';
+				$class = 'Model' . preg_replace('/[^a-zA-Z0-9]/', '', $model);
+			} else {
+				trigger_error('Error: Could not load model ' . $file . '!');
+				exit();
+			}
+		} else {
+			$file = DIR_APPLICATION . 'model/' . $model . '.php';
+			$class = 'Model' . preg_replace('/[^a-zA-Z0-9]/', '', $model);
+		}
 
         if (file_exists($file)) {
             include_once($file);
@@ -27,22 +45,39 @@ final class Loader {
     }
 
     public function view($template, $data = array()) {
-        $file = DIR_TEMPLATE . $template;
+		$parts = explode('/', str_replace('../', '', (string)$template));
+		
+		if (isset($parts[0]) && ($parts[0] == 'module' || $parts[0] == 'payment' || $parts[0] == 'total')) {
+			if (isset($parts[1])) {
+				$file = DIR_EXTENSION . $parts[0] . '/' . $parts[1] . '/view/template/';
+				
+				array_shift($parts);
+				
+				array_shift($parts);
+				
+				$file .= implode('/', $parts);
+			} else {
+				trigger_error('Error: Could not load template ' . $file . '!');
+				exit();
+			}
+		} else {
+			$file = DIR_TEMPLATE . $template;
+		}
+		
+		if (file_exists($file)) {
+			extract($data);
 
-        if (file_exists($file)) {
-            extract($data);
+			ob_start();
 
-            ob_start();
+			require($file);
 
-            require($file);
+			$output = ob_get_clean();
 
-            $output = ob_get_clean();
-
-            return $output;
-        } else {
-            trigger_error('Error: Could not load template ' . $file . '!');
-            exit();
-        }
+			return $output;
+		} else {
+			trigger_error('Error: Could not load template ' . $file . '!');
+			exit();
+		}
     }
 
     public function library($library) {

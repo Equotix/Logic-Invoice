@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ModelSystemUser extends Model {
     public function addUser($data) {
         $this->db->query("INSERT INTO `" . DB_PREFIX . "user` SET user_group_id = '" . (int)$data['user_group_id'] . "', `key` = '" . $this->db->escape($data['key']) . "', secret = '" . $this->db->escape($data['secret']) . "', email = '" . $this->db->escape($data['email']) . "', username = '" . $this->db->escape($data['username']) . "', salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', status = '" . (int)$data['status'] . "', date_added = NOW(), date_modified = NOW()");

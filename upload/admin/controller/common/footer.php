@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ControllerCommonFooter extends Controller {
     public function index() {
         $this->load->language('common/footer');

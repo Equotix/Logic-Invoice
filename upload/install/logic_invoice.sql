@@ -731,6 +731,7 @@ CREATE TABLE IF NOT EXISTS `li_transaction_account` (
 
 CREATE TABLE IF NOT EXISTS `li_url_alias` (
   `url_alias_id` int(11) NOT NULL AUTO_INCREMENT,
+  `language_id` int(11) NOT NULL AUTO_INCREMENT,
   `query` varchar(255) NOT NULL,
   `keyword` varchar(255) NOT NULL,
   PRIMARY KEY (`url_alias_id`)
@@ -740,13 +741,13 @@ CREATE TABLE IF NOT EXISTS `li_url_alias` (
 -- Dumping data for table `li_url_alias`
 --
 
-INSERT INTO `li_url_alias` (`url_alias_id`, `query`, `keyword`) VALUES
-(1, 'article_id=1', 'about-us'),
-(2, 'article_id=3', 'terms-n-conditions'),
-(3, 'article_id=4', 'equotix-invoice'),
-(4, 'article_id=2', 'our-portfolio'),
-(5, 'article_id=5', 'history'),
-(6, 'article_id=6', 'how-to-pay');
+INSERT INTO `li_url_alias` (`url_alias_id`, `language_id`, `query`, `keyword`) VALUES
+(1, 1, 'article_id=1', 'about-us'),
+(2, 1, 'article_id=3', 'terms-n-conditions'),
+(3, 1, 'article_id=4', 'equotix-invoice'),
+(4, 1, 'article_id=2', 'our-portfolio'),
+(5, 1, 'article_id=5', 'history'),
+(6, 1, 'article_id=6', 'how-to-pay');
 
 -- --------------------------------------------------------
 
@@ -775,10 +776,6 @@ CREATE TABLE IF NOT EXISTS `li_user` (
 -- Dumping data for table `li_user`
 --
 
---INSERT INTO `li_user` (`user_id`, `user_group_id`, `key`, `secret`, `email`, `username`, `salt`, `password`, `ip`, `code`, `status`, `date_added`, `date_modified`) VALUES
---(1, 1, 'jmDoCA3iwyYHP86qPMq7XJhJnPuwZTdT3FPUTR36Hknpa4hq8fuBv6eh6ZACXWm6', '4bAkyHfbibWpbyfDUAM344w0a7uQafORVBubIZdxNrrm7tDpHLwriV4pu5FsjrZl', 'admin@example.com', 'admin', 'd5cc41d16', 'd580b2c5d962b850c02397b23965789a52bcae14', '', '', 1, '0000-00-00 00:00:00', '2015-02-12 14:01:45'),
---(3, 2, 'VpdUcAWtKywMaUGi7CXCYxIfeJofwUOQ1IgvkC1mlQVoIGUAWugOWdCMiMJ6Tnan', 'HzbZJJdbFGWs2lmIUZTcA3qwKkgQdLf1j5v7XmuzqdAZpNvrg5mDOb8Npuj3cutr', 'cron@example.com', 'Cron', '35dfed170', '96fe5c1b74d0cdc6f52a8a02dd9ffe4d6cbf706f', '', '', 0, '2014-11-18 11:11:19', '2015-02-12 14:01:34');
-
 -- --------------------------------------------------------
 
 --
@@ -797,5 +794,5 @@ CREATE TABLE IF NOT EXISTS `li_user_group` (
 --
 
 INSERT INTO `li_user_group` (`user_group_id`, `name`, `permission`) VALUES
-(1, 'Top Administrator', 'a:2:{s:6:"access";a:32:{i:0;s:18:"accounting/account";i:1;s:19:"accounting/currency";i:2;s:18:"accounting/journal";i:3;s:20:"accounting/tax_class";i:4;s:19:"accounting/tax_rate";i:5;s:16:"billing/customer";i:6;s:15:"billing/invoice";i:7;s:17:"billing/recurring";i:8;s:16:"common/dashboard";i:9;s:15:"content/article";i:10;s:22:"content/email_template";i:11;s:17:"extension/payment";i:12;s:15:"extension/total";i:13;s:21:"payment/bank_transfer";i:14;s:14:"payment/cheque";i:15;s:19:"payment/pp_standard";i:16;s:24:"report/chart_of_accounts";i:17;s:14:"report/invoice";i:18;s:16:"report/recurring";i:19;s:10:"report/sci";i:20;s:10:"report/sfp";i:21;s:15:"system/activity";i:22;s:12:"system/error";i:23;s:15:"system/language";i:24;s:14:"system/setting";i:25;s:13:"system/status";i:26;s:17:"system/user_group";i:27;s:11:"system/user";i:28;s:15:"total/sub_total";i:29;s:9:"total/tax";i:30;s:11:"total/total";i:31;s:21:"payment/bank_transfer";}s:6:"modify";a:32:{i:0;s:18:"accounting/account";i:1;s:19:"accounting/currency";i:2;s:18:"accounting/journal";i:3;s:20:"accounting/tax_class";i:4;s:19:"accounting/tax_rate";i:5;s:16:"billing/customer";i:6;s:15:"billing/invoice";i:7;s:17:"billing/recurring";i:8;s:16:"common/dashboard";i:9;s:15:"content/article";i:10;s:22:"content/email_template";i:11;s:17:"extension/payment";i:12;s:15:"extension/total";i:13;s:21:"payment/bank_transfer";i:14;s:14:"payment/cheque";i:15;s:19:"payment/pp_standard";i:16;s:24:"report/chart_of_accounts";i:17;s:14:"report/invoice";i:18;s:16:"report/recurring";i:19;s:10:"report/sci";i:20;s:10:"report/sfp";i:21;s:15:"system/activity";i:22;s:12:"system/error";i:23;s:15:"system/language";i:24;s:14:"system/setting";i:25;s:13:"system/status";i:26;s:17:"system/user_group";i:27;s:11:"system/user";i:28;s:15:"total/sub_total";i:29;s:9:"total/tax";i:30;s:11:"total/total";i:31;s:21:"payment/bank_transfer";}}'),
+(1, 'Top Administrator', 'a:2:{s:6:"access";a:32:{i:0;s:18:"accounting/account";i:1;s:19:"accounting/currency";i:2;s:18:"accounting/journal";i:3;s:20:"accounting/tax_class";i:4;s:19:"accounting/tax_rate";i:5;s:16:"billing/customer";i:6;s:15:"billing/invoice";i:7;s:17:"billing/recurring";i:8;s:16:"common/dashboard";i:9;s:15:"content/article";i:10;s:22:"content/email_template";i:11;s:16:"extension/module";i:12;s:17:"extension/payment";i:13;s:15:"extension/total";i:14;s:24:"report/chart_of_accounts";i:15;s:14:"report/invoice";i:16;s:16:"report/recurring";i:17;s:10:"report/sci";i:18;s:10:"report/sfp";i:19;s:15:"system/activity";i:20;s:12:"system/error";i:21;s:15:"system/language";i:22;s:14:"system/setting";i:23;s:13:"system/status";i:24;s:11:"system/user";i:25;s:17:"system/user_group";i:26;s:21:"payment/bank_transfer";i:27;s:14:"payment/cheque";i:28;s:19:"payment/pp_standard";i:29;s:15:"total/sub_total";i:30;s:9:"total/tax";i:31;s:11:"total/total";}s:6:"modify";a:32:{i:0;s:18:"accounting/account";i:1;s:19:"accounting/currency";i:2;s:18:"accounting/journal";i:3;s:20:"accounting/tax_class";i:4;s:19:"accounting/tax_rate";i:5;s:16:"billing/customer";i:6;s:15:"billing/invoice";i:7;s:17:"billing/recurring";i:8;s:16:"common/dashboard";i:9;s:15:"content/article";i:10;s:22:"content/email_template";i:11;s:16:"extension/module";i:12;s:17:"extension/payment";i:13;s:15:"extension/total";i:14;s:24:"report/chart_of_accounts";i:15;s:14:"report/invoice";i:16;s:16:"report/recurring";i:17;s:10:"report/sci";i:18;s:10:"report/sfp";i:19;s:15:"system/activity";i:20;s:12:"system/error";i:21;s:15:"system/language";i:22;s:14:"system/setting";i:23;s:13:"system/status";i:24;s:11:"system/user";i:25;s:17:"system/user_group";i:26;s:21:"payment/bank_transfer";i:27;s:14:"payment/cheque";i:28;s:19:"payment/pp_standard";i:29;s:15:"total/sub_total";i:30;s:9:"total/tax";i:31;s:11:"total/total";}}'),
 (2, 'System', '');

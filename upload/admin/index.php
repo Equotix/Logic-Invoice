@@ -1,10 +1,16 @@
 <?php
 // Version
-define('VERSION', '0.1.0');
+define('VERSION', '0.2.0');
 
 // Configuration
-if (file_exists('config.php')) {
-    require_once('config.php');
+if (file_exists('../config.php')) {
+    require_once('../config.php');
+	
+	define('_URL', APP_URL . basename(__DIR__) . '/');
+	define('_SURL', APP_SURL . basename(__DIR__) . '/');
+	define('_PATH', __DIR__);
+	
+	require_once('../defined.php');
 }
 
 // Install 
@@ -15,9 +21,6 @@ if (!defined('DIR_APPLICATION')) {
 
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
-
-// Application
-require_once(DIR_SYSTEM . 'library/user.php');
 
 // Registry
 $registry = new Registry();

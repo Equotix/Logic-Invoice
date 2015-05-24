@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ControllerExtensionTotal extends Controller {
     private $error = array();
 
@@ -27,7 +29,7 @@ class ControllerExtensionTotal extends Controller {
         $extensions = $this->model_extension_extension->getInstalled('total');
 
         foreach ($extensions as $key => $value) {
-            if (!file_exists(DIR_APPLICATION . 'controller/total/' . $value . '.php')) {
+            if (!file_exists(DIR_EXTENSION . 'total/' . $value . '/controller/' . $value . '.php')) {
                 $this->model_extension_extension->uninstall('total', $value);
 
                 unset($extensions[$key]);
@@ -36,20 +38,26 @@ class ControllerExtensionTotal extends Controller {
 
         $this->data['extensions'] = array();
 
-        $files = glob(DIR_APPLICATION . 'controller/total/*.php');
+        $files = glob(DIR_EXTENSION . 'total/*', GLOB_ONLYDIR);
 
         if ($files) {
             foreach ($files as $file) {
                 $extension = basename($file, '.php');
 
-                $this->load->language('total/' . $extension);
+                $this->load->language('total/' . $extension . '/' . $extension);
+				
+				$xml = simplexml_load_file(DIR_EXTENSION . 'total/' . $extension . '/details.xml');
 
                 $this->data['extensions'][] = array(
                     'name'       => $this->language->get('heading_title'),
+					'author'     => $xml->author,
+					'url'        => $xml->url,
+					'version'    => $xml->version,
+					'email'      => $xml->email,
                     'code'       => $extension,
                     'status'     => $this->config->get($extension . '_status'),
                     'sort_order' => $this->config->get($extension . '_sort_order'),
-                    'edit'       => $this->url->link('total/' . $extension . '', 'token=' . $this->session->data['token'], 'SSL'),
+                    'edit'       => $this->url->link('total/' . $extension . '/' . $extension, 'token=' . $this->session->data['token'], 'SSL'),
                     'install'    => $this->url->link('extension/total/install', 'token=' . $this->session->data['token'] . '&extension=' . $extension, 'SSL'),
                     'uninstall'  => $this->url->link('extension/total/uninstall', 'token=' . $this->session->data['token'] . '&extension=' . $extension, 'SSL'),
                     'installed'  => in_array($extension, $extensions)

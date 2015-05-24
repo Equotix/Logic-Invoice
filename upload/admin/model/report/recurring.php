@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ModelReportRecurring extends Model {
     public function getRecurringsByGroup($data) {
         $sql = "SELECT MIN(r.date_added) AS date_start, MAX(r.date_added) AS date_end, r.cycle AS cycle, COUNT(*) AS recurrings, SUM((SELECT SUM(ri.quantity) FROM " . DB_PREFIX . "recurring_item ri WHERE ri.recurring_id = r.recurring_id GROUP BY ri.recurring_id)) AS items, SUM((SELECT SUM(rt.value) FROM " . DB_PREFIX . "recurring_total rt WHERE rt.recurring_id = r.recurring_id AND rt.code = 'tax' GROUP BY rt.recurring_id)) AS tax, SUM(r.total) AS `total` FROM " . DB_PREFIX . "recurring r";

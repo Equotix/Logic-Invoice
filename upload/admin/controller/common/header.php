@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ControllerCommonHeader extends Controller {
     public function index() {
         $this->data = $this->load->language('common/header');
@@ -32,6 +34,7 @@ class ControllerCommonHeader extends Controller {
             $this->data['recurring'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['article'] = $this->url->link('content/article', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['email_template'] = $this->url->link('content/email_template', 'token=' . $this->session->data['token'], 'SSL');
+            $this->data['module'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['payment'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['total'] = $this->url->link('extension/total', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['report_recurring'] = $this->url->link('report/recurring', 'token=' . $this->session->data['token'], 'SSL');

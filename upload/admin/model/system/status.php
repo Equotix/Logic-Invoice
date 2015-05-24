@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ModelSystemStatus extends Model {
     public function addStatus($data) {
         foreach ($data['name'] as $language_id => $name) {

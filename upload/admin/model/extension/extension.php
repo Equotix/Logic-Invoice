@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ModelExtensionExtension extends Model {
     public function getInstalled($type) {
         $extension_data = $this->cache->get('extension.' . $type);

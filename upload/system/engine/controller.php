@@ -16,7 +16,24 @@ abstract class Controller {
     }
 
     public function render($template) {
-        $file = DIR_TEMPLATE . $template;
+		$parts = explode('/', str_replace('../', '', (string)$template));
+		
+		if (isset($parts[0]) && ($parts[0] == 'module' || $parts[0] == 'payment' || $parts[0] == 'total')) {
+			if (isset($parts[1])) {
+				$file = DIR_EXTENSION . $parts[0] . '/' . $parts[1] . '/view/template/';
+				
+				array_shift($parts);
+				
+				array_shift($parts);
+				
+				$file .= implode('/', $parts);
+			} else {
+				trigger_error('Error: Could not load template ' . $file . '!');
+				exit();
+			}
+		} else {
+			$file = DIR_TEMPLATE . $template;
+		}
 
         if (file_exists($file)) {
             extract($this->data);

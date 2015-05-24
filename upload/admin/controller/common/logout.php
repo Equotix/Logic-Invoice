@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ControllerCommonLogout extends Controller {
     public function index() {
         $this->user->logout();

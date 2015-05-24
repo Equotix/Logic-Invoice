@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ControllerContentArticle extends Controller {
     private $error = array();
 
@@ -213,7 +215,7 @@ class ControllerContentArticle extends Controller {
         } elseif ($article_info) {
             $this->data['url_alias'] = $this->model_system_url_alias->getUrlAliasByQuery('article_id=' . $article_info['article_id']);
         } else {
-            $this->data['url_alias'] = '';
+            $this->data['url_alias'] = array();
         }
 
         $this->data['articles'] = $this->model_content_article->getArticles();
@@ -256,8 +258,12 @@ class ControllerContentArticle extends Controller {
 
             if ($query && !isset($this->request->get['article_id'])) {
                 $this->error['url_alias'] = $this->language->get('error_url_alias');
-            } elseif (isset($this->request->get['article_id']) && $query && ($query != 'article_id=' . $this->request->get['article_id'])) {
-                $this->error['url_alias'] = $this->language->get('error_url_alias');
+            } elseif (isset($this->request->get['article_id']) && $query) {
+				foreach ($this->request->post['url_alias'] as $language_id => $keyword) {
+					if (!empty($query[$language_id]) && $query[$language_id] != 'article_id=' . $this->request->get['article_id']) {
+						$this->error['url_alias'] = $this->language->get('error_url_alias');
+					}
+				}
             }
         }
 

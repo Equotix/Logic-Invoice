@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ModelBillingInvoice extends Model {
     public function addInvoice($data) {
         if (empty($data['customer_id'])) {

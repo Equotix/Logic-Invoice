@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ModelReportCustomer extends Model {
     public function getTotalCustomers($data = array()) {
         $sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer";

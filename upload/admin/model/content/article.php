@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ModelContentArticle extends Model {
     public function addArticle($data) {
         $this->db->query("INSERT INTO " . DB_PREFIX . "article SET top = '" . (int)$data['top'] . "', parent_id = '" . (int)$data['parent_id'] . "', sort_order = '" . (int)$data['sort_order'] . "', status= '" . (int)$data['status'] . "'");

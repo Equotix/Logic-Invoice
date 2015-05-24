@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ControllerBillingRecurring extends Controller {
     private $error = array();
 

@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ModelAccountingTransaction extends Model {
     public function addTransaction($data) {
         $this->db->query("INSERT INTO " . DB_PREFIX . "transaction SET description = '" . $this->db->escape($data['description']) . "', currency_code = '" . $this->db->escape($data['currency_code']) . "', currency_value = '" . (float)$data['currency_value'] . "', invoice_id = '" . (int)$data['invoice_id'] . "', date = '" . $this->db->escape($data['date']) . "', date_added = NOW(), date_modified = NOW()");

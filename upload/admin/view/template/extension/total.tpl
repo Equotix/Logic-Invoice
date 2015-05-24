@@ -23,6 +23,8 @@
       <table class="table table-striped table-bordered table-hover">
         <tr>
           <th class="text-left"><?php echo $column_name; ?></th>
+          <th class="text-left"><?php echo $column_author; ?></th>
+          <th class="text-left"><?php echo $column_version; ?></th>
           <th class="text-left"><?php echo $column_status; ?></th>
           <th class="text-left"><?php echo $column_sort_order; ?></th>
           <th class="text-right"><?php echo $column_action; ?></th>
@@ -31,6 +33,8 @@
         <?php foreach ($extensions as $extension) { ?>
         <tr>
           <td class="text-left"><?php echo $extension['name']; ?></td>
+		  <td class="text-left"><a href="<?php echo $extension['url']; ?>" target="_blank"><?php echo $extension['author']; ?></a></td>
+		  <td class="text-left"><a href="mailto:<?php echo $extension['email']; ?>"><?php echo $extension['version']; ?></a></td>
           <td class="text-left"><select name="<?php echo $extension['code']; ?>_status" class="form-control input-sm status"<?php echo $extension['installed'] ? '' : ' disabled'; ?>>
                                         <option value="1"<?php echo $extension['status'] ? ' selected="selected"' : ''; ?>><?php echo $text_enabled; ?></option>
               <option value="0"<?php echo $extension['status'] ? '' : ' selected="selected"'; ?>><?php echo $text_disabled; ?></option>
@@ -47,7 +51,7 @@
         <?php } ?>
         <?php } else { ?>
         <tr>
-          <td class="text-center" colspan="4"><?php echo $text_no_results; ?></td>
+          <td class="text-center" colspan="6"><?php echo $text_no_results; ?></td>
         </tr>
         <?php } ?>
       </table>

@@ -48,6 +48,18 @@
               <?php } ?>
             </div>
           </div>
+		  <div class="form-group">
+			<label class="col-sm-2 control-label" for="input-url-alias"><?php echo $entry_url_alias; ?></label>
+			<div class="col-sm-10">
+			  <div class="input-group">
+				<span class="input-group-addon"><img src="view/image/flags/<?php echo $language['image']; ?>" alt="<?php echo $language['name']; ?>" title="<?php echo $language['name']; ?>" /></span>
+				<input type="text" name="url_alias[<?php echo $language['language_id']; ?>]" value="<?php echo !empty($url_alias[$language['language_id']]) ? $url_alias[$language['language_id']] : ''; ?>" id="input-url-alias-<?php echo $language['language_id']; ?>" class="form-control" placeholder="<?php echo $entry_url_alias; ?>" />
+			  </div>
+			  <?php if ($error_url_alias) { ?>
+			  <div class="text-danger"><?php echo $error_url_alias; ?></div>
+			  <?php } ?>
+			</div>
+		  </div>
         </div>
         <?php } ?>
       </div>
@@ -75,15 +87,6 @@
         <label class="col-sm-2 control-label" for="input-sort-order"><?php echo $entry_sort_order; ?></label>
         <div class="col-sm-10">
           <input type="text" name="sort_order" value="<?php echo $sort_order; ?>" id="input-sort-order" class="form-control" placeholder="<?php echo $entry_sort_order; ?>" />
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-2 control-label" for="input-url-alias"><?php echo $entry_url_alias; ?></label>
-        <div class="col-sm-10">
-          <input type="text" name="url_alias" value="<?php echo $url_alias; ?>" id="input-url-alias" class="form-control" placeholder="<?php echo $entry_url_alias; ?>" />
-          <?php if ($error_url_alias) { ?>
-          <div class="text-danger"><?php echo $error_url_alias; ?></div>
-          <?php } ?>
         </div>
       </div>
       <div class="form-group">

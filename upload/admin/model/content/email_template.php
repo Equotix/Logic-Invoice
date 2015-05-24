@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ModelContentEmailTemplate extends Model {
     public function addEmailTemplate($data) {
         $this->db->query("INSERT INTO " . DB_PREFIX . "email_template SET type = '" . $this->db->escape($data['type']) . "', priority = '" . (int)$data['priority'] . "', status= '" . (int)$data['status'] . "', email = '" . $this->db->escape($data['email']) . "'");

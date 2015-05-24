@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ModelReportInvoice extends Model {
     public function getInvoicesByGroup($data) {
         $sql = "SELECT MIN(i.date_issued) AS date_start, MAX(i.date_issued) AS date_end, COUNT(*) AS invoices, SUM((SELECT SUM(ii.quantity) FROM " . DB_PREFIX . "invoice_item ii WHERE ii.invoice_id = i.invoice_id GROUP BY ii.invoice_id)) AS items, SUM((SELECT SUM(it.value) FROM " . DB_PREFIX . "invoice_total it WHERE it.invoice_id = i.invoice_id AND it.code = 'tax' GROUP BY it.invoice_id)) AS tax, SUM(i.total) AS `total` FROM " . DB_PREFIX . "invoice i";

@@ -1,28 +1,38 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ModelSystemUrlAlias extends Model {
-    public function addUrlAlias($query, $keyword) {
+    public function addUrlAlias($query, $keywords) {
         $this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = '" . $this->db->escape($query) . "'");
 
-        $this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET query = '" . $this->db->escape($query) . "', keyword = '" . $this->db->escape($keyword) . "'");
-    }
+		foreach ($keywords as $language_id => $keyword) {
+			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET language_id = '" . (int)$language_id . "', query = '" . $this->db->escape($query) . "', keyword = '" . $this->db->escape($keyword) . "'");
+		}
+	}
 
     public function getUrlAliasByQuery($query) {
         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE query = '" . $this->db->escape($query) . "'");
 
-        if ($query->num_rows) {
-            return $query->row['keyword'];
-        } else {
-            return false;
-        }
+        $url_alias_data = array();
+		
+		foreach ($query->rows as $url_alias) {
+			$url_alias_data[$url_alias['language_id']] = $url_alias['keyword'];
+		}
+		
+		return $url_alias_data;
     }
 
-    public function getUrlAliasByKeyword($keyword) {
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE keyword = '" . $this->db->escape($keyword) . "'");
+    public function getUrlAliasByKeyword($keywords) {
+		$url_alias_data = array();
+		
+		foreach ($keywords as $language_id => $keyword) {
+			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE language_id = '" . (int)$language_id . "' AND LOWER(keyword) = '" . $this->db->escape(utf8_strtolower($keyword)) . "'");
 
-        if ($query->num_rows) {
-            return $query->row['query'];
-        } else {
-            return false;
-        }
+			if ($query->num_rows) {
+				$url_alias_data[$query->row['language_id']] = $query->row['query'];
+			}
+		}
+		
+		return $url_alias_data;
     }
 }

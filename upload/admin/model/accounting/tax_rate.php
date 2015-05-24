@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ModelAccountingTaxRate extends Model {
     public function addTaxRate($data) {
         $this->db->query("INSERT INTO " . DB_PREFIX . "tax_rate SET name = '" . $this->db->escape($data['name']) . "', rate = '" . (float)$data['rate'] . "', type = '" . $this->db->escape($data['type']) . "'");

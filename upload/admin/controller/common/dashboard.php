@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ControllerCommonDashboard extends Controller {
     public function index() {
         $this->data = $this->load->language('common/dashboard');

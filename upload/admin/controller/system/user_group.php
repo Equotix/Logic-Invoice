@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ControllerSystemUserGroup extends Controller {
     private $error = array();
 
@@ -212,6 +214,24 @@ class ControllerSystemUserGroup extends Controller {
             if (!in_array($permission, $ignore)) {
                 $this->data['permissions'][] = $permission;
             }
+        }
+		
+		$files = glob(DIR_EXTENSION . 'module/*', GLOB_ONLYDIR);
+		
+		foreach ($files as $file) {
+           $this->data['permissions'][] = 'module/' . basename($file);
+        }
+		
+		$files = glob(DIR_EXTENSION . 'payment/*', GLOB_ONLYDIR);
+		
+		foreach ($files as $file) {
+           $this->data['permissions'][] = 'payment/' . basename($file);
+        }
+		
+		$files = glob(DIR_EXTENSION . 'total/*', GLOB_ONLYDIR);
+		
+		foreach ($files as $file) {
+           $this->data['permissions'][] = 'total/' . basename($file);
         }
 
         if (isset($this->request->post['permission']['access'])) {

@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ControllerAccountingAccount extends Controller {
     private $error = array();
 

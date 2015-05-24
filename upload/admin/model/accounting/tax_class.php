@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ModelAccountingTaxClass extends Model {
     public function addTaxClass($data) {
         $this->db->query("INSERT INTO " . DB_PREFIX . "tax_class SET name = '" . $this->db->escape($data['name']) . "', description = '" . $this->db->escape($data['description']) . "'");

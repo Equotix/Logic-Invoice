@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ControllerExtensionPayment extends Controller {
     private $error = array();
 
@@ -27,7 +29,7 @@ class ControllerExtensionPayment extends Controller {
         $extensions = $this->model_extension_extension->getInstalled('payment');
 
         foreach ($extensions as $key => $value) {
-            if (!file_exists(DIR_APPLICATION . 'controller/payment/' . $value . '.php')) {
+            if (!file_exists(DIR_EXTENSION . 'payment/' . $value . '/controller/' . $value . '.php')) {
                 $this->model_extension_extension->uninstall('payment', $value);
 
                 unset($extensions[$key]);
@@ -36,20 +38,26 @@ class ControllerExtensionPayment extends Controller {
 
         $this->data['extensions'] = array();
 
-        $files = glob(DIR_APPLICATION . 'controller/payment/*.php');
+        $files = glob(DIR_EXTENSION . 'payment/*', GLOB_ONLYDIR);
 
         if ($files) {
             foreach ($files as $file) {
-                $extension = basename($file, '.php');
+                $extension = basename($file);
 
-                $this->load->language('payment/' . $extension);
+                $this->load->language('payment/' . $extension . '/' . $extension);
+				
+				$xml = simplexml_load_file(DIR_EXTENSION . 'payment/' . $extension . '/details.xml');
 
                 $this->data['extensions'][] = array(
                     'name'       => $this->language->get('heading_title'),
+					'author'     => $xml->author,
+					'url'        => $xml->url,
+					'version'    => $xml->version,
+					'email'      => $xml->email,
                     'code'       => $extension,
                     'status'     => $this->config->get($extension . '_status'),
                     'sort_order' => $this->config->get($extension . '_sort_order'),
-                    'edit'       => $this->url->link('payment/' . $extension . '', 'token=' . $this->session->data['token'], 'SSL'),
+                    'edit'       => $this->url->link('payment/' . $extension . '/' . $extension, 'token=' . $this->session->data['token'], 'SSL'),
                     'install'    => $this->url->link('extension/payment/install', 'token=' . $this->session->data['token'] . '&extension=' . $extension, 'SSL'),
                     'uninstall'  => $this->url->link('extension/payment/uninstall', 'token=' . $this->session->data['token'] . '&extension=' . $extension, 'SSL'),
                     'installed'  => in_array($extension, $extensions)

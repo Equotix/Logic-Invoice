@@ -1,4 +1,6 @@
 <?php
+defined('_PATH') or die('Restricted!');
+
 class ModelBillingRecurring extends Model {
     public function addRecurring($data) {
         if (empty($data['customer_id'])) {

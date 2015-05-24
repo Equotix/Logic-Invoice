@@ -3,7 +3,15 @@
 define('VERSION', '0.1.0');
 
 // Configuration
-require_once('config.php');
+if (file_exists('../config.php')) {
+    require_once('../config.php');
+	
+	define('_URL', APP_URL . basename(__DIR__) . '/');
+	define('_SURL', APP_SURL . basename(__DIR__) . '/');
+	define('_PATH', __DIR__);
+	
+	require_once('../defined.php');
+}
 
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
@@ -27,10 +35,10 @@ if ($query->num_rows) {
         $cron_key = $user_query->row['key'];
         $cron_secret = $user_query->row['secret'];
     } else {
-        exit();
+        exit;
     }
 } else {
-    exit();
+    exit;
 }
 
 $data = array(
