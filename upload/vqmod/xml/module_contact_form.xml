@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Contact Form</id>
+	<version>1.0.0</version>
+	<vqmver>2.5.0</vqmver>
+	<author>Logic Invoice</author>
+	<file name="front/controller/common/header.php">
+		<operation info="Add contact form link">
+			<search position="before"><![CDATA[
+				if ($this->customer->isLogged()) {
+			]]></search>
+			<add><![CDATA[
+				if ($this->config->get('contact_form_status')) {
+					$this->data['contact_form'] = $this->url->link('module/contact_form/contact_form');
+				} else {
+					$this->data['contact_form'] = false;
+				}
+				
+				$this->load->language('module/contact_form/contact_form');
+				
+				$this->data['text_contact_us'] = $this->language->get('heading_title');
+			]]></add>
+		</operation>
+	</file>
+	<file name="front/view/template/common/header.tpl">
+		<operation info="Add contact form link">
+			<search position="before"><![CDATA[
+				<?php echo $text_client; ?>
+			]]></search>
+			<add><![CDATA[
+				<?php if ($contact_form) { ?>
+				<li><a href="<?php echo $contact_form; ?>"><?php echo $text_contact_us; ?></a></li>
+				<?php } ?>
+			]]></add>
+		</operation>
+	</file>
+</modification>

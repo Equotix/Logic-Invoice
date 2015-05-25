@@ -73,10 +73,6 @@ class ControllerPaymentChequeCheque extends Controller {
             $this->error['payable'] = $this->language->get('error_payable');
         }
 
-        if (!$this->error) {
-            return true;
-        } else {
-            return false;
-        }
+        return !$this->error;
     }
 }

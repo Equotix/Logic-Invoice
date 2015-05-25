@@ -40,7 +40,6 @@ class ControllerPaymentBankTransferBankTransfer extends Controller {
         $this->data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
 
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
-        $this->data['error_payable'] = $this->build->data('payable', $this->error);
 
         $setting = $this->model_system_setting->getSetting('bank_transfer');
 
@@ -68,10 +67,6 @@ class ControllerPaymentBankTransferBankTransfer extends Controller {
             $this->error['warning'] = $this->language->get('error_permission');
         }
 
-        if (!$this->error) {
-            return true;
-        } else {
-            return false;
-        }
+        return !$this->error;
     }
 }

@@ -80,10 +80,6 @@ class ControllerPaymentPPStandardPPStandard extends Controller {
             $this->error['email'] = $this->language->get('error_email');
         }
 
-        if (!$this->error) {
-            return true;
-        } else {
-            return false;
-        }
+        return !$this->error;
     }
 }
