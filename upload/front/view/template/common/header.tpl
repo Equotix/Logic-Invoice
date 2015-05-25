@@ -49,7 +49,7 @@
         </div>
         <nav class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="<?php echo $home; ?>">Home</a></li>
+            <li><a href="<?php echo $home; ?>"><?php echo $text_home; ?></a></li>
             <?php foreach ($articles as $article) { ?>
             <?php if ($article['children']) { ?>
             <li class="dropdown"><a href="<?php echo $article['href']; ?>" class="dropdown-toggle" data-toggle="dropdown"><?php echo $article['title']; ?> <b class="caret"></b></a>

@@ -1,4 +1,5 @@
 <?php
+$_['text_home']			= 'Home';
 $_['text_client'] 		= 'Client Area';
 $_['text_account'] 		= 'My Account';
 $_['text_invoice'] 		= 'My Invoices';
