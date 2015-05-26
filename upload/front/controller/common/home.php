@@ -3,8 +3,13 @@ defined('_PATH') or die('Restricted!');
 
 class ControllerCommonHome extends Controller {
     public function index() {
-        $this->document->setTitle($this->config->get('config_title'));
-        $this->document->setDescription($this->config->get('config_meta_description'));
+		$title = $this->config->get('config_meta_title');
+	
+        $this->document->setTitle($title[$this->config->get('config_language_id')]);
+		
+		$description = $this->config->get('config_meta_description');
+		
+        $this->document->setDescription($description[$this->config->get('config_language_id')]);
 
         $home = $this->config->get('config_home');
 

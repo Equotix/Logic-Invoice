@@ -91,21 +91,6 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="required col-sm-2 control-label" for="input-meta-title"><?php echo $entry_meta_title; ?></label>
-            <div class="col-sm-10">
-              <input type="text" name="config_meta_title" value="<?php echo $config_meta_title; ?>" id="input-meta-title" class="form-control" placeholder="<?php echo $entry_meta_title; ?>" required />
-              <?php if ($error_meta_title) { ?>
-              <div class="text-danger"><?php echo $error_meta_title; ?></div>
-              <?php } ?>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-meta-description"><?php echo $entry_meta_description; ?></label>
-            <div class="col-sm-10">
-              <textarea name="config_meta_description" id="input-meta-description" class="form-control" rows="5" placeholder="<?php echo $entry_meta_description; ?>"><?php echo $config_meta_description; ?></textarea>
-            </div>
-          </div>
-          <div class="form-group">
             <label class="col-sm-2 control-label" for="input-logo"><?php echo $entry_logo; ?></label>
             <div class="col-sm-10">
               <input type="text" name="config_logo" value="<?php echo $config_logo; ?>" id="input-logo" class="form-control" placeholder="<?php echo $entry_logo; ?>" />
@@ -185,6 +170,21 @@
           <div class="tab-content">
             <?php foreach ($languages as $language) { ?>
             <div class="tab-pane" id="language-<?php echo $language['language_id']; ?>">
+			  <div class="form-group">
+				<label class="required col-sm-2 control-label" for="input-meta-title-<?php echo $language['language_id']; ?>"><?php echo $entry_meta_title; ?></label>
+				<div class="col-sm-10">
+				  <input type="text" name="config_meta_title[<?php echo $language['language_id']; ?>]" value="<?php echo !empty($config_meta_title[$language['language_id']]) ? $config_meta_title[$language['language_id']] : ''; ?>" id="input-meta-title-<?php echo $language['language_id']; ?>" class="form-control" placeholder="<?php echo $entry_meta_title; ?>" required />
+				  <?php if (!empty($error_meta_title[$language['language_id']])) { ?>
+				  <div class="text-danger"><?php echo $error_meta_title[$language['language_id']]; ?></div>
+				  <?php } ?>
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label class="col-sm-2 control-label" for="input-meta-description-<?php echo $language['language_id']; ?>"><?php echo $entry_meta_description; ?></label>
+				<div class="col-sm-10">
+				  <textarea name="config_meta_description[<?php echo $language['language_id']; ?>]" id="input-meta-description-<?php echo $language['language_id']; ?>" class="form-control" rows="5" placeholder="<?php echo $entry_meta_description; ?>"><?php echo !empty($config_meta_description[$language['language_id']]) ? $config_meta_description[$language['language_id']] : ''; ?></textarea>
+				</div>
+			  </div>
               <div class="form-group">
                 <label class="required col-sm-2 control-label" for="input-home-<?php echo $language['language_id']; ?>"><?php echo $entry_home; ?></label>
                 <div class="col-sm-10">

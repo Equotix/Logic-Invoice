@@ -113,7 +113,7 @@ class ControllerInstall extends Controller {
         $json = array();
 
         if ($this->request->post['database'] == 'mysqli') {
-            $connection = @new mysqli($this->request->post['database_host'], $this->request->post['database_username'], $this->request->post['database_password'], $this->request->post['database_name']);
+            $connection = @new mysqli($this->request->post['database_hostname'], $this->request->post['database_username'], $this->request->post['database_password'], $this->request->post['database_name']);
 
             if ($connection->connect_error) {
                 $json['error'] = $connection->connect_error;
@@ -123,7 +123,7 @@ class ControllerInstall extends Controller {
         }
 
         if ($this->request->post['database'] == 'mysql') {
-            $connection = @mysql_connect($this->request->post['database_host'], $this->request->post['database_username'], $this->request->post['database_password']);
+            $connection = @mysql_connect($this->request->post['database_hostname'], $this->request->post['database_username'], $this->request->post['database_password']);
 
             if (!$connection) {
                 $json['error'] = $this->language->get('error_connection');
@@ -166,7 +166,7 @@ class ControllerInstall extends Controller {
 
         $output .= '// Database' . "\n";
         $output .= 'define(\'DB_DRIVER\', \'' . addslashes($this->request->post['database']) . '\');' . "\n";
-        $output .= 'define(\'DB_HOSTNAME\', \'' . addslashes($this->request->post['database_host']) . '\');' . "\n";
+        $output .= 'define(\'DB_HOSTNAME\', \'' . addslashes($this->request->post['database_hostname']) . '\');' . "\n";
         $output .= 'define(\'DB_USERNAME\', \'' . addslashes($this->request->post['database_username']) . '\');' . "\n";
         $output .= 'define(\'DB_PASSWORD\', \'' . addslashes($this->request->post['database_password']) . '\');' . "\n";
         $output .= 'define(\'DB_DATABASE\', \'' . addslashes($this->request->post['database_name']) . '\');' . "\n";

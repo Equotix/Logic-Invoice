@@ -11,9 +11,9 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-2 control-label" for="input-database-host"><?php echo $entry_database_host; ?></label>
+      <label class="col-sm-2 control-label" for="input-database-host"><?php echo $entry_database_hostname; ?></label>
       <div class="col-sm-10">
-        <input type="text" name="database_host" value="localhost" id="input-database-host" class="form-control" placeholder="<?php echo $entry_database_host; ?>" />
+        <input type="text" name="database_hostname" value="localhost" id="input-database-hostname" class="form-control" placeholder="<?php echo $entry_database_hostname; ?>" />
       </div>
     </div>
     <div class="form-group">

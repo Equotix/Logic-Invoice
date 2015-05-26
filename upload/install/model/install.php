@@ -1,7 +1,7 @@
 <?php
 class ModelInstall extends Model {
     public function database($data) {
-        $db = new DB($data['database'], $data['database_host'], $data['database_username'], $data['database_password'], $data['database_name']);
+        $db = new DB($data['database'], $data['database_hostname'], $data['database_username'], $data['database_password'], $data['database_name']);
 
         $file = DIR_APPLICATION . 'logic_invoice.sql';
 

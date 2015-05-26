@@ -55,8 +55,6 @@ class ControllerSystemSetting extends Controller {
         $this->data['config_telephone'] = $this->build->data('config_telephone', $this->request->post, $setting);
         $this->data['config_fax'] = $this->build->data('config_fax', $this->request->post, $setting);
         $this->data['config_theme'] = $this->build->data('config_theme', $this->request->post, $setting);
-        $this->data['config_meta_title'] = $this->build->data('config_meta_title', $this->request->post, $setting);
-        $this->data['config_meta_description'] = $this->build->data('config_meta_description', $this->request->post, $setting);
         $this->data['config_logo'] = $this->build->data('config_logo', $this->request->post, $setting);
         $this->data['config_icon'] = $this->build->data('config_icon', $this->request->post, $setting);
         $this->data['config_limit_admin'] = $this->build->data('config_limit_admin', $this->request->post, $setting);
@@ -66,6 +64,8 @@ class ControllerSystemSetting extends Controller {
         $this->data['config_forgotten_admin'] = $this->build->data('config_forgotten_admin', $this->request->post, $setting);
         $this->data['config_forgotten_application'] = $this->build->data('config_forgotten_application', $this->request->post, $setting);
         $this->data['config_registration'] = $this->build->data('config_registration', $this->request->post, $setting);
+		$this->data['config_meta_title'] = $this->build->data('config_meta_title', $this->request->post, $setting, array());
+        $this->data['config_meta_description'] = $this->build->data('config_meta_description', $this->request->post, $setting, array());
         $this->data['config_home'] = $this->build->data('config_home', $this->request->post, $setting);
         $this->data['config_currency'] = $this->build->data('config_currency', $this->request->post, $setting);
         $this->data['config_financial_year'] = $this->build->data('config_financial_year', $this->request->post, $setting);
@@ -144,9 +144,11 @@ class ControllerSystemSetting extends Controller {
             $this->error['registered_name'] = $this->language->get('error_registered_name');
         }
 
-        if ((utf8_strlen($this->request->post['config_meta_title']) < 3) || (utf8_strlen($this->request->post['config_meta_title']) > 255)) {
-            $this->error['meta_title'] = $this->language->get('error_meta_title');
-        }
+		foreach ($this->request->post['config_meta_title'] as $language_id => $meta_title) {
+			if ((utf8_strlen($meta_title) < 3) || (utf8_strlen($meta_title) > 255)) {
+				$this->error['meta_title'][$language_id] = $this->language->get('error_meta_title');
+			}
+		}
 
         if ((utf8_strlen($this->request->post['config_email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['config_email'])) {
             $this->error['email'] = $this->language->get('error_email');

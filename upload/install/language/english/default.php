@@ -15,7 +15,7 @@ $_['column_status']				= 'Status';
 
 // Entry
 $_['entry_database']			= 'Database';
-$_['entry_database_host']		= 'Database Host';
+$_['entry_database_hostname']	= 'Database Hostname';
 $_['entry_database_name']		= 'Database Name';
 $_['entry_database_username']	= 'Database Username';
 $_['entry_database_password']	= 'Database Password';
