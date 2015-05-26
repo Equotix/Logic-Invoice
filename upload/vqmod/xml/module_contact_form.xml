@@ -22,7 +22,7 @@
 			]]></add>
 		</operation>
 	</file>
-	<file name="front/view/template/common/header.tpl">
+	<file name="front/view/theme/*/template/common/header.tpl">
 		<operation info="Add contact form link">
 			<search position="before"><![CDATA[
 				<?php echo $text_client; ?>

@@ -39,8 +39,8 @@
             <label class="required col-sm-2 control-label" for="input-name"><?php echo $entry_name; ?></label>
             <div class="col-sm-10">
               <input type="text" name="config_name" value="<?php echo $config_name; ?>" id="input-name" class="form-control" placeholder="<?php echo $entry_name; ?>" required autofocus />
-              <?php if ($error_config_name) { ?>
-              <div class="text-danger"><?php echo $error_config_name; ?></div>
+              <?php if ($error_name) { ?>
+              <div class="text-danger"><?php echo $error_name; ?></div>
               <?php } ?>
             </div>
           </div>
@@ -48,8 +48,8 @@
             <label class="required col-sm-2 control-label" for="input-registered-name"><?php echo $entry_registered_name; ?></label>
             <div class="col-sm-10">
               <input type="text" name="config_registered_name" value="<?php echo $config_registered_name; ?>" id="input-registered-name" class="form-control" placeholder="<?php echo $entry_registered_name; ?>" required />
-              <?php if ($error_config_registered_name) { ?>
-              <div class="text-danger"><?php echo $error_config_registered_name; ?></div>
+              <?php if ($error_registered_name) { ?>
+              <div class="text-danger"><?php echo $error_registered_name; ?></div>
               <?php } ?>
             </div>
           </div>
@@ -63,8 +63,8 @@
             <label class="required col-sm-2 control-label" for="input-email"><?php echo $entry_email; ?></label>
             <div class="col-sm-10">
               <input type="text" name="config_email" value="<?php echo $config_email; ?>" id="input-email" class="form-control" placeholder="<?php echo $entry_email; ?>" required />
-              <?php if ($error_config_email) { ?>
-              <div class="text-danger"><?php echo $error_config_email; ?></div>
+              <?php if ($error_email) { ?>
+              <div class="text-danger"><?php echo $error_email; ?></div>
               <?php } ?>
             </div>
           </div>
@@ -82,12 +82,20 @@
           </div>
         </div>
         <div class="tab-pane" id="tab-website">
+		  <div class="form-group">
+            <label class="required col-sm-2 control-label" for="input-theme"><?php echo $entry_theme; ?></label>
+            <div class="col-sm-10"><select name="config_theme" class="form-control">
+              <?php foreach ($themes as $theme) { ?>
+			  <option value="<?php echo $theme; ?>"<?php echo $theme == $config_theme ? ' selected="selected"' : ''; ?>><?php echo $theme; ?></option>
+			  <?php } ?></select>
+            </div>
+          </div>
           <div class="form-group">
-            <label class="required col-sm-2 control-label" for="input-title"><?php echo $entry_title; ?></label>
+            <label class="required col-sm-2 control-label" for="input-meta-title"><?php echo $entry_meta_title; ?></label>
             <div class="col-sm-10">
-              <input type="text" name="config_title" value="<?php echo $config_title; ?>" id="input-title" class="form-control" placeholder="<?php echo $entry_title; ?>" required />
-              <?php if ($error_config_title) { ?>
-              <div class="text-danger"><?php echo $error_config_title; ?></div>
+              <input type="text" name="config_meta_title" value="<?php echo $config_meta_title; ?>" id="input-meta-title" class="form-control" placeholder="<?php echo $entry_meta_title; ?>" required />
+              <?php if ($error_meta_title) { ?>
+              <div class="text-danger"><?php echo $error_meta_title; ?></div>
               <?php } ?>
             </div>
           </div>
@@ -113,8 +121,8 @@
             <label class="required col-sm-2 control-label" for="input-limit-admin"><?php echo $entry_limit_admin; ?></label>
             <div class="col-sm-10">
               <input type="text" name="config_limit_admin" value="<?php echo $config_limit_admin; ?>" id="input-limit-admin" class="form-control" placeholder="<?php echo $entry_limit_admin; ?>" required />
-              <?php if ($error_config_limit_admin) { ?>
-              <div class="text-danger"><?php echo $error_config_limit_admin; ?></div>
+              <?php if ($error_limit_admin) { ?>
+              <div class="text-danger"><?php echo $error_limit_admin; ?></div>
               <?php } ?>
             </div>
           </div>
@@ -122,8 +130,8 @@
             <label class="required col-sm-2 control-label" for="input-limit-application"><?php echo $entry_limit_application; ?></label>
             <div class="col-sm-10">
               <input type="text" name="config_limit_application" value="<?php echo $config_limit_application; ?>" id="input-limit-application" class="form-control" placeholder="<?php echo $entry_limit_application; ?>" required />
-              <?php if ($error_config_limit_application) { ?>
-              <div class="text-danger"><?php echo $error_config_limit_application; ?></div>
+              <?php if ($error_limit_application) { ?>
+              <div class="text-danger"><?php echo $error_limit_application; ?></div>
               <?php } ?>
             </div>
           </div>
@@ -481,8 +489,8 @@
             <label class="required col-sm-2 control-label" for="input-error-filename"><?php echo $entry_error_filename; ?></label>
             <div class="col-sm-10">
               <input type="text" name="config_error_filename" value="<?php echo $config_error_filename; ?>" id="input-error-filename" class="form-control" placeholder="<?php echo $entry_error_filename; ?>" required />
-              <?php if ($error_config_error_filename) { ?>
-              <div class="text-danger"><?php echo $error_config_error_filename; ?></div>
+              <?php if ($error_error_log_filename) { ?>
+              <div class="text-danger"><?php echo $error_error_log_filename; ?></div>
               <?php } ?>
             </div>
           </div>

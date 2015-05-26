@@ -65,7 +65,11 @@ class ControllerPaymentPPStandardPPStandard extends Controller {
 
             $this->data['custom'] = $invoice_info['invoice_id'];
 
-            $this->response->setOutput($this->render('payment/pp_standard/pp_standard.tpl'));
+            if (file_exists(DIR_EXTENSION . 'module/pp_standard/view/theme/' . $this->config->get('config_theme') . '/template/pp_standard.tpl')) {
+				$this->response->setOutput($this->render('payment/pp_standard/' . $this->config->get('config_theme') . '/template/pp_standard.tpl'));
+			} else {
+				$this->response->setOutput($this->render('payment/pp_standard/default/template/pp_standard.tpl'));
+			}
         }
     }
 

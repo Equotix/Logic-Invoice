@@ -64,8 +64,12 @@ class ControllerModuleContactFormContactForm extends Controller {
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
-
-        $this->response->setOutput($this->render('module/contact_form/contact_form.tpl'));
+		
+		if (file_exists(DIR_EXTENSION . 'module/contact_form/view/theme/' . $this->config->get('config_theme') . '/template/contact_form.tpl')) {
+			$this->response->setOutput($this->render('module/contact_form/' . $this->config->get('config_theme') . '/template/contact_form.tpl'));
+		} else {
+			$this->response->setOutput($this->render('module/contact_form/default/template/contact_form.tpl'));
+		}
     }
 
     public function success() {
@@ -99,7 +103,11 @@ class ControllerModuleContactFormContactForm extends Controller {
 		$this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('module/contact_form/contact_form_success.tpl'));
+        if (file_exists(DIR_EXTENSION . 'module/contact_form/view/theme/' . $this->config->get('config_theme') . '/template/contact_form_success.tpl')) {
+			$this->response->setOutput($this->render('module/contact_form/' . $this->config->get('config_theme') . '/template/contact_form_success.tpl'));
+		} else {
+			$this->response->setOutput($this->render('module/contact_form/default/template/contact_form_success.tpl'));
+		}
 	}
 	
 	protected function validate() {

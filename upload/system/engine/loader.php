@@ -49,7 +49,11 @@ final class Loader {
 		
 		if (isset($parts[0]) && ($parts[0] == 'module' || $parts[0] == 'payment' || $parts[0] == 'total')) {
 			if (isset($parts[1])) {
-				$file = DIR_EXTENSION . $parts[0] . '/' . $parts[1] . '/view/template/';
+				if (_FRONT) {
+					$file = DIR_EXTENSION . $parts[0] . '/' . $parts[1] . '/view/theme/';
+				} else {
+					$file = DIR_EXTENSION . $parts[0] . '/' . $parts[1] . '/view/template/';
+				}
 				
 				array_shift($parts);
 				

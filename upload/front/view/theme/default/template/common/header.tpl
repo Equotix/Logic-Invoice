@@ -22,7 +22,7 @@
     <script type="text/javascript" src="front/view/javascript/system.js"></script>
     <link rel="stylesheet" type="text/css" href="share/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="share/font-awesome/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="front/view/stylesheet/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="front/view/theme/default/stylesheet/stylesheet.css" />
     <?php foreach ($scripts as $script) { ?>
     <script type="text/javascript" src="<?php echo $script; ?>"></script>
     <?php } ?>

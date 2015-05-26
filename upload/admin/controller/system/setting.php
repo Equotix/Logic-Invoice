@@ -38,13 +38,13 @@ class ControllerSystemSetting extends Controller {
         $this->data['success'] = $this->build->data('success', $this->session->data);
 
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
-        $this->data['error_config_name'] = $this->build->data('config_name', $this->error);
-        $this->data['error_config_registered_name'] = $this->build->data('config_registered_name', $this->error);
-        $this->data['error_config_email'] = $this->build->data('config_email', $this->error);
-        $this->data['error_config_title'] = $this->build->data('config_title', $this->error);
-        $this->data['error_config_limit_admin'] = $this->build->data('config_limit_admin', $this->error);
-        $this->data['error_config_limit_application'] = $this->build->data('config_limit_application', $this->error);
-        $this->data['error_config_error_filename'] = $this->build->data('config_error_filename', $this->error);
+        $this->data['error_name'] = $this->build->data('name', $this->error);
+        $this->data['error_registered_name'] = $this->build->data('registered_name', $this->error);
+        $this->data['error_email'] = $this->build->data('email', $this->error);
+        $this->data['error_meta_title'] = $this->build->data('meta_title', $this->error);
+        $this->data['error_limit_admin'] = $this->build->data('limit_admin', $this->error);
+        $this->data['error_limit_application'] = $this->build->data('limit_application', $this->error);
+        $this->data['error_error_log_filename'] = $this->build->data('error_log_filename', $this->error);
 
         $setting = $this->model_system_setting->getSetting('config');
 
@@ -54,7 +54,8 @@ class ControllerSystemSetting extends Controller {
         $this->data['config_email'] = $this->build->data('config_email', $this->request->post, $setting);
         $this->data['config_telephone'] = $this->build->data('config_telephone', $this->request->post, $setting);
         $this->data['config_fax'] = $this->build->data('config_fax', $this->request->post, $setting);
-        $this->data['config_title'] = $this->build->data('config_title', $this->request->post, $setting);
+        $this->data['config_theme'] = $this->build->data('config_theme', $this->request->post, $setting);
+        $this->data['config_meta_title'] = $this->build->data('config_meta_title', $this->request->post, $setting);
         $this->data['config_meta_description'] = $this->build->data('config_meta_description', $this->request->post, $setting);
         $this->data['config_logo'] = $this->build->data('config_logo', $this->request->post, $setting);
         $this->data['config_icon'] = $this->build->data('config_icon', $this->request->post, $setting);
@@ -97,6 +98,16 @@ class ControllerSystemSetting extends Controller {
         $this->load->model('system/language');
 
         $this->data['languages'] = $this->model_system_language->getLanguages();
+		
+		$this->data['themes'] = array();
+		
+		$files = glob(DIR_APPLICATION . '../front/view/theme/*', GLOB_ONLYDIR);
+		
+		if ($files) {
+            foreach ($files as $file) {
+				$this->data['themes'][] = basename($file);
+			}
+		}
 
         $this->load->model('accounting/currency');
 
@@ -125,25 +136,29 @@ class ControllerSystemSetting extends Controller {
             $this->error['warning'] = $this->language->get('error_permission');
         }
 
-        if ((utf8_strlen($this->request->post['config_name']) < 3) || (utf8_strlen($this->request->post['config_title']) > 64)) {
-            $this->error['config_name'] = $this->language->get('error_config_name');
+        if ((utf8_strlen($this->request->post['config_name']) < 3) || (utf8_strlen($this->request->post['config_name']) > 64)) {
+            $this->error['name'] = $this->language->get('error_name');
         }
 
         if ((utf8_strlen($this->request->post['config_registered_name']) < 3) || (utf8_strlen($this->request->post['config_registered_name']) > 64)) {
-            $this->error['config_registered_name'] = $this->language->get('error_config_registered_name');
+            $this->error['registered_name'] = $this->language->get('error_registered_name');
         }
 
-        if ((utf8_strlen($this->request->post['config_title']) < 3) || (utf8_strlen($this->request->post['config_title']) > 255)) {
-            $this->error['config_title'] = $this->language->get('error_config_title');
+        if ((utf8_strlen($this->request->post['config_meta_title']) < 3) || (utf8_strlen($this->request->post['config_meta_title']) > 255)) {
+            $this->error['meta_title'] = $this->language->get('error_meta_title');
         }
 
         if ((utf8_strlen($this->request->post['config_email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['config_email'])) {
-            $this->error['config_email'] = $this->language->get('error_config_email');
+            $this->error['email'] = $this->language->get('error_email');
         }
 
         if (!$this->request->post['config_error_filename']) {
-            $this->error['config_error_filename'] = $this->language->get('error_config_error_filename');
+            $this->error['error_filename'] = $this->language->get('error_error_log_filename');
         }
+		
+		if ($this->error) {
+			$this->error['warning'] = $this->language->get('error_submission');
+		}
 
         return !$this->error;
     }

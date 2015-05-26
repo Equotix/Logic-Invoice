@@ -9,6 +9,7 @@ if (file_exists('../config.php')) {
 	define('_URL', APP_URL . basename(__DIR__) . '/');
 	define('_SURL', APP_SURL . basename(__DIR__) . '/');
 	define('_PATH', __DIR__);
+	define('_FRONT', false);
 	
 	require_once('../defined.php');
 }

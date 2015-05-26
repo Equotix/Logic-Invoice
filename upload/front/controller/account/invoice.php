@@ -78,7 +78,11 @@ class ControllerAccountInvoice extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('account/invoice_list.tpl'));
+        if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/account/invoice_list.tpl')) {
+			$this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/invoice_list.tpl'));
+		} else {
+			$this->response->setOutput($this->render('default/template/account/invoice_list.tpl'));
+		}
     }
 
     public function invoice() {
@@ -169,7 +173,11 @@ class ControllerAccountInvoice extends Controller {
                 $this->data['payment_url'] = '';
             }
 
-            $this->response->setOutput($this->render('account/invoice_invoice.tpl'));
+            if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/account/invoice_invoice.tpl')) {
+				$this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/invoice_invoice.tpl'));
+			} else {
+				$this->response->setOutput($this->render('default/template/account/invoice_invoice.tpl'));
+			}
         } else {
             return new Action('error/not_found');
         }
@@ -285,7 +293,11 @@ class ControllerAccountInvoice extends Controller {
             $this->data['header'] = $this->load->controller('common/header');
             $this->data['footer'] = $this->load->controller('common/footer');
 
-            $this->response->setOutput($this->render('account/invoice_payment.tpl'));
+            if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/account/invoice_payment.tpl')) {
+				$this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/invoice_payment.tpl'));
+			} else {
+				$this->response->setOutput($this->render('default/template/account/invoice_payment.tpl'));
+			}
         } else {
             return new Action('error/not_found');
         }
@@ -337,8 +349,11 @@ class ControllerAccountInvoice extends Controller {
             $this->data['header'] = $this->load->controller('common/header');
             $this->data['footer'] = $this->load->controller('common/footer');
 
-            $this->response->setOutput($this->render('account/invoice_success.tpl'));
-
+            if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/account/invoice_success.tpl')) {
+				$this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/invoice_success.tpl'));
+			} else {
+				$this->response->setOutput($this->render('default/template/account/invoice_success.tpl'));
+			}
         } else {
             return new Action('error/not_found');
         }
@@ -431,7 +446,11 @@ class ControllerAccountInvoice extends Controller {
             $this->data['header'] = $this->load->controller('common/header');
             $this->data['footer'] = $this->load->controller('common/footer');
 
-            $this->response->setOutput($this->render('account/invoice_view.tpl'));
+            if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/account/invoice_view.tpl')) {
+				$this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/invoice_view.tpl'));
+			} else {
+				$this->response->setOutput($this->render('default/template/account/invoice_view.tpl'));
+			}
         } else {
             return new Action('error/not_found');
         }

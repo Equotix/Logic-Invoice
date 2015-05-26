@@ -78,7 +78,11 @@ class ControllerAccountRecurring extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('account/recurring_list.tpl'));
+        if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/account/recurring_list.tpl')) {
+			$this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/recurring_list.tpl'));
+		} else {
+			$this->response->setOutput($this->render('default/template/account/recurring_list.tpl'));
+		}
     }
 
     public function view() {
@@ -164,7 +168,11 @@ class ControllerAccountRecurring extends Controller {
             $this->data['header'] = $this->load->controller('common/header');
             $this->data['footer'] = $this->load->controller('common/footer');
 
-            $this->response->setOutput($this->render('account/recurring_view.tpl'));
+            if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/account/recurring_view.tpl')) {
+				$this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/recurring_view.tpl'));
+			} else {
+				$this->response->setOutput($this->render('default/template/account/recurring_view.tpl'));
+			}
         } else {
             return new Action('error/not_found');
         }

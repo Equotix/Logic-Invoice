@@ -580,10 +580,10 @@ INSERT INTO `li_setting` (`setting_id`, `group`, `key`, `value`, `serialized`) V
 (56, 'pp_standard', 'pp_standard_email', 'test@example.com', 0),
 (57, 'cheque', 'cheque_status', '1', 0),
 (58, 'config', 'config_limit_admin', '20', 0),
-(59, 'config', 'config_icon', 'front/view/image/favi.png', 0),
-(60, 'config', 'config_logo', 'front/view/image/logo.png', 0),
+(59, 'config', 'config_icon', 'front/view/theme/default/image/logo.png', 0),
+(60, 'config', 'config_logo', 'front/view/theme/default/image/favi.png', 0),
 (61, 'config', 'config_meta_description', 'My Company specialises in software and web applications. Powered by Logic Invoice.', 0),
-(62, 'config', 'config_title', 'My Company Website', 0),
+(62, 'config', 'config_meta_title', 'My Company Website', 0),
 (63, 'config', 'config_fax', '', 0),
 (64, 'config', 'config_email', 'test@example.com', 0),
 (65, 'config', 'config_telephone', '1234 5678', 0),
@@ -597,6 +597,7 @@ INSERT INTO `li_setting` (`setting_id`, `group`, `key`, `value`, `serialized`) V
 (73, 'pp_standard', 'pp_standard_status', '1', 0),
 (74, 'pp_standard', 'pp_standard_sort_order', '0', 0),
 (75, 'config', 'config_google_analytics', '', 0);
+(76, 'config', 'config_theme', 'default', 0);
 
 -- --------------------------------------------------------
 
