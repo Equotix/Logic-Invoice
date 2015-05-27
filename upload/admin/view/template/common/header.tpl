@@ -63,6 +63,12 @@
         <li><a class="parent"><i class="fa fa-newspaper-o fa-fw"></i> <span><?php echo $text_content; ?></span></a>
           <ul>
             <li><a href="<?php echo $article; ?>"><span><?php echo $text_article; ?></span></a></li>
+            <li><a class="parent"><span><?php echo $text_blog; ?></span></a>
+			  <ul>
+			    <li><a href="<?php echo $blog_category; ?>"><span><?php echo $text_blog_category; ?></span></a></li>
+			    <li><a href="<?php echo $blog_post; ?>"><span><?php echo $text_blog_post; ?></span></a></li>
+			  </ul>
+			</li>
             <li><a href="<?php echo $email_template; ?>"><span><?php echo $text_email_template; ?></span></a></li>
           </ul>
         </li>
@@ -89,14 +95,14 @@
         <li><a class="parent"><i class="fa fa-wrench fa-fw"></i> <span><?php echo $text_system; ?></span></a>
           <ul>
             <li><a href="<?php echo $language; ?>"><span><?php echo $text_language; ?></span></a></li>
-            <li><a href="<?php echo $setting; ?>"><span><?php echo $text_setting; ?></span></a></li>
-            <li><a href="<?php echo $status; ?>"><span><?php echo $text_status; ?></span></a></li>
-            <li><a class="parent"><span><?php echo $text_log; ?></span></a>
+			<li><a class="parent"><span><?php echo $text_log; ?></span></a>
               <ul>
                 <li><a href="<?php echo $activity; ?>"><span><?php echo $text_activity; ?></span></a></li>
                 <li><a href="<?php echo $error; ?>"><span><?php echo $text_error; ?></span></a></li>
               </ul>
             </li>
+            <li><a href="<?php echo $setting; ?>"><span><?php echo $text_setting; ?></span></a></li>
+            <li><a href="<?php echo $status; ?>"><span><?php echo $text_status; ?></span></a></li>
             <li><a class="parent"><span><?php echo $text_user; ?></span></a>
               <ul>
                 <li><a href="<?php echo $user; ?>"><span><?php echo $text_user; ?></span></a></li>

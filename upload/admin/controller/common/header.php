@@ -33,6 +33,8 @@ class ControllerCommonHeader extends Controller {
             $this->data['invoice'] = $this->url->link('billing/invoice', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['recurring'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['article'] = $this->url->link('content/article', 'token=' . $this->session->data['token'], 'SSL');
+            $this->data['blog_post'] = $this->url->link('content/blog_category', 'token=' . $this->session->data['token'], 'SSL');
+            $this->data['blog_category'] = $this->url->link('content/blog_post', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['email_template'] = $this->url->link('content/email_template', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['module'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['payment'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
@@ -43,10 +45,10 @@ class ControllerCommonHeader extends Controller {
             $this->data['sci'] = $this->url->link('report/sci', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['sfp'] = $this->url->link('report/sfp', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['language'] = $this->url->link('system/language', 'token=' . $this->session->data['token'], 'SSL');
-            $this->data['setting'] = $this->url->link('system/setting', 'token=' . $this->session->data['token'], 'SSL');
-            $this->data['status'] = $this->url->link('system/status', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['activity'] = $this->url->link('system/activity', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['error'] = $this->url->link('system/error', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['setting'] = $this->url->link('system/setting', 'token=' . $this->session->data['token'], 'SSL');
+            $this->data['status'] = $this->url->link('system/status', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['user'] = $this->url->link('system/user', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['user_group'] = $this->url->link('system/user_group', 'token=' . $this->session->data['token'], 'SSL');
 
