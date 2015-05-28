@@ -102,14 +102,12 @@
   </div>
 </div>
 <script type="text/javascript"><!--
-$(document).ready(function() {
-	<?php foreach ($languages as $language) { ?>
-	$('#input-description-<?php echo $language['language_id']; ?>').summernote({
-		height: 300
-	});
-	<?php } ?>
-	
-	$('.nav-tabs li :first').trigger('click');
+<?php foreach ($languages as $language) { ?>
+$('#input-description-<?php echo $language['language_id']; ?>').summernote({
+	height: 300
 });
+<?php } ?>
+
+$('.nav-tabs li :first').trigger('click');
 //--></script> 
 <?php echo $footer; ?>

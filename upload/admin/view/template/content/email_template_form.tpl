@@ -96,24 +96,22 @@
   </div>
 </div>
 <script type="text/javascript"><!--
-$(document).ready(function() {
-	$('select[name=\'type\']').on('change', function() {
-		<?php foreach ($email_template_types as $email_template_type) { ?>
-		if ($(this).val() == '<?php echo $email_template_type['type']; ?>') {
-			$('.variables').html('<?php echo $email_template_type['variables']; ?>');
-		}
-		<?php } ?>
-	});
-	
-	$('select[name=\'type\']').trigger('change');
-	
-	<?php foreach ($languages as $language) { ?>
-	$('#input-html-<?php echo $language['language_id']; ?>').summernote({
-		height: 300
-	});
+$('select[name=\'type\']').on('change', function() {
+	<?php foreach ($email_template_types as $email_template_type) { ?>
+	if ($(this).val() == '<?php echo $email_template_type['type']; ?>') {
+		$('.variables').html('<?php echo $email_template_type['variables']; ?>');
+	}
 	<?php } ?>
-	
-	$('.nav-tabs li :first').trigger('click');
 });
+
+$('select[name=\'type\']').trigger('change');
+
+<?php foreach ($languages as $language) { ?>
+$('#input-html-<?php echo $language['language_id']; ?>').summernote({
+	height: 300
+});
+<?php } ?>
+
+$('.nav-tabs li :first').trigger('click');
 //--></script> 
 <?php echo $footer; ?>
