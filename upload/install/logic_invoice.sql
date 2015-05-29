@@ -102,6 +102,75 @@ INSERT INTO `li_article_description` (`article_id`, `language_id`, `title`, `des
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `li_blog_category`
+--
+
+CREATE TABLE IF NOT EXISTS `li_blog_category` (
+  `blog_category_id` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) NOT NULL,
+  `sort_order` int(3) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  PRIMARY KEY (`blog_category_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Table structure for table `li_blog_category_description`
+--
+
+CREATE TABLE IF NOT EXISTS `li_blog_category_description` (
+  `blog_category_description_id` int(11) NOT NULL AUTO_INCREMENT,
+  `blog_category_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `meta_title` varchar(255) NOT NULL,
+  `meta_description` text NOT NULL,
+  `meta_keyword` text NOT NULL,
+  PRIMARY KEY (`blog_category_description_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Table structure for table `li_blog_post`
+--
+
+CREATE TABLE IF NOT EXISTS `li_blog_post` (
+  `blog_post_id` int(11) NOT NULL AUTO_INCREMENT,
+  `view` int(11) NOT NULL,
+  `sort_order` int(3) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `date_added` datetime NOT NULL,
+  `date_modified` datetime NOT NULL,
+  PRIMARY KEY (`blog_post_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Table structure for table `li_blog_post_description`
+--
+
+CREATE TABLE IF NOT EXISTS `li_blog_post_description` (
+  `blog_post_description_id` int(11) NOT NULL AUTO_INCREMENT,
+  `blog_post_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `meta_title` varchar(255) NOT NULL,
+  `meta_description` text NOT NULL,
+  `meta_keyword` text NOT NULL,
+  `description` text NOT NULL,
+  `tag` text NOT NULL,
+  PRIMARY KEY (`blog_post_description_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Table structure for table `li_blog_post_to_blog_category`
+--
+
+CREATE TABLE IF NOT EXISTS `li_blog_post_to_blog_category` (
+  `blog_post_id` int(11) NOT NULL,
+  `blog_category_id` int(11) NOT NULL,
+  PRIMARY KEY (`blog_post_id`,`blog_category_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
 -- Table structure for table `li_currency`
 --
 

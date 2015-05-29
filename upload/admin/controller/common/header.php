@@ -33,8 +33,8 @@ class ControllerCommonHeader extends Controller {
             $this->data['invoice'] = $this->url->link('billing/invoice', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['recurring'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['article'] = $this->url->link('content/article', 'token=' . $this->session->data['token'], 'SSL');
-            $this->data['blog_post'] = $this->url->link('content/blog_category', 'token=' . $this->session->data['token'], 'SSL');
-            $this->data['blog_category'] = $this->url->link('content/blog_post', 'token=' . $this->session->data['token'], 'SSL');
+            $this->data['blog_category'] = $this->url->link('content/blog_category', 'token=' . $this->session->data['token'], 'SSL');
+            $this->data['blog_post'] = $this->url->link('content/blog_post', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['email_template'] = $this->url->link('content/email_template', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['module'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['payment'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
