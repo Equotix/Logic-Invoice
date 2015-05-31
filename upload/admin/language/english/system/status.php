@@ -16,3 +16,4 @@ $_['text_success']			= 'You have successfully modified statuses.';
 // Error
 $_['error_permission']		= 'You do not have permission to modify statuses.';
 $_['error_name']			= 'Name must be between 3 and 32 characters.';
+$_['error_form']			= 'Please check the form for errors.';

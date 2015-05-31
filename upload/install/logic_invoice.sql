@@ -134,6 +134,7 @@ CREATE TABLE IF NOT EXISTS `li_blog_category_description` (
 
 CREATE TABLE IF NOT EXISTS `li_blog_post` (
   `blog_post_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
   `view` int(11) NOT NULL,
   `sort_order` int(3) NOT NULL,
   `status` tinyint(1) NOT NULL,
@@ -155,6 +156,7 @@ CREATE TABLE IF NOT EXISTS `li_blog_post_description` (
   `meta_title` varchar(255) NOT NULL,
   `meta_description` text NOT NULL,
   `meta_keyword` text NOT NULL,
+  `short_description` text NOT NULL,
   `description` text NOT NULL,
   `tag` text NOT NULL,
   PRIMARY KEY (`blog_post_description_id`)
@@ -830,6 +832,7 @@ CREATE TABLE IF NOT EXISTS `li_user` (
   `user_group_id` int(11) NOT NULL,
   `key` varchar(64) NOT NULL,
   `secret` varchar(64) NOT NULL,
+  `name` varchar(64) NOT NULL,
   `email` varchar(96) NOT NULL,
   `username` varchar(32) NOT NULL,
   `salt` varchar(9) NOT NULL,

@@ -88,4 +88,4 @@ $_['error_meta_title']						= 'Title must be between 3 and 255 characters.';
 $_['error_limit_admin']						= 'Admin list limit required.';
 $_['error_limit_application']				= 'Website list limit required.';
 $_['error_error_log_filename']				= 'Error log file name is required.';
-$_['error_submission']						= 'Please check the form before submission.';
+$_['error_form']							= 'Please check the form for errors.';

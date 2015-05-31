@@ -249,6 +249,10 @@ class ControllerSystemLanguage extends Controller {
         if (!$this->request->post['directory']) {
             $this->error['directory'] = $this->language->get('error_directory');
         }
+		
+		if ($this->error && empty($this->error['warning'])) {
+			$this->error['warning'] = $this->language->get('error_form');
+		}
 
         return !$this->error;
     }

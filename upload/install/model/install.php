@@ -45,7 +45,7 @@ class ModelInstall extends Model {
                 $api_secret .= $characters[rand(0, strlen($characters) - 1)];
             }
 
-            $db->query("INSERT INTO `" . $data['database_prefix'] . "user` SET user_id = '1', user_group_id = '1', `key` = '" . $db->escape($api_key) . "', secret = '" . $db->escape($api_secret) . "', email= '" . $db->escape($data['admin_email']) . "', username = '" . $db->escape($data['admin_username']) . "', salt = '" . $db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $db->escape(sha1($salt . sha1($salt . sha1($data['admin_password'])))) . "', status = '1', date_added = NOW(), date_modified = NOW()");
+            $db->query("INSERT INTO `" . $data['database_prefix'] . "user` SET user_id = '1', user_group_id = '1', `key` = '" . $db->escape($api_key) . "', secret = '" . $db->escape($api_secret) . "', name = 'Logic Invoice', email= '" . $db->escape($data['admin_email']) . "', username = '" . $db->escape($data['admin_username']) . "', salt = '" . $db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $db->escape(sha1($salt . sha1($salt . sha1($data['admin_password'])))) . "', status = '1', date_added = NOW(), date_modified = NOW()");
 
             // Cron User
             $api_key = '';
@@ -56,7 +56,7 @@ class ModelInstall extends Model {
                 $api_secret .= $characters[rand(0, strlen($characters) - 1)];
             }
 
-            $db->query("INSERT INTO `" . $data['database_prefix'] . "user` SET user_id = '2', user_group_id = '2', `key` = '" . $db->escape($api_key) . "', secret = '" . $db->escape($api_secret) . "', email= '" . $db->escape($data['admin_email']) . "', username = 'Cron', salt = '" . $db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $db->escape(sha1($salt . sha1($salt . sha1(substr(md5(uniqid(rand(), true)), 0, 15))))) . "', status = '1', date_added = NOW(), date_modified = NOW()");
+            $db->query("INSERT INTO `" . $data['database_prefix'] . "user` SET user_id = '2', user_group_id = '2', `key` = '" . $db->escape($api_key) . "', secret = '" . $db->escape($api_secret) . "', name = 'System User', email= '" . $db->escape($data['admin_email']) . "', username = 'Cron', salt = '" . $db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $db->escape(sha1($salt . sha1($salt . sha1(substr(md5(uniqid(rand(), true)), 0, 15))))) . "', status = '1', date_added = NOW(), date_modified = NOW()");
 
             // System Email
             $db->query("DELETE FROM `" . $data['database_prefix'] . "setting` WHERE `key` = 'config_email'");

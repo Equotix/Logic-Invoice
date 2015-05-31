@@ -326,7 +326,7 @@ class ControllerBillingRecurring extends Controller {
 
         foreach ($payments as $payment) {
             if ($this->config->get($payment . '_status')) {
-                $this->load->language('payment/' . $payment);
+                $this->load->language('payment/' . $payment . '/' . $payment);
 
                 $this->data['payments'][] = array(
                     'name'       => $this->language->get('heading_title'),
@@ -424,8 +424,8 @@ class ControllerBillingRecurring extends Controller {
             $this->data['payment_code'] = $recurring_info['payment_code'];
 
             foreach ($payments as $payment) {
-                if ($this->config->get($payment . '_status') && $payment['code'] == $recurring_info['payment_code']) {
-                    $this->load->language('payment/' . $payment);
+                if ($this->config->get($payment . '_status') && $payment == $recurring_info['payment_code']) {
+                    $this->load->language('payment/' . $payment . '/' . $payment);
 
                     $this->data['payment_code'] = $this->language->get('heading_title');
                 }

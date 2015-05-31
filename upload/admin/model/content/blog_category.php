@@ -108,7 +108,7 @@ class ModelContentBlogCategory extends Model {
 
             $blog_category_data = $query->rows;
         } else {
-            $blog_category_data = $this->cache->get('blog_category.' . $this->config->get('config_language_id'));
+            $blog_category_data = $this->cache->get('blog_category.all.' . $this->config->get('config_language_id'));
 
             if (!$blog_category_data) {
                 $blog_category_data = array();

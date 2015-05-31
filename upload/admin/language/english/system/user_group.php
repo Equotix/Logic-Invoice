@@ -20,3 +20,4 @@ $_['error_permission']	= 'You do not have permission to modify user groups.';
 $_['error_user_group']	= 'You need to have at least one user group on the system.';
 $_['error_user']		= 'There are still users assigned to one of the user group you selected.';
 $_['error_name']		= 'Name must be between 3 and 32 characters.';
+$_['error_form']		= 'Please check the form for errors.';

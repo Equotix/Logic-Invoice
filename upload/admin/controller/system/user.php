@@ -61,6 +61,7 @@ class ControllerSystemUser extends Controller {
         foreach ($users as $user) {
             $this->data['users'][] = array(
                 'user_id'       => $user['user_id'],
+                'name'      	=> $user['name'],
                 'username'      => $user['username'],
                 'user_group'    => $user['user_group'],
                 'status'        => $user['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
@@ -99,8 +100,9 @@ class ControllerSystemUser extends Controller {
             $order = 'ASC';
         }
 
+        $this->data['sort_name'] = $this->url->link('system/user', 'token=' . $this->session->data['token'] . '&sort=u.name&order=' . $order, 'SSL');
         $this->data['sort_username'] = $this->url->link('system/user', 'token=' . $this->session->data['token'] . '&sort=username&order=' . $order, 'SSL');
-        $this->data['sort_user_group'] = $this->url->link('system/user', 'token=' . $this->session->data['token'] . '&sort=name&order=' . $order, 'SSL');
+        $this->data['sort_user_group'] = $this->url->link('system/user', 'token=' . $this->session->data['token'] . '&sort=ug.name&order=' . $order, 'SSL');
         $this->data['sort_status'] = $this->url->link('system/user', 'token=' . $this->session->data['token'] . '&sort=status&order=' . $order, 'SSL');
         $this->data['sort_date_added'] = $this->url->link('system/user', 'token=' . $this->session->data['token'] . '&sort=date_added&order=' . $order, 'SSL');
         $this->data['sort_date_modified'] = $this->url->link('system/user', 'token=' . $this->session->data['token'] . '&sort=date_modified&order=' . $order, 'SSL');
@@ -196,10 +198,12 @@ class ControllerSystemUser extends Controller {
 
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
         $this->data['error_email'] = $this->build->data('email', $this->error);
+        $this->data['error_name'] = $this->build->data('name', $this->error);
         $this->data['error_username'] = $this->build->data('username', $this->error);
         $this->data['error_password'] = $this->build->data('password', $this->error);
         $this->data['error_confirm'] = $this->build->data('confirm', $this->error);
 
+        $this->data['name'] = $this->build->data('name', $this->request->post, $user_info);
         $this->data['username'] = $this->build->data('username', $this->request->post, $user_info);
         $this->data['email'] = $this->build->data('email', $this->request->post, $user_info);
         $this->data['user_group_id'] = $this->build->data('user_group_id', $this->request->post, $user_info);
@@ -241,6 +245,10 @@ class ControllerSystemUser extends Controller {
         if (!$this->user->hasPermission('modify', 'system/user')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
+		
+		if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['username']) > 64)) {
+            $this->error['name'] = $this->language->get('error_username');
+        }
 
         if ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
             $this->error['email'] = $this->language->get('error_email');
@@ -277,6 +285,10 @@ class ControllerSystemUser extends Controller {
                 $this->error['confirm'] = $this->language->get('error_confirm');
             }
         }
+		
+		if ($this->error && empty($this->error['warning'])) {
+			$this->error['warning'] = $this->language->get('error_form');
+		}
 
         return !$this->error;
     }

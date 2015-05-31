@@ -33,7 +33,12 @@
               <?php } else { ?>
               <a href="<?php echo $sort_username; ?>"><?php echo $column_username; ?></a>
               <?php } ?></th>
-            <th class="text-left"><?php if ($sort == 'name') { ?>
+			<th class="text-left"><?php if ($sort == 'u.name') { ?>
+              <a href="<?php echo $sort_name; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_name; ?></a>
+              <?php } else { ?>
+              <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>
+              <?php } ?></th>
+            <th class="text-left"><?php if ($sort == 'ug.name') { ?>
               <a href="<?php echo $sort_user_group; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_user_group; ?></a>
               <?php } else { ?>
               <a href="<?php echo $sort_user_group; ?>"><?php echo $column_user_group; ?></a>
@@ -64,6 +69,7 @@
               <input type="checkbox" name="selected[]" value="<?php echo $user['user_id']; ?>" />
               <?php } ?></td>
             <td class="text-left"><?php echo $user['username']; ?></td>
+            <td class="text-left"><?php echo $user['name']; ?></td>
             <td class="text-left"><?php echo $user['user_group']; ?></td>
             <td class="text-right"><?php echo $user['status']; ?></td>
             <td class="text-right"><?php echo $user['date_added']; ?></td>
@@ -73,7 +79,7 @@
           <?php } ?>
           <?php } else { ?>
           <tr>
-            <td class="text-center" colspan="7"><?php echo $text_no_results; ?></td>
+            <td class="text-center" colspan="8"><?php echo $text_no_results; ?></td>
           </tr>
           <?php } ?>
         </table>

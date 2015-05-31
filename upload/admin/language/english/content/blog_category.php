@@ -27,3 +27,4 @@ $_['error_permission']			= 'You do not have permission to modify articles.';
 $_['error_name']				= 'Name must be between 3 and 255 characters.';
 $_['error_meta_title']			= 'Meta Title must be between 3 and 255 characters.';
 $_['error_url_alias']			= 'URL Alias has to be unique across the system.';
+$_['error_form']				= 'Please check the form for errors.';

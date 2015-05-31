@@ -289,6 +289,10 @@ class ControllerAccountingAccount extends Controller {
         if (isset($this->request->get['account_id']) && $this->request->post['parent_id'] == $this->request->get['account_id']) {
             $this->error['parent'] = $this->language->get('error_parent');
         }
+		
+		if ($this->error && empty($this->error['warning'])) {
+			$this->error['warning'] = $this->language->get('error_form');
+		}
 
         return !$this->error;
     }

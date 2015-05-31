@@ -4,7 +4,7 @@
 	<version>1.0.0</version>
 	<vqmver>2.5.0</vqmver>
 	<author>Logic Invoice</author>
-	<file name="front/controller/common/header.php">
+	<file name="application/controller/common/header.php">
 		<operation info="Add contact form link">
 			<search position="before"><![CDATA[
 				if ($this->customer->isLogged()) {
@@ -22,7 +22,7 @@
 			]]></add>
 		</operation>
 	</file>
-	<file name="front/view/theme/*/template/common/header.tpl">
+	<file name="application/view/theme/*/template/common/header.tpl">
 		<operation info="Add contact form link">
 			<search position="before"><![CDATA[
 				<?php echo $text_client; ?>

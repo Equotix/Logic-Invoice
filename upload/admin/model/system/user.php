@@ -3,14 +3,14 @@ defined('_PATH') or die('Restricted!');
 
 class ModelSystemUser extends Model {
     public function addUser($data) {
-        $this->db->query("INSERT INTO `" . DB_PREFIX . "user` SET user_group_id = '" . (int)$data['user_group_id'] . "', `key` = '" . $this->db->escape($data['key']) . "', secret = '" . $this->db->escape($data['secret']) . "', email = '" . $this->db->escape($data['email']) . "', username = '" . $this->db->escape($data['username']) . "', salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', status = '" . (int)$data['status'] . "', date_added = NOW(), date_modified = NOW()");
+        $this->db->query("INSERT INTO `" . DB_PREFIX . "user` SET user_group_id = '" . (int)$data['user_group_id'] . "', `key` = '" . $this->db->escape($data['key']) . "', secret = '" . $this->db->escape($data['secret']) . "', name = '" . $this->db->escape($data['name']) . "', email = '" . $this->db->escape($data['email']) . "', username = '" . $this->db->escape($data['username']) . "', salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "', status = '" . (int)$data['status'] . "', date_added = NOW(), date_modified = NOW()");
     }
 
     public function editUser($user_id, $data) {
-        $this->db->query("UPDATE `" . DB_PREFIX . "user` SET user_group_id = '" . (int)$data['user_group_id'] . "', `key` = '" . $this->db->escape($data['key']) . "', secret = '" . $this->db->escape($data['secret']) . "', email = '" . $this->db->escape($data['email']) . "', username = '" . $this->db->escape($data['username']) . "', status = '" . (int)$data['status'] . "', date_modified = NOW() WHERE user_id = '" . (int)$user_id . "'");
+        $this->db->query("UPDATE `" . DB_PREFIX . "user` SET user_group_id = '" . (int)$data['user_group_id'] . "', `key` = '" . $this->db->escape($data['key']) . "', secret = '" . $this->db->escape($data['secret']) . "', name = '" . $this->db->escape($data['name']) . "', email = '" . $this->db->escape($data['email']) . "', username = '" . $this->db->escape($data['username']) . "', status = '" . (int)$data['status'] . "', date_modified = NOW() WHERE user_id = '" . (int)$user_id . "'");
 
         if ($data['password']) {
-            $this->db->query("UPDATE `" . DB_PREFIX . "user` SET salt = '" . $this->db->escape($salt = substr(md5(uniqid(rand(), true)), 0, 9)) . "', password = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($data['password'])))) . "' WHERE user_id = '" . (int)$user_id . "'");
+            $this->editPassword($user_id, $data['password']);
         }
     }
 
@@ -52,10 +52,12 @@ class ModelSystemUser extends Model {
     }
 
     public function getUsers($data = array()) {
-        $sql = "SELECT *, name AS user_group FROM `" . DB_PREFIX . "user` u LEFT JOIN " . DB_PREFIX . "user_group ug ON ug.user_group_id = u.user_group_id";
+        $sql = "SELECT *, u.name AS name, ug.name AS user_group FROM `" . DB_PREFIX . "user` u LEFT JOIN " . DB_PREFIX . "user_group ug ON ug.user_group_id = u.user_group_id";
 
         $sort_data = array(
+            'u.name',
             'username',
+			'ug.name',
             'status',
             'date_added',
             'date_modified'

@@ -27,6 +27,7 @@ $_['error_permission']					= 'You do not have permission to modify email templat
 $_['error_subject']						= 'Subject must be between 3 and 255 characters.';
 $_['error_html']						= 'HTML Message must be more than 3 characters.';
 $_['error_text']						= 'Text Message must be more than 3 characters.';
+$_['error_form']						= 'Please check the form for errors.';
 
 // Type
 $_['type_new_customer_admin']			= 'New Customer (Admin)';

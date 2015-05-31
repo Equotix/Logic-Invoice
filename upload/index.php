@@ -8,7 +8,7 @@ if (file_exists('config.php')) {
 	
 	define('_URL', APP_URL);
 	define('_SURL', APP_SURL);
-	define('_PATH', __DIR__ . '/front');
+	define('_PATH', __DIR__ . '/application');
 	define('_FRONT', true);
 	
 	require_once('defined.php');

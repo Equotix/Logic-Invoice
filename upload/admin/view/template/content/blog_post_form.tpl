@@ -30,7 +30,7 @@
 		  <div class="form-group">
 			<label class="col-sm-2 control-label" for="input-image-<?php echo $language['language_id']; ?>"><?php echo $entry_image; ?></label>
 			<div class="col-sm-10">
-			  <a href="" id="thumb-image-<?php echo $language['language_id']; ?>" data-toggle="image" class="img-thumbnail"><img src="<?php echo !empty($description[$language['language_id']]['image']) ? $description[$language['language_id']]['image'] : $placeholder; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a>
+			  <a href="" id="thumb-image-<?php echo $language['language_id']; ?>" data-toggle="image" class="img-thumbnail"><img src="<?php echo !empty($description[$language['language_id']]['thumb']) ? $description[$language['language_id']]['thumb'] : $placeholder; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a>
 			  <input type="hidden" name="description[<?php echo $language['language_id']; ?>][image]" value="<?php echo !empty($description[$language['language_id']]['image']) ? $description[$language['language_id']]['image'] : ''; ?>" id="input-image-<?php echo $language['language_id']; ?>" />
 			</div>
 		  </div>
@@ -59,7 +59,7 @@
             </div>
           </div>
 		  <div class="form-group">
-            <label class="required col-sm-2 control-label" for="input-meta-description-<?php echo $language['language_id']; ?>"><?php echo $entry_meta_description; ?></label>
+            <label class="col-sm-2 control-label" for="input-meta-description-<?php echo $language['language_id']; ?>"><?php echo $entry_meta_description; ?></label>
             <div class="col-sm-10">
               <div class="input-group">
                 <span class="input-group-addon"><img src="view/image/flags/<?php echo $language['image']; ?>" alt="<?php echo $language['name']; ?>" title="<?php echo $language['name']; ?>" /></span>
@@ -68,12 +68,21 @@
             </div>
           </div>
 		  <div class="form-group">
-            <label class="required col-sm-2 control-label" for="input-meta-keyword-<?php echo $language['language_id']; ?>"><?php echo $entry_meta_keyword; ?></label>
+            <label class="col-sm-2 control-label" for="input-meta-keyword-<?php echo $language['language_id']; ?>"><?php echo $entry_meta_keyword; ?></label>
             <div class="col-sm-10">
               <div class="input-group">
                 <span class="input-group-addon"><img src="view/image/flags/<?php echo $language['image']; ?>" alt="<?php echo $language['name']; ?>" title="<?php echo $language['name']; ?>" /></span>
                 <textarea name="description[<?php echo $language['language_id']; ?>][meta_keyword]" id="input-name-<?php echo $language['language_id']; ?>" class="form-control" placeholder="<?php echo $entry_meta_keyword; ?>" rows="5"><?php echo !empty($description[$language['language_id']]['meta_keyword']) ? $description[$language['language_id']]['meta_keyword'] : ''; ?></textarea>
               </div>
+            </div>
+          </div>
+		  <div class="form-group">
+            <label class="required col-sm-2 control-label" for="input-short-description-<?php echo $language['language_id']; ?>"><?php echo $entry_short_description; ?></label>
+            <div class="col-sm-10">
+              <textarea name="description[<?php echo $language['language_id']; ?>][short_description]" id="input-short-description-<?php echo $language['language_id']; ?>"><?php echo !empty($description[$language['language_id']]['short_description']) ? html_entity_decode($description[$language['language_id']]['short_description'], ENT_QUOTES) : ''; ?></textarea>
+              <?php if (!empty($error_short_description[$language['language_id']])) { ?>
+              <div class="text-danger"><?php echo $error_short_description[$language['language_id']]; ?></div>
+              <?php } ?>
             </div>
           </div>
 		  <div class="form-group">
@@ -101,9 +110,9 @@
 				<span class="input-group-addon"><img src="view/image/flags/<?php echo $language['image']; ?>" alt="<?php echo $language['name']; ?>" title="<?php echo $language['name']; ?>" /></span>
 				<input type="text" name="url_alias[<?php echo $language['language_id']; ?>]" value="<?php echo !empty($url_alias[$language['language_id']]) ? $url_alias[$language['language_id']] : ''; ?>" id="input-url-alias-<?php echo $language['language_id']; ?>" class="form-control" placeholder="<?php echo $entry_url_alias; ?>" />
 			  </div>
-			  <?php if ($error_url_alias) { ?>
-			  <div class="text-danger"><?php echo $error_url_alias; ?></div>
-			  <?php } ?>
+			  <?php if (!empty($error_url_alias[$language['language_id']])) { ?>
+              <div class="text-danger"><?php echo $error_url_alias[$language['language_id']]; ?></div>
+              <?php } ?>
 			</div>
 		  </div>
         </div>
@@ -152,6 +161,10 @@
 <?php foreach ($languages as $language) { ?>
 $('#input-description-<?php echo $language['language_id']; ?>').summernote({
 	height: 300
+});
+
+$('#input-short-description-<?php echo $language['language_id']; ?>').summernote({
+	height: 200
 });
 <?php } ?>
 

@@ -55,9 +55,9 @@
 				<span class="input-group-addon"><img src="view/image/flags/<?php echo $language['image']; ?>" alt="<?php echo $language['name']; ?>" title="<?php echo $language['name']; ?>" /></span>
 				<input type="text" name="url_alias[<?php echo $language['language_id']; ?>]" value="<?php echo !empty($url_alias[$language['language_id']]) ? $url_alias[$language['language_id']] : ''; ?>" id="input-url-alias-<?php echo $language['language_id']; ?>" class="form-control" placeholder="<?php echo $entry_url_alias; ?>" />
 			  </div>
-			  <?php if ($error_url_alias) { ?>
-			  <div class="text-danger"><?php echo $error_url_alias; ?></div>
-			  <?php } ?>
+			  <?php if (!empty($error_url_alias[$language['language_id']])) { ?>
+              <div class="text-danger"><?php echo $error_url_alias[$language['language_id']]; ?></div>
+              <?php } ?>
 			</div>
 		  </div>
         </div>

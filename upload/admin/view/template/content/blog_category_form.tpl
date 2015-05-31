@@ -52,7 +52,7 @@
             </div>
           </div>
 		  <div class="form-group">
-            <label class="required col-sm-2 control-label" for="input-meta-description-<?php echo $language['language_id']; ?>"><?php echo $entry_meta_description; ?></label>
+            <label class="col-sm-2 control-label" for="input-meta-description-<?php echo $language['language_id']; ?>"><?php echo $entry_meta_description; ?></label>
             <div class="col-sm-10">
               <div class="input-group">
                 <span class="input-group-addon"><img src="view/image/flags/<?php echo $language['image']; ?>" alt="<?php echo $language['name']; ?>" title="<?php echo $language['name']; ?>" /></span>
@@ -61,7 +61,7 @@
             </div>
           </div>
 		  <div class="form-group">
-            <label class="required col-sm-2 control-label" for="input-meta-keyword-<?php echo $language['language_id']; ?>"><?php echo $entry_meta_keyword; ?></label>
+            <label class="col-sm-2 control-label" for="input-meta-keyword-<?php echo $language['language_id']; ?>"><?php echo $entry_meta_keyword; ?></label>
             <div class="col-sm-10">
               <div class="input-group">
                 <span class="input-group-addon"><img src="view/image/flags/<?php echo $language['image']; ?>" alt="<?php echo $language['name']; ?>" title="<?php echo $language['name']; ?>" /></span>
@@ -76,9 +76,9 @@
 				<span class="input-group-addon"><img src="view/image/flags/<?php echo $language['image']; ?>" alt="<?php echo $language['name']; ?>" title="<?php echo $language['name']; ?>" /></span>
 				<input type="text" name="url_alias[<?php echo $language['language_id']; ?>]" value="<?php echo !empty($url_alias[$language['language_id']]) ? $url_alias[$language['language_id']] : ''; ?>" id="input-url-alias-<?php echo $language['language_id']; ?>" class="form-control" placeholder="<?php echo $entry_url_alias; ?>" />
 			  </div>
-			  <?php if ($error_url_alias) { ?>
-			  <div class="text-danger"><?php echo $error_url_alias; ?></div>
-			  <?php } ?>
+			  <?php if (!empty($error_url_alias[$language['language_id']])) { ?>
+              <div class="text-danger"><?php echo $error_url_alias[$language['language_id']]; ?></div>
+              <?php } ?>
 			</div>
 		  </div>
         </div>

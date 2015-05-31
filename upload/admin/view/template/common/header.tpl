@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="text/javascript" src="<?php echo $application; ?>share/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="<?php echo $application; ?>share/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="view/javascript/system.js"></script>
     <link rel="stylesheet" type="text/css" href="<?php echo $application; ?>share/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $application; ?>share/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="view/stylesheet/stylesheet.css" />
@@ -16,6 +15,7 @@
     <?php foreach ($styles as $style) { ?>
     <link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>" media="<?php echo $style['media']; ?>" />
     <?php } ?>
+	<script type="text/javascript" src="view/javascript/system.js"></script>
   </head>
   <body>
     <?php if ($logged) { ?>

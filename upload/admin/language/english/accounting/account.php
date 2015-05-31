@@ -46,3 +46,4 @@ $_['error_permission']				= 'You do not have permission to modify accounts.';
 $_['error_account_id']				= 'Account ID must be unique.';
 $_['error_name']					= 'Name must be between 3 and 32 characters.';
 $_['error_parent']					= 'Parent must not be itself.';
+$_['error_form']					= 'Please check the form for errors.';

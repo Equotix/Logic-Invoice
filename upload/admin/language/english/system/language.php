@@ -30,3 +30,4 @@ $_['error_code']		= 'Code must be more than 2 characters.';
 $_['error_locale']		= 'Locale must not be empty.';
 $_['error_image']		= 'Image must be between 3 and 32 characters.';
 $_['error_directory']	= 'Directory must not be empty.';
+$_['error_form']		= 'Please check the form for errors.';

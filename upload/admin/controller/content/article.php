@@ -254,18 +254,24 @@ class ControllerContentArticle extends Controller {
         }
 
         if (!empty($this->request->post['url_alias'])) {
-            $query = $this->model_system_url_alias->getUrlAliasByKeyword($this->request->post['url_alias']);
-
-            if ($query && !isset($this->request->get['article_id'])) {
-                $this->error['url_alias'] = $this->language->get('error_url_alias');
-            } elseif (isset($this->request->get['article_id']) && $query) {
-				foreach ($this->request->post['url_alias'] as $language_id => $keyword) {
-					if (!empty($query[$language_id]) && $query[$language_id] != 'article_id=' . $this->request->get['article_id']) {
-						$this->error['url_alias'] = $this->language->get('error_url_alias');
+			foreach ($this->request->post['url_alias'] as $language_id => $keyword) {
+				if ($keyword) {
+					$query = $this->model_system_url_alias->getUrlAliasByKeyword($language_id, $keyword);
+					
+					if (isset($this->request->get['article_id'])) {
+						if ($query && $query != 'article_id=' . $this->request->get['article_id']) {
+							$this->error['url_alias'][$language_id] = $this->language->get('error_url_alias');
+						}
+					} else {
+						$this->error['url_alias'][$language_id] = $this->language->get('error_url_alias');
 					}
 				}
-            }
+			}
         }
+		
+		if ($this->error && empty($this->error['warning'])) {
+			$this->error['warning'] = $this->language->get('error_form');
+		}
 
         return !$this->error;
     }

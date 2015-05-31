@@ -6,7 +6,9 @@ class ModelSystemUrlAlias extends Model {
         $this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = '" . $this->db->escape($query) . "'");
 
 		foreach ($keywords as $language_id => $keyword) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET language_id = '" . (int)$language_id . "', query = '" . $this->db->escape($query) . "', keyword = '" . $this->db->escape($keyword) . "'");
+			if ($keyword) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "url_alias SET language_id = '" . (int)$language_id . "', query = '" . $this->db->escape($query) . "', keyword = '" . $this->db->escape($keyword) . "'");
+			}
 		}
 	}
 
@@ -22,17 +24,13 @@ class ModelSystemUrlAlias extends Model {
 		return $url_alias_data;
     }
 
-    public function getUrlAliasByKeyword($keywords) {
-		$url_alias_data = array();
-		
-		foreach ($keywords as $language_id => $keyword) {
-			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE language_id = '" . (int)$language_id . "' AND LOWER(keyword) = '" . $this->db->escape(utf8_strtolower($keyword)) . "'");
+    public function getUrlAliasByKeyword($language_id, $keyword) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE language_id = '" . (int)$language_id . "' AND LOWER(keyword) = '" . $this->db->escape(utf8_strtolower($keyword)) . "'");
 
-			if ($query->num_rows) {
-				$url_alias_data[$query->row['language_id']] = $query->row['query'];
-			}
+		if ($query->num_rows) {
+			return $query->row['query'];
+		} else {
+			return false;
 		}
-		
-		return $url_alias_data;
     }
 }

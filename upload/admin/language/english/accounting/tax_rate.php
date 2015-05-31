@@ -21,3 +21,4 @@ $_['text_percentage']		= 'Percentage';
 $_['error_permission']		= 'You do not have permission to modify tax rates.';
 $_['error_name']			= 'Name must be between 3 and 32 characters.';
 $_['error_rate']			= 'Rate must be greater than 0.';
+$_['error_form']			= 'Please check the form for errors.';

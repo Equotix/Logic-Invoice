@@ -11,9 +11,9 @@ class ControllerSystemFileManager extends Controller {
 
 		// Make sure we have the correct directory
 		if (isset($this->request->get['directory'])) {
-			$directory = rtrim(DIR_IMAGE . 'app/' . str_replace(array('../', '..\\', '..'), '', $this->request->get['directory']), '/');
+			$directory = rtrim(DIR_IMAGE . 'upload/' . str_replace(array('../', '..\\', '..'), '', $this->request->get['directory']), '/');
 		} else {
-			$directory = DIR_IMAGE . 'app';
+			$directory = DIR_IMAGE . 'upload';
 		}
 
 		if (isset($this->request->get['page'])) {
@@ -68,7 +68,7 @@ class ControllerSystemFileManager extends Controller {
 					'name'  => implode(' ', $name),
 					'type'  => 'directory',
 					'path'  => utf8_substr($image, utf8_strlen(DIR_IMAGE)),
-					'href'  => $this->url->link('system/filemanager', 'token=' . $this->session->data['token'] . '&directory=' . urlencode(utf8_substr($image, utf8_strlen(DIR_IMAGE . 'app/'))) . $url, 'SSL')
+					'href'  => $this->url->link('system/filemanager', 'token=' . $this->session->data['token'] . '&directory=' . urlencode(utf8_substr($image, utf8_strlen(DIR_IMAGE . 'upload/'))) . $url, 'SSL')
 				);
 			} elseif (is_file($image)) {
 				// Find which protocol to use to pass the full image link back
@@ -195,9 +195,9 @@ class ControllerSystemFileManager extends Controller {
 
 		// Make sure we have the correct directory
 		if (isset($this->request->get['directory'])) {
-			$directory = rtrim(DIR_IMAGE . 'app/' . str_replace(array('../', '..\\', '..'), '', $this->request->get['directory']), '/');
+			$directory = rtrim(DIR_IMAGE . 'upload/' . str_replace(array('../', '..\\', '..'), '', $this->request->get['directory']), '/');
 		} else {
-			$directory = DIR_IMAGE . 'app';
+			$directory = DIR_IMAGE . 'upload';
 		}
 
 		// Check its a directory
@@ -278,9 +278,9 @@ class ControllerSystemFileManager extends Controller {
 
 		// Make sure we have the correct directory
 		if (isset($this->request->get['directory'])) {
-			$directory = rtrim(DIR_IMAGE . 'app/' . str_replace(array('../', '..\\', '..'), '', $this->request->get['directory']), '/');
+			$directory = rtrim(DIR_IMAGE . 'upload/' . str_replace(array('../', '..\\', '..'), '', $this->request->get['directory']), '/');
 		} else {
-			$directory = DIR_IMAGE . 'app';
+			$directory = DIR_IMAGE . 'upload';
 		}
 
 		// Check its a directory
@@ -334,7 +334,7 @@ class ControllerSystemFileManager extends Controller {
 			$path = rtrim(DIR_IMAGE . str_replace(array('../', '..\\', '..'), '', $path), '/');
 
 			// Check path exsists
-			if ($path == DIR_IMAGE . 'app') {
+			if ($path == DIR_IMAGE . 'upload') {
 				$json['error'] = $this->language->get('error_delete');
 
 				break;

@@ -31,3 +31,4 @@ $_['error_title']			= 'Title must be between 3 and 32 characters.';
 $_['error_code']			= 'Code must be between 1 and 3 characters.';
 $_['error_decimal_place']	= 'Decimal Place must be 1 character.';
 $_['error_value']			= 'Value is required.';
+$_['error_form']			= 'Please check the form for errors.';

@@ -46,3 +46,4 @@ $_['error_email']			= 'Email address does not seem to be valid.';
 $_['error_exists']			= 'Email address is already taken.';
 $_['error_password']		= 'Password must be between 6 and 25 characters.';
 $_['error_confirm']			= 'Passwords do not match.';
+$_['error_form']			= 'Please check the form for errors.';

@@ -90,18 +90,20 @@
 			  <?php } ?></select>
             </div>
           </div>
+		  <div class="form-group">
+			<label class="col-sm-2 control-label" for="input-logo"><?php echo $entry_logo; ?></label>
+			<div class="col-sm-10">
+			  <a href="" id="thumb-logo" data-toggle="image" class="img-thumbnail"><img src="<?php echo $config_logo_thumb; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a>
+			  <input type="hidden" name="config_logo" value="<?php echo $config_logo; ?>" id="input-logo" />
+			</div>
+		  </div>
           <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-logo"><?php echo $entry_logo; ?></label>
-            <div class="col-sm-10">
-              <input type="text" name="config_logo" value="<?php echo $config_logo; ?>" id="input-logo" class="form-control" placeholder="<?php echo $entry_logo; ?>" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-icon"><?php echo $entry_icon; ?></label>
-            <div class="col-sm-10">
-              <input type="text" name="config_icon" value="<?php echo $config_icon; ?>" id="input-icon" class="form-control" placeholder="<?php echo $entry_icon; ?>" />
-            </div>
-          </div>
+			<label class="col-sm-2 control-label" for="input-icon"><?php echo $entry_icon; ?></label>
+			<div class="col-sm-10">
+			  <a href="" id="thumb-icon" data-toggle="image" class="img-thumbnail"><img src="<?php echo $config_icon_thumb; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a>
+			  <input type="hidden" name="config_icon" value="<?php echo $config_icon; ?>" id="input-icon" />
+			</div>
+		  </div>
           <div class="form-group">
             <label class="required col-sm-2 control-label" for="input-limit-admin"><?php echo $entry_limit_admin; ?></label>
             <div class="col-sm-10">

@@ -28,6 +28,15 @@
           <?php } ?>
         </div>
       </div>
+	  <div class="form-group">
+        <label class="required col-sm-2 control-label" for="input-name"><?php echo $entry_name; ?></label>
+        <div class="col-sm-10">
+          <input type="text" name="name" value="<?php echo $name; ?>" id="input-name" class="form-control" placeholder="<?php echo $entry_name; ?>" required />
+          <?php if ($error_name) { ?>
+          <div class="text-danger"><?php echo $error_name; ?></div>
+          <?php } ?>
+        </div>
+      </div>
       <div class="form-group">
         <label class="required col-sm-2 control-label" for="input-email"><?php echo $entry_email; ?></label>
         <div class="col-sm-10">

@@ -36,3 +36,4 @@ $_['error_description']		= 'Description must be between 3 and 1000 characters.';
 $_['error_currency_value']	= 'Currency value must be filled in.';
 $_['error_date']			= 'Date must be filled in.';
 $_['error_account']			= 'Debit and credit needs to be equal.';
+$_['error_form']			= 'Please check the form for errors.';
