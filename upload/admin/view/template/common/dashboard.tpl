@@ -13,7 +13,9 @@
         </div>
         <div class="footer">
           <a href="<?php echo $invoice; ?>"><?php echo $text_view_more; ?></a>
-          <div class="pull-right"><a href="<?php echo $invoice; ?>" title="<?php echo $text_view_more; ?>" data-toggle="tooltip"><i class="fa fa-external-link"></i></a></div>
+          <div class="pull-right">
+            <a href="<?php echo $invoice; ?>" title="<?php echo $text_view_more; ?>" data-toggle="tooltip"><i class="fa fa-external-link"></i></a>
+          </div>
         </div>
       </div>
     </div>
@@ -26,7 +28,9 @@
         </div>
         <div class="footer">
           <a href="<?php echo $journal; ?>"><?php echo $text_view_more; ?></a>
-          <div class="pull-right"><a href="<?php echo $journal; ?>" title="<?php echo $text_view_more; ?>" data-toggle="tooltip"><i class="fa fa-external-link"></i></a></div>
+          <div class="pull-right">
+            <a href="<?php echo $journal; ?>" title="<?php echo $text_view_more; ?>" data-toggle="tooltip"><i class="fa fa-external-link"></i></a>
+          </div>
         </div>
       </div>
     </div>
@@ -39,7 +43,9 @@
         </div>
         <div class="footer">
           <a href="<?php echo $recurring; ?>"><?php echo $text_view_more; ?></a>
-          <div class="pull-right"><a href="<?php echo $recurring; ?>" title="<?php echo $text_view_more; ?>" data-toggle="tooltip"><i class="fa fa-external-link"></i></a></div>
+          <div class="pull-right">
+            <a href="<?php echo $recurring; ?>" title="<?php echo $text_view_more; ?>" data-toggle="tooltip"><i class="fa fa-external-link"></i></a>
+          </div>
         </div>
       </div>
     </div>
@@ -52,7 +58,9 @@
         </div>
         <div class="footer">
           <a href="<?php echo $customer; ?>"><?php echo $text_view_more; ?></a>
-          <div class="pull-right"><a href="<?php echo $customer; ?>" title="<?php echo $text_view_more; ?>" data-toggle="tooltip"><i class="fa fa-external-link"></i></a></div>
+          <div class="pull-right">
+            <a href="<?php echo $customer; ?>" title="<?php echo $text_view_more; ?>" data-toggle="tooltip"><i class="fa fa-external-link"></i></a>
+          </div>
         </div>
       </div>
     </div>
@@ -120,7 +128,9 @@
                 <td class="text-left"><?php echo $transaction['invoice_id']; ?></td>
                 <td class="text-left"><?php echo $transaction['date']; ?></td>
                 <td class="text-left"><?php echo $transaction['date_added']; ?></td>
-                <td class="text-right"><a href="<?php echo $transaction['edit']; ?>" title="<?php echo $button_edit; ?>" data-toggle="tooltip" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a></td>
+                <td class="text-right">
+                  <a href="<?php echo $transaction['edit']; ?>" title="<?php echo $button_edit; ?>" data-toggle="tooltip" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                </td>
               </tr>
               <?php } ?>
               <?php } else { ?>
@@ -138,7 +148,8 @@
     <div class="col-xs-12">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title"><i class="fa fa-exclamation-triangle"></i> <?php echo $text_10_latest_activities; ?></h3>
+          <h3 class="panel-title"><i class="fa fa-exclamation-triangle"></i> <?php echo $text_10_latest_activities; ?>
+          </h3>
         </div>
         <div class="panel-body">
           <div class="table-responsive">

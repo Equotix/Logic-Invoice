@@ -18,7 +18,8 @@
   <div class="panel-heading">
     <div class="pull-right">
       <a href="<?php echo $insert; ?>" title="<?php echo $button_add; ?>" data-toggle="tooltip" class="btn btn-success"><i class="fa fa-plus"></i></a>
-      <button type="button" title="<?php echo $button_delete; ?>" data-toggle="tooltip" class="btn btn-danger" onclick="confirm('<?php echo $text_confirm; ?>') ? $('#form-status').submit() : false;"><i class="fa fa-trash"></i></button>
+      <button type="button" title="<?php echo $button_delete; ?>" data-toggle="tooltip" class="btn btn-danger" onclick="confirm('<?php echo $text_confirm; ?>') ? $('#form-status').submit() : false;">
+        <i class="fa fa-trash"></i></button>
     </div>
     <h1 class="panel-title"><i class="fa fa-list fa-lg"></i> <?php echo $heading_title; ?></h1>
   </div>
@@ -27,13 +28,14 @@
       <div class="table-responsive">
         <table class="table table-striped table-bordered table-hover">
           <tr>
-            <th class="text-center" width="1"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></th>
+            <th class="text-center" width="1">
+              <input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></th>
             <th class="text-left"><?php if ($sort == 'title') { ?>
               <a href="<?php echo $sort_title; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_title; ?></a>
               <?php } else { ?>
               <a href="<?php echo $sort_title; ?>"><?php echo $column_title; ?></a>
               <?php } ?></th>
-			<th class="text-left"><?php if ($sort == 'view') { ?>
+            <th class="text-left"><?php if ($sort == 'view') { ?>
               <a href="<?php echo $sort_view; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_view; ?></a>
               <?php } else { ?>
               <a href="<?php echo $sort_view; ?>"><?php echo $column_view; ?></a>
@@ -48,12 +50,12 @@
               <?php } else { ?>
               <a href="<?php echo $sort_status; ?>"><?php echo $column_status; ?></a>
               <?php } ?></th>
-			<th class="text-right"><?php if ($sort == 'date_added') { ?>
+            <th class="text-right"><?php if ($sort == 'date_added') { ?>
               <a href="<?php echo $sort_date_added; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_date_added; ?></a>
               <?php } else { ?>
               <a href="<?php echo $sort_date_added; ?>"><?php echo $column_date_added; ?></a>
               <?php } ?></th>
-			<th class="text-right"><?php if ($sort == 'date_modified') { ?>
+            <th class="text-right"><?php if ($sort == 'date_modified') { ?>
               <a href="<?php echo $sort_date_modified; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_date_modified; ?></a>
               <?php } else { ?>
               <a href="<?php echo $sort_date_modified; ?>"><?php echo $column_date_modified; ?></a>
@@ -74,7 +76,9 @@
             <td class="text-right"><?php echo $blog_post['status']; ?></td>
             <td class="text-right"><?php echo $blog_post['date_added']; ?></td>
             <td class="text-right"><?php echo $blog_post['date_modified']; ?></td>
-            <td class="text-right"><a href="<?php echo $blog_post['edit']; ?>" title="<?php echo $button_edit; ?>" data-toggle="tooltip" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a></td>
+            <td class="text-right">
+              <a href="<?php echo $blog_post['edit']; ?>" title="<?php echo $button_edit; ?>" data-toggle="tooltip" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+            </td>
           </tr>
           <?php } ?>
           <?php } else { ?>

@@ -61,7 +61,7 @@ class ControllerSystemUser extends Controller {
         foreach ($users as $user) {
             $this->data['users'][] = array(
                 'user_id'       => $user['user_id'],
-                'name'      	=> $user['name'],
+                'name'          => $user['name'],
                 'username'      => $user['username'],
                 'user_group'    => $user['user_group'],
                 'status'        => $user['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
@@ -245,8 +245,8 @@ class ControllerSystemUser extends Controller {
         if (!$this->user->hasPermission('modify', 'system/user')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
-		
-		if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['username']) > 64)) {
+
+        if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['username']) > 64)) {
             $this->error['name'] = $this->language->get('error_username');
         }
 
@@ -285,10 +285,10 @@ class ControllerSystemUser extends Controller {
                 $this->error['confirm'] = $this->language->get('error_confirm');
             }
         }
-		
-		if ($this->error && empty($this->error['warning'])) {
-			$this->error['warning'] = $this->language->get('error_form');
-		}
+
+        if ($this->error && empty($this->error['warning'])) {
+            $this->error['warning'] = $this->language->get('error_form');
+        }
 
         return !$this->error;
     }

@@ -48,7 +48,8 @@
               <?php } ?>
             </select>
           </div>
-          <button type="button" title="<?php echo $button_filter; ?>" data-toggle="tooltip" class="btn btn-primary pull-right" onclick="filter();"><i class="fa fa-search"></i></button>
+          <button type="button" title="<?php echo $button_filter; ?>" data-toggle="tooltip" class="btn btn-primary pull-right" onclick="filter();">
+            <i class="fa fa-search"></i></button>
         </div>
       </div>
     </div>
@@ -86,38 +87,38 @@
   </div>
 </div>
 <script type="text/javascript"><!--
-function filter() {
-	url = 'index.php?load=report/recurring&token=<?php echo $token; ?>';
+  function filter() {
+    url = 'index.php?load=report/recurring&token=<?php echo $token; ?>';
 
-	var filter_date_added_start = $('input[name=\'filter_date_added_start\']').val();
+    var filter_date_added_start = $('input[name=\'filter_date_added_start\']').val();
 
-	if (filter_date_added_start) {
-		url += '&filter_date_added_start=' + encodeURIComponent(filter_date_added_start);
-	}
+    if (filter_date_added_start) {
+      url += '&filter_date_added_start=' + encodeURIComponent(filter_date_added_start);
+    }
 
-	var filter_date_added_end = $('input[name=\'filter_date_added_end\']').val();
+    var filter_date_added_end = $('input[name=\'filter_date_added_end\']').val();
 
-	if (filter_date_added_end) {
-		url += '&filter_date_added_end=' + encodeURIComponent(filter_date_added_end);
-	}
+    if (filter_date_added_end) {
+      url += '&filter_date_added_end=' + encodeURIComponent(filter_date_added_end);
+    }
 
-	var filter_group = $('select[name=\'filter_group\']').val();
+    var filter_group = $('select[name=\'filter_group\']').val();
 
-	if (filter_group) {
-		url += '&filter_group=' + encodeURIComponent(filter_group);
-	}
+    if (filter_group) {
+      url += '&filter_group=' + encodeURIComponent(filter_group);
+    }
 
-	var filter_status = $('select[name=\'filter_status\']').val();
+    var filter_status = $('select[name=\'filter_status\']').val();
 
-	if (filter_status != '') {
-		url += '&filter_status=' + encodeURIComponent(filter_status);
-	}
+    if (filter_status != '') {
+      url += '&filter_status=' + encodeURIComponent(filter_status);
+    }
 
-	location = url;
-}
+    location = url;
+  }
 
-$('.date').datetimepicker({
-	pickTime: false
-});
-//--></script>
+  $('.date').datetimepicker({
+    pickTime: false
+  });
+  //--></script>
 <?php echo $footer; ?>

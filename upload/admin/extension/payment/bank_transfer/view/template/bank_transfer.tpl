@@ -12,7 +12,8 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <div class="pull-right">
-      <button type="submit" form="form-bank-transfer" title="<?php echo $button_save; ?>" data-toggle="tooltip" class="btn btn-success"><i class="fa fa-save"></i></button>
+      <button type="submit" form="form-bank-transfer" title="<?php echo $button_save; ?>" data-toggle="tooltip" class="btn btn-success">
+        <i class="fa fa-save"></i></button>
       <a href="<?php echo $cancel; ?>" title="<?php echo $button_cancel; ?>" data-toggle="tooltip" class="btn btn-danger"><i class="fa fa-times"></i></a>
     </div>
     <h1 class="panel-title"><i class="fa fa-pencil-square fa-lg"></i> <?php echo $heading_title; ?></h1>
@@ -32,7 +33,8 @@
       <?php } ?>
       <div class="form-group">
         <label class="col-sm-2 control-label" for="input-completed"><?php echo $entry_completed; ?></label>
-        <div class="col-sm-10"><select name="bank_transfer_completed_status_id" id="input-completed" class="form-control">
+        <div class="col-sm-10">
+          <select name="bank_transfer_completed_status_id" id="input-completed" class="form-control">
             <?php foreach ($statuses as $status) { ?>
             <option value="<?php echo $status['status_id']; ?>"<?php echo $status['status_id'] == $bank_transfer_completed_status_id ? ' selected="selected"' : ''; ?>><?php echo $status['name']; ?></option>
             <?php } ?>

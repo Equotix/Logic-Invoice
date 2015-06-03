@@ -67,7 +67,7 @@ class ControllerContentBlogPost extends Controller {
                 'status'        => $blog_post['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
                 'date_added'    => date($this->language->get('date_format_short'), strtotime($blog_post['date_added'])),
                 'date_modified' => date($this->language->get('date_format_short'), strtotime($blog_post['date_modified'])),
-				'edit'          => $this->url->link('content/blog_post/form', 'token=' . $this->session->data['token'] . $url . '&blog_post_id=' . $blog_post['blog_post_id'], 'SSL')
+                'edit'          => $this->url->link('content/blog_post/form', 'token=' . $this->session->data['token'] . $url . '&blog_post_id=' . $blog_post['blog_post_id'], 'SSL')
             );
         }
 
@@ -209,33 +209,33 @@ class ControllerContentBlogPost extends Controller {
         $this->data['error_short_description'] = $this->build->data('short_description', $this->error);
         $this->data['error_description'] = $this->build->data('description', $this->error);
         $this->data['error_url_alias'] = $this->build->data('url_alias', $this->error);
-		
-		$this->load->model('tool/image');
+
+        $this->load->model('tool/image');
 
         $description = $this->build->data('description', $this->request->post, $blog_post_info, array());
-		
-		$this->data['description'] = array();
-		
-		foreach ($description as $language_id => $value) {
-			if ($value['image']) {
-				$thumb = $this->model_tool_image->resize($value['image'], 100, 100);
-			} else {
-				$thumb = $this->model_tool_image->resize('placeholder.png', 100, 100);
-			}
-		
-			$this->data['description'][$language_id] = array(
-				'thumb'			   => $thumb,
-				'image'            => $value['image'],
-                'title'            => $value['title'],
-                'meta_title'       => $value['meta_title'],
-                'meta_description' => $value['meta_description'],
-                'meta_keyword'     => $value['meta_keyword'],
-                'short_description'      => $value['short_description'],
-                'description'      => $value['description'],
-                'tag'              => $value['tag']
-			);
-		}
-		
+
+        $this->data['description'] = array();
+
+        foreach ($description as $language_id => $value) {
+            if ($value['image']) {
+                $thumb = $this->model_tool_image->resize($value['image'], 100, 100);
+            } else {
+                $thumb = $this->model_tool_image->resize('placeholder.png', 100, 100);
+            }
+
+            $this->data['description'][$language_id] = array(
+                'thumb'             => $thumb,
+                'image'             => $value['image'],
+                'title'             => $value['title'],
+                'meta_title'        => $value['meta_title'],
+                'meta_description'  => $value['meta_description'],
+                'meta_keyword'      => $value['meta_keyword'],
+                'short_description' => $value['short_description'],
+                'description'       => $value['description'],
+                'tag'               => $value['tag']
+            );
+        }
+
         $this->data['sort_order'] = $this->build->data('sort_order', $this->request->post, $blog_post_info);
         $this->data['blog_category'] = $this->build->data('blog_category', $this->request->post, $blog_post_info, array());
         $this->data['status'] = $this->build->data('status', $this->request->post, $blog_post_info);
@@ -247,10 +247,10 @@ class ControllerContentBlogPost extends Controller {
         } else {
             $this->data['url_alias'] = array();
         }
-		
-		$this->data['placeholder'] = $this->model_tool_image->resize('placeholder.png', 100, 100);
-		
-		$this->load->model('content/blog_category');
+
+        $this->data['placeholder'] = $this->model_tool_image->resize('placeholder.png', 100, 100);
+
+        $this->load->model('content/blog_category');
 
         $this->data['blog_categories'] = $this->model_content_blog_category->getBlogCategories();
 
@@ -281,12 +281,12 @@ class ControllerContentBlogPost extends Controller {
             if ((utf8_strlen($value['title']) < 3) || (utf8_strlen($value['title']) > 255)) {
                 $this->error['title'][$language_id] = $this->language->get('error_title');
             }
-			
-			if ((utf8_strlen($value['meta_title']) < 3) || (utf8_strlen($value['meta_title']) > 255)) {
+
+            if ((utf8_strlen($value['meta_title']) < 3) || (utf8_strlen($value['meta_title']) > 255)) {
                 $this->error['meta_title'][$language_id] = $this->language->get('error_meta_title');
             }
-			
-			if (utf8_strlen($value['short_description']) < 10) {
+
+            if (utf8_strlen($value['short_description']) < 10) {
                 $this->error['short_description'][$language_id] = $this->language->get('error_short_description');
             }
 
@@ -296,24 +296,24 @@ class ControllerContentBlogPost extends Controller {
         }
 
         if (!empty($this->request->post['url_alias'])) {
-			foreach ($this->request->post['url_alias'] as $language_id => $keyword) {
-				if ($keyword) {
-					$query = $this->model_system_url_alias->getUrlAliasByKeyword($language_id, $keyword);
-					
-					if (isset($this->request->get['blog_post_id'])) {
-						if ($query && $query != 'blog_post_id=' . $this->request->get['blog_post_id']) {
-							$this->error['url_alias'][$language_id] = $this->language->get('error_url_alias');
-						}
-					} else {
-						$this->error['url_alias'][$language_id] = $this->language->get('error_url_alias');
-					}
-				}
-			}
+            foreach ($this->request->post['url_alias'] as $language_id => $keyword) {
+                if ($keyword) {
+                    $query = $this->model_system_url_alias->getUrlAliasByKeyword($language_id, $keyword);
+
+                    if (isset($this->request->get['blog_post_id'])) {
+                        if ($query && $query != 'blog_post_id=' . $this->request->get['blog_post_id']) {
+                            $this->error['url_alias'][$language_id] = $this->language->get('error_url_alias');
+                        }
+                    } else {
+                        $this->error['url_alias'][$language_id] = $this->language->get('error_url_alias');
+                    }
+                }
+            }
         }
-		
-		if ($this->error && empty($this->error['warning'])) {
-			$this->error['warning'] = $this->language->get('error_form');
-		}
+
+        if ($this->error && empty($this->error['warning'])) {
+            $this->error['warning'] = $this->language->get('error_form');
+        }
 
         return !$this->error;
     }

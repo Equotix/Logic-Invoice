@@ -47,14 +47,15 @@ if (isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTPS
 
 // Autoloader
 function autoload($class) {
-	$file = DIR_SYSTEM . 'library/' . str_replace('\\', '/', strtolower($class)) . '.php';
-	
-	if (is_file($file)) {
-		include_once($file);
-		return true;
-	}
-	
-	return false;
+    $file = DIR_SYSTEM . 'library/' . str_replace('\\', '/', strtolower($class)) . '.php';
+
+    if (is_file($file)) {
+        include_once($file);
+
+        return true;
+    }
+
+    return false;
 }
 
 spl_autoload_register('autoload');

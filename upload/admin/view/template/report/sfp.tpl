@@ -28,7 +28,8 @@
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <button type="button" title="<?php echo $button_filter; ?>" data-toggle="tooltip" class="btn btn-primary pull-right" onclick="filter();"><i class="fa fa-search"></i></button>
+          <button type="button" title="<?php echo $button_filter; ?>" data-toggle="tooltip" class="btn btn-primary pull-right" onclick="filter();">
+            <i class="fa fa-search"></i></button>
         </div>
       </div>
     </div>
@@ -50,8 +51,10 @@
           </tr>
           <?php } ?>
           <tr>
-            <th class="text-left indent-2"><?php echo $text_total_current_assets; ?></td>
-            <th class="text-right"><?php echo $current_asset_total; ?></td>
+            <th class="text-left indent-2"><?php echo $text_total_current_assets; ?>
+            </td>
+            <th class="text-right"><?php echo $current_asset_total; ?>
+            </td>
           </tr>
           <?php } ?>
           <?php if ($non_current_asset_accounts) { ?>
@@ -65,13 +68,17 @@
           </tr>
           <?php } ?>
           <tr>
-            <th class="text-left indent-2"><?php echo $text_total_non_current_assets; ?></td>
-            <th class="text-right"><?php echo $non_current_asset_total; ?></td>
+            <th class="text-left indent-2"><?php echo $text_total_non_current_assets; ?>
+            </td>
+            <th class="text-right"><?php echo $non_current_asset_total; ?>
+            </td>
           </tr>
           <?php } ?>
           <tr>
-            <th class="text-left indent-1"><?php echo $text_total_assets; ?></td>
-            <th class="text-right"><?php echo $asset_total; ?></td>
+            <th class="text-left indent-1"><?php echo $text_total_assets; ?>
+            </td>
+            <th class="text-right"><?php echo $asset_total; ?>
+            </td>
           </tr>
         </table>
       </div>
@@ -94,8 +101,10 @@
           </tr>
           <?php } ?>
           <tr>
-            <th class="text-left indent-2"><?php echo $text_total_current_liabilities; ?></td>
-            <th class="text-right"><?php echo $current_liability_total; ?></td>
+            <th class="text-left indent-2"><?php echo $text_total_current_liabilities; ?>
+            </td>
+            <th class="text-right"><?php echo $current_liability_total; ?>
+            </td>
           </tr>
           <?php } ?>
           <?php if ($non_current_liability_accounts) { ?>
@@ -109,13 +118,17 @@
           </tr>
           <?php } ?>
           <tr>
-            <th class="text-left indent-2"><?php echo $text_total_non_current_liabilities; ?></td>
-            <th class="text-right"><?php echo $non_current_liability_total; ?></td>
+            <th class="text-left indent-2"><?php echo $text_total_non_current_liabilities; ?>
+            </td>
+            <th class="text-right"><?php echo $non_current_liability_total; ?>
+            </td>
           </tr>
           <?php } ?>
           <tr>
-            <th class="text-left indent-1"><?php echo $text_total_liabilities; ?></td>
-            <th class="text-right"><?php echo $liability_total; ?></td>
+            <th class="text-left indent-1"><?php echo $text_total_liabilities; ?>
+            </td>
+            <th class="text-right"><?php echo $liability_total; ?>
+            </td>
           </tr>
           <tr>
             <th class="text-left" colspan="2"><?php echo $text_equity; ?></th>
@@ -129,8 +142,10 @@
           <?php } ?>
           <?php } ?>
           <tr>
-            <th class="text-left indent-1"><?php echo $text_total_equity; ?></td>
-            <th class="text-right"><?php echo $equity_total; ?></td>
+            <th class="text-left indent-1"><?php echo $text_total_equity; ?>
+            </td>
+            <th class="text-right"><?php echo $equity_total; ?>
+            </td>
           </tr>
           <tr>
             <th class="text-left"><?php echo $text_total_liability_equity; ?></th>
@@ -142,30 +157,30 @@
   </div>
 </div>
 <script type="text/javascript"><!--
-function filter() {
-	url = 'index.php?load=report/sfp&token=<?php echo $token; ?>';
+  function filter() {
+    url = 'index.php?load=report/sfp&token=<?php echo $token; ?>';
 
-	var filter_date_end = $('input[name=\'filter_date_end\']').val();
+    var filter_date_end = $('input[name=\'filter_date_end\']').val();
 
-	if (filter_date_end) {
-		url += '&filter_date_end=' + encodeURIComponent(filter_date_end);
-	}
+    if (filter_date_end) {
+      url += '&filter_date_end=' + encodeURIComponent(filter_date_end);
+    }
 
-	location = url;
-}
+    location = url;
+  }
 
-$('.date').datetimepicker({
-	pickTime: false
-});
-//--></script>
+  $('.date').datetimepicker({
+    pickTime: false
+  });
+  //--></script>
 <?php if ($print_version) { ?>
 <script type="text/javascript"><!--
-$('#column-left').hide();
-$('header').hide();
-$('.breadcrumb').hide();
-$('.panel-heading .pull-right').hide();
-$('.well').hide();
-window.print();
-//--></script>
+  $('#column-left').hide();
+  $('header').hide();
+  $('.breadcrumb').hide();
+  $('.panel-heading .pull-right').hide();
+  $('.well').hide();
+  window.print();
+  //--></script>
 <?php } ?>
 <?php echo $footer; ?>

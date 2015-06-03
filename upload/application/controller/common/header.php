@@ -61,8 +61,8 @@ class ControllerCommonHeader extends Controller {
                 );
             }
         }
-		
-		$this->data['blog'] = $this->url->link('content/blog');
+
+        $this->data['blog'] = $this->url->link('content/blog');
 
         if ($this->customer->isLogged()) {
             $this->data['logged'] = true;
@@ -75,11 +75,11 @@ class ControllerCommonHeader extends Controller {
             $this->data['register'] = $this->config->get('config_registration') ? $this->url->link('account/register', '', 'SSL') : false;
             $this->data['login'] = $this->url->link('account/login', '', 'SSL');
         }
-		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/common/header.tpl')) {
-			return $this->render($this->config->get('config_theme') . '/template/common/header.tpl');
-		} else {
-			return $this->render('default/template/common/header.tpl');
-		}
+
+        if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/common/header.tpl')) {
+            return $this->render($this->config->get('config_theme') . '/template/common/header.tpl');
+        } else {
+            return $this->render('default/template/common/header.tpl');
+        }
     }
 }

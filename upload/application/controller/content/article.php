@@ -32,9 +32,9 @@ class ControllerContentArticle extends Controller {
         $this->data['footer'] = $this->load->controller('common/footer');
 
         if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/content/article.tpl')) {
-			$this->response->setOutput($this->render($this->config->get('config_theme') . '/template/content/article.tpl'));
-		} else {
-			$this->response->setOutput($this->render('default/template/content/article.tpl'));
-		}
+            $this->response->setOutput($this->render($this->config->get('config_theme') . '/template/content/article.tpl'));
+        } else {
+            $this->response->setOutput($this->render('default/template/content/article.tpl'));
+        }
     }
 }

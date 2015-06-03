@@ -64,9 +64,9 @@ class ControllerAccountCredit extends Controller {
         $this->data['footer'] = $this->load->controller('common/footer');
 
         if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/account/credit.tpl')) {
-			$this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/credit.tpl'));
-		} else {
-			$this->response->setOutput($this->render('default/template/account/credit.tpl'));
-		}
+            $this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/credit.tpl'));
+        } else {
+            $this->response->setOutput($this->render('default/template/account/credit.tpl'));
+        }
     }
 }

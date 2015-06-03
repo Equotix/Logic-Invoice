@@ -39,7 +39,8 @@
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <button type="button" title="<?php echo $button_filter; ?>" data-toggle="tooltip" class="btn btn-primary pull-right" onclick="filter();"><i class="fa fa-search"></i></button>
+          <button type="button" title="<?php echo $button_filter; ?>" data-toggle="tooltip" class="btn btn-primary pull-right" onclick="filter();">
+            <i class="fa fa-search"></i></button>
         </div>
       </div>
     </div>
@@ -58,8 +59,10 @@
         <?php } ?>
         <?php } ?>
         <tr>
-          <th class="text-left indent-1"><?php echo $text_total_revenue; ?></td>
-          <th class="text-right"><?php echo $revenue_total; ?></td>
+          <th class="text-left indent-1"><?php echo $text_total_revenue; ?>
+          </td>
+          <th class="text-right"><?php echo $revenue_total; ?>
+          </td>
         </tr>
         <tr>
           <th class="text-left" colspan="2"><?php echo $text_expense; ?></th>
@@ -73,48 +76,52 @@
         <?php } ?>
         <?php } ?>
         <tr>
-          <th class="text-left indent-1"><?php echo $text_total_expense; ?></td>
-          <th class="text-right"><?php echo $expense_total; ?></td>
+          <th class="text-left indent-1"><?php echo $text_total_expense; ?>
+          </td>
+          <th class="text-right"><?php echo $expense_total; ?>
+          </td>
         </tr>
         <tr>
-          <th class="text-left"><?php echo $text_net_profit; ?></td>
-          <th class="text-right"><?php echo $net_profit; ?></td>
+          <th class="text-left"><?php echo $text_net_profit; ?>
+          </td>
+          <th class="text-right"><?php echo $net_profit; ?>
+          </td>
         </tr>
       </table>
     </div>
   </div>
 </div>
 <script type="text/javascript"><!--
-function filter() {
-	url = 'index.php?load=report/sci&token=<?php echo $token; ?>';
+  function filter() {
+    url = 'index.php?load=report/sci&token=<?php echo $token; ?>';
 
-	var filter_date_start = $('input[name=\'filter_date_start\']').val();
+    var filter_date_start = $('input[name=\'filter_date_start\']').val();
 
-	if (filter_date_start) {
-		url += '&filter_date_start=' + encodeURIComponent(filter_date_start);
-	}
+    if (filter_date_start) {
+      url += '&filter_date_start=' + encodeURIComponent(filter_date_start);
+    }
 
-	var filter_date_end = $('input[name=\'filter_date_end\']').val();
+    var filter_date_end = $('input[name=\'filter_date_end\']').val();
 
-	if (filter_date_end) {
-		url += '&filter_date_end=' + encodeURIComponent(filter_date_end);
-	}
+    if (filter_date_end) {
+      url += '&filter_date_end=' + encodeURIComponent(filter_date_end);
+    }
 
-	location = url;
-}
+    location = url;
+  }
 
-$('.date').datetimepicker({
-	pickTime: false
-});
-//--></script>
+  $('.date').datetimepicker({
+    pickTime: false
+  });
+  //--></script>
 <?php if ($print_version) { ?>
 <script type="text/javascript"><!--
-$('#column-left').hide();
-$('header').hide();
-$('.breadcrumb').hide();
-$('.panel-heading .pull-right').hide();
-$('.well').hide();
-window.print();
-//--></script>
+  $('#column-left').hide();
+  $('header').hide();
+  $('.breadcrumb').hide();
+  $('.panel-heading .pull-right').hide();
+  $('.well').hide();
+  window.print();
+  //--></script>
 <?php } ?>
 <?php echo $footer; ?>
