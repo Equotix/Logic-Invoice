@@ -10,7 +10,7 @@ define('DIR_LANGUAGE', _PATH . '/language/');
 define('DIR_SYSTEM', __DIR__ . '/system/');
 
 if (_FRONT) {
-	define('DIR_TEMPLATE', _PATH . '/view/theme/');
+    define('DIR_TEMPLATE', _PATH . '/view/theme/');
 } else {
-	define('DIR_TEMPLATE', _PATH . '/view/template/');
+    define('DIR_TEMPLATE', _PATH . '/view/template/');
 }

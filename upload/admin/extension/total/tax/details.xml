@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension>
-	<name>Tax</name>
-	<version>1.0.0</version>
-	<author>Logic Invoice</author>
-	<email>contact@logicinvoice.com</email>
-	<url>http://www.logicinvoice.com</url>
-	<copyright>(C) 2015 Logic Invoice. All rights reserved</copyright>
-	<license>GNU General Public License version 3</license>
-	<description>Default Tax Total Extension</description>
+    <name>Tax</name>
+    <version>1.0.0</version>
+    <author>Logic Invoice</author>
+    <email>contact@logicinvoice.com</email>
+    <url>http://www.logicinvoice.com</url>
+    <copyright>(C) 2015 Logic Invoice. All rights reserved</copyright>
+    <license>GNU General Public License version 3</license>
+    <description>Default Tax Total Extension</description>
 </extension>

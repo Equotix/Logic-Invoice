@@ -111,7 +111,18 @@ CREATE TABLE IF NOT EXISTS `li_blog_category` (
   `sort_order` int(3) NOT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`blog_category_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `li_blog_category`
+--
+
+INSERT INTO `li_blog_category` (`blog_category_id`, `parent_id`, `sort_order`, `status`) VALUES
+(1, 0, 0, 1),
+(2, 1, 0, 1),
+(3, 2, 0, 1);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `li_blog_category_description`
@@ -126,7 +137,18 @@ CREATE TABLE IF NOT EXISTS `li_blog_category_description` (
   `meta_description` text NOT NULL,
   `meta_keyword` text NOT NULL,
   PRIMARY KEY (`blog_category_description_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `li_blog_category_description`
+--
+
+INSERT INTO `li_blog_category_description` (`blog_category_description_id`, `blog_category_id`, `language_id`, `name`, `meta_title`, `meta_description`, `meta_keyword`) VALUES
+(1, 1, 1, 'My Blog', 'My Blog', '', ''),
+(2, 2, 1, 'Sub Category', 'Sub Category', '', ''),
+(3, 3, 1, 'Level 3', 'Level 3', '', '');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `li_blog_post`
@@ -141,7 +163,16 @@ CREATE TABLE IF NOT EXISTS `li_blog_post` (
   `date_added` datetime NOT NULL,
   `date_modified` datetime NOT NULL,
   PRIMARY KEY (`blog_post_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `li_blog_post`
+--
+
+INSERT INTO `li_blog_post` (`blog_post_id`, `user_id`, `view`, `sort_order`, `status`, `date_added`, `date_modified`) VALUES
+(1, 1, 0, 0, 1, '2015-06-02 15:11:28', '2015-06-02 15:11:28');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `li_blog_post_description`
@@ -160,7 +191,16 @@ CREATE TABLE IF NOT EXISTS `li_blog_post_description` (
   `description` text NOT NULL,
   `tag` text NOT NULL,
   PRIMARY KEY (`blog_post_description_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `li_blog_post_description`
+--
+
+INSERT INTO `li_blog_post_description` (`blog_post_description_id`, `blog_post_id`, `language_id`, `image`, `title`, `meta_title`, `meta_description`, `meta_keyword`, `short_description`, `description`, `tag`) VALUES
+(1, 1, 1, '', 'My First Post', 'My First Post', '', '', 'Hello world, this is my first blog post.&lt;br&gt;', '&lt;p&gt;Hello world, this is my first blog post.&lt;/p&gt;&lt;p&gt;&lt;br&gt;Hello everyone and thank you!&lt;br&gt;&lt;/p&gt;', 'invoice, logic invoice');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `li_blog_post_to_blog_category`
@@ -171,6 +211,15 @@ CREATE TABLE IF NOT EXISTS `li_blog_post_to_blog_category` (
   `blog_category_id` int(11) NOT NULL,
   PRIMARY KEY (`blog_post_id`,`blog_category_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `li_blog_post_to_blog_category`
+--
+
+INSERT INTO `li_blog_post_to_blog_category` (`blog_post_id`, `blog_category_id`) VALUES
+(1, 1),
+(1, 2),
+(1, 3);
 
 --
 -- Table structure for table `li_currency`
@@ -393,7 +442,8 @@ INSERT INTO `li_extension` (`extension`, `type`, `code`) VALUES
 (3, 'total', 'sub_total'),
 (4, 'payment', 'cheque'),
 (5, 'total', 'tax'),
-(6, 'payment', 'bank_transfer');
+(6, 'payment', 'bank_transfer'),
+(7, 'module', 'contact_form');
 
 -- --------------------------------------------------------
 
@@ -651,8 +701,8 @@ INSERT INTO `li_setting` (`setting_id`, `group`, `key`, `value`, `serialized`) V
 (56, 'pp_standard', 'pp_standard_email', 'test@example.com', 0),
 (57, 'cheque', 'cheque_status', '1', 0),
 (58, 'config', 'config_limit_admin', '20', 0),
-(59, 'config', 'config_icon', 'front/view/theme/default/image/favi.png', 0),
-(60, 'config', 'config_logo', 'front/view/theme/default/image/logo.png', 0),
+(59, 'config', 'config_icon', 'upload/favi.png', 0),
+(60, 'config', 'config_logo', 'upload/logo.png', 0),
 (61, 'config', 'config_meta_description', 'a:1:{i:1;s:82:"My Company specialises in software and web applications. Powered by Logic Invoice.";}', 1),
 (62, 'config', 'config_meta_title', 'a:1:{i:1;s:18:"My Company Website";}', 1),
 (63, 'config', 'config_fax', '', 0),
@@ -668,7 +718,10 @@ INSERT INTO `li_setting` (`setting_id`, `group`, `key`, `value`, `serialized`) V
 (73, 'pp_standard', 'pp_standard_status', '1', 0),
 (74, 'pp_standard', 'pp_standard_sort_order', '0', 0),
 (75, 'config', 'config_google_analytics', '', 0),
-(76, 'config', 'config_theme', 'default', 0);
+(76, 'config', 'config_theme', 'default', 0),
+(77, 'contact_form', 'contact_form_receiving_email', 'test@example.com', 0),
+(78, 'contact_form', 'contact_form_description', 'a:1:{i:1;s:0:"";}', 1),
+(79, 'contact_form', 'contact_form_status', '1', 0);
 
 -- --------------------------------------------------------
 
@@ -867,5 +920,5 @@ CREATE TABLE IF NOT EXISTS `li_user_group` (
 --
 
 INSERT INTO `li_user_group` (`user_group_id`, `name`, `permission`) VALUES
-(1, 'Top Administrator', 'a:2:{s:6:"access";a:33:{i:0;s:18:"accounting/account";i:1;s:19:"accounting/currency";i:2;s:18:"accounting/journal";i:3;s:20:"accounting/tax_class";i:4;s:19:"accounting/tax_rate";i:5;s:16:"billing/customer";i:6;s:15:"billing/invoice";i:7;s:17:"billing/recurring";i:8;s:16:"common/dashboard";i:9;s:15:"content/article";i:10;s:22:"content/email_template";i:11;s:16:"extension/module";i:12;s:17:"extension/payment";i:13;s:15:"extension/total";i:14;s:24:"report/chart_of_accounts";i:15;s:14:"report/invoice";i:16;s:16:"report/recurring";i:17;s:10:"report/sci";i:18;s:10:"report/sfp";i:19;s:15:"system/activity";i:20;s:12:"system/error";i:21;s:15:"system/language";i:22;s:14:"system/setting";i:23;s:13:"system/status";i:24;s:11:"system/user";i:25;s:17:"system/user_group";i:26;s:19:"module/contact_form";i:27;s:21:"payment/bank_transfer";i:28;s:14:"payment/cheque";i:29;s:19:"payment/pp_standard";i:30;s:15:"total/sub_total";i:31;s:9:"total/tax";i:32;s:11:"total/total";}s:6:"modify";a:33:{i:0;s:18:"accounting/account";i:1;s:19:"accounting/currency";i:2;s:18:"accounting/journal";i:3;s:20:"accounting/tax_class";i:4;s:19:"accounting/tax_rate";i:5;s:16:"billing/customer";i:6;s:15:"billing/invoice";i:7;s:17:"billing/recurring";i:8;s:16:"common/dashboard";i:9;s:15:"content/article";i:10;s:22:"content/email_template";i:11;s:16:"extension/module";i:12;s:17:"extension/payment";i:13;s:15:"extension/total";i:14;s:24:"report/chart_of_accounts";i:15;s:14:"report/invoice";i:16;s:16:"report/recurring";i:17;s:10:"report/sci";i:18;s:10:"report/sfp";i:19;s:15:"system/activity";i:20;s:12:"system/error";i:21;s:15:"system/language";i:22;s:14:"system/setting";i:23;s:13:"system/status";i:24;s:11:"system/user";i:25;s:17:"system/user_group";i:26;s:19:"module/contact_form";i:27;s:21:"payment/bank_transfer";i:28;s:14:"payment/cheque";i:29;s:19:"payment/pp_standard";i:30;s:15:"total/sub_total";i:31;s:9:"total/tax";i:32;s:11:"total/total";}}'),
+(1, 'Top Administrator', 'a:2:{s:6:"access";a:36:{i:0;s:18:"accounting/account";i:1;s:19:"accounting/currency";i:2;s:18:"accounting/journal";i:3;s:20:"accounting/tax_class";i:4;s:19:"accounting/tax_rate";i:5;s:16:"billing/customer";i:6;s:15:"billing/invoice";i:7;s:17:"billing/recurring";i:8;s:16:"common/dashboard";i:9;s:15:"content/article";i:10;s:21:"content/blog_category";i:11;s:17:"content/blog_post";i:12;s:22:"content/email_template";i:13;s:16:"extension/module";i:14;s:17:"extension/payment";i:15;s:15:"extension/total";i:16;s:24:"report/chart_of_accounts";i:17;s:14:"report/invoice";i:18;s:16:"report/recurring";i:19;s:10:"report/sci";i:20;s:10:"report/sfp";i:21;s:15:"system/activity";i:22;s:12:"system/error";i:23;s:18:"system/filemanager";i:24;s:15:"system/language";i:25;s:14:"system/setting";i:26;s:13:"system/status";i:27;s:11:"system/user";i:28;s:17:"system/user_group";i:29;s:19:"module/contact_form";i:30;s:21:"payment/bank_transfer";i:31;s:14:"payment/cheque";i:32;s:19:"payment/pp_standard";i:33;s:15:"total/sub_total";i:34;s:9:"total/tax";i:35;s:11:"total/total";}s:6:"modify";a:36:{i:0;s:18:"accounting/account";i:1;s:19:"accounting/currency";i:2;s:18:"accounting/journal";i:3;s:20:"accounting/tax_class";i:4;s:19:"accounting/tax_rate";i:5;s:16:"billing/customer";i:6;s:15:"billing/invoice";i:7;s:17:"billing/recurring";i:8;s:16:"common/dashboard";i:9;s:15:"content/article";i:10;s:21:"content/blog_category";i:11;s:17:"content/blog_post";i:12;s:22:"content/email_template";i:13;s:16:"extension/module";i:14;s:17:"extension/payment";i:15;s:15:"extension/total";i:16;s:24:"report/chart_of_accounts";i:17;s:14:"report/invoice";i:18;s:16:"report/recurring";i:19;s:10:"report/sci";i:20;s:10:"report/sfp";i:21;s:15:"system/activity";i:22;s:12:"system/error";i:23;s:18:"system/filemanager";i:24;s:15:"system/language";i:25;s:14:"system/setting";i:26;s:13:"system/status";i:27;s:11:"system/user";i:28;s:17:"system/user_group";i:29;s:19:"module/contact_form";i:30;s:21:"payment/bank_transfer";i:31;s:14:"payment/cheque";i:32;s:19:"payment/pp_standard";i:33;s:15:"total/sub_total";i:34;s:9:"total/tax";i:35;s:11:"total/total";}}'),
 (2, 'System', '');

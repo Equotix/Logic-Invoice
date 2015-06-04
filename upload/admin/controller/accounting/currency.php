@@ -280,10 +280,10 @@ class ControllerAccountingCurrency extends Controller {
         if (!$this->request->post['value']) {
             $this->error['value'] = $this->language->get('error_value');
         }
-		
-		if ($this->error && empty($this->error['warning'])) {
-			$this->error['warning'] = $this->language->get('error_form');
-		}
+
+        if ($this->error && empty($this->error['warning'])) {
+            $this->error['warning'] = $this->language->get('error_form');
+        }
 
         return !$this->error;
     }

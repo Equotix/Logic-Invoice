@@ -9,75 +9,75 @@ final class Action {
         $path = '';
 
         $parts = explode('/', str_replace('../', '', (string)$route));
-		
-		if (isset($parts[0]) && ($parts[0] == 'module' || $parts[0] == 'payment' || $parts[0] == 'total')) {
-			if (isset($parts[1])) {
-				$path = $parts[0] . '/' . $parts[1] . '/';
-				
-				$file = DIR_EXTENSION . $parts[0] . '/' . $parts[1] . '/controller/';
-				
-				array_shift($parts);
-				
-				array_shift($parts);
-				
-				foreach ($parts as $part) {
-					$path .= $part;
-					
-					if (is_dir($file . $part)) {
-						$file .= $part . '/';
-						$path .= '/';
 
-						array_shift($parts);
+        if (isset($parts[0]) && ($parts[0] == 'module' || $parts[0] == 'payment' || $parts[0] == 'total')) {
+            if (isset($parts[1])) {
+                $path = $parts[0] . '/' . $parts[1] . '/';
 
-						continue;
-					}
-					
-					$file = str_replace(array(
-							'../',
-							'..\\',
-							'..'
-						), '', $file . $part) . '.php';
+                $file = DIR_EXTENSION . $parts[0] . '/' . $parts[1] . '/controller/';
 
-					if (is_file($file)) {
-						$this->file = $file;
+                array_shift($parts);
 
-						$this->class = 'Controller' . preg_replace('/[^a-zA-Z0-9]/', '', $path);
+                array_shift($parts);
 
-						array_shift($parts);
+                foreach ($parts as $part) {
+                    $path .= $part;
 
-						break;
-					}
-				}
-			}
-		} else {
-			foreach ($parts as $part) {
-				$path .= $part;
+                    if (is_dir($file . $part)) {
+                        $file .= $part . '/';
+                        $path .= '/';
 
-				if (is_dir(DIR_APPLICATION . 'controller/' . $path)) {
-					$path .= '/';
+                        array_shift($parts);
 
-					array_shift($parts);
+                        continue;
+                    }
 
-					continue;
-				}
+                    $file = str_replace(array(
+                            '../',
+                            '..\\',
+                            '..'
+                        ), '', $file . $part) . '.php';
 
-				$file = DIR_APPLICATION . 'controller/' . str_replace(array(
-						'../',
-						'..\\',
-						'..'
-					), '', $path) . '.php';
+                    if (is_file($file)) {
+                        $this->file = $file;
 
-				if (is_file($file)) {
-					$this->file = $file;
+                        $this->class = 'Controller' . preg_replace('/[^a-zA-Z0-9]/', '', $path);
 
-					$this->class = 'Controller' . preg_replace('/[^a-zA-Z0-9]/', '', $path);
+                        array_shift($parts);
 
-					array_shift($parts);
+                        break;
+                    }
+                }
+            }
+        } else {
+            foreach ($parts as $part) {
+                $path .= $part;
 
-					break;
-				}
-			}
-		}
+                if (is_dir(DIR_APPLICATION . 'controller/' . $path)) {
+                    $path .= '/';
+
+                    array_shift($parts);
+
+                    continue;
+                }
+
+                $file = DIR_APPLICATION . 'controller/' . str_replace(array(
+                        '../',
+                        '..\\',
+                        '..'
+                    ), '', $path) . '.php';
+
+                if (is_file($file)) {
+                    $this->file = $file;
+
+                    $this->class = 'Controller' . preg_replace('/[^a-zA-Z0-9]/', '', $path);
+
+                    array_shift($parts);
+
+                    break;
+                }
+            }
+        }
 
         if ($args) {
             $this->args = $args;

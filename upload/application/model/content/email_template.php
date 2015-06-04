@@ -73,11 +73,11 @@ class ModelContentEmailTemplate extends Model {
             $template_data['subject'] = $subject;
             $template_data['message'] = $message;
 
-			if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/mail/general.tpl')) {
-				$html = $this->load->view($this->config->get('config_theme') . '/template/mail/general.tpl', $template_data);
-			} else {
-				$html = $this->load->view('default/template/mail/general.tpl', $template_data);
-			}
+            if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/mail/general.tpl')) {
+                $html = $this->load->view($this->config->get('config_theme') . '/template/mail/general.tpl', $template_data);
+            } else {
+                $html = $this->load->view('default/template/mail/general.tpl', $template_data);
+            }
 
             $text = str_replace($search, $replace, html_entity_decode($template_info['description'][$language_id]['text'], ENT_QUOTES));
 

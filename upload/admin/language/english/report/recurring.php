@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']				= 'Recurring Payment Report';
+$_['heading_title']				= 'Recurring Payments Report';
 
 // Column
 $_['column_date_start']			= 'Date Start';

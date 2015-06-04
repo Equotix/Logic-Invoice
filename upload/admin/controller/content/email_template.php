@@ -290,10 +290,10 @@ class ControllerContentEmailTemplate extends Controller {
                 $this->error['text'][$language_id] = $this->language->get('error_text');
             }
         }
-		
-		if ($this->error && empty($this->error['warning'])) {
-			$this->error['warning'] = $this->language->get('error_form');
-		}
+
+        if ($this->error && empty($this->error['warning'])) {
+            $this->error['warning'] = $this->language->get('error_form');
+        }
 
         return !$this->error;
     }

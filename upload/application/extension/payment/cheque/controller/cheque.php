@@ -19,10 +19,10 @@ class ControllerPaymentChequeCheque extends Controller {
             $this->data['action'] = $this->url->link('payment/cheque/cheque/confirm', 'invoice_id=' . $invoice_info['invoice_id'], 'SSL');
 
             if (file_exists(DIR_EXTENSION . 'module/cheque/view/theme/' . $this->config->get('config_theme') . '/template/cheque.tpl')) {
-				$this->response->setOutput($this->render('payment/cheque/' . $this->config->get('config_theme') . '/template/cheque.tpl'));
-			} else {
-				$this->response->setOutput($this->render('payment/cheque/default/template/cheque.tpl'));
-			}
+                $this->response->setOutput($this->render('payment/cheque/' . $this->config->get('config_theme') . '/template/cheque.tpl'));
+            } else {
+                $this->response->setOutput($this->render('payment/cheque/default/template/cheque.tpl'));
+            }
         }
     }
 

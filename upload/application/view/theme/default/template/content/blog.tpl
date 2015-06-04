@@ -14,13 +14,13 @@
     <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
 	  <div class="list-group">
         <?php foreach ($blog_categories as $blog_category) { ?>
-	    <a href="<?php echo $blog_category['href']; ?>" class="list-group-item"><?php echo $blog_category['name']; ?></a>
+	    <a href="<?php echo $blog_category['href']; ?>" class="list-group-item<?php echo $blog_category['blog_category_id'] == $blog_category_id ? ' active' : ''; ?>"><?php echo $blog_category['name']; ?></a>
 		<?php if ($blog_category['children']) { ?>
 		<?php foreach ($blog_category['children'] as $child) { ?>
-	    <a href="<?php echo $child['href']; ?>" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $child['name']; ?></a>
+	    <a href="<?php echo $child['href']; ?>" class="list-group-item<?php echo $child['blog_category_id'] == $blog_category_id ? ' active' : ''; ?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $child['name']; ?></a>
 		<?php if ($child['grandchildren']) { ?>
 		<?php foreach ($child['grandchildren'] as $grandchild) { ?>
-	    <a href="<?php echo $grandchild['href']; ?>" class="list-group-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $grandchild['name']; ?></a>
+	    <a href="<?php echo $grandchild['href']; ?>" class="list-group-item<?php echo $grandchild['blog_category_id'] == $blog_category_id ? ' active' : ''; ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $grandchild['name']; ?></a>
 		<?php } ?>
 		<?php } ?>
 		<?php } ?>

@@ -1,23 +1,23 @@
 <?php
 // Version
-define('VERSION', '0.2.0');
+define('VERSION', '1.0.0rc');
 
 // Configuration
 if (file_exists('../config.php')) {
     require_once('../config.php');
-	
-	define('_URL', APP_URL . basename(__DIR__) . '/');
-	define('_SURL', APP_SURL . basename(__DIR__) . '/');
-	define('_PATH', __DIR__);
-	define('_FRONT', false);
-	
-	require_once('../defined.php');
+
+    define('_URL', APP_URL . basename(__DIR__) . '/');
+    define('_SURL', APP_SURL . basename(__DIR__) . '/');
+    define('_PATH', __DIR__);
+    define('_FRONT', false);
+
+    require_once('../defined.php');
 }
 
 // Install 
 if (!defined('DIR_APPLICATION')) {
-	header('Location: ../install/index.php');
-	exit;
+    header('Location: ../install/index.php');
+    exit;
 }
 
 // vQmod

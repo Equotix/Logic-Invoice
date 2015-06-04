@@ -51,29 +51,29 @@ class ControllerAccountForgotten extends Controller {
         $this->data['action'] = $this->url->link('account/forgotten', '', 'SSL');
 
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
-		$this->data['error_captcha'] = $this->build->data('captcha', $this->error);
+        $this->data['error_captcha'] = $this->build->data('captcha', $this->error);
 
         $this->data['email'] = $this->build->data('email', $this->request->post);
-		$this->data['captcha'] = $this->build->data('captcha', $this->request->post);
-		
-		$this->data['captcha_image'] = $this->url->link('tool/captcha', '', 'SSL');
+        $this->data['captcha'] = $this->build->data('captcha', $this->request->post);
+
+        $this->data['captcha_image'] = $this->url->link('tool/captcha', '', 'SSL');
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
         if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/account/forgotten.tpl')) {
-			$this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/forgotten.tpl'));
-		} else {
-			$this->response->setOutput($this->render('default/template/account/forgotten.tpl'));
-		}
+            $this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/forgotten.tpl'));
+        } else {
+            $this->response->setOutput($this->render('default/template/account/forgotten.tpl'));
+        }
     }
 
     protected function validate() {
         if (!$this->model_billing_customer->getCustomerByEmail($this->request->post['email'])) {
             $this->error['warning'] = $this->language->get('error_warning');
         }
-		
-		if ($this->request->post['captcha'] != $this->session->data['captcha']) {
+
+        if ($this->request->post['captcha'] != $this->session->data['captcha']) {
             $this->error['captcha'] = $this->language->get('error_captcha');
         }
 

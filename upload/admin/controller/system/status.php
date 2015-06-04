@@ -220,10 +220,10 @@ class ControllerSystemStatus extends Controller {
                 $this->error['name'][$language_id] = $this->language->get('error_name');
             }
         }
-		
-		if ($this->error && empty($this->error['warning'])) {
-			$this->error['warning'] = $this->language->get('error_form');
-		}
+
+        if ($this->error && empty($this->error['warning'])) {
+            $this->error['warning'] = $this->language->get('error_form');
+        }
 
         return !$this->error;
     }
