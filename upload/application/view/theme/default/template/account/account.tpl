@@ -27,8 +27,7 @@
           <a href="<?php echo $invoice; ?>"><i class="fa fa-envelope fa-4x"></i><br /><?php echo $text_invoice; ?></a>
         </div>
         <div class="col-xs-6 col-sm-3 text-center bottom-20">
-          <a href="<?php echo $recurring; ?>"><i class="fa fa-refresh fa-4x"></i><br /><?php echo $text_recurring; ?>
-          </a>
+          <a href="<?php echo $recurring; ?>"><i class="fa fa-refresh fa-4x"></i><br /><?php echo $text_recurring; ?></a>
         </div>
       </div>
       <div class="row">

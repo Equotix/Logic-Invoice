@@ -57,7 +57,7 @@ class ModelSystemUser extends Model {
         $sort_data = array(
             'u.name',
             'username',
-            'ug.name',
+			'ug.name',
             'status',
             'date_added',
             'date_modified'

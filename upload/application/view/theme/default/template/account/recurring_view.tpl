@@ -81,9 +81,7 @@
       <h3><?php echo $text_cancel; ?></h3>
       <table class="table table-striped table-bordered">
         <tr>
-          <td class="text-right">
-            <a href="<?php echo $cancel; ?>" onclick="return confirm('<?php echo $text_confirm; ?>') ? true : false;" class="btn btn-primary"><?php echo $button_cancel_payment; ?></a>
-          </td>
+          <td class="text-right"><a href="<?php echo $cancel; ?>" onclick="return confirm('<?php echo $text_confirm; ?>') ? true : false;" class="btn btn-primary"><?php echo $button_cancel_payment; ?></a></td>
         </tr>
       </table>
     </div>

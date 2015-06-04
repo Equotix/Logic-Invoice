@@ -22,13 +22,13 @@
           <label class="sr-only" for="input-email"><?php echo $entry_email; ?></label>
           <input type="text" name="email" value="<?php echo $email; ?>" id="input-email" class="form-control" placeholder="<?php echo $entry_email; ?>" required autofocus />
         </div>
-        <div class="form-group">
+		<div class="form-group">
           <label for="input-email"><?php echo $entry_captcha; ?></label>
           <input type="text" name="captcha" value="<?php echo $captcha; ?>" id="input-captcha" class="form-control" placeholder="<?php echo $entry_captcha; ?>" autocomplete="off" required />
           <?php if ($error_captcha) { ?>
           <div class="text-danger"><?php echo $error_captcha; ?></div>
           <?php } ?><br />
-          <img src="<?php echo $captcha_image; ?>" />
+		  <img src="<?php echo $captcha_image; ?>" />
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit"><?php echo $button_reset; ?></button>
       </form>

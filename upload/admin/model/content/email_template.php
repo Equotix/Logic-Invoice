@@ -65,7 +65,7 @@ class ModelContentEmailTemplate extends Model {
             $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "email_template WHERE type = '" . $this->db->escape($type) . "' AND status = '1' ORDER BY priority ASC LIMIT 1");
 
             if ($query->num_rows) {
-                $variables_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "email_template_type WHERE '" . $this->db->escape($type) . "' LIKE CONCAT(type, '%') LIMIT 1");
+				$variables_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "email_template_type WHERE '" . $this->db->escape($type) . "' LIKE CONCAT(type, '%') LIMIT 1");
 
                 $description_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "email_template_description WHERE email_template_id = '" . (int)$query->row['email_template_id'] . "'");
 

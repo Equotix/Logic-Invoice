@@ -10,12 +10,12 @@ class ModelContentBlogPost extends Model {
         foreach ($data['description'] as $language_id => $value) {
             $this->db->query("INSERT INTO " . DB_PREFIX . "blog_post_description SET blog_post_id = '" . (int)$blog_post_id . "', language_id = '" . (int)$language_id . "', image = '" . $this->db->escape($value['image']) . "', title= '" . $this->db->escape($value['title']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', short_description = '" . $this->db->escape($value['short_description']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "'");
         }
-
-        if (isset($data['blog_category'])) {
-            foreach ($data['blog_category'] as $blog_category_id) {
-                $this->db->query("INSERT INTO " . DB_PREFIX . "blog_post_to_blog_category SET blog_post_id = '" . (int)$blog_post_id . "', blog_category_id = '" . (int)$blog_category_id . "'");
-            }
-        }
+		
+		if (isset($data['blog_category'])) {
+			foreach ($data['blog_category'] as $blog_category_id) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "blog_post_to_blog_category SET blog_post_id = '" . (int)$blog_post_id . "', blog_category_id = '" . (int)$blog_category_id . "'");
+			}
+		}
 
         if ($data['url_alias']) {
             $this->load->model('system/url_alias');
@@ -34,14 +34,14 @@ class ModelContentBlogPost extends Model {
         foreach ($data['description'] as $language_id => $value) {
             $this->db->query("INSERT INTO " . DB_PREFIX . "blog_post_description SET blog_post_id = '" . (int)$blog_post_id . "', language_id = '" . (int)$language_id . "', image = '" . $this->db->escape($value['image']) . "', title= '" . $this->db->escape($value['title']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', short_description = '" . $this->db->escape($value['short_description']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "'");
         }
-
-        $this->db->query("DELETE FROM " . DB_PREFIX . "blog_post_to_blog_category WHERE blog_post_id = '" . (int)$blog_post_id . "'");
-
-        if (isset($data['blog_category'])) {
-            foreach ($data['blog_category'] as $blog_category_id) {
-                $this->db->query("INSERT INTO " . DB_PREFIX . "blog_post_to_blog_category SET blog_post_id = '" . (int)$blog_post_id . "', blog_category_id = '" . (int)$blog_category_id . "'");
-            }
-        }
+		
+		$this->db->query("DELETE FROM " . DB_PREFIX . "blog_post_to_blog_category WHERE blog_post_id = '" . (int)$blog_post_id . "'");
+		
+		if (isset($data['blog_category'])) {
+			foreach ($data['blog_category'] as $blog_category_id) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "blog_post_to_blog_category SET blog_post_id = '" . (int)$blog_post_id . "', blog_category_id = '" . (int)$blog_category_id . "'");
+			}
+		}
 
         if ($data['url_alias']) {
             $this->load->model('system/url_alias');
@@ -55,7 +55,7 @@ class ModelContentBlogPost extends Model {
     public function deleteBlogPost($blog_post_id) {
         $this->db->query("DELETE FROM " . DB_PREFIX . "blog_post WHERE blog_post_id = '" . (int)$blog_post_id . "'");
         $this->db->query("DELETE FROM " . DB_PREFIX . "blog_post_description WHERE blog_post_id = '" . (int)$blog_post_id . "'");
-        $this->db->query("DELETE FROM " . DB_PREFIX . "blog_post_to_blog_category WHERE blog_post_id = '" . (int)$blog_post_id . "'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "blog_post_to_blog_category WHERE blog_post_id = '" . (int)$blog_post_id . "'");
 
         $this->cache->delete('blog_post');
     }
@@ -69,24 +69,24 @@ class ModelContentBlogPost extends Model {
 
         foreach ($description_query->rows as $result) {
             $description[$result['language_id']] = array(
-                'image'             => $result['image'],
-                'title'             => $result['title'],
-                'meta_title'        => $result['meta_title'],
-                'meta_description'  => $result['meta_description'],
-                'meta_keyword'      => $result['meta_keyword'],
-                'short_description' => $result['short_description'],
-                'description'       => $result['description'],
-                'tag'               => $result['tag']
+				'image'            => $result['image'],
+                'title'            => $result['title'],
+                'meta_title'       => $result['meta_title'],
+                'meta_description' => $result['meta_description'],
+                'meta_keyword'     => $result['meta_keyword'],
+                'short_description'      => $result['short_description'],
+                'description'      => $result['description'],
+                'tag'              => $result['tag']
             );
         }
-
-        $blog_category_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "blog_post_to_blog_category WHERE blog_post_id = '" . (int)$blog_post_id . "'");
-
-        $blog_category_data = array();
-
-        foreach ($blog_category_query->rows as $result) {
-            $blog_category_data[] = $result['blog_category_id'];
-        }
+		
+		$blog_category_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "blog_post_to_blog_category WHERE blog_post_id = '" . (int)$blog_post_id . "'");
+		
+		$blog_category_data = array();
+		
+		foreach ($blog_category_query->rows as $result) {
+			$blog_category_data[] = $result['blog_category_id'];
+		}
 
         return array(
             'blog_post_id'  => $query->row['blog_post_id'],
@@ -96,47 +96,47 @@ class ModelContentBlogPost extends Model {
             'date_added'    => $query->row['date_added'],
             'date_modified' => $query->row['date_modified'],
             'description'   => $description,
-            'blog_category' => $blog_category_data
+			'blog_category' => $blog_category_data
         );
     }
 
     public function getBlogPosts($data = array()) {
-        $sql = "SELECT * FROM " . DB_PREFIX . "blog_post bp LEFT JOIN " . DB_PREFIX . "blog_post_description bpd ON bpd.blog_post_id = bp.blog_post_id WHERE bpd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+		$sql = "SELECT * FROM " . DB_PREFIX . "blog_post bp LEFT JOIN " . DB_PREFIX . "blog_post_description bpd ON bpd.blog_post_id = bp.blog_post_id WHERE bpd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
-        $sort_data = array(
-            'title',
-            'view',
-            'sort_order',
-            'status',
-            'date_added',
-            'date_modified'
-        );
+		$sort_data = array(
+			'title',
+			'view',
+			'sort_order',
+			'status',
+			'date_added',
+			'date_modified'
+		);
 
-        if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
-            $sql .= " ORDER BY " . $data['sort'];
-        } else {
-            $sql .= " ORDER BY title";
-        }
+		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
+			$sql .= " ORDER BY " . $data['sort'];
+		} else {
+			$sql .= " ORDER BY title";
+		}
 
-        if (isset($data['order']) && ($data['order'] == 'DESC')) {
-            $sql .= " DESC";
-        } else {
-            $sql .= " ASC";
-        }
+		if (isset($data['order']) && ($data['order'] == 'DESC')) {
+			$sql .= " DESC";
+		} else {
+			$sql .= " ASC";
+		}
 
-        if (isset($data['start']) && isset($data['limit'])) {
-            if ($data['start'] < 0) {
-                $data['start'] = 0;
-            }
+		if (isset($data['start']) && isset($data['limit'])) {
+			if ($data['start'] < 0) {
+				$data['start'] = 0;
+			}
 
-            if ($data['limit'] < 1) {
-                $data['limit'] = 20;
-            }
+			if ($data['limit'] < 1) {
+				$data['limit'] = 20;
+			}
 
-            $sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
-        }
+			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+		}
 
-        $query = $this->db->query($sql);
+		$query = $this->db->query($sql);
 
         return $query->rows;
     }

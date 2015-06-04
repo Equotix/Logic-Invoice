@@ -31,16 +31,13 @@
         <?php foreach ($extensions as $extension) { ?>
         <tr>
           <td class="text-left"><?php echo $extension['name']; ?></td>
-          <td class="text-left">
-            <a href="<?php echo $extension['url']; ?>" target="_blank"><?php echo $extension['author']; ?></a></td>
-          <td class="text-left">
-            <a href="mailto:<?php echo $extension['email']; ?>"><?php echo $extension['version']; ?></a></td>
+          <td class="text-left"><a href="<?php echo $extension['url']; ?>" target="_blank"><?php echo $extension['author']; ?></a></td>
+		  <td class="text-left"><a href="mailto:<?php echo $extension['email']; ?>"><?php echo $extension['version']; ?></a></td>
           <td class="text-right"><?php if ($extension['installed']) { ?>
             <a href="<?php echo $extension['edit']; ?>" title="<?php echo $button_edit; ?>" data-toggle="tooltip" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
             <a href="<?php echo $extension['uninstall']; ?>" title="<?php echo $button_uninstall; ?>" data-toggle="tooltip" class="btn btn-danger btn-xs" onclick="return confirm('<?php echo $text_confirm; ?>') ? true : false;"><i class="fa fa-minus-circle"></i></a>
             <?php } else { ?>
-            <button type="button" title="<?php echo $button_edit; ?>" data-toggle="tooltip" class="btn btn-primary btn-xs" disabled="disabled">
-              <i class="fa fa-pencil"></i></button>
+            <button type="button" title="<?php echo $button_edit; ?>" data-toggle="tooltip" class="btn btn-primary btn-xs" disabled="disabled"><i class="fa fa-pencil"></i></button>
             <a href="<?php echo $extension['install']; ?>" title="<?php echo $button_install; ?>" data-toggle="tooltip" class="btn btn-success btn-xs"><i class="fa fa-plus-circle"></i></a>
             <?php } ?></td>
         </tr>

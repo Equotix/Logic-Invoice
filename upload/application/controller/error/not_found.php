@@ -49,9 +49,9 @@ class ControllerErrorNotFound extends Controller {
         $this->data['footer'] = $this->load->controller('common/footer');
 
         if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/error/not_found.tpl')) {
-            $this->response->setOutput($this->render($this->config->get('config_theme') . '/template/error/not_found.tpl'));
-        } else {
-            $this->response->setOutput($this->render('default/template/error/not_found.tpl'));
-        }
+			$this->response->setOutput($this->render($this->config->get('config_theme') . '/template/error/not_found.tpl'));
+		} else {
+			$this->response->setOutput($this->render('default/template/error/not_found.tpl'));
+		}
     }
 }

@@ -639,9 +639,9 @@ class ControllerBillingRecurring extends Controller {
 
             foreach ($results as $result) {
                 if ($this->config->get($result . '_status')) {
-                    $this->load->model('total/' . $result . '/' . $result);
+                    $this->load->model('total/' . $result);
 
-                    $this->{'model_total_' . $result . '_' . $result}->getTotal($total_data, $total, $taxes);
+                    $this->{'model_total_' . $result}->getTotal($total_data, $total, $taxes);
                 }
             }
 

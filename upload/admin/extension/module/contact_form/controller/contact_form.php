@@ -8,8 +8,8 @@ class ControllerModuleContactFormContactForm extends Controller {
         $this->data = $this->load->language('module/contact_form/contact_form');
 
         $this->document->setTitle($this->language->get('heading_title'));
-
-        $this->document->addScript('view/javascript/summernote/summernote.min.js');
+		
+		$this->document->addScript('view/javascript/summernote/summernote.min.js');
         $this->document->addStyle('view/javascript/summernote/summernote.css');
 
         $this->data['breadcrumbs'] = array();
@@ -65,10 +65,10 @@ class ControllerModuleContactFormContactForm extends Controller {
         if (!$this->user->hasPermission('modify', 'module/contact_form')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
-
-        if (empty($this->request->post['contact_form_receiving_email'])) {
-            $this->error['receiving_email'] = $this->language->get('contact_form_receiving_email');
-        }
+		
+		if (empty($this->request->post['contact_form_receiving_email'])) {
+			$this->error['receiving_email'] = $this->language->get('contact_form_receiving_email');
+		}
 
         return !$this->error;
     }

@@ -84,9 +84,7 @@
             <th class="text-left"><?php echo $column_title; ?></th>
             <th class="text-left"><?php echo $column_description; ?></th>
             <th class="text-left"><?php echo $column_quantity; ?></th>
-            <th class="text-right">
-              <span data-toggle="tooltip" title="<?php echo $tooltip_price; ?>"><?php echo $column_price; ?>
-                <i class="fa fa-question-circle"></i></span></th>
+            <th class="text-right"><span data-toggle="tooltip" title="<?php echo $tooltip_price; ?>"><?php echo $column_price; ?> <i class="fa fa-question-circle"></i></span></th>
             <th class="text-right"><?php echo $column_discount; ?></th>
             <th class="text-right"><?php echo $column_total; ?></th>
           </tr>

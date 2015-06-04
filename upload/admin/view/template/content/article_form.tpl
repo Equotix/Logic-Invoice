@@ -12,8 +12,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <div class="pull-right">
-      <button type="submit" form="form-email-template" title="<?php echo $button_save; ?>" data-toggle="tooltip" class="btn btn-success">
-        <i class="fa fa-save"></i></button>
+      <button type="submit" form="form-email-template" title="<?php echo $button_save; ?>" data-toggle="tooltip" class="btn btn-success"><i class="fa fa-save"></i></button>
       <a href="<?php echo $cancel; ?>" title="<?php echo $button_cancel; ?>" data-toggle="tooltip" class="btn btn-danger"><i class="fa fa-times"></i></a>
     </div>
     <h1 class="panel-title"><i class="fa fa-pencil-square fa-lg"></i> <?php echo $heading_title; ?></h1>
@@ -22,9 +21,7 @@
     <form method="post" action="<?php echo $action; ?>" id="form-email-template" class="form-horizontal">
       <ul class="nav nav-tabs">
         <?php foreach ($languages as $language) { ?>
-        <li>
-          <a href="#language-<?php echo $language['language_id']; ?>" data-toggle="tab"><img src="view/image/flags/<?php echo $language['image']; ?>" /> <?php echo $language['name']; ?>
-          </a></li>
+        <li><a href="#language-<?php echo $language['language_id']; ?>" data-toggle="tab"><img src="view/image/flags/<?php echo $language['image']; ?>" /> <?php echo $language['name']; ?></a></li>
         <?php } ?>
       </ul>
       <div class="tab-content">
@@ -51,18 +48,18 @@
               <?php } ?>
             </div>
           </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-url-alias"><?php echo $entry_url_alias; ?></label>
-            <div class="col-sm-10">
-              <div class="input-group">
-                <span class="input-group-addon"><img src="view/image/flags/<?php echo $language['image']; ?>" alt="<?php echo $language['name']; ?>" title="<?php echo $language['name']; ?>" /></span>
-                <input type="text" name="url_alias[<?php echo $language['language_id']; ?>]" value="<?php echo !empty($url_alias[$language['language_id']]) ? $url_alias[$language['language_id']] : ''; ?>" id="input-url-alias-<?php echo $language['language_id']; ?>" class="form-control" placeholder="<?php echo $entry_url_alias; ?>" />
-              </div>
-              <?php if (!empty($error_url_alias[$language['language_id']])) { ?>
+		  <div class="form-group">
+			<label class="col-sm-2 control-label" for="input-url-alias"><?php echo $entry_url_alias; ?></label>
+			<div class="col-sm-10">
+			  <div class="input-group">
+				<span class="input-group-addon"><img src="view/image/flags/<?php echo $language['image']; ?>" alt="<?php echo $language['name']; ?>" title="<?php echo $language['name']; ?>" /></span>
+				<input type="text" name="url_alias[<?php echo $language['language_id']; ?>]" value="<?php echo !empty($url_alias[$language['language_id']]) ? $url_alias[$language['language_id']] : ''; ?>" id="input-url-alias-<?php echo $language['language_id']; ?>" class="form-control" placeholder="<?php echo $entry_url_alias; ?>" />
+			  </div>
+			  <?php if (!empty($error_url_alias[$language['language_id']])) { ?>
               <div class="text-danger"><?php echo $error_url_alias[$language['language_id']]; ?></div>
               <?php } ?>
-            </div>
-          </div>
+			</div>
+		  </div>
         </div>
         <?php } ?>
       </div>
@@ -105,27 +102,12 @@
   </div>
 </div>
 <script type="text/javascript"><!--
-  <
-  ? php foreach($languages
-  as
-  $language
-  )
-  {
-    ?
-  >
-    $('#input-description-<?php echo $language['
-    language_id
-    ']; ?>'
-  ).
-    summernote({
-      height: 300
-    });
-  <
-    ? php
-  }
-  ?
-  >
+<?php foreach ($languages as $language) { ?>
+$('#input-description-<?php echo $language['language_id']; ?>').summernote({
+	height: 300
+});
+<?php } ?>
 
-  $('.nav-tabs li :first').trigger('click');
-  //--></script>
+$('.nav-tabs li :first').trigger('click');
+//--></script> 
 <?php echo $footer; ?>

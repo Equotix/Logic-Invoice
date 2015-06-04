@@ -12,8 +12,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <div class="pull-right">
-      <button type="submit" form="form-email-template" title="<?php echo $button_save; ?>" data-toggle="tooltip" class="btn btn-success">
-        <i class="fa fa-save"></i></button>
+      <button type="submit" form="form-email-template" title="<?php echo $button_save; ?>" data-toggle="tooltip" class="btn btn-success"><i class="fa fa-save"></i></button>
       <a href="<?php echo $cancel; ?>" title="<?php echo $button_cancel; ?>" data-toggle="tooltip" class="btn btn-danger"><i class="fa fa-times"></i></a>
     </div>
     <h1 class="panel-title"><i class="fa fa-pencil-square fa-lg"></i> <?php echo $heading_title; ?></h1>
@@ -31,9 +30,7 @@
       </div>
       <ul class="nav nav-tabs">
         <?php foreach ($languages as $language) { ?>
-        <li>
-          <a href="#language-<?php echo $language['language_id']; ?>" data-toggle="tab"><img src="view/image/flags/<?php echo $language['image']; ?>" /> <?php echo $language['name']; ?>
-          </a></li>
+        <li><a href="#language-<?php echo $language['language_id']; ?>" data-toggle="tab"><img src="view/image/flags/<?php echo $language['image']; ?>" /> <?php echo $language['name']; ?></a></li>
         <?php } ?>
       </ul>
       <div class="tab-content">
@@ -99,55 +96,22 @@
   </div>
 </div>
 <script type="text/javascript"><!--
-  $('select[name=\'type\']').on('change', function () {
-    <
-    ? php foreach($email_template_types
-    as
-    $email_template_type
-    )
-    {
-      ?
-    >
-      if ($(this).val() == '<?php echo $email_template_type['type
-      ']; ?>'
-    )
-      {
-        $('.variables').html('<?php echo $email_template_type['
-        variables
-        ']; ?>'
-      )
-        ;
-      }
-    <
-      ? php
-    }
-    ?
-    >
-  });
+$('select[name=\'type\']').on('change', function() {
+	<?php foreach ($email_template_types as $email_template_type) { ?>
+	if ($(this).val() == '<?php echo $email_template_type['type']; ?>') {
+		$('.variables').html('<?php echo $email_template_type['variables']; ?>');
+	}
+	<?php } ?>
+});
 
-  $('select[name=\'type\']').trigger('change');
+$('select[name=\'type\']').trigger('change');
 
-  <
-  ? php foreach($languages
-  as
-  $language
-  )
-  {
-    ?
-  >
-    $('#input-html-<?php echo $language['
-    language_id
-    ']; ?>'
-  ).
-    summernote({
-      height: 300
-    });
-  <
-    ? php
-  }
-  ?
-  >
+<?php foreach ($languages as $language) { ?>
+$('#input-html-<?php echo $language['language_id']; ?>').summernote({
+	height: 300
+});
+<?php } ?>
 
-  $('.nav-tabs li :first').trigger('click');
-  //--></script>
+$('.nav-tabs li :first').trigger('click');
+//--></script> 
 <?php echo $footer; ?>

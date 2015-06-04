@@ -35,10 +35,7 @@
             <td><?php echo $invoice['date_due']; ?></td>
             <td><?php echo $invoice['total']; ?></td>
             <td><?php echo $invoice['status']; ?></td>
-            <td class="text-right">
-              <a href="<?php echo $invoice['invoice']; ?>" title="<?php echo $button_invoice; ?>" data-toggle="tooltip" class="btn btn-primary btn-xs" target="_blank"><i class="fa fa-clipboard"></i></a>
-              <a href="<?php echo $invoice['view']; ?>" title="<?php echo $button_view; ?>" data-toggle="tooltip" class="btn btn-primary btn-xs"><i class="fa fa-search"></i></a>
-            </td>
+            <td class="text-right"><a href="<?php echo $invoice['invoice']; ?>" title="<?php echo $button_invoice; ?>" data-toggle="tooltip" class="btn btn-primary btn-xs" target="_blank"><i class="fa fa-clipboard"></i></a> <a href="<?php echo $invoice['view']; ?>" title="<?php echo $button_view; ?>" data-toggle="tooltip" class="btn btn-primary btn-xs"><i class="fa fa-search"></i></a></td>
           </tr>
           <?php } ?>
           <?php } else { ?>

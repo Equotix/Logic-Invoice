@@ -103,11 +103,11 @@
 </div>
 <?php if ($print_version) { ?>
 <script type="text/javascript"><!--
-  $('#column-left').hide();
-  $('header').hide();
-  $('.breadcrumb').hide();
-  $('.panel-heading .pull-right').hide();
-  window.print();
-  //--></script>
+$('#column-left').hide();
+$('header').hide();
+$('.breadcrumb').hide();
+$('.panel-heading .pull-right').hide();
+window.print();
+//--></script>
 <?php } ?>
 <?php echo $footer; ?>

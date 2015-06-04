@@ -5,12 +5,12 @@ define('VERSION', '0.1.0');
 // Configuration
 if (file_exists('../config.php')) {
     require_once('../config.php');
-
-    define('_URL', APP_URL . basename(__DIR__) . '/');
-    define('_SURL', APP_SURL . basename(__DIR__) . '/');
-    define('_PATH', __DIR__);
-
-    require_once('../defined.php');
+	
+	define('_URL', APP_URL . basename(__DIR__) . '/');
+	define('_SURL', APP_SURL . basename(__DIR__) . '/');
+	define('_PATH', __DIR__);
+	
+	require_once('../defined.php');
 }
 
 // Startup

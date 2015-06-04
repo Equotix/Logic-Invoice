@@ -37,9 +37,7 @@
             <td><?php echo $recurring['cycle']; ?></td>
             <td><?php echo $recurring['date_due']; ?></td>
             <td><?php echo $recurring['date_added']; ?></td>
-            <td class="text-right">
-              <a href="<?php echo $recurring['view']; ?>" title="<?php echo $button_view; ?>" data-toggle="tooltip" class="btn btn-primary btn-xs"><i class="fa fa-search"></i></a>
-            </td>
+            <td class="text-right"><a href="<?php echo $recurring['view']; ?>" title="<?php echo $button_view; ?>" data-toggle="tooltip" class="btn btn-primary btn-xs"><i class="fa fa-search"></i></a></td>
           </tr>
           <?php } ?>
           <?php } else { ?>

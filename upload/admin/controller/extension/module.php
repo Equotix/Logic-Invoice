@@ -45,19 +45,19 @@ class ControllerExtensionModule extends Controller {
                 $extension = basename($file);
 
                 $this->load->language('module/' . $extension . '/' . $extension);
-
-                $xml = simplexml_load_file(DIR_EXTENSION . 'module/' . $extension . '/details.xml');
+				
+				$xml = simplexml_load_file(DIR_EXTENSION . 'module/' . $extension . '/details.xml');
 
                 $this->data['extensions'][] = array(
-                    'name'      => $this->language->get('heading_title'),
-                    'author'    => $xml->author,
-                    'url'       => $xml->url,
-                    'version'   => $xml->version,
-                    'email'     => $xml->email,
-                    'edit'      => $this->url->link('module/' . $extension . '/' . $extension, 'token=' . $this->session->data['token'], 'SSL'),
-                    'install'   => $this->url->link('extension/module/install', 'token=' . $this->session->data['token'] . '&extension=' . $extension, 'SSL'),
-                    'uninstall' => $this->url->link('extension/module/uninstall', 'token=' . $this->session->data['token'] . '&extension=' . $extension, 'SSL'),
-                    'installed' => in_array($extension, $extensions)
+                    'name'       => $this->language->get('heading_title'),
+					'author'     => $xml->author,
+					'url'        => $xml->url,
+					'version'    => $xml->version,
+					'email'      => $xml->email,
+                    'edit'       => $this->url->link('module/' . $extension . '/' . $extension, 'token=' . $this->session->data['token'], 'SSL'),
+                    'install'    => $this->url->link('extension/module/install', 'token=' . $this->session->data['token'] . '&extension=' . $extension, 'SSL'),
+                    'uninstall'  => $this->url->link('extension/module/uninstall', 'token=' . $this->session->data['token'] . '&extension=' . $extension, 'SSL'),
+                    'installed'  => in_array($extension, $extensions)
                 );
             }
         }

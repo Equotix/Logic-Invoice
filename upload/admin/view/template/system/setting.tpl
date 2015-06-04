@@ -17,8 +17,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <div class="pull-right">
-      <button type="submit" form="form-setting" title="<?php echo $button_save; ?>" data-toggle="tooltip" class="btn btn-success">
-        <i class="fa fa-save"></i></button>
+      <button type="submit" form="form-setting" title="<?php echo $button_save; ?>" data-toggle="tooltip" class="btn btn-success"><i class="fa fa-save"></i></button>
       <a href="<?php echo $cancel; ?>" title="<?php echo $button_cancel; ?>" data-toggle="tooltip" class="btn btn-danger"><i class="fa fa-times"></i></a>
     </div>
     <h1 class="panel-title"><i class="fa fa-pencil-square fa-lg"></i> <?php echo $heading_title; ?></h1>
@@ -83,28 +82,28 @@
           </div>
         </div>
         <div class="tab-pane" id="tab-website">
-          <div class="form-group">
+		  <div class="form-group">
             <label class="required col-sm-2 control-label" for="input-theme"><?php echo $entry_theme; ?></label>
             <div class="col-sm-10"><select name="config_theme" class="form-control">
-                <?php foreach ($themes as $theme) { ?>
-                <option value="<?php echo $theme; ?>"<?php echo $theme == $config_theme ? ' selected="selected"' : ''; ?>><?php echo $theme; ?></option>
-                <?php } ?></select>
+              <?php foreach ($themes as $theme) { ?>
+			  <option value="<?php echo $theme; ?>"<?php echo $theme == $config_theme ? ' selected="selected"' : ''; ?>><?php echo $theme; ?></option>
+			  <?php } ?></select>
             </div>
           </div>
+		  <div class="form-group">
+			<label class="col-sm-2 control-label" for="input-logo"><?php echo $entry_logo; ?></label>
+			<div class="col-sm-10">
+			  <a href="" id="thumb-logo" data-toggle="image" class="img-thumbnail"><img src="<?php echo $config_logo_thumb; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a>
+			  <input type="hidden" name="config_logo" value="<?php echo $config_logo; ?>" id="input-logo" />
+			</div>
+		  </div>
           <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-logo"><?php echo $entry_logo; ?></label>
-            <div class="col-sm-10">
-              <a href="" id="thumb-logo" data-toggle="image" class="img-thumbnail"><img src="<?php echo $config_logo_thumb; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a>
-              <input type="hidden" name="config_logo" value="<?php echo $config_logo; ?>" id="input-logo" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-icon"><?php echo $entry_icon; ?></label>
-            <div class="col-sm-10">
-              <a href="" id="thumb-icon" data-toggle="image" class="img-thumbnail"><img src="<?php echo $config_icon_thumb; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a>
-              <input type="hidden" name="config_icon" value="<?php echo $config_icon; ?>" id="input-icon" />
-            </div>
-          </div>
+			<label class="col-sm-2 control-label" for="input-icon"><?php echo $entry_icon; ?></label>
+			<div class="col-sm-10">
+			  <a href="" id="thumb-icon" data-toggle="image" class="img-thumbnail"><img src="<?php echo $config_icon_thumb; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a>
+			  <input type="hidden" name="config_icon" value="<?php echo $config_icon; ?>" id="input-icon" />
+			</div>
+		  </div>
           <div class="form-group">
             <label class="required col-sm-2 control-label" for="input-limit-admin"><?php echo $entry_limit_admin; ?></label>
             <div class="col-sm-10">
@@ -143,8 +142,7 @@
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-forgotten-admin"><?php echo $entry_forgotten_admin; ?></label>
-            <div class="col-sm-10">
-              <select name="config_forgotten_admin" id="input-forgotten-admin" class="form-control">
+            <div class="col-sm-10"><select name="config_forgotten_admin" id="input-forgotten-admin" class="form-control">
                 <option value="1"<?php echo $config_forgotten_admin ? ' selected="selected"' : ''; ?>><?php echo $text_yes; ?></option>
                 <option value="0"<?php echo $config_forgotten_admin ? '' : ' selected="selected"'; ?>><?php echo $text_no; ?></option>
               </select>
@@ -152,8 +150,7 @@
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-forgotten-application"><?php echo $entry_forgotten_application; ?></label>
-            <div class="col-sm-10">
-              <select name="config_forgotten_application" id="input-forgotten-application" class="form-control">
+            <div class="col-sm-10"><select name="config_forgotten_application" id="input-forgotten-application" class="form-control">
                 <option value="1"<?php echo $config_forgotten_application ? ' selected="selected"' : ''; ?>><?php echo $text_yes; ?></option>
                 <option value="0"<?php echo $config_forgotten_application ? '' : ' selected="selected"'; ?>><?php echo $text_no; ?></option>
               </select>
@@ -169,29 +166,27 @@
           </div>
           <ul id="home" class="nav nav-tabs">
             <?php foreach ($languages as $language) { ?>
-            <li>
-              <a href="#language-<?php echo $language['language_id']; ?>" data-toggle="tab"><img src="view/image/flags/<?php echo $language['image']; ?>" /> <?php echo $language['name']; ?>
-              </a></li>
+            <li><a href="#language-<?php echo $language['language_id']; ?>" data-toggle="tab"><img src="view/image/flags/<?php echo $language['image']; ?>" /> <?php echo $language['name']; ?></a></li>
             <?php } ?>
           </ul>
           <div class="tab-content">
             <?php foreach ($languages as $language) { ?>
             <div class="tab-pane" id="language-<?php echo $language['language_id']; ?>">
-              <div class="form-group">
-                <label class="required col-sm-2 control-label" for="input-meta-title-<?php echo $language['language_id']; ?>"><?php echo $entry_meta_title; ?></label>
-                <div class="col-sm-10">
-                  <input type="text" name="config_meta_title[<?php echo $language['language_id']; ?>]" value="<?php echo !empty($config_meta_title[$language['language_id']]) ? $config_meta_title[$language['language_id']] : ''; ?>" id="input-meta-title-<?php echo $language['language_id']; ?>" class="form-control" placeholder="<?php echo $entry_meta_title; ?>" required />
-                  <?php if (!empty($error_meta_title[$language['language_id']])) { ?>
-                  <div class="text-danger"><?php echo $error_meta_title[$language['language_id']]; ?></div>
-                  <?php } ?>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-meta-description-<?php echo $language['language_id']; ?>"><?php echo $entry_meta_description; ?></label>
-                <div class="col-sm-10">
-                  <textarea name="config_meta_description[<?php echo $language['language_id']; ?>]" id="input-meta-description-<?php echo $language['language_id']; ?>" class="form-control" rows="5" placeholder="<?php echo $entry_meta_description; ?>"><?php echo !empty($config_meta_description[$language['language_id']]) ? $config_meta_description[$language['language_id']] : ''; ?></textarea>
-                </div>
-              </div>
+			  <div class="form-group">
+				<label class="required col-sm-2 control-label" for="input-meta-title-<?php echo $language['language_id']; ?>"><?php echo $entry_meta_title; ?></label>
+				<div class="col-sm-10">
+				  <input type="text" name="config_meta_title[<?php echo $language['language_id']; ?>]" value="<?php echo !empty($config_meta_title[$language['language_id']]) ? $config_meta_title[$language['language_id']] : ''; ?>" id="input-meta-title-<?php echo $language['language_id']; ?>" class="form-control" placeholder="<?php echo $entry_meta_title; ?>" required />
+				  <?php if (!empty($error_meta_title[$language['language_id']])) { ?>
+				  <div class="text-danger"><?php echo $error_meta_title[$language['language_id']]; ?></div>
+				  <?php } ?>
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label class="col-sm-2 control-label" for="input-meta-description-<?php echo $language['language_id']; ?>"><?php echo $entry_meta_description; ?></label>
+				<div class="col-sm-10">
+				  <textarea name="config_meta_description[<?php echo $language['language_id']; ?>]" id="input-meta-description-<?php echo $language['language_id']; ?>" class="form-control" rows="5" placeholder="<?php echo $entry_meta_description; ?>"><?php echo !empty($config_meta_description[$language['language_id']]) ? $config_meta_description[$language['language_id']] : ''; ?></textarea>
+				</div>
+			  </div>
               <div class="form-group">
                 <label class="required col-sm-2 control-label" for="input-home-<?php echo $language['language_id']; ?>"><?php echo $entry_home; ?></label>
                 <div class="col-sm-10">
@@ -220,8 +215,7 @@
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-auto-update-currency"><?php echo $entry_auto_update_currency; ?></label>
-            <div class="col-sm-10">
-              <select name="config_auto_update_currency" id="input-auto-update-currency" class="form-control">
+            <div class="col-sm-10"><select name="config_auto_update_currency" id="input-auto-update-currency" class="form-control">
                 <option value="1"<?php echo $config_auto_update_currency ? ' selected="selected"' : ''; ?>><?php echo $text_yes; ?></option>
                 <option value="0"<?php echo $config_auto_update_currency ? '' : ' selected="selected"'; ?>><?php echo $text_no; ?></option>
               </select>
@@ -259,8 +253,7 @@
                 </div>
                 <?php } ?>
               </div>
-              <a onclick="$(this).parent().find(':checkbox').prop('checked', true);"><?php echo $text_select_all; ?></a> /
-              <a onclick="$(this).parent().find(':checkbox').prop('checked', false);"><?php echo $text_unselect_all; ?></a>
+              <a onclick="$(this).parent().find(':checkbox').prop('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').prop('checked', false);"><?php echo $text_unselect_all; ?></a>
             </div>
           </div>
           <div class="form-group">
@@ -281,8 +274,7 @@
                 </div>
                 <?php } ?>
               </div>
-              <a onclick="$(this).parent().find(':checkbox').prop('checked', true);"><?php echo $text_select_all; ?></a> /
-              <a onclick="$(this).parent().find(':checkbox').prop('checked', false);"><?php echo $text_unselect_all; ?></a>
+              <a onclick="$(this).parent().find(':checkbox').prop('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').prop('checked', false);"><?php echo $text_unselect_all; ?></a>
             </div>
           </div>
           <div class="form-group">
@@ -303,8 +295,7 @@
                 </div>
                 <?php } ?>
               </div>
-              <a onclick="$(this).parent().find(':checkbox').prop('checked', true);"><?php echo $text_select_all; ?></a> /
-              <a onclick="$(this).parent().find(':checkbox').prop('checked', false);"><?php echo $text_unselect_all; ?></a>
+              <a onclick="$(this).parent().find(':checkbox').prop('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').prop('checked', false);"><?php echo $text_unselect_all; ?></a>
             </div>
           </div>
           <div class="form-group">
@@ -325,8 +316,7 @@
                 </div>
                 <?php } ?>
               </div>
-              <a onclick="$(this).parent().find(':checkbox').prop('checked', true);"><?php echo $text_select_all; ?></a> /
-              <a onclick="$(this).parent().find(':checkbox').prop('checked', false);"><?php echo $text_unselect_all; ?></a>
+              <a onclick="$(this).parent().find(':checkbox').prop('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').prop('checked', false);"><?php echo $text_unselect_all; ?></a>
             </div>
           </div>
           <div class="form-group">
@@ -347,8 +337,7 @@
                 </div>
                 <?php } ?>
               </div>
-              <a onclick="$(this).parent().find(':checkbox').prop('checked', true);"><?php echo $text_select_all; ?></a> /
-              <a onclick="$(this).parent().find(':checkbox').prop('checked', false);"><?php echo $text_unselect_all; ?></a>
+              <a onclick="$(this).parent().find(':checkbox').prop('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').prop('checked', false);"><?php echo $text_unselect_all; ?></a>
             </div>
           </div>
           <div class="form-group">
@@ -509,8 +498,7 @@
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-cron-user"><?php echo $entry_cron_user; ?></label>
-            <div class="col-sm-10">
-              <select name="config_cron_user_id" id="input-cron-user" class="form-control"><?php foreach ($users as $user) { ?>
+            <div class="col-sm-10"><select name="config_cron_user_id" id="input-cron-user" class="form-control"><?php foreach ($users as $user) { ?>
                 <option value="<?php echo $user['user_id']; ?>"<?php echo $config_cron_user_id == $user['user_id'] ? ' selected="selected"' : ''; ?>><?php echo $user['username']; ?></option>
                 <?php } ?></select>
             </div>
@@ -518,7 +506,7 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-google-analytics"><?php echo $entry_google_analytics; ?></label>
             <div class="col-sm-10">
-              <textarea name="config_google_analytics" id="input-google-analytics" class="form-control" placeholder="<?php echo $entry_google_analytics; ?>" rows="3"><?php echo $config_google_analytics; ?></textarea />
+              <textarea name="config_google_analytics" id="input-google-analytics" class="form-control" placeholder="<?php echo $entry_google_analytics; ?>" rows="3"><?php echo $config_google_analytics; ?></textarea/>
             </div>
           </div>
         </div>
@@ -527,29 +515,14 @@
   </div>
 </div>
 <script type="text/javascript"><!--
-  $(document).ready(function () {
-    <
-    ? php foreach($languages
-    as
-    $language
-    )
-    {
-      ?
-    >
-      $('#input-home-<?php echo $language['
-      language_id
-      ']; ?>'
-    ).
-      summernote({
-        height: 300
-      });
-    <
-      ? php
-    }
-    ?
-    >
+$(document).ready(function() {
+<?php foreach ($languages as $language) { ?>
+$('#input-home-<?php echo $language['language_id']; ?>').summernote({
+	height: 300
+});
+<?php } ?>
 
-    $('#home li :first').trigger('click');
-  });
-  //--></script>
+$('#home li :first').trigger('click');
+});
+//--></script>
 <?php echo $footer; ?>

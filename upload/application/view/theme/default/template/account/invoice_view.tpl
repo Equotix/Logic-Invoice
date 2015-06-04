@@ -66,61 +66,61 @@
   </div>
 </div>
 <script type="text/javascript"><!--
-  function history(page) {
-    $.ajax({
-      url: 'index.php?load=account/invoice/history&invoice_id=<?php echo $invoice_id; ?>&page=' + page,
-      dataType: 'json',
-      beforeSend: function () {
-        $('#history').html('<div class="text-center"><i class="fa fa-spinner fa-spin fa-4x"></i></div>');
-      },
-      complete: function () {
-        $('.fa-spinner').parent().remove();
-      },
-      success: function (json) {
-        var html = '<h3>' + json['text_history'] + '</h3>';
+function history(page) {
+	$.ajax({
+		url: 'index.php?load=account/invoice/history&invoice_id=<?php echo $invoice_id; ?>&page=' + page,
+		dataType: 'json',
+		beforeSend: function () {
+			$('#history').html('<div class="text-center"><i class="fa fa-spinner fa-spin fa-4x"></i></div>');
+		},
+		complete: function () {
+			$('.fa-spinner').parent().remove();
+		},
+		success: function (json) {
+			var html = '<h3>' + json['text_history'] + '</h3>';
 
-        html += '<div class="table-responsive">';
-        html += '  <table class="table table-striped table-bordered table-hover">';
-        html += '    <tr>';
-        html += '      <th class="text-left">' + json['column_status'] + '</th>';
-        html += '      <th class="text-left">' + json['column_comment'] + '</th>';
-        html += '      <th class="text-right">' + json['column_date_added'] + '</th>';
-        html += '    </tr>';
+			html += '<div class="table-responsive">';
+			html += '  <table class="table table-striped table-bordered table-hover">';
+			html += '    <tr>';
+			html += '      <th class="text-left">' + json['column_status'] + '</th>';
+			html += '      <th class="text-left">' + json['column_comment'] + '</th>';
+			html += '      <th class="text-right">' + json['column_date_added'] + '</th>';
+			html += '    </tr>';
 
-        if (json['histories'].length > 0) {
-          for (i = 0; i < json['histories'].length; i++) {
-            html += '    <tr>';
-            html += '      <td class="text-left">' + json['histories'][i]['status'] + '</td>';
-            html += '      <td class="text-left">' + json['histories'][i]['comment'] + '</td>';
-            html += '      <td class="text-right">' + json['histories'][i]['date_added'] + '</td>';
-            html += '    </tr>';
-          }
-        } else {
-          html += '    <tr>';
-          html += '      <td class="text-center" colspan="3">' + json['text_no_histories'] + '</td>';
-          html += '    </tr>';
-        }
+			if (json['histories'].length > 0) {
+				for (i = 0; i < json['histories'].length; i++) {
+					html += '    <tr>';
+					html += '      <td class="text-left">' + json['histories'][i]['status'] + '</td>';
+					html += '      <td class="text-left">' + json['histories'][i]['comment'] + '</td>';
+					html += '      <td class="text-right">' + json['histories'][i]['date_added'] + '</td>';
+					html += '    </tr>';
+				}
+			} else {
+				html += '    <tr>';
+				html += '      <td class="text-center" colspan="3">' + json['text_no_histories'] + '</td>';
+				html += '    </tr>';
+			}
 
-        html += '  </table>';
-        html += '</div>';
-        html += '<div class="pagination">' + json['pagination'] + '</div><br /><br />';
+			html += '  </table>';
+			html += '</div>';
+			html += '<div class="pagination">' + json['pagination'] + '</div><br /><br />';
 
-        $('#history').html(html);
-      },
-      error: function (xhr, ajaxOptions, thrownError) {
-        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-      }
-    });
-  }
+			$('#history').html(html);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+}
 
-  $(document).ready(function () {
-    history(1);
-  });
+$(document).ready(function () {
+	history(1);
+});
 
-  $(document).on('click', '#history .pagination a', function () {
-    history($(this).attr('href'));
+$(document).on('click', '#history .pagination a', function () {
+	history($(this).attr('href'));
 
-    return false;
-  });
-  //--></script>
+	return false;
+});
+//--></script>
 <?php echo $footer; ?>

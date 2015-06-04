@@ -47,7 +47,7 @@ class ControllerCommonHeader extends Controller {
             $this->data['language'] = $this->url->link('system/language', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['activity'] = $this->url->link('system/activity', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['error'] = $this->url->link('system/error', 'token=' . $this->session->data['token'], 'SSL');
-            $this->data['setting'] = $this->url->link('system/setting', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['setting'] = $this->url->link('system/setting', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['status'] = $this->url->link('system/status', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['user'] = $this->url->link('system/user', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['user_group'] = $this->url->link('system/user_group', 'token=' . $this->session->data['token'], 'SSL');

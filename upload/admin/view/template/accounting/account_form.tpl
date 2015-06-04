@@ -98,43 +98,43 @@
   </div>
 </div>
 <script type="text/javascript"><!--
-  $(document).ready(function () {
-    $('select[name=\'type\']').change(function () {
-      $.ajax({
-        url: 'index.php?load=accounting/account/getaccounts&token=<?php echo $token; ?>&type=' + $(this).val(),
-        dataType: 'json',
-        beforeSend: function () {
-          $('select[name=\'type\']').after(' <i class="fa fa-spinner fa-spin"></i>');
-        },
-        complete: function () {
-          $('.fa-spinner').remove();
-        },
-        success: function (json) {
-          html = '<option value=""><?php echo $text_none; ?></option>';
+$(document).ready(function () {
+	$('select[name=\'type\']').change(function () {
+		$.ajax({
+			url: 'index.php?load=accounting/account/getaccounts&token=<?php echo $token; ?>&type=' + $(this).val(),
+			dataType: 'json',
+			beforeSend: function () {
+				$('select[name=\'type\']').after(' <i class="fa fa-spinner fa-spin"></i>');
+			},
+			complete: function () {
+				$('.fa-spinner').remove();
+			},
+			success: function (json) {
+				html = '<option value=""><?php echo $text_none; ?></option>';
 
-          if (json['account']) {
-            for (i = 0; i < json['account'].length; i++) {
-              html += '<option value="' + json['account'][i]['account_id'] + '"';
+				if (json['account']) {
+					for (i = 0; i < json['account'].length; i++) {
+						html += '<option value="' + json['account'][i]['account_id'] + '"';
 
-              if (json['account'][i]['account_id'] == '<?php echo $parent_id; ?>') {
-                html += ' selected="selected"';
-              }
+						if (json['account'][i]['account_id'] == '<?php echo $parent_id; ?>') {
+							html += ' selected="selected"';
+						}
 
-              html += '>' + json['account'][i]['name'] + '</option>';
-            }
-          } else {
-            html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
-          }
+						html += '>' + json['account'][i]['name'] + '</option>';
+					}
+				} else {
+					html += '<option value="0" selected="selected"><?php echo $text_none; ?></option>';
+				}
 
-          $('select[name=\'parent_id\']').html(html);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-          alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-        }
-      });
-    });
+				$('select[name=\'parent_id\']').html(html);
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		});
+	});
 
-    $('select[name=\'type\']').trigger('change');
-  });
-  //--></script>
+	$('select[name=\'type\']').trigger('change');
+});
+//--></script>
 <?php echo $footer; ?>

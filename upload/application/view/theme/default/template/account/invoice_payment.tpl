@@ -65,18 +65,14 @@
         <tr>
           <td class="text-left">
             <div class="radio">
-              <label><input type="radio" name="payment_method" value="<?php echo $payment['code']; ?>" /> <?php echo $payment['name']; ?>
-              </label>
+              <label><input type="radio" name="payment_method" value="<?php echo $payment['code']; ?>" /> <?php echo $payment['name']; ?></label>
             </div>
           </td>
         </tr>
         <?php } ?>
         <?php } else { ?>
         <tr>
-          <td class="text-left">
-            <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> <?php echo $text_no_payment; ?>
-            </div>
-          </td>
+          <td class="text-left"><div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> <?php echo $text_no_payment; ?></div></td>
         </tr>
         <?php } ?>
       </table>
@@ -85,27 +81,27 @@
   </div>
 </div>
 <script type="text/javascript"><!--
-  $(document).ready(function () {
-    $('input[name=\'payment_method\']').change(function () {
-      payment_code = $(this).val();
+$(document).ready(function () {
+	$('input[name=\'payment_method\']').change(function () {
+		payment_code = $(this).val();
 
-      $.ajax({
-        url: 'index.php?load=payment/' + payment_code + '/' + payment_code + '&invoice_id=<?php echo $invoice_id; ?>',
-        type: 'get',
-        dataType: 'html',
-        beforeSend: function () {
-          $('#payment').html(' <i class="fa fa-spinner fa-spin"></i>');
-        },
-        complete: function () {
-          $('.fa-spinner').remove();
-        },
-        success: function (html) {
-          $('#payment').html(html);
-        }
-      });
-    });
+		$.ajax({
+			url: 'index.php?load=payment/' + payment_code + '/' + payment_code + '&invoice_id=<?php echo $invoice_id; ?>',
+			type: 'get',
+			dataType: 'html',
+			beforeSend: function () {
+				$('#payment').html(' <i class="fa fa-spinner fa-spin"></i>');
+			},
+			complete: function () {
+				$('.fa-spinner').remove();
+			},
+			success: function (html) {
+				$('#payment').html(html);
+			}
+		});
+	});
 
-    $('input[name=\'payment_method\']:checked').trigger('change');
-  });
-  //--></script>
+	$('input[name=\'payment_method\']:checked').trigger('change');
+});
+//--></script>
 <?php echo $footer; ?>

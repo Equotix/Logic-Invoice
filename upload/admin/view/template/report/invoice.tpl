@@ -49,8 +49,7 @@
               <?php } ?>
             </select>
           </div>
-          <button type="button" title="<?php echo $button_filter; ?>" data-toggle="tooltip" class="btn btn-primary pull-right" onclick="filter();">
-            <i class="fa fa-search"></i></button>
+          <button type="button" title="<?php echo $button_filter; ?>" data-toggle="tooltip" class="btn btn-primary pull-right" onclick="filter();"><i class="fa fa-search"></i></button>
         </div>
       </div>
     </div>
@@ -86,38 +85,38 @@
   </div>
 </div>
 <script type="text/javascript"><!--
-  function filter() {
-    url = 'index.php?load=report/invoice&token=<?php echo $token; ?>';
+function filter() {
+	url = 'index.php?load=report/invoice&token=<?php echo $token; ?>';
 
-    var filter_date_issued_start = $('input[name=\'filter_date_issued_start\']').val();
+	var filter_date_issued_start = $('input[name=\'filter_date_issued_start\']').val();
 
-    if (filter_date_issued_start) {
-      url += '&filter_date_issued_start=' + encodeURIComponent(filter_date_issued_start);
-    }
+	if (filter_date_issued_start) {
+		url += '&filter_date_issued_start=' + encodeURIComponent(filter_date_issued_start);
+	}
 
-    var filter_date_issued_end = $('input[name=\'filter_date_issued_end\']').val();
+	var filter_date_issued_end = $('input[name=\'filter_date_issued_end\']').val();
 
-    if (filter_date_issued_end) {
-      url += '&filter_date_issued_end=' + encodeURIComponent(filter_date_issued_end);
-    }
+	if (filter_date_issued_end) {
+		url += '&filter_date_issued_end=' + encodeURIComponent(filter_date_issued_end);
+	}
 
-    var filter_group = $('select[name=\'filter_group\']').val();
+	var filter_group = $('select[name=\'filter_group\']').val();
 
-    if (filter_group) {
-      url += '&filter_group=' + encodeURIComponent(filter_group);
-    }
+	if (filter_group) {
+		url += '&filter_group=' + encodeURIComponent(filter_group);
+	}
 
-    var filter_status_id = $('select[name=\'filter_status_id\']').val();
+	var filter_status_id = $('select[name=\'filter_status_id\']').val();
 
-    if (filter_status_id != '') {
-      url += '&filter_status_id=' + encodeURIComponent(filter_status_id);
-    }
+	if (filter_status_id != '') {
+		url += '&filter_status_id=' + encodeURIComponent(filter_status_id);
+	}
 
-    location = url;
-  }
+	location = url;
+}
 
-  $('.date').datetimepicker({
-    pickTime: false
-  });
-  //--></script>
+$('.date').datetimepicker({
+	pickTime: false
+});
+//--></script>
 <?php echo $footer; ?>

@@ -475,10 +475,10 @@ class ControllerBillingCustomer extends Controller {
                 $this->error['confirm'] = $this->language->get('error_confirm');
             }
         }
-
-        if ($this->error && empty($this->error['warning'])) {
-            $this->error['warning'] = $this->language->get('error_form');
-        }
+		
+		if ($this->error && empty($this->error['warning'])) {
+			$this->error['warning'] = $this->language->get('error_form');
+		}
 
         return !$this->error;
     }

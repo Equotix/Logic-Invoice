@@ -12,8 +12,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <div class="pull-right">
-      <button type="submit" form="form-user" title="<?php echo $button_save; ?>" data-toggle="tooltip" class="btn btn-success">
-        <i class="fa fa-save"></i></button>
+      <button type="submit" form="form-user" title="<?php echo $button_save; ?>" data-toggle="tooltip" class="btn btn-success"><i class="fa fa-save"></i></button>
       <a href="<?php echo $cancel; ?>" title="<?php echo $button_cancel; ?>" data-toggle="tooltip" class="btn btn-danger"><i class="fa fa-times"></i></a>
     </div>
     <h1 class="panel-title"><i class="fa fa-pencil-square fa-lg"></i> <?php echo $heading_title; ?></h1>
@@ -29,7 +28,7 @@
           <?php } ?>
         </div>
       </div>
-      <div class="form-group">
+	  <div class="form-group">
         <label class="required col-sm-2 control-label" for="input-name"><?php echo $entry_name; ?></label>
         <div class="col-sm-10">
           <input type="text" name="name" value="<?php echo $name; ?>" id="input-name" class="form-control" placeholder="<?php echo $entry_name; ?>" required />
@@ -63,8 +62,7 @@
           <div class="input-group">
             <input type="text" name="key" value="<?php echo $key; ?>" id="input-api-key" class="form-control" placeholder="<?php echo $entry_api_key; ?>" />
             <span class="input-group-btn">
-              <button type="button" title="<?php echo $button_generate; ?>" data-toggle="tooltip" class="btn btn-primary" id="button-generate-key">
-                <i class="fa fa-refresh"></i></button>
+              <button type="button" title="<?php echo $button_generate; ?>" data-toggle="tooltip" class="btn btn-primary" id="button-generate-key"><i class="fa fa-refresh"></i></button>
             </span>
           </div>
         </div>
@@ -75,8 +73,7 @@
           <div class="input-group">
             <input type="text" name="secret" value="<?php echo $secret; ?>" id="input-api-secret" class="form-control" placeholder="<?php echo $entry_api_secret; ?>" />
             <span class="input-group-btn">
-              <button type="button" title="<?php echo $button_generate; ?>" data-toggle="tooltip" class="btn btn-primary" id="button-generate-secret">
-                <i class="fa fa-refresh"></i></button>
+              <button type="button" title="<?php echo $button_generate; ?>" data-toggle="tooltip" class="btn btn-primary" id="button-generate-secret"><i class="fa fa-refresh"></i></button>
             </span>
           </div>
         </div>
@@ -112,28 +109,28 @@
   </div>
 </div>
 <script type="text/javascript"><!--
-  $('#button-generate-key').on('click', function () {
-    rand = '';
+$('#button-generate-key').on('click', function () {
+	rand = '';
 
-    string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-    for (i = 0; i < 64; i++) {
-      rand += string[Math.floor(Math.random() * (string.length - 1))];
-    }
+	for (i = 0; i < 64; i++) {
+		rand += string[Math.floor(Math.random() * (string.length - 1))];
+	}
 
-    $('input[name=\'key\']').val(rand);
-  });
+	$('input[name=\'key\']').val(rand);
+});
 
-  $('#button-generate-secret').on('click', function () {
-    rand = '';
+$('#button-generate-secret').on('click', function () {
+	rand = '';
 
-    string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-    for (i = 0; i < 64; i++) {
-      rand += string[Math.floor(Math.random() * (string.length - 1))];
-    }
+	for (i = 0; i < 64; i++) {
+		rand += string[Math.floor(Math.random() * (string.length - 1))];
+	}
 
-    $('input[name=\'secret\']').val(rand);
-  });
-  //--></script>
+	$('input[name=\'secret\']').val(rand);
+});
+//--></script>
 <?php echo $footer; ?>

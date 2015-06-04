@@ -215,23 +215,23 @@ class ControllerSystemUserGroup extends Controller {
                 $this->data['permissions'][] = $permission;
             }
         }
-
-        $files = glob(DIR_EXTENSION . 'module/*', GLOB_ONLYDIR);
-
-        foreach ($files as $file) {
-            $this->data['permissions'][] = 'module/' . basename($file);
+		
+		$files = glob(DIR_EXTENSION . 'module/*', GLOB_ONLYDIR);
+		
+		foreach ($files as $file) {
+           $this->data['permissions'][] = 'module/' . basename($file);
         }
-
-        $files = glob(DIR_EXTENSION . 'payment/*', GLOB_ONLYDIR);
-
-        foreach ($files as $file) {
-            $this->data['permissions'][] = 'payment/' . basename($file);
+		
+		$files = glob(DIR_EXTENSION . 'payment/*', GLOB_ONLYDIR);
+		
+		foreach ($files as $file) {
+           $this->data['permissions'][] = 'payment/' . basename($file);
         }
-
-        $files = glob(DIR_EXTENSION . 'total/*', GLOB_ONLYDIR);
-
-        foreach ($files as $file) {
-            $this->data['permissions'][] = 'total/' . basename($file);
+		
+		$files = glob(DIR_EXTENSION . 'total/*', GLOB_ONLYDIR);
+		
+		foreach ($files as $file) {
+           $this->data['permissions'][] = 'total/' . basename($file);
         }
 
         if (isset($this->request->post['permission']['access'])) {
@@ -288,10 +288,10 @@ class ControllerSystemUserGroup extends Controller {
         if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 32)) {
             $this->error['name'] = $this->language->get('error_name');
         }
-
-        if ($this->error && empty($this->error['warning'])) {
-            $this->error['warning'] = $this->language->get('error_form');
-        }
+		
+		if ($this->error && empty($this->error['warning'])) {
+			$this->error['warning'] = $this->language->get('error_form');
+		}
 
         return !$this->error;
     }

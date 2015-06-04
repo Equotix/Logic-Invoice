@@ -221,10 +221,10 @@ class ControllerAccountingTaxRate extends Controller {
         if (!(float)$this->request->post['rate']) {
             $this->error['rate'] = $this->language->get('error_rate');
         }
-
-        if ($this->error && empty($this->error['warning'])) {
-            $this->error['warning'] = $this->language->get('error_form');
-        }
+		
+		if ($this->error && empty($this->error['warning'])) {
+			$this->error['warning'] = $this->language->get('error_form');
+		}
 
         return !$this->error;
     }

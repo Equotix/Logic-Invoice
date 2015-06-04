@@ -25,14 +25,14 @@ class ControllerCommonSeoUrl extends Controller {
                     if ($url[0] == 'article_id') {
                         $this->request->get['article_id'] = $url[1];
                     } elseif ($url[0] == 'blog_category_id') {
-                        if (!isset($this->request->get['blog_category_id'])) {
-                            $this->request->get['blog_category_id'] = $url[1];
-                        } else {
-                            $this->request->get['blog_category_id'] .= '_' . $url[1];
-                        }
-                    } elseif ($url[0] == 'blog_post_id') {
-                        $this->request->get['blog_post_id'] = $url[1];
-                    }
+						if (!isset($this->request->get['blog_category_id'])) {
+							$this->request->get['blog_category_id'] = $url[1];
+						} else {
+							$this->request->get['blog_category_id'] .= '_' . $url[1];
+						}
+					} elseif ($url[0] == 'blog_post_id') {
+						$this->request->get['blog_post_id'] = $url[1];
+					}
                 } else {
                     $this->request->get['load'] = 'error/not_found';
 
@@ -43,71 +43,71 @@ class ControllerCommonSeoUrl extends Controller {
             if (!isset($this->request->get['load'])) {
                 if (isset($this->request->get['article_id'])) {
                     $this->request->get['load'] = 'content/article';
-                } elseif (isset($this->request->get['blog_post_id'])) {
-                    $this->request->get['load'] = 'content/blog/info';
-                } elseif (isset($this->request->get['blog_category_id'])) {
-                    $this->request->get['load'] = 'content/blog';
-                }
+				} elseif (isset($this->request->get['blog_post_id'])) {
+					$this->request->get['load'] = 'content/blog/info';
+				} elseif (isset($this->request->get['blog_category_id'])) {
+					$this->request->get['load'] = 'content/blog';
+				}
             }
 
             if (isset($this->request->get['load']) && $this->request->get['load'] == 'error/not_found') {
                 $load = '';
                 $exists = false;
 
-                if (isset($parts[0]) && ($parts[0] == 'module' || $parts[0] == 'payment' || $parts[0] == 'total')) {
-                    if (isset($parts[1])) {
-                        $load .= $parts[0] . '/' . $parts[1] . '/';
+				if (isset($parts[0]) && ($parts[0] == 'module' || $parts[0] == 'payment' || $parts[0] == 'total')) {
+					if (isset($parts[1])) {
+						$load .= $parts[0] . '/' . $parts[1] . '/';
+						
+						$file = DIR_EXTENSION . $parts[0] . '/' . $parts[1] . '/controller/';
+						
+						array_shift($parts);
+				
+						array_shift($parts);
+						
+						foreach ($parts as $part) {
+							$file .= $part;
+							
+							$load .= $part . '/';
+							
+							if (is_dir(str_replace(array(
+									'../',
+									'..\\',
+									'..'
+								), '', $file))) {
+								$file .= '/';
+								
+								continue;
+							} elseif (is_file(str_replace(array(
+									'../',
+									'..\\',
+									'..'
+								), '', $file) . '.php')) {
+								$exists = true;
+							}
+						}
+					}
+				} else {
+					foreach ($parts as $part) {
+						$load .= $part;
 
-                        $file = DIR_EXTENSION . $parts[0] . '/' . $parts[1] . '/controller/';
-
-                        array_shift($parts);
-
-                        array_shift($parts);
-
-                        foreach ($parts as $part) {
-                            $file .= $part;
-
-                            $load .= $part . '/';
-
-                            if (is_dir(str_replace(array(
-                                '../',
-                                '..\\',
-                                '..'
-                            ), '', $file))) {
-                                $file .= '/';
-
-                                continue;
-                            } elseif (is_file(str_replace(array(
-                                    '../',
-                                    '..\\',
-                                    '..'
-                                ), '', $file) . '.php')) {
-                                $exists = true;
-                            }
-                        }
-                    }
-                } else {
-                    foreach ($parts as $part) {
-                        $load .= $part;
-
-                        if (is_dir(DIR_APPLICATION . 'controller/' . str_replace(array(
-                                '../',
-                                '..\\',
-                                '..'
-                            ), '', $load))) {
-                            $load .= '/';
-                            continue;
-                        } elseif (is_file(DIR_APPLICATION . 'controller/' . str_replace(array(
-                                '../',
-                                '..\\',
-                                '..'
-                            ), '', $load) . '.php')) {
-                            $load .= '/';
-
-                            $exists = true;
-                        }
-                    }
-                }
+						if (is_dir(DIR_APPLICATION . 'controller/' . str_replace(array(
+								'../',
+								'..\\',
+								'..'
+							), '', $load))) {
+							$load .= '/';
+							continue;
+						} elseif (is_file(DIR_APPLICATION . 'controller/' . str_replace(array(
+								'../',
+								'..\\',
+								'..'
+							), '', $load) . '.php')) {
+							$load .= '/';
+							
+							$exists = true;
+						}
+					}
+				}
 
                 if ($exists == true) {
                     $this->request->get['load'] = $load;
@@ -139,18 +139,18 @@ class ControllerCommonSeoUrl extends Controller {
 
                         unset($data[$key]);
                     }
-                } elseif ($key == 'blog_category_id') {
-                    $blog_category_ids = explode('_', (string)$value);
+				} elseif ($key == 'blog_category_id') {
+					$blog_category_ids = explode('_', (string)$value);
+					
+					foreach ($blog_category_ids as $blog_category_id) {
+						$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE language_id = '" . (int)$this->config->get('config_language_id') . "' AND `query` = '" . $this->db->escape($key . '=' . (int)$blog_category_id) . "'");
 
-                    foreach ($blog_category_ids as $blog_category_id) {
-                        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE language_id = '" . (int)$this->config->get('config_language_id') . "' AND `query` = '" . $this->db->escape($key . '=' . (int)$blog_category_id) . "'");
+						if ($query->num_rows) {
+							$url .= '/' . $query->row['keyword'];
 
-                        if ($query->num_rows) {
-                            $url .= '/' . $query->row['keyword'];
-
-                            unset($data[$key]);
-                        }
-                    }
+							unset($data[$key]);
+						}
+					}
                 } elseif ($key == 'load') {
                     if ($data['load'] == 'common/home') {
                         $url .= '/';

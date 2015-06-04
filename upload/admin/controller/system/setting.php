@@ -55,17 +55,17 @@ class ControllerSystemSetting extends Controller {
         $this->data['config_telephone'] = $this->build->data('config_telephone', $this->request->post, $setting);
         $this->data['config_fax'] = $this->build->data('config_fax', $this->request->post, $setting);
         $this->data['config_theme'] = $this->build->data('config_theme', $this->request->post, $setting);
-
-        $this->load->model('tool/image');
-
+		
+		$this->load->model('tool/image');
+		
         $this->data['config_logo'] = $this->build->data('config_logo', $this->request->post, $setting);
-
-        $this->data['config_logo_thumb'] = $this->model_tool_image->resize($this->data['config_logo'], 100, 100);
-
+		
+		$this->data['config_logo_thumb'] = $this->model_tool_image->resize($this->data['config_logo'], 100, 100);
+		
         $this->data['config_icon'] = $this->build->data('config_icon', $this->request->post, $setting);
-
-        $this->data['config_icon_thumb'] = $this->model_tool_image->resize($this->data['config_icon'], 100, 100);
-
+		
+		$this->data['config_icon_thumb'] = $this->model_tool_image->resize($this->data['config_icon'], 100, 100);
+		
         $this->data['config_limit_admin'] = $this->build->data('config_limit_admin', $this->request->post, $setting);
         $this->data['config_limit_application'] = $this->build->data('config_limit_application', $this->request->post, $setting);
         $this->data['config_admin_language'] = $this->build->data('config_admin_language', $this->request->post, $setting);
@@ -73,7 +73,7 @@ class ControllerSystemSetting extends Controller {
         $this->data['config_forgotten_admin'] = $this->build->data('config_forgotten_admin', $this->request->post, $setting);
         $this->data['config_forgotten_application'] = $this->build->data('config_forgotten_application', $this->request->post, $setting);
         $this->data['config_registration'] = $this->build->data('config_registration', $this->request->post, $setting);
-        $this->data['config_meta_title'] = $this->build->data('config_meta_title', $this->request->post, $setting, array());
+		$this->data['config_meta_title'] = $this->build->data('config_meta_title', $this->request->post, $setting, array());
         $this->data['config_meta_description'] = $this->build->data('config_meta_description', $this->request->post, $setting, array());
         $this->data['config_home'] = $this->build->data('config_home', $this->request->post, $setting);
         $this->data['config_currency'] = $this->build->data('config_currency', $this->request->post, $setting);
@@ -104,21 +104,21 @@ class ControllerSystemSetting extends Controller {
         $this->data['config_cron_user_id'] = $this->build->data('config_cron_user_id', $this->request->post, $setting);
         $this->data['config_google_analytics'] = $this->build->data('config_google_analytics', $this->request->post, $setting);
 
-        $this->data['placeholder'] = $this->model_tool_image->resize('placeholder.png', 100, 100);
-
+		$this->data['placeholder'] = $this->model_tool_image->resize('placeholder.png', 100, 100);
+		
         $this->load->model('system/language');
 
         $this->data['languages'] = $this->model_system_language->getLanguages();
-
-        $this->data['themes'] = array();
-
-        $files = glob(DIR_APPLICATION . '../front/view/theme/*', GLOB_ONLYDIR);
-
-        if ($files) {
+		
+		$this->data['themes'] = array();
+		
+		$files = glob(DIR_APPLICATION . '../front/view/theme/*', GLOB_ONLYDIR);
+		
+		if ($files) {
             foreach ($files as $file) {
-                $this->data['themes'][] = basename($file);
-            }
-        }
+				$this->data['themes'][] = basename($file);
+			}
+		}
 
         $this->load->model('accounting/currency');
 
@@ -155,11 +155,11 @@ class ControllerSystemSetting extends Controller {
             $this->error['registered_name'] = $this->language->get('error_registered_name');
         }
 
-        foreach ($this->request->post['config_meta_title'] as $language_id => $meta_title) {
-            if ((utf8_strlen($meta_title) < 3) || (utf8_strlen($meta_title) > 255)) {
-                $this->error['meta_title'][$language_id] = $this->language->get('error_meta_title');
-            }
-        }
+		foreach ($this->request->post['config_meta_title'] as $language_id => $meta_title) {
+			if ((utf8_strlen($meta_title) < 3) || (utf8_strlen($meta_title) > 255)) {
+				$this->error['meta_title'][$language_id] = $this->language->get('error_meta_title');
+			}
+		}
 
         if ((utf8_strlen($this->request->post['config_email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['config_email'])) {
             $this->error['email'] = $this->language->get('error_email');
@@ -168,10 +168,10 @@ class ControllerSystemSetting extends Controller {
         if (!$this->request->post['config_error_filename']) {
             $this->error['error_filename'] = $this->language->get('error_error_log_filename');
         }
-
-        if ($this->error && empty($this->error['warning'])) {
-            $this->error['warning'] = $this->language->get('error_form');
-        }
+		
+		if ($this->error && empty($this->error['warning'])) {
+			$this->error['warning'] = $this->language->get('error_form');
+		}
 
         return !$this->error;
     }

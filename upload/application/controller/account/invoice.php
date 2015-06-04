@@ -79,10 +79,10 @@ class ControllerAccountInvoice extends Controller {
         $this->data['footer'] = $this->load->controller('common/footer');
 
         if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/account/invoice_list.tpl')) {
-            $this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/invoice_list.tpl'));
-        } else {
-            $this->response->setOutput($this->render('default/template/account/invoice_list.tpl'));
-        }
+			$this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/invoice_list.tpl'));
+		} else {
+			$this->response->setOutput($this->render('default/template/account/invoice_list.tpl'));
+		}
     }
 
     public function invoice() {
@@ -174,10 +174,10 @@ class ControllerAccountInvoice extends Controller {
             }
 
             if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/account/invoice_invoice.tpl')) {
-                $this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/invoice_invoice.tpl'));
-            } else {
-                $this->response->setOutput($this->render('default/template/account/invoice_invoice.tpl'));
-            }
+				$this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/invoice_invoice.tpl'));
+			} else {
+				$this->response->setOutput($this->render('default/template/account/invoice_invoice.tpl'));
+			}
         } else {
             return new Action('error/not_found');
         }
@@ -294,10 +294,10 @@ class ControllerAccountInvoice extends Controller {
             $this->data['footer'] = $this->load->controller('common/footer');
 
             if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/account/invoice_payment.tpl')) {
-                $this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/invoice_payment.tpl'));
-            } else {
-                $this->response->setOutput($this->render('default/template/account/invoice_payment.tpl'));
-            }
+				$this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/invoice_payment.tpl'));
+			} else {
+				$this->response->setOutput($this->render('default/template/account/invoice_payment.tpl'));
+			}
         } else {
             return new Action('error/not_found');
         }
@@ -350,10 +350,10 @@ class ControllerAccountInvoice extends Controller {
             $this->data['footer'] = $this->load->controller('common/footer');
 
             if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/account/invoice_success.tpl')) {
-                $this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/invoice_success.tpl'));
-            } else {
-                $this->response->setOutput($this->render('default/template/account/invoice_success.tpl'));
-            }
+				$this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/invoice_success.tpl'));
+			} else {
+				$this->response->setOutput($this->render('default/template/account/invoice_success.tpl'));
+			}
         } else {
             return new Action('error/not_found');
         }
@@ -447,10 +447,10 @@ class ControllerAccountInvoice extends Controller {
             $this->data['footer'] = $this->load->controller('common/footer');
 
             if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/account/invoice_view.tpl')) {
-                $this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/invoice_view.tpl'));
-            } else {
-                $this->response->setOutput($this->render('default/template/account/invoice_view.tpl'));
-            }
+				$this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/invoice_view.tpl'));
+			} else {
+				$this->response->setOutput($this->render('default/template/account/invoice_view.tpl'));
+			}
         } else {
             return new Action('error/not_found');
         }

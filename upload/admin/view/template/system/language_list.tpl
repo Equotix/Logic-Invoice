@@ -18,8 +18,7 @@
   <div class="panel-heading">
     <div class="pull-right">
       <a href="<?php echo $insert; ?>" title="<?php echo $button_add; ?>" data-toggle="tooltip" class="btn btn-success"><i class="fa fa-save"></i></a>
-      <button type="button" title="<?php echo $button_delete; ?>" data-toggle="tooltip" class="btn btn-danger" onclick="confirm('<?php echo $text_confirm; ?>') ? $('#form-language').submit() : false;">
-        <i class="fa fa-trash"></i></button>
+      <button type="button" title="<?php echo $button_delete; ?>" data-toggle="tooltip" class="btn btn-danger" onclick="confirm('<?php echo $text_confirm; ?>') ? $('#form-language').submit() : false;"><i class="fa fa-trash"></i></button>
     </div>
     <h1 class="panel-title"><i class="fa fa-list fa-lg"></i> <?php echo $heading_title; ?></h1>
   </div>
@@ -28,8 +27,7 @@
       <div class="table-responsive">
         <table class="table table-striped table-bordered table-hover">
           <tr>
-            <th class="text-center" width="1">
-              <input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></th>
+            <th class="text-center" width="1"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></th>
             <th class="text-left"><?php if ($sort == 'name') { ?>
               <a href="<?php echo $sort_name; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_name; ?></a>
               <?php } else { ?>
@@ -64,9 +62,7 @@
             <td class="text-left"><?php echo $language['code']; ?></td>
             <td class="text-right"><?php echo $language['sort_order']; ?></td>
             <td class="text-right"><?php echo $language['status']; ?></td>
-            <td class="text-right">
-              <a href="<?php echo $language['edit']; ?>" title="<?php echo $button_edit; ?>" data-toggle="tooltip" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-            </td>
+            <td class="text-right"><a href="<?php echo $language['edit']; ?>" title="<?php echo $button_edit; ?>" data-toggle="tooltip" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a></td>
           </tr>
           <?php } ?>
           <?php } else { ?>

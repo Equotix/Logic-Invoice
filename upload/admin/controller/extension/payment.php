@@ -45,15 +45,15 @@ class ControllerExtensionPayment extends Controller {
                 $extension = basename($file);
 
                 $this->load->language('payment/' . $extension . '/' . $extension);
-
-                $xml = simplexml_load_file(DIR_EXTENSION . 'payment/' . $extension . '/details.xml');
+				
+				$xml = simplexml_load_file(DIR_EXTENSION . 'payment/' . $extension . '/details.xml');
 
                 $this->data['extensions'][] = array(
                     'name'       => $this->language->get('heading_title'),
-                    'author'     => $xml->author,
-                    'url'        => $xml->url,
-                    'version'    => $xml->version,
-                    'email'      => $xml->email,
+					'author'     => $xml->author,
+					'url'        => $xml->url,
+					'version'    => $xml->version,
+					'email'      => $xml->email,
                     'code'       => $extension,
                     'status'     => $this->config->get($extension . '_status'),
                     'sort_order' => $this->config->get($extension . '_sort_order'),

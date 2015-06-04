@@ -410,10 +410,10 @@ class ControllerAccountingJournal extends Controller {
         if (round($debit, 4) != round($credit, 4)) {
             $this->error['warning'] = $this->language->get('error_account');
         }
-
-        if ($this->error && empty($this->error['warning'])) {
-            $this->error['warning'] = $this->language->get('error_form');
-        }
+		
+		if ($this->error && empty($this->error['warning'])) {
+			$this->error['warning'] = $this->language->get('error_form');
+		}
 
         return !$this->error;
     }
