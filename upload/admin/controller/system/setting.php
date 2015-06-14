@@ -112,7 +112,7 @@ class ControllerSystemSetting extends Controller {
 
         $this->data['themes'] = array();
 
-        $files = glob(DIR_APPLICATION . '../front/view/theme/*', GLOB_ONLYDIR);
+        $files = glob(DIR_APPLICATION . '../application/view/theme/*', GLOB_ONLYDIR);
 
         if ($files) {
             foreach ($files as $file) {
