@@ -108,7 +108,7 @@ class ModelContentArticle extends Model {
 
             $article_data = $query->rows;
         } else {
-            $article_data = $this->cache->get('article.' . $this->config->get('config_language_id'));
+            $article_data = $this->cache->get('article.list.' . $this->config->get('config_language_id'));
 
             if (!$article_data) {
                 $article_data = array();
@@ -117,7 +117,7 @@ class ModelContentArticle extends Model {
 
                 $article_data = $query->rows;
 
-                $this->cache->set('article.' . $this->config->get('config_language_id'), $article_data);
+                $this->cache->set('article.list.' . $this->config->get('config_language_id'), $article_data);
             }
         }
 
