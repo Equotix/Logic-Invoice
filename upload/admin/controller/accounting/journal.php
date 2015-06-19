@@ -390,22 +390,26 @@ class ControllerAccountingJournal extends Controller {
         $debit = 0;
         $credit = 0;
 
-        foreach ($this->request->post['transaction_accounts'] as $account) {
-            if (preg_match('/^\(.+\)$/', $account['debit'])) {
-                $account['debit'] = preg_replace('/[^\d.-]/', '', $account['debit']);
+		if (isset($this->request->post['transaction_accounts'])) {
+			foreach ($this->request->post['transaction_accounts'] as $account) {
+				if (preg_match('/^\(.+\)$/', $account['debit'])) {
+					$account['debit'] = preg_replace('/[^\d.-]/', '', $account['debit']);
 
-                $account['debit'] = '-' . (float)$account['debit'];
-            }
+					$account['debit'] = '-' . (float)$account['debit'];
+				}
 
-            if (preg_match('/^\(.+\)$/', $account['credit'])) {
-                $account['credit'] = preg_replace('/[^\d.-]/', '', $account['credit']);
+				if (preg_match('/^\(.+\)$/', $account['credit'])) {
+					$account['credit'] = preg_replace('/[^\d.-]/', '', $account['credit']);
 
-                $account['credit'] = '-' . (float)$account['credit'];
-            }
+					$account['credit'] = '-' . (float)$account['credit'];
+				}
 
-            $debit += $account['debit'];
-            $credit += $account['credit'];
-        }
+				$debit += $account['debit'];
+				$credit += $account['credit'];
+			}
+		} else {
+			 $this->error['warning'] = $this->language->get('error_form');
+		}
 
         if (round($debit, 4) != round($credit, 4)) {
             $this->error['warning'] = $this->language->get('error_account');
