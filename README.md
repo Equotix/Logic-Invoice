@@ -21,6 +21,10 @@ Logic Invoice is an open source accounting and invoicing solution built with PHP
 5. Upon completing installation, set up a cron job to trigger admin/cron.php hourly / daily.
 6. To use SEO URLs, rename .htaccess.txt to .htaccess (remove .txt extension)
 
+## Documentation
+
+For more information on installation and administration, do use our documentation. Documentation is available at http://docs.logicinvoice.com.
+
 ##Reporting Bugs
 
 Please report bugs through github.
