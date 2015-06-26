@@ -9,13 +9,9 @@ class ModelBillingInvoice extends Model {
             if ($customer_info = $this->model_billing_customer->getCustomerByEmail($data['email'])) {
                 $data['customer_id'] = $customer_info['customer_id'];
             } else {
-                $temp_status = $data['status'];
-
                 $data['status'] = 1;
 
                 $data['customer_id'] = $this->model_billing_customer->addCustomer($data);
-
-                $data['status'] = $temp_status;
             }
         }
 
