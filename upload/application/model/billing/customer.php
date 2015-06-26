@@ -46,7 +46,7 @@ class ModelBillingCustomer extends Model {
     public function editCustomer($data) {
         $this->db->query("UPDATE " . DB_PREFIX . "customer SET firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', company = '" . $this->db->escape($data['company']) . "', website = '" . $this->db->escape($data['website']) . "', email = '" . $this->db->escape(trim($data['email'])) . "', date_modified = NOW() WHERE customer_id = '" . (int)$this->customer->getId() . "'");
 
-        $customer_info = $this->getCustomer($customer_id);
+        $customer_info = $this->getCustomer($this->customer->getId());
 
         $this->load->model('content/email_template');
 
