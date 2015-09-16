@@ -2,11 +2,22 @@
 // Error Reporting
 error_reporting(E_ALL);
 
-// Check Version
+// PHP Version
 if (version_compare(phpversion(), '5.3.0', '<') == true) {
     exit('PHP5.3+ Required');
 }
 
+// Session
+if (!session_id()) {
+	ini_set('session.use_only_cookies', 'On');
+	ini_set('session.use_trans_sid', 'Off');
+	ini_set('session.cookie_httponly', 'On');
+
+	session_set_cookie_params(0, '/');
+	session_start();
+}
+
+// Timezone
 if (!ini_get('date.timezone')) {
     date_default_timezone_set('UTC');
 }
@@ -36,7 +47,7 @@ if (!isset($_SERVER['HTTP_HOST'])) {
     $_SERVER['HTTP_HOST'] = getenv('HTTP_HOST');
 }
 
-// Check SSL
+// SSL
 if (isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTPS'] == '1'))) {
     $_SERVER['HTTPS'] = true;
 } elseif (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' || !empty($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] == 'on') {
