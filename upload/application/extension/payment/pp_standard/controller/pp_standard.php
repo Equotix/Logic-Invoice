@@ -118,6 +118,8 @@ class ControllerPaymentPPStandardPPStandard extends Controller {
             }
 
             $status_id = $this->config->get('pp_standard_denied');
+			
+			$message = '';
 
             if ((strcmp($response, 'VERIFIED') == 0 || strcmp($response, 'UNVERIFIED') == 0) && isset($this->request->post['payment_status'])) {
                 switch ($this->request->post['payment_status']) {
@@ -132,11 +134,11 @@ class ControllerPaymentPPStandardPPStandard extends Controller {
                             $status_id = $this->config->get('pp_standard_completed');
                         } else {
                             if (!$receiver_match) {
-                                $this->log->write('PP_STANDARD :: RECEIVER EMAIL MISMATCH! ' . strtolower($this->request->post['receiver_email']));
+                                $message = 'Receiver email mismatch. ' . strtolower($this->request->post['receiver_email']);
                             }
 
                             if (!$total_paid_match) {
-                                $this->log->write('PP_STANDARD :: TOTAL PAID MISMATCH! ' . $this->request->post['mc_gross']);
+                                $message = 'Total paid mismatch. ' . $this->request->post['mc_gross'];
                             }
                         }
                         break;
@@ -201,7 +203,7 @@ class ControllerPaymentPPStandardPPStandard extends Controller {
 
             $data = array(
                 'status_id' => $status_id,
-                'comment'   => ''
+                'comment'   => $message
             );
 
             $this->model_billing_invoice->addHistory($invoice_id, $data, true);

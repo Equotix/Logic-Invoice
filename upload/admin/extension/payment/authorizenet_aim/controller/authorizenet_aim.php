@@ -52,6 +52,7 @@ class ControllerPaymentAuthorizenetAimAuthorizenetAim extends Controller {
         $this->data['authorizenet_aim_mode'] = $this->build->data('authorizenet_aim_mode', $this->request->post, $setting);
         $this->data['authorizenet_aim_method'] = $this->build->data('authorizenet_aim_method', $this->request->post, $setting);
         $this->data['authorizenet_aim_completed_status_id'] = $this->build->data('authorizenet_aim_completed_status_id', $this->request->post, $setting);
+        $this->data['authorizenet_aim_denied_status_id'] = $this->build->data('authorizenet_aim_denied_status_id', $this->request->post, $setting);
         $this->data['authorizenet_aim_status'] = $this->build->data('authorizenet_aim_status', $this->request->post, $setting);
         $this->data['authorizenet_aim_sort_order'] = $this->build->data('authorizenet_aim_sort_order', $this->request->post, $setting);
 
