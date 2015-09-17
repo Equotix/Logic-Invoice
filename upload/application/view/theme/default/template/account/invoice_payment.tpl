@@ -14,35 +14,37 @@
   <div class="row">
     <div class="col-lg-12">
       <h3><?php echo $text_item; ?></h3>
-      <table class="table table-striped table-bordered">
-        <tr>
-          <th class="text-left" style="width:10%;"><?php echo $column_number; ?></th>
-          <th class="text-left" style="width:30%;"><?php echo $column_description; ?></th>
-          <th class="text-left" style="width:10%;"><?php echo $column_quantity; ?></th>
-          <th class="text-right" style="width:20%;"><?php echo $column_price; ?></th>
-          <th class="text-right" style="width:10%;"><?php echo $column_discount; ?></th>
-          <th class="text-right" style="width:20%;"><?php echo $column_total; ?></th>
-        </tr>
-        <?php foreach ($items as $item) { ?>
-        <tr>
-          <td class="text-left"><?php echo $item['number']; ?></td>
-          <td class="text-left">
-            <b><?php echo $item['title']; ?></b><br />
-            <?php echo $item['description']; ?>
-          </td>
-          <td class="text-left"><?php echo $item['quantity']; ?></td>
-          <td class="text-right"><?php echo $item['price']; ?></td>
-          <td class="text-right"><?php echo $item['discount']; ?></td>
-          <td class="text-right"><?php echo $item['total']; ?></td>
-        </tr>
-        <?php } ?>
-        <?php foreach ($totals as $total) { ?>
-        <tr>
-          <td class="text-right" colspan="5"><b><?php echo $total['title']; ?></b></td>
-          <td class="text-right"><?php echo $total['text']; ?></td>
-        </tr>
-        <?php } ?>
-      </table>
+	  <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+          <tr>
+            <th class="text-left" style="width:10%;"><?php echo $column_number; ?></th>
+            <th class="text-left" style="width:30%;"><?php echo $column_description; ?></th>
+            <th class="text-left" style="width:10%;"><?php echo $column_quantity; ?></th>
+            <th class="text-right" style="width:20%;"><?php echo $column_price; ?></th>
+            <th class="text-right" style="width:10%;"><?php echo $column_discount; ?></th>
+            <th class="text-right" style="width:20%;"><?php echo $column_total; ?></th>
+          </tr>
+          <?php foreach ($items as $item) { ?>
+          <tr>
+            <td class="text-left"><?php echo $item['number']; ?></td>
+            <td class="text-left">
+              <b><?php echo $item['title']; ?></b><br />
+              <?php echo $item['description']; ?>
+            </td>
+            <td class="text-left"><?php echo $item['quantity']; ?></td>
+            <td class="text-right"><?php echo $item['price']; ?></td>
+            <td class="text-right"><?php echo $item['discount']; ?></td>
+            <td class="text-right"><?php echo $item['total']; ?></td>
+          </tr>
+          <?php } ?>
+          <?php foreach ($totals as $total) { ?>
+          <tr>
+            <td class="text-right" colspan="5"><b><?php echo $total['title']; ?></b></td>
+            <td class="text-right"><?php echo $total['text']; ?></td>
+          </tr>
+          <?php } ?>
+        </table>
+	  </div>
     </div>
     <div class="col-lg-12">
       <h3><?php echo $text_payment; ?></h3>
@@ -102,6 +104,18 @@ $(document).ready(function () {
 	});
 
 	$('input[name=\'payment_method\']:checked').trigger('change');
+	
+	var selected = false;
+	
+	$('input[name=\'payment_method\']').each(function() {
+		if ($(this).is(':checked')) {
+			selected = true;
+		}
+	});
+	
+	if (selected == false) {
+		$('input[name=\'payment_method\']').first().prop('checked', true).trigger('change');
+	}
 });
 //--></script>
 <?php echo $footer; ?>
