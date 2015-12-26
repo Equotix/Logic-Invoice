@@ -286,7 +286,7 @@ class ModelBillingRecurring extends Model {
         }
 
         if (!empty($data['filter_name'])) {
-            $implode[] = "CONCAT(firstname, ' ', lastname) LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
+            $implode[] = "name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
         }
 
         if (!empty($data['filter_total'])) {
@@ -357,7 +357,7 @@ class ModelBillingRecurring extends Model {
     }
 
     public function getTotalRecurrings($data = array()) {
-        $query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "recurring");
+        $sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "recurring";
 
         $implode = array();
 
@@ -366,7 +366,7 @@ class ModelBillingRecurring extends Model {
         }
 
         if (!empty($data['filter_name'])) {
-            $implode[] = "CONCAT(firstname, ' ', lastname) LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
+            $implode[] = "name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
         }
 
         if (!empty($data['filter_total'])) {
@@ -396,6 +396,8 @@ class ModelBillingRecurring extends Model {
         if ($implode) {
             $sql .= " WHERE " . implode(" AND ", $implode);
         }
+		
+		$query = $this->db->query($sql);
 
         return $query->row['total'];
     }

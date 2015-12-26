@@ -99,7 +99,7 @@ class ModelBillingRecurring extends Model {
 
         $this->load->model('billing/customer');
 
-        $customer_info = $this->model_account_customer->getCustomer($recurring_info['customer_id']);
+        $customer_info = $this->model_billing_customer->getCustomer($recurring_info['customer_id']);
 
         $this->load->model('content/email_template');
 

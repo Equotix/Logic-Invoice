@@ -45,7 +45,7 @@ $(document).ready(function () {
         $('#menu a[href=\'' + sessionStorage.getItem('menu') + '\']').parents('li').addClass('active open');
     }
 
-    if (localStorage.getItem('column-left') == 'active') {
+    if ($(window).width() > 480 && localStorage.getItem('column-left') == 'active') {
         $('#button-menu').attr('src', 'view/image/logo.png');
 
         $('#column-left').addClass('active');

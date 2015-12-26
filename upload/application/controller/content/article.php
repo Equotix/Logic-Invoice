@@ -5,7 +5,11 @@ class ControllerContentArticle extends Controller {
     public function index() {
         $this->load->model('content/article');
 
-        $article_info = $this->model_content_article->getArticle((int)$this->request->get['article_id']);
+		if (isset($this->request->get['article_id'])) {
+			$article_info = $this->model_content_article->getArticle((int)$this->request->get['article_id']);
+		} else {
+			$article_info = false;
+		}
 
         if ($article_info) {
             $this->document->setTitle($article_info['title']);

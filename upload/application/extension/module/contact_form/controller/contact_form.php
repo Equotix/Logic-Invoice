@@ -119,7 +119,7 @@ class ControllerModuleContactFormContactForm extends Controller {
             $this->error['email'] = $this->language->get('error_email');
         }
 
-        if (!isset($this->request->post['captcha']) || $this->request->post['captcha'] != $this->session->data['captcha']) {
+        if (!isset($this->request->post['captcha']) || !isset($this->session->data['captcha']) || $this->request->post['captcha'] != $this->session->data['captcha']) {
             $this->error['captcha'] = $this->language->get('error_captcha');
         }
 

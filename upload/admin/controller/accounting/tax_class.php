@@ -225,6 +225,10 @@ class ControllerAccountingTaxClass extends Controller {
         if ((utf8_strlen($this->request->post['description']) < 3) || (utf8_strlen($this->request->post['description']) > 255)) {
             $this->error['description'] = $this->language->get('error_description');
         }
+		
+		if (empty($this->request->post['tax_rates'])) {
+			$this->error['warning'] = $this->language->get('error_tax_rate');
+		}
 
         if ($this->error && empty($this->error['warning'])) {
             $this->error['warning'] = $this->language->get('error_form');

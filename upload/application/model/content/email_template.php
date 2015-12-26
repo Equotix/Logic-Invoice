@@ -59,7 +59,7 @@ class ModelContentEmailTemplate extends Model {
                 $variable = trim($variable);
 
                 if ($variable && isset($data[$variable])) {
-                    $search[] = $variable;
+                    $search[] = '{' . $variable . '}';
                     $replace[] = $data[$variable];
                 }
             }
