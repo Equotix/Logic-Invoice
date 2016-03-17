@@ -46,7 +46,7 @@ class ControllerCommonReset extends Controller {
             $this->data['header'] = $this->load->controller('common/header');
             $this->data['footer'] = $this->load->controller('common/footer');
 
-            $this->response->setOutput($this->render('common/reset.tpl'));
+            $this->response->setOutput($this->render('common/reset'));
         } else {
             $this->load->model('system/setting');
 

@@ -109,7 +109,7 @@ class ControllerAccountingCurrency extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('accounting/currency_list.tpl'));
+        $this->response->setOutput($this->render('accounting/currency_list'));
     }
 
     public function delete() {
@@ -212,7 +212,7 @@ class ControllerAccountingCurrency extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('accounting/currency_form.tpl'));
+        $this->response->setOutput($this->render('accounting/currency_form'));
     }
 
     public function currency() {

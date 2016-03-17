@@ -100,7 +100,7 @@ class ControllerAccountingTaxRate extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('accounting/tax_rate_list.tpl'));
+        $this->response->setOutput($this->render('accounting/tax_rate_list'));
     }
 
     public function delete() {
@@ -198,7 +198,7 @@ class ControllerAccountingTaxRate extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('accounting/tax_rate_form.tpl'));
+        $this->response->setOutput($this->render('accounting/tax_rate_form'));
     }
 
     protected function validateDelete() {

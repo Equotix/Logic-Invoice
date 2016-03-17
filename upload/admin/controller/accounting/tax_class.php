@@ -100,7 +100,7 @@ class ControllerAccountingTaxClass extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('accounting/tax_class_list.tpl'));
+        $this->response->setOutput($this->render('accounting/tax_class_list'));
     }
 
     public function delete() {
@@ -202,7 +202,7 @@ class ControllerAccountingTaxClass extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('accounting/tax_class_form.tpl'));
+        $this->response->setOutput($this->render('accounting/tax_class_form'));
     }
 
     protected function validateDelete() {

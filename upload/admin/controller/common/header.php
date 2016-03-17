@@ -59,6 +59,6 @@ class ControllerCommonHeader extends Controller {
             $this->data['logged'] = false;
         }
 
-        return $this->render('common/header.tpl');
+        return $this->render('common/header');
     }
 }

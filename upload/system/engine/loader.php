@@ -50,7 +50,9 @@ final class Loader {
         if (isset($parts[0]) && ($parts[0] == 'module' || $parts[0] == 'payment' || $parts[0] == 'total')) {
             if (isset($parts[1])) {
                 if (_FRONT) {
-                    $file = DIR_EXTENSION . $parts[0] . '/' . $parts[1] . '/view/theme/';
+					$file_theme = DIR_EXTENSION . $parts[0] . '/' . $parts[1] . '/view/theme/' . $this->config->get('config_theme') . '/template/';
+					
+                    $file_default = DIR_EXTENSION . $parts[0] . '/' . $parts[1] . '/view/theme/default/template/';
                 } else {
                     $file = DIR_EXTENSION . $parts[0] . '/' . $parts[1] . '/view/template/';
                 }
@@ -59,13 +61,37 @@ final class Loader {
 
                 array_shift($parts);
 
-                $file .= implode('/', $parts);
+				if (_FRONT) {
+					$file_theme .= implode('/', $parts) . '.tpl';
+					
+					$file_default .= implode('/', $parts) . '.tpl';
+					
+					if (file_exists($file_theme)) {
+						$file = $file_theme;
+					} else {
+						$file = $file_default;
+					}
+				} else {
+					$file .= implode('/', $parts) . '.tpl';
+				}
             } else {
                 trigger_error('Error: Could not load template ' . $file . '!');
                 exit();
             }
         } else {
-            $file = DIR_TEMPLATE . $template;
+           if (_FRONT) {
+				$file_theme = DIR_TEMPLATE . $this->config->get('config_theme') . '/template/' . $template . '.tpl';
+				
+				$file_default = DIR_TEMPLATE . 'default/template/' . $template . '.tpl';
+				
+				if (file_exists($file_theme)) {
+					$file = $file_theme;
+				} else {
+					$file = $file_default;
+				}
+			} else {
+				$file = DIR_TEMPLATE . $template . '.tpl';
+			}
         }
 
         if (file_exists($file)) {

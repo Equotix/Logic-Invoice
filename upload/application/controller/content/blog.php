@@ -158,12 +158,8 @@ class ControllerContentBlog extends Controller {
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
-
-        if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/content/blog.tpl')) {
-            $this->response->setOutput($this->render($this->config->get('config_theme') . '/template/content/blog.tpl'));
-        } else {
-            $this->response->setOutput($this->render('default/template/content/blog.tpl'));
-        }
+		
+		$this->response->setOutput($this->render('content/blog'));
     }
 
     public function info() {
@@ -300,10 +296,6 @@ class ControllerContentBlog extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/content/blog_info.tpl')) {
-            $this->response->setOutput($this->render($this->config->get('config_theme') . '/template/content/blog_info.tpl'));
-        } else {
-            $this->response->setOutput($this->render('default/template/content/blog_info.tpl'));
-        }
+        $this->response->setOutput($this->render('content/blog_info'));
     }
 }

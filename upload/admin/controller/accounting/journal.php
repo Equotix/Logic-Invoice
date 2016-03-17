@@ -174,7 +174,7 @@ class ControllerAccountingJournal extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('accounting/journal_list.tpl'));
+        $this->response->setOutput($this->render('accounting/journal_list'));
     }
 
     public function delete() {
@@ -359,7 +359,7 @@ class ControllerAccountingJournal extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('accounting/journal_form.tpl'));
+        $this->response->setOutput($this->render('accounting/journal_form'));
     }
 
     protected function validateDelete() {

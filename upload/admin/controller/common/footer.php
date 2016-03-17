@@ -13,6 +13,6 @@ class ControllerCommonFooter extends Controller {
             $this->data['version'] = '';
         }
 
-        return $this->render('common/footer.tpl');
+        return $this->render('common/footer');
     }
 }

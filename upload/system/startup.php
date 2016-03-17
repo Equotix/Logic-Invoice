@@ -7,6 +7,25 @@ if (version_compare(phpversion(), '5.3.0', '<') == true) {
     exit('PHP5.3+ Required');
 }
 
+// Magic Quotes Fix
+if (ini_get('magic_quotes_gpc')) {
+	function clean($data) {
+   		if (is_array($data)) {
+  			foreach ($data as $key => $value) {
+    			$data[clean($key)] = clean($value);
+  			}
+		} else {
+  			$data = stripslashes($data);
+		}
+
+		return $data;
+	}
+
+	$_GET = clean($_GET);
+	$_POST = clean($_POST);
+	$_COOKIE = clean($_COOKIE);
+}
+
 if (!ini_get('date.timezone')) {
     date_default_timezone_set('UTC');
 }
@@ -37,16 +56,16 @@ if (!isset($_SERVER['HTTP_HOST'])) {
 }
 
 // Check SSL
-if (isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTPS'] == '1'))) {
-    $_SERVER['HTTPS'] = true;
+if ((isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTPS'] == '1'))) || $_SERVER['SERVER_PORT'] == 443) {
+	$_SERVER['HTTPS'] = true;
 } elseif (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' || !empty($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] == 'on') {
-    $_SERVER['HTTPS'] = true;
+	$_SERVER['HTTPS'] = true;
 } else {
-    $_SERVER['HTTPS'] = false;
+	$_SERVER['HTTPS'] = false;
 }
 
 // Autoloader
-function autoload($class) {
+function library($class) {
 	$file = DIR_SYSTEM . 'library/' . str_replace('\\', '/', strtolower($class)) . '.php';
 	
 	if (is_file($file)) {
@@ -57,7 +76,7 @@ function autoload($class) {
 	return false;
 }
 
-spl_autoload_register('autoload');
+spl_autoload_register('library');
 spl_autoload_extensions('.php');
 
 // Engine

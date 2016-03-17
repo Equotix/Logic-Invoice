@@ -189,7 +189,7 @@ class ControllerSystemFileManager extends Controller {
 
         $this->data['pagination'] = $pagination->render();
 
-        $this->response->setOutput($this->render('system/filemanager.tpl'));
+        $this->response->setOutput($this->render('system/filemanager'));
     }
 
     public function upload() {

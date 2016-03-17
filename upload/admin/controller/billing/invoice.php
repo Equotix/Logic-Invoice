@@ -230,7 +230,7 @@ class ControllerBillingInvoice extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('billing/invoice_list.tpl'));
+        $this->response->setOutput($this->render('billing/invoice_list'));
     }
 
     public function delete() {
@@ -387,7 +387,7 @@ class ControllerBillingInvoice extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('billing/invoice_form.tpl'));
+        $this->response->setOutput($this->render('billing/invoice_form'));
     }
 
     public function history() {
@@ -519,7 +519,7 @@ class ControllerBillingInvoice extends Controller {
                 );
             }
 
-            $this->response->setOutput($this->render('billing/invoice_invoice.tpl'));
+            $this->response->setOutput($this->render('billing/invoice_invoice'));
         } else {
             return new Action('error/not_found');
         }
@@ -692,7 +692,7 @@ class ControllerBillingInvoice extends Controller {
             $this->data['header'] = $this->load->controller('common/header');
             $this->data['footer'] = $this->load->controller('common/footer');
 
-            $this->response->setOutput($this->render('billing/invoice_view.tpl'));
+            $this->response->setOutput($this->render('billing/invoice_view'));
         } else {
             return new Action('error/not_found');
         }

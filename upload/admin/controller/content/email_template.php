@@ -124,7 +124,7 @@ class ControllerContentEmailTemplate extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('content/email_template_list.tpl'));
+        $this->response->setOutput($this->render('content/email_template_list'));
     }
 
     public function delete() {
@@ -261,7 +261,7 @@ class ControllerContentEmailTemplate extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('content/email_template_form.tpl'));
+        $this->response->setOutput($this->render('content/email_template_form'));
     }
 
     protected function validateDelete() {

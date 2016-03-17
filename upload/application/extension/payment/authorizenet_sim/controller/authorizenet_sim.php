@@ -40,11 +40,7 @@ class ControllerPaymentAuthorizeNetSimAuthorizeNetSim extends Controller {
 
 			$data['x_fp_hash'] = hash_hmac('md5', $data['x_login'] . '^' . $data['x_fp_sequence'] . '^' . $data['x_fp_timestamp'] . '^' . $data['x_amount'] . '^' . $data['x_currency_code'], $this->config->get('authorizenet_sim_transaction_key'));
 
-            if (file_exists(DIR_EXTENSION . 'module/authorizenet_sim/view/theme/' . $this->config->get('config_theme') . '/template/authorizenet_sim.tpl')) {
-                $this->response->setOutput($this->render('payment/authorizenet_sim/' . $this->config->get('config_theme') . '/template/authorizenet_sim.tpl'));
-            } else {
-                $this->response->setOutput($this->render('payment/authorizenet_sim/default/template/authorizenet_sim.tpl'));
-            }
+			$this->response->setOutput($this->render('payment/authorizenet_sim/authorizenet_sim'));
         }
     }
 	

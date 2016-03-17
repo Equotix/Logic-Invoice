@@ -16,11 +16,7 @@ class ControllerPaymentBankTransferBankTransfer extends Controller {
 
             $this->data['action'] = $this->url->link('payment/bank_transfer/bank_transfer/confirm', 'invoice_id=' . $invoice_info['invoice_id'], 'SSL');
 
-            if (file_exists(DIR_EXTENSION . 'module/bank_transfer/view/theme/' . $this->config->get('config_theme') . '/template/bank_transfer.tpl')) {
-                $this->response->setOutput($this->render('payment/bank_transfer/' . $this->config->get('config_theme') . '/template/bank_transfer.tpl'));
-            } else {
-                $this->response->setOutput($this->render('payment/bank_transfer/default/template/bank_transfer.tpl'));
-            }
+			$this->response->setOutput($this->render('payment/bank_transfer/bank_transfer'));
         }
     }
 

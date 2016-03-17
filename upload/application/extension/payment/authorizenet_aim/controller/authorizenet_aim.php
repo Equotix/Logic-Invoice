@@ -31,12 +31,8 @@ class ControllerPaymentAuthorizeNetAimAuthorizeNetAim extends Controller {
 					'value' => strftime('%Y', mktime(0, 0, 0, 1, 1, $i))
 				);
 			}
-
-            if (file_exists(DIR_EXTENSION . 'module/authorizenet_aim/view/theme/' . $this->config->get('config_theme') . '/template/authorizenet_aim.tpl')) {
-                $this->response->setOutput($this->render('payment/authorizenet_aim/' . $this->config->get('config_theme') . '/template/authorizenet_aim.tpl'));
-            } else {
-                $this->response->setOutput($this->render('payment/authorizenet_aim/default/template/authorizenet_aim.tpl'));
-            }
+			
+			$this->response->setOutput($this->render('payment/authorizenet_aim/authorizenet_aim'));
         }
     }
 	

@@ -88,11 +88,7 @@ class ControllerAccountLogin extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/account/login.tpl')) {
-            $this->response->setOutput($this->render($this->config->get('config_theme') . '/template/account/login.tpl'));
-        } else {
-            $this->response->setOutput($this->render('default/template/account/login.tpl'));
-        }
+        $this->response->setOutput($this->render('account/login'));
     }
 
     protected function validate() {

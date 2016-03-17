@@ -212,6 +212,6 @@ class ControllerReportChartOfAccounts extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('report/chart_of_accounts.tpl'));
+        $this->response->setOutput($this->render('report/chart_of_accounts'));
     }
 }

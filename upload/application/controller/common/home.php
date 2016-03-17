@@ -18,10 +18,6 @@ class ControllerCommonHome extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        if (file_exists(DIR_TEMPLATE . $this->config->get('config_theme') . '/template/common/home.tpl')) {
-            $this->response->setOutput($this->render($this->config->get('config_theme') . '/template/common/home.tpl'));
-        } else {
-            $this->response->setOutput($this->render('default/template/common/home.tpl'));
-        }
+        $this->response->setOutput($this->render('common/home'));
     }
 }

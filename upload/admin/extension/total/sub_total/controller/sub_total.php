@@ -49,7 +49,7 @@ class ControllerTotalSubTotalSubTotal extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('total/sub_total/sub_total.tpl'));
+        $this->response->setOutput($this->render('total/sub_total/sub_total.'));
     }
 
     protected function validate() {

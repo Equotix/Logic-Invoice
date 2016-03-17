@@ -67,7 +67,7 @@ class ControllerExtensionModule extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('extension/module.tpl'));
+        $this->response->setOutput($this->render('extension/module'));
     }
 
     public function install() {

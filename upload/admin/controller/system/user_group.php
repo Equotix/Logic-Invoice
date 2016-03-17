@@ -100,7 +100,7 @@ class ControllerSystemUserGroup extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('system/user_group_list.tpl'));
+        $this->response->setOutput($this->render('system/user_group_list'));
     }
 
     public function delete() {
@@ -253,7 +253,7 @@ class ControllerSystemUserGroup extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('system/user_group_form.tpl'));
+        $this->response->setOutput($this->render('system/user_group_form'));
     }
 
     protected function validateDelete() {

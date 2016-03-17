@@ -213,7 +213,7 @@ class ControllerBillingRecurring extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('billing/recurring_list.tpl'));
+        $this->response->setOutput($this->render('billing/recurring_list'));
     }
 
     public function delete() {
@@ -361,7 +361,7 @@ class ControllerBillingRecurring extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('billing/recurring_form.tpl'));
+        $this->response->setOutput($this->render('billing/recurring_form'));
     }
 
     public function view() {
@@ -477,7 +477,7 @@ class ControllerBillingRecurring extends Controller {
             $this->data['header'] = $this->load->controller('common/header');
             $this->data['footer'] = $this->load->controller('common/footer');
 
-            $this->response->setOutput($this->render('billing/recurring_view.tpl'));
+            $this->response->setOutput($this->render('billing/recurring_view'));
         } else {
             return new Action('error/not_found');
         }

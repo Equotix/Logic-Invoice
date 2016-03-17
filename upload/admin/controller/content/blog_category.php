@@ -104,7 +104,7 @@ class ControllerContentBlogCategory extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('content/blog_category_list.tpl'));
+        $this->response->setOutput($this->render('content/blog_category_list'));
     }
 
     public function delete() {
@@ -223,7 +223,7 @@ class ControllerContentBlogCategory extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('content/blog_category_form.tpl'));
+        $this->response->setOutput($this->render('content/blog_category_form'));
     }
 
     protected function validateDelete() {

@@ -142,7 +142,7 @@ class ControllerAccountingAccount extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('accounting/account_list.tpl'));
+        $this->response->setOutput($this->render('accounting/account_list'));
     }
 
     public function delete() {
@@ -245,7 +245,7 @@ class ControllerAccountingAccount extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('accounting/account_form.tpl'));
+        $this->response->setOutput($this->render('accounting/account_form'));
     }
 
     public function getaccounts() {
