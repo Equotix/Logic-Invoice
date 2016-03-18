@@ -80,9 +80,9 @@ final class Loader {
             }
         } else {
            if (_FRONT) {
-				$file_theme = DIR_TEMPLATE . $this->config->get('config_theme') . '/template/' . $template . '.tpl';
+				$file_theme = DIR_TEMPLATE . 'theme/' . $this->config->get('config_theme') . '/template/' . $template . '.tpl';
 				
-				$file_default = DIR_TEMPLATE . 'default/template/' . $template . '.tpl';
+				$file_default = DIR_TEMPLATE . 'theme/default/template/' . $template . '.tpl';
 				
 				if (file_exists($file_theme)) {
 					$file = $file_theme;
@@ -90,7 +90,7 @@ final class Loader {
 					$file = $file_default;
 				}
 			} else {
-				$file = DIR_TEMPLATE . $template . '.tpl';
+				$file = DIR_TEMPLATE . 'template/' . $template . '.tpl';
 			}
         }
 

@@ -4,10 +4,10 @@
     <title><?php echo $title; ?></title>
     <base href="<?php echo $base; ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="text/javascript" src="<?php echo $application; ?>share/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="<?php echo $application; ?>share/bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="<?php echo $application; ?>share/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $application; ?>share/font-awesome/css/font-awesome.min.css" />
+    <script type="text/javascript" src="<?php echo $application; ?>vendor/jquery/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="<?php echo $application; ?>vendor/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo $application; ?>vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $application; ?>vendor/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="view/stylesheet/stylesheet.css" />
     <?php foreach ($scripts as $script) { ?>
     <script type="text/javascript" src="<?php echo $script; ?>"></script>

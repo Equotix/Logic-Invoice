@@ -32,7 +32,7 @@
 <script type="text/javascript"><!--
 $('#button-retry').on('click', function () {
 	$.ajax({
-		url: 'index.php?load=install/requirement',
+		url: 'index.php?load=install/step_2',
 		dataType: 'html',
 		cache: false,
 		beforeSend: function () {
@@ -53,7 +53,7 @@ $('#button-retry').on('click', function () {
 
 $('#button-requirement').on('click', function () {
 	$.ajax({
-		url: 'index.php?load=install/configure',
+		url: 'index.php?load=install/step_3',
 		dataType: 'html',
 		cache: false,
 		beforeSend: function () {

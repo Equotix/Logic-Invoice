@@ -5,10 +5,10 @@
     <title><?php echo $title; ?></title>
     <base href="<?php echo $base; ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="share/jquery-2.1.3.min.js"></script>
-    <script type="text/javascript" src="share/bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="share/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="share/font-awesome/css/font-awesome.min.css" />
+    <script type="text/javascript" src="vendor/jquery/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="application/view/stylesheet/stylesheet.css" />
   </head>
   <body>

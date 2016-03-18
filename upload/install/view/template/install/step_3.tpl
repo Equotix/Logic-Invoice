@@ -44,7 +44,7 @@
     <div class="form-group">
       <label class="col-sm-2 control-label" for="input-admin-username"><?php echo $entry_admin_username; ?></label>
       <div class="col-sm-10">
-        <input type="text" name="admin_username" value="administrator" id="input-admin-username" class="form-control" placeholder="<?php echo $entry_admin_username; ?>" />
+        <input type="text" name="admin_username" value="admin" id="input-admin-username" class="form-control" placeholder="<?php echo $entry_admin_username; ?>" />
       </div>
     </div>
     <div class="form-group">
@@ -69,7 +69,7 @@
 <script type="text/javascript"><!--
 $('#button-configure').on('click', function () {
 	$.ajax({
-		url: 'index.php?load=install/validate_configure',
+		url: 'index.php?load=install/step_3/validate',
 		data: $('#form-configuration input, #form-configuration select'),
 		type: 'post',
 		dataType: 'json',
@@ -94,7 +94,7 @@ $('#button-configure').on('click', function () {
 
 function install() {
 	$.ajax({
-		url: 'index.php?load=install/install',
+		url: 'index.php?load=install/step_4',
 		data: $('#form-configuration input, #form-configuration select'),
 		type: 'post',
 		dataType: 'html',

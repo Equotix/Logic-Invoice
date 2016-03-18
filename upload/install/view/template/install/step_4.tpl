@@ -8,7 +8,7 @@
 <script type="text/javascript"><!--
 $('#button-remove').on('click', function () {
 	$.ajax({
-		url: 'index.php?load=install/remove',
+		url: 'index.php?load=install/step_4/remove',
 		cache: false,
 		beforeSend: function () {
 			$('#button-remove').button('loading');

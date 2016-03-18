@@ -1,7 +1,4 @@
 <?php
-// Version
-define('VERSION', '1.0.1');
-
 // Configuration
 if (file_exists('../config.php')) {
     require_once('../config.php');
@@ -63,6 +60,10 @@ $registry->set('log', $log);
 
 function error_handler($errno, $errstr, $errfile, $errline) {
     global $log, $config;
+	
+	if (error_reporting() === 0) {
+		return false;
+	}
 
     switch ($errno) {
         case E_NOTICE:
