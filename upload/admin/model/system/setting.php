@@ -9,7 +9,7 @@ class ModelSystemSetting extends Model {
             if (!is_array($value)) {
                 $this->db->query("INSERT INTO " . DB_PREFIX . "setting SET `group` = '" . $this->db->escape($group) . "', `key` = '" . $this->db->escape($key) . "', `value` = '" . $this->db->escape($value) . "'");
             } else {
-                $this->db->query("INSERT INTO " . DB_PREFIX . "setting SET `group` = '" . $this->db->escape($group) . "', `key` = '" . $this->db->escape($key) . "', `value` = '" . $this->db->escape(serialize($value)) . "', serialized = '1'");
+                $this->db->query("INSERT INTO " . DB_PREFIX . "setting SET `group` = '" . $this->db->escape($group) . "', `key` = '" . $this->db->escape($key) . "', `value` = '" . $this->db->escape(json_encode($value)) . "', serialized = '1'");
             }
         }
     }
@@ -27,7 +27,7 @@ class ModelSystemSetting extends Model {
             if (!$result['serialized']) {
                 $data[$result['key']] = $result['value'];
             } else {
-                $data[$result['key']] = unserialize($result['value']);
+                $data[$result['key']] = json_decode($result['value'], true);
             }
         }
 
@@ -38,7 +38,7 @@ class ModelSystemSetting extends Model {
         if (!is_array($value)) {
             $this->db->query("INSERT INTO " . DB_PREFIX . "setting SET `group` = '" . $this->db->escape($group) . "', `key` = '" . $this->db->escape($key) . "', `value` = '" . $this->db->escape($value) . "'");
         } else {
-            $this->db->query("INSERT INTO " . DB_PREFIX . "setting SET `group` = '" . $this->db->escape($group) . "', `key` = '" . $this->db->escape($key) . "', `value` = '" . $this->db->escape(serialize($value)) . "', serialized = '1'");
+            $this->db->query("INSERT INTO " . DB_PREFIX . "setting SET `group` = '" . $this->db->escape($group) . "', `key` = '" . $this->db->escape($key) . "', `value` = '" . $this->db->escape(json_encode($value)) . "', serialized = '1'");
         }
     }
 
@@ -46,7 +46,7 @@ class ModelSystemSetting extends Model {
         if (!is_array($value)) {
             $this->db->query("UPDATE " . DB_PREFIX . "setting SET `value` = '" . $this->db->escape($value) . "' WHERE `group` = '" . $this->db->escape($group) . "' AND `key` = '" . $this->db->escape($key) . "'");
         } else {
-            $this->db->query("UPDATE " . DB_PREFIX . "setting SET `value` = '" . $this->db->escape(serialize($value)) . "' WHERE `group` = '" . $this->db->escape($group) . "' AND `key` = '" . $this->db->escape($key) . "' AND serialized = '1'");
+            $this->db->query("UPDATE " . DB_PREFIX . "setting SET `value` = '" . $this->db->escape(json_encode($value)) . "' WHERE `group` = '" . $this->db->escape($group) . "' AND `key` = '" . $this->db->escape($key) . "' AND serialized = '1'");
         }
     }
 
@@ -55,7 +55,7 @@ class ModelSystemSetting extends Model {
 
         if ($query->num_rows) {
             if ($query->row['serialized']) {
-                return unserialize($query->row['value']);
+                return json_decode($query->row['value'], true);
             } else {
                 return $query->row['value'];
             }
