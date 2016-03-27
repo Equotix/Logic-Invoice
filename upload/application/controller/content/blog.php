@@ -251,6 +251,8 @@ class ControllerContentBlog extends Controller {
             $this->data['date_added'] = date($this->language->get('date_format_long'), strtotime($blog_post_info['date_added']));
             $this->data['user'] = $blog_post_info['user'];
             $this->data['tag'] = $blog_post_info['tag'];
+			
+			$this->model_content_blog_post->increaseView($blog_post_info['blog_post_id']);
         } else {
             return new Action('error/not_found');
         }
