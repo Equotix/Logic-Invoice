@@ -238,7 +238,7 @@ class ControllerContentBlogPost extends Controller {
 
         $this->data['sort_order'] = $this->build->data('sort_order', $this->request->post, $blog_post_info);
         $this->data['blog_category'] = $this->build->data('blog_category', $this->request->post, $blog_post_info, array());
-        $this->data['status'] = $this->build->data('status', $this->request->post, $blog_post_info);
+        $this->data['status'] = $this->build->data('status', $this->request->post, $blog_post_info, '1');
 
         if (isset($this->request->post['url_alias'])) {
             $this->data['url_alias'] = $this->request->post['url_alias'];

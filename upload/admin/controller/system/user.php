@@ -211,7 +211,7 @@ class ControllerSystemUser extends Controller {
         $this->data['secret'] = $this->build->data('secret', $this->request->post, $user_info);
         $this->data['password'] = $this->build->data('password', $this->request->post);
         $this->data['confirm'] = $this->build->data('confirm', $this->request->post);
-        $this->data['status'] = $this->build->data('status', $this->request->post, $user_info);
+        $this->data['status'] = $this->build->data('status', $this->request->post, $user_info, '1');
 
         $this->load->model('system/user_group');
 

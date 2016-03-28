@@ -225,7 +225,7 @@ class ControllerContentEmailTemplate extends Controller {
         $this->data['type'] = $this->build->data('type', $this->request->post, $email_template_info);
         $this->data['description'] = $this->build->data('description', $this->request->post, $email_template_info, array());
         $this->data['priority'] = $this->build->data('priority', $this->request->post, $email_template_info);
-        $this->data['status'] = $this->build->data('status', $this->request->post, $email_template_info);
+        $this->data['status'] = $this->build->data('status', $this->request->post, $email_template_info, '1');
         $this->data['email'] = $this->build->data('email', $this->request->post, $email_template_info);
 
         $email_template_types = $this->model_content_email_template->getEmailTemplateTypes();

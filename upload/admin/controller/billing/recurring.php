@@ -312,7 +312,7 @@ class ControllerBillingRecurring extends Controller {
         $this->data['currency_code'] = $this->build->data('currency_code', $this->request->post, $recurring_info, $this->config->get('config_currency'));
         $this->data['currency_value'] = $this->build->data('currency_value', $this->request->post, $recurring_info, '1.00');
         $this->data['comment'] = $this->build->data('comment', $this->request->post, $recurring_info);
-        $this->data['status'] = $this->build->data('status', $this->request->post, $recurring_info);
+        $this->data['status'] = $this->build->data('status', $this->request->post, $recurring_info, '1');
         $this->data['cycle'] = $this->build->data('cycle', $this->request->post, $recurring_info);
         $this->data['date_due'] = $this->build->data('date_due', $this->request->post, $recurring_info);
         $this->data['items'] = $this->build->data('items', $this->request->post, $recurring_info, array());
@@ -522,7 +522,7 @@ class ControllerBillingRecurring extends Controller {
     }
 
     public function validate_step_1() {
-        $this->load->language('billing/invoice');
+        $this->load->language('billing/recurring');
 
         $json = array();
 
@@ -543,7 +543,7 @@ class ControllerBillingRecurring extends Controller {
     }
 
     public function validate_step_2() {
-        $this->load->language('billing/invoice');
+        $this->load->language('billing/recurring');
 
         $json = array();
 

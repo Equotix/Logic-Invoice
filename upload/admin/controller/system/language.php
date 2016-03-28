@@ -205,7 +205,7 @@ class ControllerSystemLanguage extends Controller {
         $this->data['image'] = $this->build->data('image', $this->request->post, $language_info);
         $this->data['directory'] = $this->build->data('directory', $this->request->post, $language_info);
         $this->data['sort_order'] = $this->build->data('sort_order', $this->request->post, $language_info);
-        $this->data['status'] = $this->build->data('status', $this->request->post, $language_info);
+        $this->data['status'] = $this->build->data('status', $this->request->post, $language_info, '1');
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');

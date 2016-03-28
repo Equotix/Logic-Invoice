@@ -274,7 +274,7 @@ class ControllerBillingCustomer extends Controller {
         $this->data['email'] = $this->build->data('email', $this->request->post, $customer_info);
         $this->data['password'] = $this->build->data('password', $this->request->post);
         $this->data['confirm'] = $this->build->data('confirm', $this->request->post);
-        $this->data['status'] = $this->build->data('status', $this->request->post, $customer_info);
+        $this->data['status'] = $this->build->data('status', $this->request->post, $customer_info, '1');
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');

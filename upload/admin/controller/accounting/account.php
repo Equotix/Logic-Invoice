@@ -240,7 +240,7 @@ class ControllerAccountingAccount extends Controller {
         $this->data['description'] = $this->build->data('description', $this->request->post, $account_info);
         $this->data['type'] = $this->build->data('type', $this->request->post, $account_info);
         $this->data['parent_id'] = $this->build->data('parent_id', $this->request->post, $account_info);
-        $this->data['status'] = $this->build->data('status', $this->request->post, $account_info);
+        $this->data['status'] = $this->build->data('status', $this->request->post, $account_info, '1');
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');

@@ -207,7 +207,7 @@ class ControllerAccountingCurrency extends Controller {
         $this->data['symbol_right'] = $this->build->data('symbol_right', $this->request->post, $currency_info);
         $this->data['decimal_place'] = $this->build->data('decimal_place', $this->request->post, $currency_info);
         $this->data['value'] = $this->build->data('value', $this->request->post, $currency_info);
-        $this->data['status'] = $this->build->data('status', $this->request->post, $currency_info);
+        $this->data['status'] = $this->build->data('status', $this->request->post, $currency_info, '1');
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');

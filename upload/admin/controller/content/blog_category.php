@@ -204,7 +204,7 @@ class ControllerContentBlogCategory extends Controller {
         $this->data['description'] = $this->build->data('description', $this->request->post, $blog_category_info, array());
         $this->data['parent_id'] = $this->build->data('parent_id', $this->request->post, $blog_category_info);
         $this->data['sort_order'] = $this->build->data('sort_order', $this->request->post, $blog_category_info);
-        $this->data['status'] = $this->build->data('status', $this->request->post, $blog_category_info);
+        $this->data['status'] = $this->build->data('status', $this->request->post, $blog_category_info, '1');
 
         if (isset($this->request->post['url_alias'])) {
             $this->data['url_alias'] = $this->request->post['url_alias'];
