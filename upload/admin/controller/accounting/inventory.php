@@ -293,6 +293,43 @@ class ControllerAccountingInventory extends Controller {
 
         $this->response->setOutput($this->render('accounting/inventory_form'));
     }
+	
+	public function autocomplete() {
+        $json = array();
+
+        if (isset($this->request->get['filter_name']) || isset($this->request->get['filter_sku'])) {
+            if (isset($this->request->get['filter_sku'])) {
+                $filter_sku = $this->request->get['filter_sku'];
+            } else {
+                $filter_sku = '';
+            }
+
+            if (isset($this->request->get['filter_name'])) {
+                $filter_name = $this->request->get['filter_name'];
+            } else {
+                $filter_name = '';
+            }
+
+            $filter_data = array(
+                'filter_sku'  => $filter_sku,
+                'filter_name' => $filter_name,
+				'sort'        => 'name',
+				'start'       => 0,
+				'limit'       => $this->config->get('config_limit_admin')
+            );
+
+            $this->load->model('accounting/inventory');
+
+            $inventories = $this->model_accounting_inventory->getInventories($filter_data);
+
+            foreach ($inventories as $inventory) {
+                $json[] = $inventory;
+            }
+        }
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+    }
 
     protected function validateDelete() {
         if (!$this->user->hasPermission('modify', 'accounting/inventory')) {

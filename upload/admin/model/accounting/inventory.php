@@ -30,7 +30,7 @@ class ModelAccountingInventory extends Model {
         }
 		
 		if (!empty($data['filter_name'])) {
-            $implode[] = "LOWER(name) LIKE '" . $this->db->escape(utf8_strtolower($data['name'])) . "%'";
+            $implode[] = "LOWER(name) LIKE '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "%'";
         }
 
         if (isset($data['filter_quantity']) && !is_null($data['filter_quantity'])) {
@@ -67,7 +67,7 @@ class ModelAccountingInventory extends Model {
         if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
             $sql .= " ORDER BY " . $data['sort'];
         } else {
-            $sql .= " ORDER BY date";
+            $sql .= " ORDER BY sku";
         }
 
         if (isset($data['order']) && ($data['order'] == 'DESC')) {

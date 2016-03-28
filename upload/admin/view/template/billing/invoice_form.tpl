@@ -273,8 +273,9 @@ $(document).ready(function () {
 				success: function (json) {
 					response($.map(json, function (item) {
 						return {
-							label: item['name'],
+							label: item['name'] + ' (' + item['email'] + ')',
 							value: item['customer_id'],
+							name: item['name'],
 							firstname: item['firstname'],
 							lastname: item['lastname'],
 							company: item['company'],
@@ -286,7 +287,7 @@ $(document).ready(function () {
 			});
 		},
 		'select': function (item) {
-			$('#input-customer').val(item['label']);
+			$('#input-customer').val(item['name']);
 			$('#input-firstname').val(item['firstname']);
 			$('#input-lastname').val(item['lastname']);
 			$('#input-company').val(item['company']);
@@ -606,8 +607,40 @@ function addRow() {
 	$('#items tr:last').before(html);
 
 	$('[data-toggle=\'tooltip\']').tooltip();
+	
+	itemAutocomplete(item_row);
 
 	item_row++;
+}
+
+<?php $item_row = 0; ?>
+<?php foreach ($items as $item) { ?>
+	itemAutocomplete('<?php echo $item_row; ?>');
+	<?php $item_row++; ?>
+<?php } ?>
+
+function itemAutocomplete(item_row) {
+	$('input[name=\'items[' + item_row + '][title]\']').autocomplete({
+		'source': function (request, response) {
+			$.ajax({
+				url: 'index.php?load=accounting/inventory/autocomplete&token=<?php echo $token; ?>&filter_name=' + encodeURIComponent(request),
+				dataType: 'json',
+				success: function (json) {
+					response($.map(json, function (item) {
+						return {
+							label: item['name'] + ' (' + item['sku'] + ')',
+							value: item['name'],
+							sell: item['sell']
+						}
+					}));
+				}
+			});
+		},
+		'select': function (item) {
+			$('input[name=\'items[' + item_row + '][title]\']').val(item['label']);
+			$('input[name=\'items[' + item_row + '][price]\']').val(item['sell']).trigger('keyup');
+		}
+	});
 }
 //--></script>
 <?php echo $footer; ?>
