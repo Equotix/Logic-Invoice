@@ -26,6 +26,7 @@ class ControllerCommonHeader extends Controller {
             $this->data['dashboard'] = $this->url->link('common/dashboard', 'token=' . $this->session->data['token']);
             $this->data['account'] = $this->url->link('accounting/account', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['currency'] = $this->url->link('accounting/currency', 'token=' . $this->session->data['token'], 'SSL');
+            $this->data['inventory'] = $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['journal'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['tax_class'] = $this->url->link('accounting/tax_class', 'token=' . $this->session->data['token'], 'SSL');
             $this->data['tax_rate'] = $this->url->link('accounting/tax_rate', 'token=' . $this->session->data['token'], 'SSL');

@@ -3,6 +3,7 @@ $_['text_dashboard']			= 'Dashboard';
 $_['text_accounting']			= 'Accounting';
 $_['text_account']				= 'Accounts';
 $_['text_currency'] 			= 'Currencies';
+$_['text_inventory'] 			= 'Inventory';
 $_['text_journal']				= 'Journal Entries';
 $_['text_tax'] 					= 'Taxes';
 $_['text_tax_class'] 			= 'Tax Classes';

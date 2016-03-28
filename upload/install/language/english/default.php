@@ -74,3 +74,4 @@ $_['upgrade_1']					= '1. Ensure you have made a full backup of your database.';
 $_['upgrade_2']					= '2. Ensure you server is fully compatible with this version of Logic Invoice.';
 $_['upgrade_3']					= '3. Proceed with the upgrade and post any update errors in the community forums.';
 $_['upgrade_4']					= '4. Restore your backup if you face any errors with the upgrade.';
+$_['upgrade_5']					= '5. Give permission to your user groups to view any new pages added to the administration panel.';

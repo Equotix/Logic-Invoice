@@ -20,6 +20,7 @@
           <?php echo $upgrade_2; ?><br />
           <?php echo $upgrade_3; ?><br />
           <?php echo $upgrade_4; ?><br />
+          <?php echo $upgrade_5; ?><br />
         </div>
         <div class="text-center"><br /><br />
           <button id="button-upgrade" class="btn btn-success btn-lg"><?php echo $button_upgrade; ?></button>

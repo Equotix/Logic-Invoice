@@ -44,6 +44,7 @@
           <ul>
             <li><a href="<?php echo $account; ?>"><span><?php echo $text_account; ?></span></a></li>
             <li><a href="<?php echo $currency; ?>"><span><?php echo $text_currency; ?></span></a></li>
+            <li><a href="<?php echo $inventory; ?>"><span><?php echo $text_inventory; ?></span></a></li>
             <li><a href="<?php echo $journal; ?>"><span><?php echo $text_journal; ?></span></a></li>
             <li><a class="parent"><span><?php echo $text_tax; ?></span></a>
               <ul>
