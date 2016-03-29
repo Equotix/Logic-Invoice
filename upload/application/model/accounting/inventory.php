@@ -4,7 +4,9 @@ defined('_PATH') or die('Restricted!');
 class ModelAccountingInventory extends Model {
     public function addInventory($data) {
         $this->db->query("INSERT INTO " . DB_PREFIX . "inventory SET sku = '" . $this->db->escape($data['sku']) . "', name = '" . $this->db->escape($data['name']) . "', description = '" . $this->db->escape($data['description']) . "', image = '" . $this->db->escape($data['image']) . "', quantity = '" . (int)$data['quantity'] . "', cost = '" . (float)$data['cost'] . "', sell = '" . (float)$data['sell'] . "', status = '" . (int)$data['status'] . "', date_added = NOW(), date_modified = NOW()");
-    }
+    
+		return $inventory_id;
+	}
 
     public function editInventory($inventory_id, $data) {
         $this->db->query("UPDATE " . DB_PREFIX . "inventory SET sku = '" . $this->db->escape($data['sku']) . "', name = '" . $this->db->escape($data['name']) . "', description = '" . $this->db->escape($data['description']) . "', image = '" . $this->db->escape($data['image']) . "', quantity = '" . (int)$data['quantity'] . "', cost = '" . (float)$data['cost'] . "', sell = '" . (float)$data['sell'] . "', status = '" . (int)$data['status'] . "', date_modified = NOW() WHERE inventory_id = '" . (int)$inventory_id . "'");
@@ -91,43 +93,5 @@ class ModelAccountingInventory extends Model {
         $query = $this->db->query($sql);
 
         return $query->rows;
-    }
-
-    public function getTotalInventories($data = array()) {
-        $sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "inventory";
-
-        $implode = array();
-
-        if (!empty($data['filter_sku'])) {
-            $implode[] = "LOWER(sku) = '" . $this->db->escape(utf8_strtolower($data['filter_sku'])) . "'";
-        }
-		
-		if (!empty($data['filter_name'])) {
-            $implode[] = "LOWER(name) LIKE '" . $this->db->escape(utf8_strtolower($data['name'])) . "%'";
-        }
-
-        if (isset($data['filter_quantity']) && !is_null($data['filter_quantity'])) {
-            $implode[] = "quantity = '" . (int)$data['filter_quantity'] . "'";
-        }
-		
-		if (isset($data['filter_cost']) && !is_null($data['filter_cost'])) {
-            $implode[] = "cost = '" . (float)$data['filter_cost'] . "'";
-        }
-		
-		if (isset($data['filter_sell']) && !is_null($data['filter_sell'])) {
-            $implode[] = "sell = '" . (float)$data['filter_sell'] . "'";
-        }
-		
-		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
-            $implode[] = "status = '" . (int)$data['filter_status'] . "'";
-        }
-
-        if ($implode) {
-            $sql .= " WHERE " . implode(" AND ", $implode);
-        }
-
-        $query = $this->db->query($sql);
-
-        return $query->row['total'];
     }
 }
