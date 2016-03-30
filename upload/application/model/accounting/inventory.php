@@ -21,6 +21,12 @@ class ModelAccountingInventory extends Model {
 
 		return $query->row;
     }
+	
+	public function getInventoryBySKU($sku) {
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "inventory WHERE LOWER(sku) = '" . $this->db->escape(utf8_strtolower($sku)) . "'");
+
+		return $query->row;
+    }
 
     public function getInventories($data = array()) {
         $sql = "SELECT * FROM " . DB_PREFIX . "inventory";
