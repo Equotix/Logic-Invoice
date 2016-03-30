@@ -25,7 +25,7 @@ class ModelUpgrade110 extends Model {
 		}
 		
 		// Add new database tables
-		$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "inventory` (
+		$db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "inventory` (
 		  `inventory_id` int(11) NOT NULL AUTO_INCREMENT,
 		  `sku` varchar(255) NOT NULL,
 		  `name` varchar(255) NOT NULL,

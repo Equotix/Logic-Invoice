@@ -74,7 +74,8 @@ class ControllerContentBlog extends Controller {
         $filter_data = array(
             'start'            => $this->config->get('config_limit_application') * ($page - 1),
             'limit'            => $this->config->get('config_limit_application'),
-            'blog_category_id' => $blog_category_id
+            'blog_category_id' => $blog_category_id,
+			'order'            => 'DESC'
         );
 
         $this->load->model('content/blog_post');
