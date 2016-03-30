@@ -226,7 +226,7 @@ class ControllerApiRecurring extends Controller {
                     'totals'              => $totals
                 );
 
-                $invoice_id = $this->model_billing_recurring->addRecurring($data);
+                $recurring_id = $this->model_billing_recurring->addRecurring($data);
 
                 $this->model_system_activity->addActivity(sprintf($this->language->get('text_recurring'), $recurring_id, $this->session->data['username']));
 

@@ -246,7 +246,7 @@ class ControllerApiInvoice extends Controller {
                 $this->model_system_activity->addActivity(sprintf($this->language->get('text_edited'), $this->request->post['invoice_id'], $this->session->data['username']));
 
                 $json['success'] = true;
-                $json['invoice_id'] = $invoice_id;
+                $json['invoice_id'] = $this->request->post['invoice_id'];
             }
         }
 
@@ -277,13 +277,21 @@ class ControllerApiInvoice extends Controller {
             $json['error'][] = $this->language->get('error_currency_code');
         }
 
-        if (!isset($this->request->post['currency_value']) || $this->request->post['currency_code'] < 0) {
+        if (!isset($this->request->post['currency_value']) || $this->request->post['currency_code'] <= 0) {
             $json['error'][] = $this->language->get('error_currency_value');
         }
 
-        if (!isset($this->request->post['status_id'])) {
+        if (!isset($this->request->post['status'])) {
             $json['error'][] = $this->language->get('error_status');
-        }
+        } else {
+			$status_info = $this->model_system_status->getStatusByName($this->request->post['status']);
+			
+			if ($status_info) {
+				$this->request->post['status_id'] = $status_info['status_id'];
+			} else {
+				$json['error'][] = $this->language->get('error_status');
+			}
+		}
 
         if (!isset($this->request->post['date_due'])) {
             $json['error'][] = $this->language->get('error_date_due');
