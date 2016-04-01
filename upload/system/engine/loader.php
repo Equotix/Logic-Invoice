@@ -1,9 +1,12 @@
 <?php
 final class Loader {
     private $registry;
+	private $config;
 
     public function __construct($registry) {
         $this->registry = $registry;
+		
+		$this->config = $registry->get('config');
     }
 
     public function controller($route, $args = array()) {

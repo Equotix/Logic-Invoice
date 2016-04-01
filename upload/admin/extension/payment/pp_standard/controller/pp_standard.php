@@ -68,7 +68,7 @@ class ControllerPaymentPPStandardPPStandard extends Controller {
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->render('payment/pp_standard/pp_standard.'));
+        $this->response->setOutput($this->render('payment/pp_standard/pp_standard'));
     }
 
     protected function validate() {
