@@ -199,6 +199,7 @@ $(document).ready(function () {
 						return {
 							label: item['name'] + ' (' + item['email'] + ')',
 							value: item['customer_id'],
+							name: item['name'],
 							firstname: item['firstname'],
 							lastname: item['lastname'],
 							company: item['company'],
