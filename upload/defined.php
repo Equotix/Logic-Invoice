@@ -1,7 +1,7 @@
 <?php
 defined('_PATH') or die('Restricted!');
 
-define('VERSION', '1.1.0');
+define('VERSION', '1.1.1');
 define('HTTP_SERVER', _URL);
 define('HTTP_APPLICATION', APP_URL);
 define('HTTPS_SERVER', _SURL);
