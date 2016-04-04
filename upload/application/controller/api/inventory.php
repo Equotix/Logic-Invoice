@@ -22,6 +22,7 @@ class ControllerApiInventory extends Controller {
 				
 				if (empty($json['error'])) {
 					$data = array(
+						'image'       => '',
 						'sku'         => $this->request->post['sku'],
 						'name'        => $this->request->post['name'],
 						'description' => isset($this->request->post['description']) ? $this->request->post['description'] : '',
@@ -83,39 +84,37 @@ class ControllerApiInventory extends Controller {
             $this->load->model('accounting/inventory');
 			$this->load->model('system/activity');
 			
-			if (isset($this->request->post['sku']) || isset($this->request->post['name'])) {				
-				if (isset($this->request->post['sku'])) {
-					$filter_sku = $this->request->post['sku'];
-				} else {
-					$filter_sku = '';
-				}
-				
-				if (isset($this->request->post['name'])) {
-					$filter_name = $this->request->post['name'];
-				} else {
-					$filter_name = '';
-				}
-				
-				if (isset($this->request->post['page'])) {
-					$page = $this->request->post['page'];
-				} else {
-					$page = 1;
-				}
-				
-				$filter_data = array(
-					'filter_sku'  => $filter_sku,
-					'filter_name' => $filter_name,
-					'sort'        => 'name',
-					'start'       => 30 * ($page - 1),
-					'limit'       => 30
-				);
-				
-				$inventories = $this->model_accounting_inventory->getInventories($filter_data);
+			if (isset($this->request->post['sku'])) {
+				$filter_sku = $this->request->post['sku'];
+			} else {
+				$filter_sku = '';
+			}
+			
+			if (isset($this->request->post['name'])) {
+				$filter_name = $this->request->post['name'];
+			} else {
+				$filter_name = '';
+			}
+			
+			if (isset($this->request->post['page'])) {
+				$page = $this->request->post['page'];
+			} else {
+				$page = 1;
+			}
+			
+			$filter_data = array(
+				'filter_sku'  => $filter_sku,
+				'filter_name' => $filter_name,
+				'sort'        => 'name',
+				'start'       => 30 * ($page - 1),
+				'limit'       => 30
+			);
+			
+			$inventories = $this->model_accounting_inventory->getInventories($filter_data);
 
-				foreach ($inventories as $inventory) {
-					$json[] = $inventory;
-				}
-            }
+			foreach ($inventories as $inventory) {
+				$json[] = $inventory;
+			}
         }
 
         $this->response->addHeader('Content-Type: application/json');

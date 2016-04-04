@@ -241,7 +241,7 @@ class ControllerApiInvoice extends Controller {
                     'totals'              => $totals
                 );
 
-                $this->model_billing_invoice->editInvoice($data);
+                $this->model_billing_invoice->editInvoice($this->request->post['invoice_id'], $data);
 
                 $this->model_system_activity->addActivity(sprintf($this->language->get('text_edited'), $this->request->post['invoice_id'], $this->session->data['username']));
 
@@ -277,7 +277,7 @@ class ControllerApiInvoice extends Controller {
             $json['error'][] = $this->language->get('error_currency_code');
         }
 
-        if (!isset($this->request->post['currency_value']) || $this->request->post['currency_code'] <= 0) {
+        if (!isset($this->request->post['currency_value']) || $this->request->post['currency_value'] <= 0) {
             $json['error'][] = $this->language->get('error_currency_value');
         }
 

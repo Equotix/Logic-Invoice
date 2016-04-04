@@ -5,7 +5,7 @@ class ModelAccountingInventory extends Model {
     public function addInventory($data) {
         $this->db->query("INSERT INTO " . DB_PREFIX . "inventory SET sku = '" . $this->db->escape($data['sku']) . "', name = '" . $this->db->escape($data['name']) . "', description = '" . $this->db->escape($data['description']) . "', image = '" . $this->db->escape($data['image']) . "', quantity = '" . (int)$data['quantity'] . "', cost = '" . (float)$data['cost'] . "', sell = '" . (float)$data['sell'] . "', status = '" . (int)$data['status'] . "', date_added = NOW(), date_modified = NOW()");
     
-		return $inventory_id;
+		return $this->db->getLastId();
 	}
 
     public function editInventory($inventory_id, $data) {
