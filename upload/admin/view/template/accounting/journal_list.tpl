@@ -38,6 +38,11 @@
               <?php } else { ?>
               <a href="<?php echo $sort_invoice_id; ?>"><?php echo $column_invoice; ?></a>
               <?php } ?></th>
+			 <th class="text-left"><?php if ($sort == 'amount') { ?>
+              <a href="<?php echo $sort_amount; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_amount; ?></a>
+              <?php } else { ?>
+              <a href="<?php echo $sort_amount; ?>"><?php echo $column_amount; ?></a>
+              <?php } ?></th>
             <th class="text-left"><?php if ($sort == 'date') { ?>
               <a href="<?php echo $sort_date; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_date; ?></a>
               <?php } else { ?>
@@ -59,6 +64,7 @@
             <td></td>
             <td class="text-left"><input type="text" name="filter_description" value="<?php echo $filter_description; ?>" class="form-control input-sm" /></td>
             <td class="text-left"><input type="text" name="filter_invoice_id" value="<?php echo $filter_invoice_id; ?>" class="form-control input-sm" /></td>
+			<td class="text-left"></td>
             <td class="text-left"><input type="text" name="filter_date" value="<?php echo $filter_date; ?>" class="form-control input-sm date" data-date-format="YYYY-MM-DD" /></td>
             <td class="text-right"><input type="text" name="filter_date_added" value="<?php echo $filter_date_added; ?>" class="form-control input-sm date" data-date-format="YYYY-MM-DD" /></td>
             <td class="text-right"><input type="text" name="filter_date_modified" value="<?php echo $filter_date_modified; ?>" class="form-control input-sm date" data-date-format="YYYY-MM-DD" /></td>
@@ -80,6 +86,7 @@
               <?php echo $text_none; ?>
               <?php } ?>
             </td>
+            <td class="text-left"><?php echo $transaction['amount']; ?></td>
             <td class="text-left"><?php echo $transaction['date']; ?></td>
             <td class="text-right"><?php echo $transaction['date_added']; ?></td>
             <td class="text-right"><?php echo $transaction['date_modified']; ?></td>

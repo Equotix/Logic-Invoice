@@ -5,6 +5,7 @@ $_['heading_title']			= 'Journal Entries';
 // Column
 $_['column_description']	= 'Description';
 $_['column_invoice']		= 'Linked Invoice ID';
+$_['column_amount']			= 'Amount';
 $_['column_debit']			= 'Debit';
 $_['column_credit']			= 'Credit';
 $_['column_date']			= 'Date';

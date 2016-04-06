@@ -141,7 +141,7 @@ class ModelAccountingTransaction extends Model {
     }
 
     public function getTransactions($data = array()) {
-        $sql = "SELECT * FROM " . DB_PREFIX . "transaction";
+        $sql = "SELECT *, (SELECT SUM(debit) FROM " . DB_PREFIX . "transaction_account ta WHERE ta.transaction_id = t.transaction_id) AS amount FROM " . DB_PREFIX . "transaction t";
 
         $implode = array();
 
@@ -172,6 +172,7 @@ class ModelAccountingTransaction extends Model {
         $sort_data = array(
             'description',
             'invoice_id',
+            'amount',
             'date',
             'date_added',
             'date_modified'
@@ -207,7 +208,7 @@ class ModelAccountingTransaction extends Model {
     }
 
     public function getTotalTransactions($data = array()) {
-        $sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "transaction";
+        $sql = "SELECT COUNT(*) AS total, (SELECT SUM(debit) FROM " . DB_PREFIX . "transaction_account ta WHERE ta.transaction_id = t.transaction_id) AS amount FROM " . DB_PREFIX . "transaction t";
 
         $implode = array();
 

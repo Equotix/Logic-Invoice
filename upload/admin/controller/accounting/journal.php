@@ -47,7 +47,7 @@ class ControllerAccountingJournal extends Controller {
         } else {
             $filter_invoice_id = null;
         }
-
+		
         if (isset($this->request->get['filter_date'])) {
             $filter_date = $this->request->get['filter_date'];
         } else {
@@ -108,7 +108,8 @@ class ControllerAccountingJournal extends Controller {
                 'description'    => utf8_strlen($transaction['description']) > 20 ? utf8_substr($transaction['description'], 0, 20) . '...' : $transaction['description'],
                 'invoice_id'     => $transaction['invoice_id'],
                 'invoice'        => $transaction['invoice_id'] ? $this->url->link('billing/invoice/view', 'token=' . $this->session->data['token'] . '&invoice_id=' . $transaction['invoice_id'], 'SSL') : false,
-                'date'           => date($this->language->get('date_format_short'), strtotime($transaction['date'])),
+                'amount'         => $this->currency->format($transaction['amount'], $transaction['currency_code'], $transaction['currency_value']),
+				'date'           => date($this->language->get('date_format_short'), strtotime($transaction['date'])),
                 'date_added'     => date($this->language->get('datetime_format_short'), strtotime($transaction['date_added'])),
                 'date_modified'  => date($this->language->get('datetime_format_short'), strtotime($transaction['date_modified'])),
                 'edit'           => $this->url->link('accounting/journal/form', 'token=' . $this->session->data['token'] . $url . '&transaction_id=' . $transaction['transaction_id'], 'SSL')
@@ -161,6 +162,7 @@ class ControllerAccountingJournal extends Controller {
 
         $this->data['sort_description'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url . '&sort=description&order=' . $order, 'SSL');
         $this->data['sort_invoice_id'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url . '&sort=invoice_id&order=' . $order, 'SSL');
+        $this->data['sort_amount'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url . '&sort=amount&order=' . $order, 'SSL');
         $this->data['sort_date'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url . '&sort=date&order=' . $order, 'SSL');
         $this->data['sort_date_added'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url . '&sort=date_added&order=' . $order, 'SSL');
         $this->data['sort_date_modified'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url . '&sort=date_modified&order=' . $order, 'SSL');
