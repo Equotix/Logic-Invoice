@@ -204,7 +204,7 @@ if ($query->num_rows) {
 
     if ($user_query->num_rows) {
         $session->data['api_key'] = md5(mt_rand());
-		$session->data['api_user'] = $user_query->row['username'];
+		$session->data['username'] = $user_query->row['username'];
 		
 		$request->post['api_key'] = $session->data['api_key'];
 		

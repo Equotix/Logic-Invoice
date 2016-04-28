@@ -142,15 +142,19 @@ class ControllerReportSFP extends Controller {
 
                         $expense += ($transaction_total['debit'] - $transaction_total['credit']);
                     }
+					
+					$equity_total += $revenue - $expense;
+					
+					$transaction_total = $this->model_report_transaction->getTotalByAccount($account['account_id'], $filter_data);
 
-                    if (($revenue - $expense) != 0) {
+					$equity_total += $transaction_total['credit'] - $transaction_total['debit'];
+
+                    if ($equity_total > 0 || $equity_total < 0) {
                         $this->data['equity_accounts'][] = array(
                             'name'  => $account['name'],
-                            'total' => $this->currency->format($revenue - $expense)
+                            'total' => $this->currency->format($equity_total)
                         );
                     }
-
-                    $equity_total += $revenue - $expense;
                 } else {
                     $transaction_total = $this->model_report_transaction->getTotalByAccount($account['account_id'], $filter_data);
 
