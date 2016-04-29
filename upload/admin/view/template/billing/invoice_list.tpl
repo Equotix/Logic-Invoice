@@ -89,9 +89,9 @@
                 <option value="1"<?php echo $filter_transaction ? ' selected="selected"' : ''; ?>><?php echo $text_yes; ?></option>
                 <option value="0"<?php echo (!$filter_transaction && !is_null($filter_transaction)) ? ' selected="selected"' : ''; ?>><?php echo $text_no; ?></option>
               </select></td>
-            <td class="text-right col-sm-1"><input type="text" name="filter_date_due" value="<?php echo $filter_date_due; ?>" class="form-control input-sm date" data-date-format="YYYY-MM-DD" /></td>
-            <td class="text-right col-sm-1"><input type="text" name="filter_date_issued" value="<?php echo $filter_date_issued; ?>" class="form-control input-sm date" data-date-format="YYYY-MM-DD" /></td>
-            <td class="text-right col-sm-1"><input type="text" name="filter_date_modified" value="<?php echo $filter_date_modified; ?>" class="form-control input-sm date" data-date-format="YYYY-MM-DD" /></td>
+            <td class="text-right col-sm-1"><input type="text" name="filter_date_due" value="<?php echo $filter_date_due; ?>" class="form-control input-sm date" /></td>
+            <td class="text-right col-sm-1"><input type="text" name="filter_date_issued" value="<?php echo $filter_date_issued; ?>" class="form-control input-sm date" /></td>
+            <td class="text-right col-sm-1"><input type="text" name="filter_date_modified" value="<?php echo $filter_date_modified; ?>" class="form-control input-sm date" /></td>
             <td class="text-right col-sm-1"><button type="button" title="<?php echo $button_search; ?>" data-toggle="tooltip" class="btn btn-primary btn-xs" onclick="filter();"><i class="fa fa-search"></i></button></td>
           </tr>
           <?php if ($invoices) { ?>
@@ -187,7 +187,7 @@ function filter() {
 
 $(document).ready(function () {
 	$('.date').datetimepicker({
-		pickTime: false
+		format: 'YYYY-MM-DD'
 	});
 
 	$('.filter input').on('keydown', function (e) {

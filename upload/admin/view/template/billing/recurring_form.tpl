@@ -65,10 +65,10 @@
           <div class="form-group">
             <label class="required col-sm-2 control-label" for="input-date-due"><?php echo $entry_date_due; ?></label>
             <div class="col-sm-10">
-              <div class="input-group date">
-                <input type="text" name="date_due" value="<?php echo $date_due; ?>" id="input-date-due" class="form-control" placeholder="<?php echo $entry_date_due; ?>" data-date-format="YYYY-MM-DD" required />
+              <div class="input-group">
+                <input type="text" name="date_due" value="<?php echo $date_due; ?>" id="input-date-due" class="form-control date" placeholder="<?php echo $entry_date_due; ?>" required />
                 <span class="input-group-btn">
-                  <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
+                  <button class="btn btn-default" type="button" onclick="$(this).parent().siblings('input').focus();"><i class="fa fa-calendar"></i></button>
                 </span>
               </div>
             </div>
@@ -186,7 +186,7 @@ var currency_code = '<?php echo $currency_code; ?>';
 
 $(document).ready(function () {
 	$('.date').datetimepicker({
-		pickTime: false
+		format: 'YYYY-MM-DD'
 	});
 
 	$('#input-customer').autocomplete({

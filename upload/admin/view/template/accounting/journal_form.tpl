@@ -60,10 +60,10 @@
         <label class="required col-sm-2 control-label" for="input-date"><?php echo $entry_date; ?></label>
 
         <div class="col-sm-10">
-          <div class="input-group date">
-            <input type="text" name="date" value="<?php echo $date; ?>" id="input-date" class="form-control" placeholder="<?php echo $entry_date; ?>" data-date-format="YYYY-MM-DD" required />
+          <div class="input-group">
+            <input type="text" name="date" value="<?php echo $date; ?>" id="input-date" class="form-control date" placeholder="<?php echo $entry_date; ?>" required />
             <span class="input-group-btn">
-              <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
+              <button class="btn btn-default" type="button" onclick="$(this).parent().siblings('input').focus();"><i class="fa fa-calendar"></i></button>
             </span></div>
           <?php if ($error_date) { ?>
           <div class="text-danger"><?php echo $error_date; ?></div>
@@ -230,7 +230,7 @@ function addTransaction() {
 
 $(document).ready(function () {
 	$('.date').datetimepicker({
-		pickTime: false
+		format: 'YYYY-MM-DD'
 	});
 
 	$(document).on('keyup', '.table input', function () {

@@ -157,7 +157,7 @@ $(document).ready(function () {
 	});
 
 	$('.date').datetimepicker({
-		pickTime: false
+		format: 'YYYY-MM-DD'
 	});
 });
 //--></script>

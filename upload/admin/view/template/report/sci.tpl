@@ -17,10 +17,10 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label class="control-label" for="input-date-start"><?php echo $entry_date_start; ?></label>
-            <div class="input-group date">
-              <input type="text" name="filter_date_start" value="<?php echo $filter_date_start; ?>" placeholder="<?php echo $entry_date_start; ?>" data-date-format="YYYY-MM-DD" id="input-date-start" class="form-control" />
+            <div class="input-group">
+              <input type="text" name="filter_date_start" value="<?php echo $filter_date_start; ?>" placeholder="<?php echo $entry_date_start; ?>" id="input-date-start" class="form-control date" />
               <span class="input-group-btn">
-                <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                <button type="button" class="btn btn-default" onclick="$(this).parent().siblings('input').focus();"><i class="fa fa-calendar"></i></button>
               </span>
             </div>
           </div>
@@ -28,10 +28,10 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label class="control-label" for="input-date-end"><?php echo $entry_date_end; ?></label>
-            <div class="input-group date">
-              <input type="text" name="filter_date_end" value="<?php echo $filter_date_end; ?>" placeholder="<?php echo $entry_date_end; ?>" data-date-format="YYYY-MM-DD" id="input-date-end" class="form-control" />
+            <div class="input-group">
+              <input type="text" name="filter_date_end" value="<?php echo $filter_date_end; ?>" placeholder="<?php echo $entry_date_end; ?>" id="input-date-end" class="form-control date" />
               <span class="input-group-btn">
-                <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                <button type="button" class="btn btn-default" onclick="$(this).parent().siblings('input').focus();"><i class="fa fa-calendar"></i></button>
               </span>
             </div>
           </div>
@@ -104,7 +104,7 @@ function filter() {
 }
 
 $('.date').datetimepicker({
-	pickTime: false
+	format: 'YYYY-MM-DD'
 });
 //--></script>
 <?php if ($print_version) { ?>

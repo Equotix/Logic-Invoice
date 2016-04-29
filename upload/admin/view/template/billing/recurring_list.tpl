@@ -90,9 +90,9 @@
                 <option value="biennally"<?php echo $filter_cycle == 'biennally' ? 'selected="selected"' : ''; ?>><?php echo $text_biennally; ?></option>
                 <option value="triennally"<?php echo $filter_cycle == 'triennally' ? 'selected="selected"' : ''; ?>><?php echo $text_triennally; ?></option>
               </select></td>
-            <td class="text-right col-sm-1"><input type="text" name="filter_date_due" value="<?php echo $filter_date_due; ?>" class="form-control input-sm date" data-date-format="YYYY-MM-DD" /></td>
-            <td class="text-right col-sm-1"><input type="text" name="filter_date_added" value="<?php echo $filter_date_added; ?>" class="form-control input-sm date" data-date-format="YYYY-MM-DD" /></td>
-            <td class="text-right col-sm-1"><input type="text" name="filter_date_modified" value="<?php echo $filter_date_modified; ?>" class="form-control input-sm date" data-date-format="YYYY-MM-DD" /></td>
+            <td class="text-right col-sm-1"><input type="text" name="filter_date_due" value="<?php echo $filter_date_due; ?>" class="form-control input-sm date" /></td>
+            <td class="text-right col-sm-1"><input type="text" name="filter_date_added" value="<?php echo $filter_date_added; ?>" class="form-control input-sm date" /></td>
+            <td class="text-right col-sm-1"><input type="text" name="filter_date_modified" value="<?php echo $filter_date_modified; ?>" class="form-control input-sm date" /></td>
             <td class="text-right col-sm-1"><button type="button" title="<?php echo $button_search; ?>" data-toggle="tooltip" class="btn btn-primary btn-xs" onclick="filter();"><i class="fa fa-search"></i></button></td>
           </tr>
           <?php if ($recurrings) { ?>
@@ -185,7 +185,7 @@ function filter() {
 
 $(document).ready(function () {
 	$('.date').datetimepicker({
-		pickTime: false
+		format: 'YYYY-MM-DD'
 	});
 
 	$('.status').change(function () {

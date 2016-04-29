@@ -14,19 +14,19 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label class="control-label" for="input-date-added-start"><?php echo $entry_date_added_start; ?></label>
-            <div class="input-group date">
-              <input type="text" name="filter_date_added_start" value="<?php echo $filter_date_added_start; ?>" placeholder="<?php echo $entry_date_added_start; ?>" data-date-format="YYYY-MM-DD" id="input-date-added-start" class="form-control" />
+            <div class="input-group">
+              <input type="text" name="filter_date_added_start" value="<?php echo $filter_date_added_start; ?>" placeholder="<?php echo $entry_date_added_start; ?>" id="input-date-added-start" class="form-control date" />
               <span class="input-group-btn">
-                <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                <button type="button" class="btn btn-default" onclick="$(this).parent().siblings('input').focus();"><i class="fa fa-calendar"></i></button>
               </span>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label" for="input-date-added-end"><?php echo $entry_date_added_end; ?></label>
-            <div class="input-group date">
-              <input type="text" name="filter_date_added_end" value="<?php echo $filter_date_added_end; ?>" placeholder="<?php echo $entry_date_added_end; ?>" data-date-format="YYYY-MM-DD" id="input-date-added-end" class="form-control" />
+            <div class="input-group">
+              <input type="text" name="filter_date_added_end" value="<?php echo $filter_date_added_end; ?>" placeholder="<?php echo $entry_date_added_end; ?>" id="input-date-added-end" class="form-control date" />
               <span class="input-group-btn">
-                <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                <button type="button" class="btn btn-default" onclick="$(this).parent().siblings('input').focus();"><i class="fa fa-calendar"></i></button>
               </span>
             </div>
           </div>
@@ -117,7 +117,7 @@ function filter() {
 }
 
 $('.date').datetimepicker({
-	pickTime: false
+	format: 'YYYY-MM-DD'
 });
 //--></script>
 <?php echo $footer; ?>

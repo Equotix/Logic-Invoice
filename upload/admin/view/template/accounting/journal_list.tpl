@@ -65,9 +65,9 @@
             <td class="text-left"><input type="text" name="filter_description" value="<?php echo $filter_description; ?>" class="form-control input-sm" /></td>
             <td class="text-left"><input type="text" name="filter_invoice_id" value="<?php echo $filter_invoice_id; ?>" class="form-control input-sm" /></td>
 			<td class="text-left"></td>
-            <td class="text-left"><input type="text" name="filter_date" value="<?php echo $filter_date; ?>" class="form-control input-sm date" data-date-format="YYYY-MM-DD" /></td>
-            <td class="text-right"><input type="text" name="filter_date_added" value="<?php echo $filter_date_added; ?>" class="form-control input-sm date" data-date-format="YYYY-MM-DD" /></td>
-            <td class="text-right"><input type="text" name="filter_date_modified" value="<?php echo $filter_date_modified; ?>" class="form-control input-sm date" data-date-format="YYYY-MM-DD" /></td>
+            <td class="text-left"><input type="text" name="filter_date" value="<?php echo $filter_date; ?>" class="form-control input-sm date" /></td>
+            <td class="text-right"><input type="text" name="filter_date_added" value="<?php echo $filter_date_added; ?>" class="form-control input-sm date" /></td>
+            <td class="text-right"><input type="text" name="filter_date_modified" value="<?php echo $filter_date_modified; ?>" class="form-control input-sm date" /></td>
             <td class="text-right"><button type="button" title="<?php echo $button_search; ?>" data-toggle="tooltip" class="btn btn-primary btn-xs" onclick="filter();"><i class="fa fa-search"></i></button></td>
           </tr>
           <?php if ($transactions) { ?>
@@ -149,7 +149,7 @@ $(document).ready(function () {
 	});
 
 	$('.date').datetimepicker({
-		pickTime: false
+		format: 'YYYY-MM-DD'
 	});
 });
 //--></script>

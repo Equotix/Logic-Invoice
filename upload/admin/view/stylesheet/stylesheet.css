@@ -170,6 +170,7 @@ h1, h2, h3, h4, h5, h6, p {
 	min-height: 100%;
 	padding-top: 40px;
 	padding-bottom: 80px;
+	position: relative;
 }
 #column-left + #content {
 	margin-left: 50px;
