@@ -89,53 +89,55 @@ class ModelBillingInvoice extends Model {
             }
         }
 
-        $invoice_info = $this->getInvoice($invoice_id);
+		if ($notify) {
+			$invoice_info = $this->getInvoice($invoice_id);
 
-        $this->load->model('content/email_template');
+			$this->load->model('content/email_template');
 
-        $email_data = array(
-            'website_name'  => $this->config->get('config_name'),
-            'website_url'   => $this->config->get('config_url'),
-            'customer_id'   => $invoice_info['customer_id'],
-            'firstname'     => $invoice_info['firstname'],
-            'lastname'      => $invoice_info['lastname'],
-            'company'       => $invoice_info['company'],
-            'website'       => $invoice_info['website'],
-            'email'         => $invoice_info['email'],
-            'invoice_id'    => $invoice_info['invoice_id'],
-            'comment'       => $invoice_info['comment'],
-            'total'         => $this->currency->format($invoice_info['total'], $invoice_info['currency_code'], $invoice_info['currency_value']),
-            'status'        => $invoice_info['status'],
-            'payment_name'  => $invoice_info['payment_name'],
-            'date_issued'   => date($this->language->get('date_format_short'), strtotime($invoice_info['date_issued'])),
-            'date_due'      => date($this->language->get('date_format_short'), strtotime($invoice_info['date_due'])),
-            'date_modified' => date($this->language->get('date_format_short'), strtotime($invoice_info['date_modified'])),
-            'to_email'      => $this->config->get('config_email')
-        );
+			$email_data = array(
+				'website_name'  => $this->config->get('config_name'),
+				'website_url'   => $this->config->get('config_url'),
+				'customer_id'   => $invoice_info['customer_id'],
+				'firstname'     => $invoice_info['firstname'],
+				'lastname'      => $invoice_info['lastname'],
+				'company'       => $invoice_info['company'],
+				'website'       => $invoice_info['website'],
+				'email'         => $invoice_info['email'],
+				'invoice_id'    => $invoice_info['invoice_id'],
+				'comment'       => $invoice_info['comment'],
+				'total'         => $this->currency->format($invoice_info['total'], $invoice_info['currency_code'], $invoice_info['currency_value']),
+				'status'        => $invoice_info['status'],
+				'payment_name'  => $invoice_info['payment_name'],
+				'date_issued'   => date($this->language->get('date_format_short'), strtotime($invoice_info['date_issued'])),
+				'date_due'      => date($this->language->get('date_format_short'), strtotime($invoice_info['date_due'])),
+				'date_modified' => date($this->language->get('date_format_short'), strtotime($invoice_info['date_modified'])),
+				'to_email'      => $this->config->get('config_email')
+			);
 
-        $this->model_content_email_template->send($email_data, 'edit_invoice_admin');
+			$this->model_content_email_template->send($email_data, 'edit_invoice_admin');
 
-        $email_data = array(
-            'website_name'  => $this->config->get('config_name'),
-            'website_url'   => $this->config->get('config_url'),
-            'customer_id'   => $invoice_info['customer_id'],
-            'firstname'     => $invoice_info['firstname'],
-            'lastname'      => $invoice_info['lastname'],
-            'company'       => $invoice_info['company'],
-            'website'       => $invoice_info['website'],
-            'email'         => $invoice_info['email'],
-            'invoice_id'    => $invoice_info['invoice_id'],
-            'comment'       => $invoice_info['comment'],
-            'total'         => $this->currency->format($invoice_info['total'], $invoice_info['currency_code'], $invoice_info['currency_value']),
-            'status'        => $invoice_info['status'],
-            'payment_name'  => $invoice_info['payment_name'],
-            'date_issued'   => date($this->language->get('date_format_short'), strtotime($invoice_info['date_issued'])),
-            'date_due'      => date($this->language->get('date_format_short'), strtotime($invoice_info['date_due'])),
-            'date_modified' => date($this->language->get('date_format_short'), strtotime($invoice_info['date_modified'])),
-            'to_email'      => $invoice_info['email']
-        );
+			$email_data = array(
+				'website_name'  => $this->config->get('config_name'),
+				'website_url'   => $this->config->get('config_url'),
+				'customer_id'   => $invoice_info['customer_id'],
+				'firstname'     => $invoice_info['firstname'],
+				'lastname'      => $invoice_info['lastname'],
+				'company'       => $invoice_info['company'],
+				'website'       => $invoice_info['website'],
+				'email'         => $invoice_info['email'],
+				'invoice_id'    => $invoice_info['invoice_id'],
+				'comment'       => $invoice_info['comment'],
+				'total'         => $this->currency->format($invoice_info['total'], $invoice_info['currency_code'], $invoice_info['currency_value']),
+				'status'        => $invoice_info['status'],
+				'payment_name'  => $invoice_info['payment_name'],
+				'date_issued'   => date($this->language->get('date_format_short'), strtotime($invoice_info['date_issued'])),
+				'date_due'      => date($this->language->get('date_format_short'), strtotime($invoice_info['date_due'])),
+				'date_modified' => date($this->language->get('date_format_short'), strtotime($invoice_info['date_modified'])),
+				'to_email'      => $invoice_info['email']
+			);
 
-        $this->model_content_email_template->send($email_data, 'edit_invoice_customer');
+			$this->model_content_email_template->send($email_data, 'edit_invoice_customer');
+		}
     }
 
     public function editStatus($invoice_id, $status_id, $comment = '', $notify = false) {
