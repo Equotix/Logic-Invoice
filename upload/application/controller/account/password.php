@@ -8,9 +8,9 @@ class ControllerAccountPassword extends Controller {
         $this->load->model('billing/customer');
 
         if (!$this->customer->isLogged()) {
-            $this->session->data['redirect'] = $this->url->link('account/password', '', 'SSL');
+            $this->session->data['redirect'] = $this->url->link('account/password', '', true);
 
-            $this->response->redirect($this->url->link('account/login', '', 'SSL'));
+            $this->response->redirect($this->url->link('account/login', '', true));
         }
 
         $this->data = $this->load->language('account/password');
@@ -22,7 +22,7 @@ class ControllerAccountPassword extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('account/account', '', 'SSL'));
+            $this->response->redirect($this->url->link('account/account', '', true));
         }
 
         $this->data['breadcrumbs'] = array();
@@ -34,15 +34,15 @@ class ControllerAccountPassword extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_account'),
-            'href' => $this->url->link('account/account', '', 'SSL')
+            'href' => $this->url->link('account/account', '', true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('account/password', '', 'SSL')
+            'href' => $this->url->link('account/password', '', true)
         );
 
-        $this->data['action'] = $this->url->link('account/password', '', 'SSL');
+        $this->data['action'] = $this->url->link('account/password', '', true);
 
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
         $this->data['error_password'] = $this->build->data('password', $this->error);

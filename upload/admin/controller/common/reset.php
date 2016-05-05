@@ -6,11 +6,11 @@ class ControllerCommonReset extends Controller {
 
     public function index() {
         if ($this->user->isLogged() && isset($this->request->get['token']) && ($this->request->get['token'] == $this->session->data['token'])) {
-            $this->response->redirect($this->url->link('common/dashboard', '', 'SSL'));
+            $this->response->redirect($this->url->link('common/dashboard', '', true));
         }
 
         if (!$this->config->get('config_forgotten_admin')) {
-            $this->response->redirect($this->url->link('common/login', '', 'SSL'));
+            $this->response->redirect($this->url->link('common/login', '', true));
         }
 
         if (isset($this->request->get['code'])) {
@@ -33,12 +33,12 @@ class ControllerCommonReset extends Controller {
 
                 $this->session->data['success'] = $this->language->get('text_success');
 
-                $this->response->redirect($this->url->link('common/login', '', 'SSL'));
+                $this->response->redirect($this->url->link('common/login', '', true));
             }
 
             $this->data['error_warning'] = $this->build->data('warning', $this->error);
 
-            $this->data['action'] = $this->url->link('common/reset', 'code=' . $code, 'SSL');
+            $this->data['action'] = $this->url->link('common/reset', 'code=' . $code, true);
 
             $this->data['password'] = $this->build->data('password', $this->request->post);
             $this->data['confirm'] = $this->build->data('confirm', $this->request->post);
@@ -52,7 +52,7 @@ class ControllerCommonReset extends Controller {
 
             $this->model_system_setting->editSettingValue('config', 'config_forgotten_admin', '0');
 
-            $this->response->redirect($this->url->link('common/login', '', 'SSL'));
+            $this->response->redirect($this->url->link('common/login', '', true));
         }
     }
 

@@ -19,12 +19,12 @@ class ControllerAccountingAccount extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('accounting/account', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('accounting/account', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         if (isset($this->request->get['page'])) {
@@ -69,7 +69,7 @@ class ControllerAccountingAccount extends Controller {
                 'formatted_type' => $this->language->get('text_' . $account['type']),
                 'parent'         => $parent ? $parent['name'] : $this->language->get('text_none'),
                 'status'         => $account['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-                'edit'           => $this->url->link('accounting/account/form', 'token=' . $this->session->data['token'] . $url . '&account_id=' . $account['account_id'], 'SSL')
+                'edit'           => $this->url->link('accounting/account/form', 'token=' . $this->session->data['token'] . $url . '&account_id=' . $account['account_id'], true)
             );
         }
 
@@ -82,12 +82,12 @@ class ControllerAccountingAccount extends Controller {
         $pagination->total = $this->model_accounting_account->getTotalAccounts();
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('accounting/account', 'token=' . $this->session->data['token'] . '&page={page}' . $url, 'SSL');
+        $pagination->url = $this->url->link('accounting/account', 'token=' . $this->session->data['token'] . '&page={page}' . $url, true);
 
         $this->data['pagination'] = $pagination->render();
 
-        $this->data['delete'] = $this->url->link('accounting/account/delete', 'token=' . $this->session->data['token'], 'SSL');
-        $this->data['insert'] = $this->url->link('accounting/account/form', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['delete'] = $this->url->link('accounting/account/delete', 'token=' . $this->session->data['token'], true);
+        $this->data['insert'] = $this->url->link('accounting/account/form', 'token=' . $this->session->data['token'], true);
 
         $this->data['success'] = $this->build->data('success', $this->session->data);
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
@@ -132,12 +132,12 @@ class ControllerAccountingAccount extends Controller {
             $order = 'ASC';
         }
 
-        $this->data['sort_account_id'] = $this->url->link('accounting/account', 'token=' . $this->session->data['token'] . '&sort=account_id&order=' . $order, 'SSL');
-        $this->data['sort_name'] = $this->url->link('accounting/account', 'token=' . $this->session->data['token'] . '&sort=name&order=' . $order, 'SSL');
-        $this->data['sort_description'] = $this->url->link('accounting/account', 'token=' . $this->session->data['token'] . '&sort=description&order=' . $order, 'SSL');
-        $this->data['sort_type'] = $this->url->link('accounting/account', 'token=' . $this->session->data['token'] . '&sort=type&order=' . $order, 'SSL');
-        $this->data['sort_parent'] = $this->url->link('accounting/account', 'token=' . $this->session->data['token'] . '&sort=parent_id&order=' . $order, 'SSL');
-        $this->data['sort_status'] = $this->url->link('accounting/account', 'token=' . $this->session->data['token'] . '&sort=status&order=' . $order, 'SSL');
+        $this->data['sort_account_id'] = $this->url->link('accounting/account', 'token=' . $this->session->data['token'] . '&sort=account_id&order=' . $order, true);
+        $this->data['sort_name'] = $this->url->link('accounting/account', 'token=' . $this->session->data['token'] . '&sort=name&order=' . $order, true);
+        $this->data['sort_description'] = $this->url->link('accounting/account', 'token=' . $this->session->data['token'] . '&sort=description&order=' . $order, true);
+        $this->data['sort_type'] = $this->url->link('accounting/account', 'token=' . $this->session->data['token'] . '&sort=type&order=' . $order, true);
+        $this->data['sort_parent'] = $this->url->link('accounting/account', 'token=' . $this->session->data['token'] . '&sort=parent_id&order=' . $order, true);
+        $this->data['sort_status'] = $this->url->link('accounting/account', 'token=' . $this->session->data['token'] . '&sort=status&order=' . $order, true);
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
@@ -157,7 +157,7 @@ class ControllerAccountingAccount extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('accounting/account', 'token=' . $this->session->data['token'], 'SSL'));
+            $this->response->redirect($this->url->link('accounting/account', 'token=' . $this->session->data['token'], true));
         }
 
         $this->index();
@@ -179,17 +179,17 @@ class ControllerAccountingAccount extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('accounting/account', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('accounting/account', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('accounting/account/form', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('accounting/account/form', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         $this->load->model('accounting/account');
@@ -209,7 +209,7 @@ class ControllerAccountingAccount extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('accounting/account', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->response->redirect($this->url->link('accounting/account', 'token=' . $this->session->data['token'] . $url, true));
         }
 
         if (isset($this->request->get['account_id'])) {
@@ -218,7 +218,7 @@ class ControllerAccountingAccount extends Controller {
             $account_info = array();
         }
 
-        $this->data['action'] = $this->url->link('accounting/account/form', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['action'] = $this->url->link('accounting/account/form', 'token=' . $this->session->data['token'] . $url, true);
 
         $url = $this->build->url(array(
             'sort',
@@ -226,7 +226,7 @@ class ControllerAccountingAccount extends Controller {
             'page'
         ));
 
-        $this->data['cancel'] = $this->url->link('accounting/account', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['cancel'] = $this->url->link('accounting/account', 'token=' . $this->session->data['token'] . $url, true);
 
         $this->data['token'] = $this->session->data['token'];
 

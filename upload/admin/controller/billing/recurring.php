@@ -31,12 +31,12 @@ class ControllerBillingRecurring extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         if (isset($this->request->get['filter_recurring_id'])) {
@@ -129,7 +129,7 @@ class ControllerBillingRecurring extends Controller {
         foreach ($recurrings as $recurring) {
             $this->data['recurrings'][] = array(
                 'recurring_id'  => $recurring['recurring_id'],
-                'customer'      => $this->url->link('billing/customer/form', 'token=' . $this->session->data['token'] . '&customer_id=' . $recurring['customer_id'], 'SSL'),
+                'customer'      => $this->url->link('billing/customer/form', 'token=' . $this->session->data['token'] . '&customer_id=' . $recurring['customer_id'], true),
                 'name'          => $recurring['name'],
                 'total'         => $this->currency->format($recurring['total'], $recurring['currency_code'], $recurring['currency_value']),
                 'status'        => $recurring['status'],
@@ -137,8 +137,8 @@ class ControllerBillingRecurring extends Controller {
                 'date_due'      => date($this->language->get('date_format_short'), strtotime($recurring['date_due'])),
                 'date_added'    => date($this->language->get('datetime_format_short'), strtotime($recurring['date_added'])),
                 'date_modified' => date($this->language->get('datetime_format_short'), strtotime($recurring['date_modified'])),
-                'view'          => $this->url->link('billing/recurring/view', 'token=' . $this->session->data['token'] . '&recurring_id=' . $recurring['recurring_id'], 'SSL'),
-                'edit'          => $this->url->link('billing/recurring/form', 'token=' . $this->session->data['token'] . $url . '&recurring_id=' . $recurring['recurring_id'], 'SSL')
+                'view'          => $this->url->link('billing/recurring/view', 'token=' . $this->session->data['token'] . '&recurring_id=' . $recurring['recurring_id'], true),
+                'edit'          => $this->url->link('billing/recurring/form', 'token=' . $this->session->data['token'] . $url . '&recurring_id=' . $recurring['recurring_id'], true)
             );
         }
 
@@ -159,12 +159,12 @@ class ControllerBillingRecurring extends Controller {
         $pagination->total = $this->model_billing_recurring->getTotalRecurrings($filter_data);
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . '&page={page}' . $url, 'SSL');
+        $pagination->url = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . '&page={page}' . $url, true);
 
         $this->data['pagination'] = $pagination->render();
 
-        $this->data['delete'] = $this->url->link('billing/recurring/delete', 'token=' . $this->session->data['token'], 'SSL');
-        $this->data['insert'] = $this->url->link('billing/recurring/form', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['delete'] = $this->url->link('billing/recurring/delete', 'token=' . $this->session->data['token'], true);
+        $this->data['insert'] = $this->url->link('billing/recurring/form', 'token=' . $this->session->data['token'], true);
 
         $this->data['token'] = $this->session->data['token'];
 
@@ -192,14 +192,14 @@ class ControllerBillingRecurring extends Controller {
             $order = 'ASC';
         }
 
-        $this->data['sort_recurring_id'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url . '&sort=recurring_id&order=' . $order, 'SSL');
-        $this->data['sort_name'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url . '&sort=name&order=' . $order, 'SSL');
-        $this->data['sort_total'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url . '&sort=total&order=' . $order, 'SSL');
-        $this->data['sort_status'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url . '&sort=status&order=' . $order, 'SSL');
-        $this->data['sort_cycle'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url . '&sort=cycle&order=' . $order, 'SSL');
-        $this->data['sort_date_added'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url . '&sort=date_added&order=' . $order, 'SSL');
-        $this->data['sort_date_due'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url . '&sort=date_due&order=' . $order, 'SSL');
-        $this->data['sort_date_modified'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url . '&sort=date_modified&order=' . $order, 'SSL');
+        $this->data['sort_recurring_id'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url . '&sort=recurring_id&order=' . $order, true);
+        $this->data['sort_name'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url . '&sort=name&order=' . $order, true);
+        $this->data['sort_total'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url . '&sort=total&order=' . $order, true);
+        $this->data['sort_status'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url . '&sort=status&order=' . $order, true);
+        $this->data['sort_cycle'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url . '&sort=cycle&order=' . $order, true);
+        $this->data['sort_date_added'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url . '&sort=date_added&order=' . $order, true);
+        $this->data['sort_date_due'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url . '&sort=date_due&order=' . $order, true);
+        $this->data['sort_date_modified'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url . '&sort=date_modified&order=' . $order, true);
 
         $this->data['filter_recurring_id'] = $filter_recurring_id;
         $this->data['filter_name'] = $filter_name;
@@ -228,7 +228,7 @@ class ControllerBillingRecurring extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('billing/recurring', 'token=' . $this->session->data['token'], 'SSL'));
+            $this->response->redirect($this->url->link('billing/recurring', 'token=' . $this->session->data['token'], true));
         }
 
         $this->index();
@@ -262,17 +262,17 @@ class ControllerBillingRecurring extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('billing/recurring', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('billing/recurring', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('billing/recurring/form', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('billing/recurring/form', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         $this->load->model('billing/recurring');
@@ -286,7 +286,7 @@ class ControllerBillingRecurring extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->response->redirect($this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url, true));
         }
 
         if (isset($this->request->get['recurring_id'])) {
@@ -295,9 +295,9 @@ class ControllerBillingRecurring extends Controller {
             $recurring_info = array();
         }
 
-        $this->data['action'] = $this->url->link('billing/recurring/form', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['action'] = $this->url->link('billing/recurring/form', 'token=' . $this->session->data['token'] . $url, true);
 
-        $this->data['cancel'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['cancel'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url, true);
 
         $this->data['token'] = $this->session->data['token'];
 
@@ -388,12 +388,12 @@ class ControllerBillingRecurring extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         $this->load->model('billing/recurring');
@@ -401,13 +401,13 @@ class ControllerBillingRecurring extends Controller {
         $recurring_info = $this->model_billing_recurring->getRecurring((int)$this->request->get['recurring_id']);
 
         if ($recurring_info) {
-            $this->data['filter'] = $this->url->link('billing/invoice', 'token=' . $this->session->data['token'] . '&filter_recurring_id=' . $recurring_info['recurring_id'], 'SSL');
-            $this->data['cancel'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url, 'SSL');
+            $this->data['filter'] = $this->url->link('billing/invoice', 'token=' . $this->session->data['token'] . '&filter_recurring_id=' . $recurring_info['recurring_id'], true);
+            $this->data['cancel'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'] . $url, true);
 
             $this->data['token'] = $this->session->data['token'];
 
             $this->data['recurring_id'] = $recurring_info['recurring_id'];
-            $this->data['customer_href'] = $this->url->link('billing/customer/form', 'token=' . $this->session->data['token'] . '&customer_id=' . $recurring_info['customer_id'], 'SSL');
+            $this->data['customer_href'] = $this->url->link('billing/customer/form', 'token=' . $this->session->data['token'] . '&customer_id=' . $recurring_info['customer_id'], true);
             $this->data['customer'] = $recurring_info['customer'];
             $this->data['payment_name'] = $recurring_info['payment_name'];
             $this->data['payment_description'] = $recurring_info['payment_description'];

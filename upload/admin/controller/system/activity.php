@@ -17,12 +17,12 @@ class ControllerSystemActivity extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('system/activity', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('system/activity', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         if (isset($this->request->get['page'])) {
@@ -53,11 +53,11 @@ class ControllerSystemActivity extends Controller {
         $pagination->total = $this->model_system_activity->getTotalActivities();
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('system/activity', 'token=' . $this->session->data['token'] . '&page={page}', 'SSL');
+        $pagination->url = $this->url->link('system/activity', 'token=' . $this->session->data['token'] . '&page={page}', true);
 
         $this->data['pagination'] = $pagination->render();
 
-        $this->data['clear'] = $this->url->link('system/activity/clear', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['clear'] = $this->url->link('system/activity/clear', 'token=' . $this->session->data['token'], true);
 
         $this->data['success'] = $this->build->data('success', $this->session->data);
         $this->data['error_warning'] = $this->build->data('warning', $this->session->data);
@@ -83,6 +83,6 @@ class ControllerSystemActivity extends Controller {
             $this->session->data['success'] = $this->language->get('text_success');
         }
 
-        $this->response->redirect($this->url->link('system/activity', 'token=' . $this->session->data['token'], 'SSL'));
+        $this->response->redirect($this->url->link('system/activity', 'token=' . $this->session->data['token'], true));
     }
 }

@@ -13,12 +13,12 @@ class ControllerAccountLogin extends Controller {
             $customer_info = $this->model_billing_customer->getCustomerByToken($this->request->get['token']);
 
             if ($customer_info && $this->customer->login($customer_info['email'], '', true)) {
-                $this->response->redirect($this->url->link('account/account', '', 'SSL'));
+                $this->response->redirect($this->url->link('account/account', '', true));
             }
         }
 
         if ($this->customer->isLogged()) {
-            $this->response->redirect($this->url->link('account/account', '', 'SSL'));
+            $this->response->redirect($this->url->link('account/account', '', true));
         }
 
         $this->data = $this->load->language('account/login');
@@ -29,7 +29,7 @@ class ControllerAccountLogin extends Controller {
             if (isset($this->request->post['redirect']) && (strpos($this->request->post['redirect'], $this->config->get('config_url')) !== false || strpos($this->request->post['redirect'], $this->config->get('config_ssl')) !== false)) {
                 $this->response->redirect(str_replace('&amp;', '&', $this->request->post['redirect']));
             } else {
-                $this->response->redirect($this->url->link('account/account', '', 'SSL'));
+                $this->response->redirect($this->url->link('account/account', '', true));
             }
         }
 
@@ -42,22 +42,22 @@ class ControllerAccountLogin extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_account'),
-            'href' => $this->url->link('account/account', '', 'SSL')
+            'href' => $this->url->link('account/account', '', true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('account/login', '', 'SSL')
+            'href' => $this->url->link('account/login', '', true)
         );
 
-        $this->data['action'] = $this->url->link('account/login', '', 'SSL');
+        $this->data['action'] = $this->url->link('account/login', '', true);
 
         if ($this->config->get('config_forgotten_application') && $this->config->get('config_registration')) {
-            $this->data['text_forgotten'] = sprintf($this->language->get('text_register_forgotten'), $this->url->link('account/register', '', 'SSL'), $this->url->link('account/forgotten', '', 'SSL'));
+            $this->data['text_forgotten'] = sprintf($this->language->get('text_register_forgotten'), $this->url->link('account/register', '', true), $this->url->link('account/forgotten', '', true));
         } elseif ($this->config->get('config_forgotten_application')) {
-            $this->data['text_forgotten'] = sprintf($this->language->get('text_forgotten'), $this->url->link('account/register', '', 'SSL'), $this->url->link('account/forgotten', '', 'SSL'));
+            $this->data['text_forgotten'] = sprintf($this->language->get('text_forgotten'), $this->url->link('account/register', '', true), $this->url->link('account/forgotten', '', true));
         } elseif ($this->config->get('config_registration')) {
-            $this->data['text_forgotten'] = sprintf($this->language->get('text_register'), $this->url->link('account/register', '', 'SSL'));
+            $this->data['text_forgotten'] = sprintf($this->language->get('text_register'), $this->url->link('account/register', '', true));
         } else {
             $this->data['text_forgotten'] = false;
         }

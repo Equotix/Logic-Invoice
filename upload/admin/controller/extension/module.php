@@ -13,12 +13,12 @@ class ControllerExtensionModule extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('extension/module', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['success'] = $this->build->data('success', $this->session->data);
@@ -54,9 +54,9 @@ class ControllerExtensionModule extends Controller {
                     'url'       => $xml->url,
                     'version'   => $xml->version,
                     'email'     => $xml->email,
-                    'edit'      => $this->url->link('module/' . $extension . '/' . $extension, 'token=' . $this->session->data['token'], 'SSL'),
-                    'install'   => $this->url->link('extension/module/install', 'token=' . $this->session->data['token'] . '&extension=' . $extension, 'SSL'),
-                    'uninstall' => $this->url->link('extension/module/uninstall', 'token=' . $this->session->data['token'] . '&extension=' . $extension, 'SSL'),
+                    'edit'      => $this->url->link('module/' . $extension . '/' . $extension, 'token=' . $this->session->data['token'], true),
+                    'install'   => $this->url->link('extension/module/install', 'token=' . $this->session->data['token'] . '&extension=' . $extension, true),
+                    'uninstall' => $this->url->link('extension/module/uninstall', 'token=' . $this->session->data['token'] . '&extension=' . $extension, true),
                     'installed' => in_array($extension, $extensions)
                 );
             }
@@ -85,7 +85,7 @@ class ControllerExtensionModule extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL'));
+            $this->response->redirect($this->url->link('extension/module', 'token=' . $this->session->data['token'], true));
         }
 
         $this->index();
@@ -112,7 +112,7 @@ class ControllerExtensionModule extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL'));
+            $this->response->redirect($this->url->link('extension/module', 'token=' . $this->session->data['token'], true));
         }
 
         $this->getList();

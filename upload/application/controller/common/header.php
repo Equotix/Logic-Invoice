@@ -66,14 +66,14 @@ class ControllerCommonHeader extends Controller {
 
         if ($this->customer->isLogged()) {
             $this->data['logged'] = true;
-            $this->data['account'] = $this->url->link('account/account', '', 'SSL');
-            $this->data['invoice'] = $this->url->link('account/invoice', '', 'SSL');
-            $this->data['logout'] = $this->url->link('account/logout', '', 'SSL');
+            $this->data['account'] = $this->url->link('account/account', '', true);
+            $this->data['invoice'] = $this->url->link('account/invoice', '', true);
+            $this->data['logout'] = $this->url->link('account/logout', '', true);
         } else {
             $this->data['logged'] = false;
-            $this->data['account'] = $this->url->link('account/account', '', 'SSL');
-            $this->data['register'] = $this->config->get('config_registration') ? $this->url->link('account/register', '', 'SSL') : false;
-            $this->data['login'] = $this->url->link('account/login', '', 'SSL');
+            $this->data['account'] = $this->url->link('account/account', '', true);
+            $this->data['register'] = $this->config->get('config_registration') ? $this->url->link('account/register', '', true) : false;
+            $this->data['login'] = $this->url->link('account/login', '', true);
         }
 		
 		return $this->render('common/header');

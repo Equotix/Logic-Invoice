@@ -77,7 +77,7 @@ class ControllerSystemFileManager extends Controller {
                     'name'  => implode(' ', $name),
                     'type'  => 'directory',
                     'path'  => utf8_substr($image, utf8_strlen(DIR_IMAGE)),
-                    'href'  => $this->url->link('system/filemanager', 'token=' . $this->session->data['token'] . '&directory=' . urlencode(utf8_substr($image, utf8_strlen(DIR_IMAGE . 'upload/'))) . $url, 'SSL')
+                    'href'  => $this->url->link('system/filemanager', 'token=' . $this->session->data['token'] . '&directory=' . urlencode(utf8_substr($image, utf8_strlen(DIR_IMAGE . 'upload/'))) . $url, true)
                 );
             } elseif (is_file($image)) {
                 // Find which protocol to use to pass the full image link back
@@ -144,7 +144,7 @@ class ControllerSystemFileManager extends Controller {
             $url .= '&thumb=' . $this->request->get['thumb'];
         }
 
-        $this->data['parent'] = $this->url->link('system/filemanager', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['parent'] = $this->url->link('system/filemanager', 'token=' . $this->session->data['token'] . $url, true);
 
         // Refresh
         $url = '';
@@ -161,7 +161,7 @@ class ControllerSystemFileManager extends Controller {
             $url .= '&thumb=' . $this->request->get['thumb'];
         }
 
-        $this->data['refresh'] = $this->url->link('system/filemanager', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['refresh'] = $this->url->link('system/filemanager', 'token=' . $this->session->data['token'] . $url, true);
 
         $url = '';
 
@@ -185,7 +185,7 @@ class ControllerSystemFileManager extends Controller {
         $pagination->total = $image_total;
         $pagination->page = $page;
         $pagination->limit = 16;
-        $pagination->url = $this->url->link('system/filemanager', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
+        $pagination->url = $this->url->link('system/filemanager', 'token=' . $this->session->data['token'] . $url . '&page={page}', true);
 
         $this->data['pagination'] = $pagination->render();
 

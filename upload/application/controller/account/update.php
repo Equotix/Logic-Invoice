@@ -8,9 +8,9 @@ class ControllerAccountUpdate extends Controller {
         $this->load->model('billing/customer');
 
         if (!$this->customer->isLogged()) {
-            $this->session->data['redirect'] = $this->url->link('account/update', '', 'SSL');
+            $this->session->data['redirect'] = $this->url->link('account/update', '', true);
 
-            $this->response->redirect($this->url->link('account/login', '', 'SSL'));
+            $this->response->redirect($this->url->link('account/login', '', true));
         }
 
         $this->data = $this->load->language('account/update');
@@ -26,7 +26,7 @@ class ControllerAccountUpdate extends Controller {
 
             $this->model_system_activity->addActivity(sprintf($this->language->get('text_update'), $this->request->post['firstname'] . ' ' . $this->request->post['lastname']));
 
-            $this->response->redirect($this->url->link('account/account', '', 'SSL'));
+            $this->response->redirect($this->url->link('account/account', '', true));
         }
 
         $this->data['breadcrumbs'] = array();
@@ -38,17 +38,17 @@ class ControllerAccountUpdate extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_account'),
-            'href' => $this->url->link('account/account', '', 'SSL')
+            'href' => $this->url->link('account/account', '', true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('account/update', '', 'SSL')
+            'href' => $this->url->link('account/update', '', true)
         );
 
         $customer_info = $this->model_billing_customer->getCustomer($this->customer->getId());
 
-        $this->data['action'] = $this->url->link('account/update', '', 'SSL');
+        $this->data['action'] = $this->url->link('account/update', '', true);
 
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
         $this->data['error_firstname'] = $this->build->data('firstname', $this->error);

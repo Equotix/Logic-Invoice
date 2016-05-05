@@ -19,12 +19,12 @@ class ControllerSystemStatus extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('system/status', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('system/status', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         if (isset($this->request->get['page'])) {
@@ -62,7 +62,7 @@ class ControllerSystemStatus extends Controller {
             $this->data['statuses'][] = array(
                 'status_id' => $status['status_id'],
                 'name'      => $status['name'],
-                'edit'      => $this->url->link('system/status/form', 'token=' . $this->session->data['token'] . $url . '&status_id=' . $status['status_id'], 'SSL')
+                'edit'      => $this->url->link('system/status/form', 'token=' . $this->session->data['token'] . $url . '&status_id=' . $status['status_id'], true)
             );
         }
 
@@ -75,12 +75,12 @@ class ControllerSystemStatus extends Controller {
         $pagination->total = $this->model_system_status->getTotalStatuses();
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('system/status', 'token=' . $this->session->data['token'] . '&page={page}' . $url, 'SSL');
+        $pagination->url = $this->url->link('system/status', 'token=' . $this->session->data['token'] . '&page={page}' . $url, true);
 
         $this->data['pagination'] = $pagination->render();
 
-        $this->data['delete'] = $this->url->link('system/status/delete', 'token=' . $this->session->data['token'], 'SSL');
-        $this->data['insert'] = $this->url->link('system/status/form', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['delete'] = $this->url->link('system/status/delete', 'token=' . $this->session->data['token'], true);
+        $this->data['insert'] = $this->url->link('system/status/form', 'token=' . $this->session->data['token'], true);
 
         $this->data['success'] = $this->build->data('success', $this->session->data);
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
@@ -95,7 +95,7 @@ class ControllerSystemStatus extends Controller {
             $order = 'ASC';
         }
 
-        $this->data['sort_name'] = $this->url->link('system/status', 'token=' . $this->session->data['token'] . '&sort=name&order=' . $order, 'SSL');
+        $this->data['sort_name'] = $this->url->link('system/status', 'token=' . $this->session->data['token'] . '&sort=name&order=' . $order, true);
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
@@ -116,7 +116,7 @@ class ControllerSystemStatus extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('system/status', 'token=' . $this->session->data['token'], 'SSL'));
+            $this->response->redirect($this->url->link('system/status', 'token=' . $this->session->data['token'], true));
         }
 
         $this->index();
@@ -138,17 +138,17 @@ class ControllerSystemStatus extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('system/status', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('system/status', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('system/status/form', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('system/status/form', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         $this->load->model('system/status');
@@ -168,7 +168,7 @@ class ControllerSystemStatus extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('system/status', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->response->redirect($this->url->link('system/status', 'token=' . $this->session->data['token'] . $url, true));
         }
 
         if (isset($this->request->get['status_id'])) {
@@ -177,7 +177,7 @@ class ControllerSystemStatus extends Controller {
             $status_info = array();
         }
 
-        $this->data['action'] = $this->url->link('system/status/form', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['action'] = $this->url->link('system/status/form', 'token=' . $this->session->data['token'] . $url, true);
 
         $url = $this->build->url(array(
             'sort',
@@ -185,7 +185,7 @@ class ControllerSystemStatus extends Controller {
             'page'
         ));
 
-        $this->data['cancel'] = $this->url->link('system/status', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['cancel'] = $this->url->link('system/status', 'token=' . $this->session->data['token'] . $url, true);
 
         $this->data['error_warning'] = $this->build->data('warning', $this->session->data);
         $this->data['error_name'] = $this->build->data('name', $this->error);

@@ -19,12 +19,12 @@ class ControllerSystemUserGroup extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('system/user_group', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('system/user_group', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         if (isset($this->request->get['page'])) {
@@ -62,7 +62,7 @@ class ControllerSystemUserGroup extends Controller {
             $this->data['user_groups'][] = array(
                 'user_group_id' => $user_group['user_group_id'],
                 'name'          => $user_group['name'],
-                'edit'          => $this->url->link('system/user_group/form', 'token=' . $this->session->data['token'] . $url . '&user_group_id=' . $user_group['user_group_id'], 'SSL')
+                'edit'          => $this->url->link('system/user_group/form', 'token=' . $this->session->data['token'] . $url . '&user_group_id=' . $user_group['user_group_id'], true)
             );
         }
 
@@ -75,12 +75,12 @@ class ControllerSystemUserGroup extends Controller {
         $pagination->total = $this->model_system_user_group->getTotalUserGroups();
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('system/user_group', 'token=' . $this->session->data['token'] . '&page={page}' . $url, 'SSL');
+        $pagination->url = $this->url->link('system/user_group', 'token=' . $this->session->data['token'] . '&page={page}' . $url, true);
 
         $this->data['pagination'] = $pagination->render();
 
-        $this->data['delete'] = $this->url->link('system/user_group/delete', 'token=' . $this->session->data['token'], 'SSL');
-        $this->data['insert'] = $this->url->link('system/user_group/form', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['delete'] = $this->url->link('system/user_group/delete', 'token=' . $this->session->data['token'], true);
+        $this->data['insert'] = $this->url->link('system/user_group/form', 'token=' . $this->session->data['token'], true);
 
         $this->data['success'] = $this->build->data('success', $this->session->data);
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
@@ -95,7 +95,7 @@ class ControllerSystemUserGroup extends Controller {
             $order = 'ASC';
         }
 
-        $this->data['sort_name'] = $this->url->link('system/user_group', 'token=' . $this->session->data['token'] . '&sort=name&order=' . $order, 'SSL');
+        $this->data['sort_name'] = $this->url->link('system/user_group', 'token=' . $this->session->data['token'] . '&sort=name&order=' . $order, true);
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
@@ -115,7 +115,7 @@ class ControllerSystemUserGroup extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('system/user_group', 'token=' . $this->session->data['token'], 'SSL'));
+            $this->response->redirect($this->url->link('system/user_group', 'token=' . $this->session->data['token'], true));
         }
 
         $this->index();
@@ -137,17 +137,17 @@ class ControllerSystemUserGroup extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('system/user_group', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('system/user_group', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('system/user_group/form', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('system/user_group/form', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         $this->load->model('system/user_group');
@@ -167,7 +167,7 @@ class ControllerSystemUserGroup extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('system/user_group', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->response->redirect($this->url->link('system/user_group', 'token=' . $this->session->data['token'] . $url, true));
         }
 
         if (isset($this->request->get['user_group_id'])) {
@@ -176,7 +176,7 @@ class ControllerSystemUserGroup extends Controller {
             $user_group_info = array();
         }
 
-        $this->data['action'] = $this->url->link('system/user_group/form', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['action'] = $this->url->link('system/user_group/form', 'token=' . $this->session->data['token'] . $url, true);
 
         $url = $this->build->url(array(
             'sort',
@@ -184,7 +184,7 @@ class ControllerSystemUserGroup extends Controller {
             'page'
         ));
 
-        $this->data['cancel'] = $this->url->link('system/user_group', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['cancel'] = $this->url->link('system/user_group', 'token=' . $this->session->data['token'] . $url, true);
 
         $this->data['error_warning'] = $this->build->data('warning', $this->session->data);
         $this->data['error_name'] = $this->build->data('name', $this->error);

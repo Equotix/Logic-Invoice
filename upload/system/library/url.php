@@ -3,7 +3,7 @@ class Url {
     private $domain;
     private $rewrite = array();
 
-    public function __construct($domain, $ssl = '') {
+    public function __construct($domain, $ssl) {
         $this->domain = $domain;
         $this->ssl = $ssl;
     }

@@ -91,9 +91,9 @@ class ControllerPaymentAuthorizeNetSimAuthorizeNetSim extends Controller {
 
 			$this->model_system_activity->addActivity(sprintf($this->language->get('text_updated'), $invoice_info['invoice_id'], $status['name']));
 
-			$this->response->redirect($this->url->link('account/invoice/success', 'invoice_id=' . $invoice_info['invoice_id'], 'SSL'));
+			$this->response->redirect($this->url->link('account/invoice/success', 'invoice_id=' . $invoice_info['invoice_id'], true));
 		} else {
-			$this->response->redirect($this->url->link('account/invoice', '', 'SSL'));
+			$this->response->redirect($this->url->link('account/invoice', '', true));
 		}
 	}
 }

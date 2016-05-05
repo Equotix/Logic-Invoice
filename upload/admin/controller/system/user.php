@@ -19,12 +19,12 @@ class ControllerSystemUser extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('system/user', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('system/user', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         if (isset($this->request->get['page'])) {
@@ -67,7 +67,7 @@ class ControllerSystemUser extends Controller {
                 'status'        => $user['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
                 'date_added'    => date($this->language->get('date_format_short'), strtotime($user['date_added'])),
                 'date_modified' => date($this->language->get('date_format_short'), strtotime($user['date_modified'])),
-                'edit'          => $this->url->link('system/user/form', 'token=' . $this->session->data['token'] . $url . '&user_id=' . $user['user_id'], 'SSL')
+                'edit'          => $this->url->link('system/user/form', 'token=' . $this->session->data['token'] . $url . '&user_id=' . $user['user_id'], true)
             );
         }
 
@@ -80,12 +80,12 @@ class ControllerSystemUser extends Controller {
         $pagination->total = $this->model_system_user->getTotalUsers();
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('system/user', 'token=' . $this->session->data['token'] . '&page={page}' . $url, 'SSL');
+        $pagination->url = $this->url->link('system/user', 'token=' . $this->session->data['token'] . '&page={page}' . $url, true);
 
         $this->data['pagination'] = $pagination->render();
 
-        $this->data['delete'] = $this->url->link('system/user/delete', 'token=' . $this->session->data['token'], 'SSL');
-        $this->data['insert'] = $this->url->link('system/user/form', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['delete'] = $this->url->link('system/user/delete', 'token=' . $this->session->data['token'], true);
+        $this->data['insert'] = $this->url->link('system/user/form', 'token=' . $this->session->data['token'], true);
 
         $this->data['success'] = $this->build->data('success', $this->session->data);
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
@@ -100,12 +100,12 @@ class ControllerSystemUser extends Controller {
             $order = 'ASC';
         }
 
-        $this->data['sort_name'] = $this->url->link('system/user', 'token=' . $this->session->data['token'] . '&sort=u.name&order=' . $order, 'SSL');
-        $this->data['sort_username'] = $this->url->link('system/user', 'token=' . $this->session->data['token'] . '&sort=username&order=' . $order, 'SSL');
-        $this->data['sort_user_group'] = $this->url->link('system/user', 'token=' . $this->session->data['token'] . '&sort=ug.name&order=' . $order, 'SSL');
-        $this->data['sort_status'] = $this->url->link('system/user', 'token=' . $this->session->data['token'] . '&sort=status&order=' . $order, 'SSL');
-        $this->data['sort_date_added'] = $this->url->link('system/user', 'token=' . $this->session->data['token'] . '&sort=date_added&order=' . $order, 'SSL');
-        $this->data['sort_date_modified'] = $this->url->link('system/user', 'token=' . $this->session->data['token'] . '&sort=date_modified&order=' . $order, 'SSL');
+        $this->data['sort_name'] = $this->url->link('system/user', 'token=' . $this->session->data['token'] . '&sort=u.name&order=' . $order, true);
+        $this->data['sort_username'] = $this->url->link('system/user', 'token=' . $this->session->data['token'] . '&sort=username&order=' . $order, true);
+        $this->data['sort_user_group'] = $this->url->link('system/user', 'token=' . $this->session->data['token'] . '&sort=ug.name&order=' . $order, true);
+        $this->data['sort_status'] = $this->url->link('system/user', 'token=' . $this->session->data['token'] . '&sort=status&order=' . $order, true);
+        $this->data['sort_date_added'] = $this->url->link('system/user', 'token=' . $this->session->data['token'] . '&sort=date_added&order=' . $order, true);
+        $this->data['sort_date_modified'] = $this->url->link('system/user', 'token=' . $this->session->data['token'] . '&sort=date_modified&order=' . $order, true);
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
@@ -125,7 +125,7 @@ class ControllerSystemUser extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('system/user', 'token=' . $this->session->data['token'], 'SSL'));
+            $this->response->redirect($this->url->link('system/user', 'token=' . $this->session->data['token'], true));
         }
 
         $this->index();
@@ -147,17 +147,17 @@ class ControllerSystemUser extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('system/user', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('system/user', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('system/user/form', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('system/user/form', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         $this->load->model('system/user');
@@ -177,7 +177,7 @@ class ControllerSystemUser extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('system/user', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->response->redirect($this->url->link('system/user', 'token=' . $this->session->data['token'] . $url, true));
         }
 
         if (isset($this->request->get['user_id'])) {
@@ -186,7 +186,7 @@ class ControllerSystemUser extends Controller {
             $user_info = array();
         }
 
-        $this->data['action'] = $this->url->link('system/user/form', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['action'] = $this->url->link('system/user/form', 'token=' . $this->session->data['token'] . $url, true);
 
         $url = $this->build->url(array(
             'sort',
@@ -194,7 +194,7 @@ class ControllerSystemUser extends Controller {
             'page'
         ));
 
-        $this->data['cancel'] = $this->url->link('system/user', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['cancel'] = $this->url->link('system/user', 'token=' . $this->session->data['token'] . $url, true);
 
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
         $this->data['error_email'] = $this->build->data('email', $this->error);

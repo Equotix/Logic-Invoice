@@ -57,7 +57,7 @@ class ControllerPaymentAuthorizeNetAimAuthorizeNetAim extends Controller {
 
 		if ($invoice_info) {
 			if (!(in_array($invoice_info['status_id'], $this->config->get('config_pending_status')) || in_array($invoice_info['status_id'], $this->config->get('config_overdue_status')))) {
-                $json['redirect'] = $this->url->link('account/invoice/invoice', 'invoice_id=' . $invoice_id, 'SSL');
+                $json['redirect'] = $this->url->link('account/invoice/invoice', 'invoice_id=' . $invoice_id, true);
             }
 			
 			if (!$json) {
@@ -172,7 +172,7 @@ class ControllerPaymentAuthorizeNetAimAuthorizeNetAim extends Controller {
 
 						$this->model_system_activity->addActivity(sprintf($this->language->get('text_updated'), $invoice_id, $status['name']));
 
-						$json['redirect'] = $this->url->link('account/invoice/success', 'invoice_id=' . $invoice_id, 'SSL');
+						$json['redirect'] = $this->url->link('account/invoice/success', 'invoice_id=' . $invoice_id, true);
 					} else {
 						$json['error'] = $response_info[4];
 					}
@@ -185,7 +185,7 @@ class ControllerPaymentAuthorizeNetAimAuthorizeNetAim extends Controller {
 				curl_close($curl);
 			}
 		} else {
-			$json['redirect'] = $this->url->link('account/invoice', '', 'SSL');
+			$json['redirect'] = $this->url->link('account/invoice', '', true);
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

@@ -19,12 +19,12 @@ class ControllerContentEmailTemplate extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('content/email_template', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('content/email_template', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         if (isset($this->request->get['page'])) {
@@ -83,7 +83,7 @@ class ControllerContentEmailTemplate extends Controller {
                 'subject'           => $email_template['subject'],
                 'priority'          => $email_template['priority'],
                 'status'            => $email_template['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-                'edit'              => $this->url->link('content/email_template/form', 'token=' . $this->session->data['token'] . $url . '&email_template_id=' . $email_template['email_template_id'], 'SSL')
+                'edit'              => $this->url->link('content/email_template/form', 'token=' . $this->session->data['token'] . $url . '&email_template_id=' . $email_template['email_template_id'], true)
             );
         }
 
@@ -96,12 +96,12 @@ class ControllerContentEmailTemplate extends Controller {
         $pagination->total = $this->model_content_email_template->getTotalEmailTemplates();
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('content/email_template', 'token=' . $this->session->data['token'] . '&page={page}' . $url, 'SSL');
+        $pagination->url = $this->url->link('content/email_template', 'token=' . $this->session->data['token'] . '&page={page}' . $url, true);
 
         $this->data['pagination'] = $pagination->render();
 
-        $this->data['delete'] = $this->url->link('content/email_template/delete', 'token=' . $this->session->data['token'], 'SSL');
-        $this->data['insert'] = $this->url->link('content/email_template/form', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['delete'] = $this->url->link('content/email_template/delete', 'token=' . $this->session->data['token'], true);
+        $this->data['insert'] = $this->url->link('content/email_template/form', 'token=' . $this->session->data['token'], true);
 
         $this->data['success'] = $this->build->data('success', $this->session->data);
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
@@ -116,10 +116,10 @@ class ControllerContentEmailTemplate extends Controller {
             $order = 'ASC';
         }
 
-        $this->data['sort_type'] = $this->url->link('content/email_template', 'token=' . $this->session->data['token'] . '&sort=type&order=' . $order, 'SSL');
-        $this->data['sort_subject'] = $this->url->link('content/email_template', 'token=' . $this->session->data['token'] . '&sort=subject&order=' . $order, 'SSL');
-        $this->data['sort_priority'] = $this->url->link('content/email_template', 'token=' . $this->session->data['token'] . '&sort=priority&order=' . $order, 'SSL');
-        $this->data['sort_status'] = $this->url->link('content/email_template', 'token=' . $this->session->data['token'] . '&sort=status&order=' . $order, 'SSL');
+        $this->data['sort_type'] = $this->url->link('content/email_template', 'token=' . $this->session->data['token'] . '&sort=type&order=' . $order, true);
+        $this->data['sort_subject'] = $this->url->link('content/email_template', 'token=' . $this->session->data['token'] . '&sort=subject&order=' . $order, true);
+        $this->data['sort_priority'] = $this->url->link('content/email_template', 'token=' . $this->session->data['token'] . '&sort=priority&order=' . $order, true);
+        $this->data['sort_status'] = $this->url->link('content/email_template', 'token=' . $this->session->data['token'] . '&sort=status&order=' . $order, true);
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
@@ -140,7 +140,7 @@ class ControllerContentEmailTemplate extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('content/email_template', 'token=' . $this->session->data['token'], 'SSL'));
+            $this->response->redirect($this->url->link('content/email_template', 'token=' . $this->session->data['token'], true));
         }
 
         $this->index();
@@ -165,17 +165,17 @@ class ControllerContentEmailTemplate extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('content/email_template', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('content/email_template', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('content/email_template/form', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('content/email_template/form', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         $this->load->model('content/email_template');
@@ -196,7 +196,7 @@ class ControllerContentEmailTemplate extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('content/email_template', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->response->redirect($this->url->link('content/email_template', 'token=' . $this->session->data['token'] . $url, true));
         }
 
         if (isset($this->request->get['email_template_id'])) {
@@ -205,7 +205,7 @@ class ControllerContentEmailTemplate extends Controller {
             $email_template_info = array();
         }
 
-        $this->data['action'] = $this->url->link('content/email_template/form', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['action'] = $this->url->link('content/email_template/form', 'token=' . $this->session->data['token'] . $url, true);
 
         $this->data['token'] = $this->session->data['token'];
 
@@ -215,7 +215,7 @@ class ControllerContentEmailTemplate extends Controller {
             'page'
         ));
 
-        $this->data['cancel'] = $this->url->link('content/email_template', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['cancel'] = $this->url->link('content/email_template', 'token=' . $this->session->data['token'] . $url, true);
 
         $this->data['error_warning'] = $this->build->data('warning', $this->session->data);
         $this->data['error_subject'] = $this->build->data('subject', $this->error);

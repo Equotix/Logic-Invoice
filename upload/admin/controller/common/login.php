@@ -10,7 +10,7 @@ class ControllerCommonLogin extends Controller {
         $this->document->setTitle($this->language->get('heading_title'));
 
         if ($this->user->isLogged() && isset($this->request->get['token']) && ($this->request->get['token'] == $this->session->data['token'])) {
-            $this->response->redirect($this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL'));
+            $this->response->redirect($this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true));
         }
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
@@ -23,7 +23,7 @@ class ControllerCommonLogin extends Controller {
             if (!empty($this->request->post['redirect'])) {
                 $this->response->redirect($this->request->post['redirect'] . '&token=' . $this->session->data['token']);
             } else {
-                $this->response->redirect($this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL'));
+                $this->response->redirect($this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true));
             }
         }
 
@@ -31,10 +31,10 @@ class ControllerCommonLogin extends Controller {
             $this->error['warning'] = $this->language->get('error_token');
         }
 
-        $this->data['action'] = $this->url->link('common/login', '', 'SSL');
+        $this->data['action'] = $this->url->link('common/login', '', true);
 
         if ($this->config->get('config_forgotten_admin')) {
-            $this->data['text_forgotten'] = sprintf($this->language->get('text_forgotten'), $this->url->link('common/forgotten', '', 'SSL'));
+            $this->data['text_forgotten'] = sprintf($this->language->get('text_forgotten'), $this->url->link('common/forgotten', '', true));
         } else {
             $this->data['text_forgotten'] = false;
         }
@@ -64,7 +64,7 @@ class ControllerCommonLogin extends Controller {
                 $url .= http_build_query($this->request->get);
             }
 
-            $this->data['redirect'] = $this->url->link($load, $url, 'SSL');
+            $this->data['redirect'] = $this->url->link($load, $url, true);
         } else {
             $this->data['redirect'] = '';
         }

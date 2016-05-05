@@ -19,12 +19,12 @@ class ControllerContentBlogCategory extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('content/blog_category', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('content/blog_category', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         if (isset($this->request->get['page'])) {
@@ -64,7 +64,7 @@ class ControllerContentBlogCategory extends Controller {
                 'name'             => $blog_category['name'],
                 'sort_order'       => $blog_category['sort_order'],
                 'status'           => $blog_category['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-                'edit'             => $this->url->link('content/blog_category/form', 'token=' . $this->session->data['token'] . $url . '&blog_category_id=' . $blog_category['blog_category_id'], 'SSL')
+                'edit'             => $this->url->link('content/blog_category/form', 'token=' . $this->session->data['token'] . $url . '&blog_category_id=' . $blog_category['blog_category_id'], true)
             );
         }
 
@@ -77,12 +77,12 @@ class ControllerContentBlogCategory extends Controller {
         $pagination->total = $this->model_content_blog_category->getTotalBlogCategories();
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('content/blog_category', 'token=' . $this->session->data['token'] . '&page={page}' . $url, 'SSL');
+        $pagination->url = $this->url->link('content/blog_category', 'token=' . $this->session->data['token'] . '&page={page}' . $url, true);
 
         $this->data['pagination'] = $pagination->render();
 
-        $this->data['delete'] = $this->url->link('content/blog_category/delete', 'token=' . $this->session->data['token'], 'SSL');
-        $this->data['insert'] = $this->url->link('content/blog_category/form', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['delete'] = $this->url->link('content/blog_category/delete', 'token=' . $this->session->data['token'], true);
+        $this->data['insert'] = $this->url->link('content/blog_category/form', 'token=' . $this->session->data['token'], true);
 
         $this->data['success'] = $this->build->data('success', $this->session->data);
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
@@ -97,9 +97,9 @@ class ControllerContentBlogCategory extends Controller {
             $order = 'ASC';
         }
 
-        $this->data['sort_name'] = $this->url->link('content/blog_category', 'token=' . $this->session->data['token'] . '&sort=name&order=' . $order, 'SSL');
-        $this->data['sort_sort_order'] = $this->url->link('content/blog_category', 'token=' . $this->session->data['token'] . '&sort=sort_order&order=' . $order, 'SSL');
-        $this->data['sort_status'] = $this->url->link('content/blog_category', 'token=' . $this->session->data['token'] . '&sort=status&order=' . $order, 'SSL');
+        $this->data['sort_name'] = $this->url->link('content/blog_category', 'token=' . $this->session->data['token'] . '&sort=name&order=' . $order, true);
+        $this->data['sort_sort_order'] = $this->url->link('content/blog_category', 'token=' . $this->session->data['token'] . '&sort=sort_order&order=' . $order, true);
+        $this->data['sort_status'] = $this->url->link('content/blog_category', 'token=' . $this->session->data['token'] . '&sort=status&order=' . $order, true);
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
@@ -119,7 +119,7 @@ class ControllerContentBlogCategory extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('content/blog_category', 'token=' . $this->session->data['token'], 'SSL'));
+            $this->response->redirect($this->url->link('content/blog_category', 'token=' . $this->session->data['token'], true));
         }
 
         $this->index();
@@ -144,17 +144,17 @@ class ControllerContentBlogCategory extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('content/blog_category', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('content/blog_category', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('content/blog_category/form', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('content/blog_category/form', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         $this->load->model('content/blog_category');
@@ -175,7 +175,7 @@ class ControllerContentBlogCategory extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('content/blog_category', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->response->redirect($this->url->link('content/blog_category', 'token=' . $this->session->data['token'] . $url, true));
         }
 
         if (isset($this->request->get['blog_category_id'])) {
@@ -184,7 +184,7 @@ class ControllerContentBlogCategory extends Controller {
             $blog_category_info = array();
         }
 
-        $this->data['action'] = $this->url->link('content/blog_category/form', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['action'] = $this->url->link('content/blog_category/form', 'token=' . $this->session->data['token'] . $url, true);
 
         $this->data['token'] = $this->session->data['token'];
 
@@ -194,7 +194,7 @@ class ControllerContentBlogCategory extends Controller {
             'page'
         ));
 
-        $this->data['cancel'] = $this->url->link('content/blog_category', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['cancel'] = $this->url->link('content/blog_category', 'token=' . $this->session->data['token'] . $url, true);
 
         $this->data['error_warning'] = $this->build->data('warning', $this->session->data);
         $this->data['error_name'] = $this->build->data('name', $this->error);

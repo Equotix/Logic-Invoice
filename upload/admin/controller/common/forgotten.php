@@ -6,11 +6,11 @@ class ControllerCommonForgotten extends Controller {
 
     public function index() {
         if ($this->user->isLogged() && isset($this->request->get['token']) && ($this->request->get['token'] == $this->session->data['token'])) {
-            $this->response->redirect($this->url->link('common/dashboard', '', 'SSL'));
+            $this->response->redirect($this->url->link('common/dashboard', '', true));
         }
 
         if (!$this->config->get('config_forgotten_admin')) {
-            $this->response->redirect($this->url->link('common/login', '', 'SSL'));
+            $this->response->redirect($this->url->link('common/login', '', true));
         }
 
         $this->data = $this->load->language('common/forgotten');
@@ -26,12 +26,12 @@ class ControllerCommonForgotten extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('common/login', '', 'SSL'));
+            $this->response->redirect($this->url->link('common/login', '', true));
         }
 
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
 
-        $this->data['action'] = $this->url->link('common/forgotten', '', 'SSL');
+        $this->data['action'] = $this->url->link('common/forgotten', '', true);
 
         $this->data['email'] = $this->build->data('email', $this->request->post);
 

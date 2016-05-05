@@ -53,9 +53,9 @@ class ControllerPaymentPPStandardPPStandard extends Controller {
             $this->data['email'] = $invoice_info['email'];
             $this->data['invoice'] = $invoice_info['invoice_id'] . ' - ' . html_entity_decode($invoice_info['firstname'], ENT_QUOTES, 'UTF-8') . ' ' . html_entity_decode($invoice_info['lastname'], ENT_QUOTES, 'UTF-8');
             $this->data['lc'] = $this->session->data['language'];
-            $this->data['return'] = $this->url->link('account/invoice/success', 'invoice_id=' . $invoice_info['invoice_id'], 'SSL');
-            $this->data['notify_url'] = $this->url->link('payment/pp_standard/pp_standard/callback', '', 'SSL');
-            $this->data['cancel_return'] = $this->url->link('account/invoice/payment', 'invoice_id=' . $invoice_info['invoice_id'], 'SSL');
+            $this->data['return'] = $this->url->link('account/invoice/success', 'invoice_id=' . $invoice_info['invoice_id'], true);
+            $this->data['notify_url'] = $this->url->link('payment/pp_standard/pp_standard/callback', '', true);
+            $this->data['cancel_return'] = $this->url->link('account/invoice/payment', 'invoice_id=' . $invoice_info['invoice_id'], true);
 
             if (!$this->config->get('pp_standard_transaction')) {
                 $this->data['paymentaction'] = 'authorization';

@@ -4,9 +4,9 @@ defined('_PATH') or die('Restricted!');
 class ControllerAccountRecurring extends Controller {
     public function index() {
         if (!$this->customer->isLogged()) {
-            $this->session->data['redirect'] = $this->url->link('account/recurring', '', 'SSL');
+            $this->session->data['redirect'] = $this->url->link('account/recurring', '', true);
 
-            $this->response->redirect($this->url->link('account/recurring', '', 'SSL'));
+            $this->response->redirect($this->url->link('account/recurring', '', true));
         }
 
         $this->data = $this->load->language('account/recurring');
@@ -22,12 +22,12 @@ class ControllerAccountRecurring extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_account'),
-            'href' => $this->url->link('account/account', '', 'SSL')
+            'href' => $this->url->link('account/account', '', true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('account/recurring', '', 'SSL')
+            'href' => $this->url->link('account/recurring', '', true)
         );
 
         if (isset($this->session->data['success'])) {
@@ -63,7 +63,7 @@ class ControllerAccountRecurring extends Controller {
                 'cycle'        => $this->language->get('text_' . $recurring['cycle']),
                 'date_due'     => $recurring['status'] ? date($this->language->get('date_format_short'), strtotime($recurring['date_due'])) : $this->language->get('text_disabled'),
                 'date_added'   => date($this->language->get('date_format_short'), strtotime($recurring['date_added'])),
-                'view'         => $this->url->link('account/recurring/view', 'recurring_id=' . $recurring['recurring_id'], 'SSL')
+                'view'         => $this->url->link('account/recurring/view', 'recurring_id=' . $recurring['recurring_id'], true)
             );
         }
 
@@ -71,7 +71,7 @@ class ControllerAccountRecurring extends Controller {
         $pagination->total = $this->model_billing_recurring->getTotalRecurrings();
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_application');
-        $pagination->url = $this->url->link('account/recurring', 'page={page}', 'SSL');
+        $pagination->url = $this->url->link('account/recurring', 'page={page}', true);
 
         $this->data['pagination'] = $pagination->render();
 
@@ -83,9 +83,9 @@ class ControllerAccountRecurring extends Controller {
 
     public function view() {
         if (!$this->customer->isLogged()) {
-            $this->session->data['redirect'] = $this->url->link('account/recurring', '', 'SSL');
+            $this->session->data['redirect'] = $this->url->link('account/recurring', '', true);
 
-            $this->response->redirect($this->url->link('account/login', '', 'SSL'));
+            $this->response->redirect($this->url->link('account/login', '', true));
         }
 
         $this->data = $this->load->language('account/recurring');
@@ -106,17 +106,17 @@ class ControllerAccountRecurring extends Controller {
 
             $this->data['breadcrumbs'][] = array(
                 'text' => $this->language->get('text_account'),
-                'href' => $this->url->link('account/account', '', 'SSL')
+                'href' => $this->url->link('account/account', '', true)
             );
 
             $this->data['breadcrumbs'][] = array(
                 'text' => $this->language->get('heading_title'),
-                'href' => $this->url->link('account/recurring', '', 'SSL')
+                'href' => $this->url->link('account/recurring', '', true)
             );
 
             $this->data['breadcrumbs'][] = array(
                 'text' => $this->language->get('text_view_recurring'),
-                'href' => $this->url->link('account/recurring/view', 'recurring_id=' . $recurring_info['recurring_id'], 'SSL')
+                'href' => $this->url->link('account/recurring/view', 'recurring_id=' . $recurring_info['recurring_id'], true)
             );
 
             $this->data['recurring_id'] = $recurring_info['recurring_id'];
@@ -128,7 +128,7 @@ class ControllerAccountRecurring extends Controller {
             $this->data['date_due'] = $recurring_info['status'] ? date($this->language->get('date_format_short'), strtotime($recurring_info['date_due'])) : $this->language->get('text_disabled');
             $this->data['date_added'] = date($this->language->get('date_format_short'), strtotime($recurring_info['date_added']));
 
-            $this->data['cancel'] = $this->url->link('account/recurring/cancel', 'recurring_id=' . $recurring_info['recurring_id'], 'SSL');
+            $this->data['cancel'] = $this->url->link('account/recurring/cancel', 'recurring_id=' . $recurring_info['recurring_id'], true);
 
             $items = $recurring_info['items'];
 
@@ -172,9 +172,9 @@ class ControllerAccountRecurring extends Controller {
 
     public function cancel() {
         if (!$this->customer->isLogged()) {
-            $this->session->data['redirect'] = $this->url->link('account/recurring', '', 'SSL');
+            $this->session->data['redirect'] = $this->url->link('account/recurring', '', true);
 
-            $this->response->redirect($this->url->link('account/login', '', 'SSL'));
+            $this->response->redirect($this->url->link('account/login', '', true));
         }
 
         if (isset($this->request->get['recurring_id'])) {

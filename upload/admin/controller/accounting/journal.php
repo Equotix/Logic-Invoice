@@ -28,12 +28,12 @@ class ControllerAccountingJournal extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         if (isset($this->request->get['filter_description'])) {
@@ -107,12 +107,12 @@ class ControllerAccountingJournal extends Controller {
                 'transaction_id' => $transaction['transaction_id'],
                 'description'    => utf8_strlen($transaction['description']) > 20 ? utf8_substr($transaction['description'], 0, 20) . '...' : $transaction['description'],
                 'invoice_id'     => $transaction['invoice_id'],
-                'invoice'        => $transaction['invoice_id'] ? $this->url->link('billing/invoice/view', 'token=' . $this->session->data['token'] . '&invoice_id=' . $transaction['invoice_id'], 'SSL') : false,
+                'invoice'        => $transaction['invoice_id'] ? $this->url->link('billing/invoice/view', 'token=' . $this->session->data['token'] . '&invoice_id=' . $transaction['invoice_id'], true) : false,
                 'amount'         => $this->currency->format($transaction['amount'], $transaction['currency_code'], $transaction['currency_value']),
 				'date'           => date($this->language->get('date_format_short'), strtotime($transaction['date'])),
                 'date_added'     => date($this->language->get('datetime_format_short'), strtotime($transaction['date_added'])),
                 'date_modified'  => date($this->language->get('datetime_format_short'), strtotime($transaction['date_modified'])),
-                'edit'           => $this->url->link('accounting/journal/form', 'token=' . $this->session->data['token'] . $url . '&transaction_id=' . $transaction['transaction_id'], 'SSL')
+                'edit'           => $this->url->link('accounting/journal/form', 'token=' . $this->session->data['token'] . $url . '&transaction_id=' . $transaction['transaction_id'], true)
             );
         }
 
@@ -130,12 +130,12 @@ class ControllerAccountingJournal extends Controller {
         $pagination->total = $this->model_accounting_transaction->getTotalTransactions($filter_data);
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . '&page={page}' . $url, 'SSL');
+        $pagination->url = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . '&page={page}' . $url, true);
 
         $this->data['pagination'] = $pagination->render();
 
-        $this->data['delete'] = $this->url->link('accounting/journal/delete', 'token=' . $this->session->data['token'], 'SSL');
-        $this->data['insert'] = $this->url->link('accounting/journal/form', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['delete'] = $this->url->link('accounting/journal/delete', 'token=' . $this->session->data['token'], true);
+        $this->data['insert'] = $this->url->link('accounting/journal/form', 'token=' . $this->session->data['token'], true);
 
         $this->data['token'] = $this->session->data['token'];
 
@@ -160,12 +160,12 @@ class ControllerAccountingJournal extends Controller {
             $order = 'ASC';
         }
 
-        $this->data['sort_description'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url . '&sort=description&order=' . $order, 'SSL');
-        $this->data['sort_invoice_id'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url . '&sort=invoice_id&order=' . $order, 'SSL');
-        $this->data['sort_amount'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url . '&sort=amount&order=' . $order, 'SSL');
-        $this->data['sort_date'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url . '&sort=date&order=' . $order, 'SSL');
-        $this->data['sort_date_added'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url . '&sort=date_added&order=' . $order, 'SSL');
-        $this->data['sort_date_modified'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url . '&sort=date_modified&order=' . $order, 'SSL');
+        $this->data['sort_description'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url . '&sort=description&order=' . $order, true);
+        $this->data['sort_invoice_id'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url . '&sort=invoice_id&order=' . $order, true);
+        $this->data['sort_amount'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url . '&sort=amount&order=' . $order, true);
+        $this->data['sort_date'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url . '&sort=date&order=' . $order, true);
+        $this->data['sort_date_added'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url . '&sort=date_added&order=' . $order, true);
+        $this->data['sort_date_modified'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url . '&sort=date_modified&order=' . $order, true);
 
         $this->data['filter_description'] = $filter_description;
         $this->data['filter_invoice_id'] = $filter_invoice_id;
@@ -191,7 +191,7 @@ class ControllerAccountingJournal extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('accounting/journal', 'token=' . $this->session->data['token'], 'SSL'));
+            $this->response->redirect($this->url->link('accounting/journal', 'token=' . $this->session->data['token'], true));
         }
 
         $this->index();
@@ -222,12 +222,12 @@ class ControllerAccountingJournal extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         $this->load->model('accounting/transaction');
@@ -241,7 +241,7 @@ class ControllerAccountingJournal extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->response->redirect($this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url, true));
         }
 
         if (isset($this->request->get['transaction_id'])) {
@@ -250,9 +250,9 @@ class ControllerAccountingJournal extends Controller {
             $transaction_info = array();
         }
 
-        $this->data['action'] = $this->url->link('accounting/journal/form', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['action'] = $this->url->link('accounting/journal/form', 'token=' . $this->session->data['token'] . $url, true);
 
-        $this->data['cancel'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['cancel'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . $url, true);
 
         $this->data['token'] = $this->session->data['token'];
 

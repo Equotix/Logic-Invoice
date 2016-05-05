@@ -19,12 +19,12 @@ class ControllerContentArticle extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('content/article', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('content/article', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         if (isset($this->request->get['page'])) {
@@ -65,7 +65,7 @@ class ControllerContentArticle extends Controller {
                 'top'        => $article['top'] ? $this->language->get('text_yes') : $this->language->get('text_no'),
                 'sort_order' => $article['sort_order'],
                 'status'     => $article['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-                'edit'       => $this->url->link('content/article/form', 'token=' . $this->session->data['token'] . $url . '&article_id=' . $article['article_id'], 'SSL')
+                'edit'       => $this->url->link('content/article/form', 'token=' . $this->session->data['token'] . $url . '&article_id=' . $article['article_id'], true)
             );
         }
 
@@ -78,12 +78,12 @@ class ControllerContentArticle extends Controller {
         $pagination->total = $this->model_content_article->getTotalArticles();
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('content/article', 'token=' . $this->session->data['token'] . '&page={page}' . $url, 'SSL');
+        $pagination->url = $this->url->link('content/article', 'token=' . $this->session->data['token'] . '&page={page}' . $url, true);
 
         $this->data['pagination'] = $pagination->render();
 
-        $this->data['delete'] = $this->url->link('content/article/delete', 'token=' . $this->session->data['token'], 'SSL');
-        $this->data['insert'] = $this->url->link('content/article/form', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['delete'] = $this->url->link('content/article/delete', 'token=' . $this->session->data['token'], true);
+        $this->data['insert'] = $this->url->link('content/article/form', 'token=' . $this->session->data['token'], true);
 
         $this->data['success'] = $this->build->data('success', $this->session->data);
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
@@ -98,10 +98,10 @@ class ControllerContentArticle extends Controller {
             $order = 'ASC';
         }
 
-        $this->data['sort_title'] = $this->url->link('content/article', 'token=' . $this->session->data['token'] . '&sort=title&order=' . $order, 'SSL');
-        $this->data['sort_top'] = $this->url->link('content/article', 'token=' . $this->session->data['token'] . '&sort=top&order=' . $order, 'SSL');
-        $this->data['sort_sort_order'] = $this->url->link('content/article', 'token=' . $this->session->data['token'] . '&sort=sort_order&order=' . $order, 'SSL');
-        $this->data['sort_status'] = $this->url->link('content/article', 'token=' . $this->session->data['token'] . '&sort=status&order=' . $order, 'SSL');
+        $this->data['sort_title'] = $this->url->link('content/article', 'token=' . $this->session->data['token'] . '&sort=title&order=' . $order, true);
+        $this->data['sort_top'] = $this->url->link('content/article', 'token=' . $this->session->data['token'] . '&sort=top&order=' . $order, true);
+        $this->data['sort_sort_order'] = $this->url->link('content/article', 'token=' . $this->session->data['token'] . '&sort=sort_order&order=' . $order, true);
+        $this->data['sort_status'] = $this->url->link('content/article', 'token=' . $this->session->data['token'] . '&sort=status&order=' . $order, true);
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
@@ -122,7 +122,7 @@ class ControllerContentArticle extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('content/article', 'token=' . $this->session->data['token'], 'SSL'));
+            $this->response->redirect($this->url->link('content/article', 'token=' . $this->session->data['token'], true));
         }
 
         $this->index();
@@ -147,17 +147,17 @@ class ControllerContentArticle extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('content/article', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('content/article', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('content/article/form', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('content/article/form', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         $this->load->model('content/article');
@@ -178,7 +178,7 @@ class ControllerContentArticle extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('content/article', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->response->redirect($this->url->link('content/article', 'token=' . $this->session->data['token'] . $url, true));
         }
 
         if (isset($this->request->get['article_id'])) {
@@ -187,7 +187,7 @@ class ControllerContentArticle extends Controller {
             $article_info = array();
         }
 
-        $this->data['action'] = $this->url->link('content/article/form', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['action'] = $this->url->link('content/article/form', 'token=' . $this->session->data['token'] . $url, true);
 
         $this->data['token'] = $this->session->data['token'];
 
@@ -197,7 +197,7 @@ class ControllerContentArticle extends Controller {
             'page'
         ));
 
-        $this->data['cancel'] = $this->url->link('content/article', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['cancel'] = $this->url->link('content/article', 'token=' . $this->session->data['token'] . $url, true);
 
         $this->data['error_warning'] = $this->build->data('warning', $this->session->data);
         $this->data['error_title'] = $this->build->data('title', $this->error);

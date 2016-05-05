@@ -16,12 +16,12 @@ class ControllerSystemSetting extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('system/setting', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('system/setting', 'token=' . $this->session->data['token'], true)
         );
 
         $this->load->model('system/setting');
@@ -32,8 +32,8 @@ class ControllerSystemSetting extends Controller {
             $this->session->data['success'] = $this->language->get('text_success');
         }
 
-        $this->data['action'] = $this->url->link('system/setting', 'token=' . $this->session->data['token'], 'SSL');
-        $this->data['cancel'] = $this->url->link('system/setting', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['action'] = $this->url->link('system/setting', 'token=' . $this->session->data['token'], true);
+        $this->data['cancel'] = $this->url->link('system/setting', 'token=' . $this->session->data['token'], true);
 
         $this->data['success'] = $this->build->data('success', $this->session->data);
 

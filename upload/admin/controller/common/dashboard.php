@@ -10,10 +10,10 @@ class ControllerCommonDashboard extends Controller {
         $this->data['text_total_invoices'] = sprintf($this->language->get('text_total_invoices'), date('Y'));
         $this->data['text_total_journal_entries'] = sprintf($this->language->get('text_total_journal_entries'), date('Y'));
 
-        $this->data['invoice'] = $this->url->link('billing/invoice', 'token=' . $this->session->data['token'], 'SSL');
-        $this->data['journal'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'], 'SSL');
-        $this->data['recurring'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'], 'SSL');
-        $this->data['customer'] = $this->url->link('billing/customer', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['invoice'] = $this->url->link('billing/invoice', 'token=' . $this->session->data['token'], true);
+        $this->data['journal'] = $this->url->link('accounting/journal', 'token=' . $this->session->data['token'], true);
+        $this->data['recurring'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'], true);
+        $this->data['customer'] = $this->url->link('billing/customer', 'token=' . $this->session->data['token'], true);
 
         $this->load->model('report/invoice');
 
@@ -69,8 +69,8 @@ class ControllerCommonDashboard extends Controller {
                 'total'      => $this->currency->format($invoice['total'], $invoice['currency_code'], $invoice['currency_value']),
                 'status'     => $invoice['status'],
                 'date_due'   => date($this->language->get('date_format_short'), strtotime($invoice['date_due'])),
-                'view'       => $this->url->link('billing/invoice/view', 'token=' . $this->session->data['token'] . '&invoice_id=' . $invoice['invoice_id'], 'SSL'),
-                'invoice'    => $this->url->link('billing/invoice/invoice', 'token=' . $this->session->data['token'] . '&invoice_id=' . $invoice['invoice_id'], 'SSL')
+                'view'       => $this->url->link('billing/invoice/view', 'token=' . $this->session->data['token'] . '&invoice_id=' . $invoice['invoice_id'], true),
+                'invoice'    => $this->url->link('billing/invoice/invoice', 'token=' . $this->session->data['token'] . '&invoice_id=' . $invoice['invoice_id'], true)
             );
         }
 
@@ -93,7 +93,7 @@ class ControllerCommonDashboard extends Controller {
                 'invoice_id'  => $transaction['invoice_id'] ? $transaction['invoice_id'] : $this->language->get('text_none'),
                 'date'        => date($this->language->get('date_format_short'), strtotime($transaction['date'])),
                 'date_added'  => date($this->language->get('datetime_format_short'), strtotime($transaction['date_added'])),
-                'edit'        => $this->url->link('accounting/journal/form', 'token=' . $this->session->data['token'] . '&transaction_id=' . $transaction['transaction_id'], 'SSL')
+                'edit'        => $this->url->link('accounting/journal/form', 'token=' . $this->session->data['token'] . '&transaction_id=' . $transaction['transaction_id'], true)
             );
         }
 

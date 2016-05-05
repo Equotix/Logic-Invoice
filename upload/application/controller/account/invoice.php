@@ -4,9 +4,9 @@ defined('_PATH') or die('Restricted!');
 class ControllerAccountInvoice extends Controller {
     public function index() {
         if (!$this->customer->isLogged()) {
-            $this->session->data['redirect'] = $this->url->link('account/invoice', '', 'SSL');
+            $this->session->data['redirect'] = $this->url->link('account/invoice', '', true);
 
-            $this->response->redirect($this->url->link('account/login', '', 'SSL'));
+            $this->response->redirect($this->url->link('account/login', '', true));
         }
 
         $this->data = $this->load->language('account/invoice');
@@ -22,12 +22,12 @@ class ControllerAccountInvoice extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_account'),
-            'href' => $this->url->link('account/account', '', 'SSL')
+            'href' => $this->url->link('account/account', '', true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('account/invoice', '', 'SSL')
+            'href' => $this->url->link('account/invoice', '', true)
         );
 
         if (isset($this->session->data['success'])) {
@@ -62,8 +62,8 @@ class ControllerAccountInvoice extends Controller {
                 'date_due'    => date($this->language->get('date_format_short'), strtotime($invoice['date_due'])),
                 'total'       => $this->currency->format($invoice['total'], $invoice['currency_code'], $invoice['currency_value']),
                 'status'      => $invoice['status'],
-                'invoice'     => $this->url->link('account/invoice/invoice', 'invoice_id=' . $invoice['invoice_id'], 'SSL'),
-                'view'        => $this->url->link('account/invoice/view', 'invoice_id=' . $invoice['invoice_id'], 'SSL')
+                'invoice'     => $this->url->link('account/invoice/invoice', 'invoice_id=' . $invoice['invoice_id'], true),
+                'view'        => $this->url->link('account/invoice/view', 'invoice_id=' . $invoice['invoice_id'], true)
             );
         }
 
@@ -71,7 +71,7 @@ class ControllerAccountInvoice extends Controller {
         $pagination->total = $this->model_billing_invoice->getTotalInvoices();
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_application');
-        $pagination->url = $this->url->link('account/invoice', 'page={page}', 'SSL');
+        $pagination->url = $this->url->link('account/invoice', 'page={page}', true);
 
         $this->data['pagination'] = $pagination->render();
 
@@ -83,9 +83,9 @@ class ControllerAccountInvoice extends Controller {
 
     public function invoice() {
         if (!$this->customer->isLogged()) {
-            $this->session->data['redirect'] = $this->url->link('account/invoice', '', 'SSL');
+            $this->session->data['redirect'] = $this->url->link('account/invoice', '', true);
 
-            $this->response->redirect($this->url->link('account/login', '', 'SSL'));
+            $this->response->redirect($this->url->link('account/login', '', true));
         }
 
         $this->data = $this->load->language('account/invoice');
@@ -164,7 +164,7 @@ class ControllerAccountInvoice extends Controller {
             }
 
             if (in_array($invoice_info['status_id'], $this->config->get('config_pending_status')) || in_array($invoice_info['status_id'], $this->config->get('config_overdue_status'))) {
-                $this->data['payment_url'] = $this->url->link('account/invoice/payment', 'invoice_id=' . $invoice_info['invoice_id'], 'SSL');
+                $this->data['payment_url'] = $this->url->link('account/invoice/payment', 'invoice_id=' . $invoice_info['invoice_id'], true);
             } else {
                 $this->data['payment_url'] = '';
             }
@@ -177,9 +177,9 @@ class ControllerAccountInvoice extends Controller {
 
     public function payment() {
         if (!$this->customer->isLogged()) {
-            $this->session->data['redirect'] = $this->url->link('account/invoice', '', 'SSL');
+            $this->session->data['redirect'] = $this->url->link('account/invoice', '', true);
 
-            $this->response->redirect($this->url->link('account/login', '', 'SSL'));
+            $this->response->redirect($this->url->link('account/login', '', true));
         }
 
         $this->data = $this->load->language('account/invoice');
@@ -204,17 +204,17 @@ class ControllerAccountInvoice extends Controller {
 
             $this->data['breadcrumbs'][] = array(
                 'text' => $this->language->get('text_account'),
-                'href' => $this->url->link('account/account', '', 'SSL')
+                'href' => $this->url->link('account/account', '', true)
             );
 
             $this->data['breadcrumbs'][] = array(
                 'text' => $this->language->get('heading_title'),
-                'href' => $this->url->link('account/invoice', '', 'SSL')
+                'href' => $this->url->link('account/invoice', '', true)
             );
 
             $this->data['breadcrumbs'][] = array(
                 'text' => $this->language->get('text_invoice_payment'),
-                'href' => $this->url->link('account/invoice/payment', 'invoice_id=' . $invoice_info['invoice_id'], 'SSL')
+                'href' => $this->url->link('account/invoice/payment', 'invoice_id=' . $invoice_info['invoice_id'], true)
             );
 
             $this->data['text_invoice_info'] = sprintf($this->language->get('text_invoice_info'), $invoice_info['invoice_id']);
@@ -293,9 +293,9 @@ class ControllerAccountInvoice extends Controller {
 
     public function success() {
         if (!$this->customer->isLogged()) {
-            $this->session->data['redirect'] = $this->url->link('account/invoice', '', 'SSL');
+            $this->session->data['redirect'] = $this->url->link('account/invoice', '', true);
 
-            $this->response->redirect($this->url->link('account/login', '', 'SSL'));
+            $this->response->redirect($this->url->link('account/login', '', true));
         }
 
         if (isset($this->request->get['invoice_id'])) {
@@ -312,27 +312,27 @@ class ControllerAccountInvoice extends Controller {
 
             $this->data['breadcrumbs'][] = array(
                 'text' => $this->language->get('text_account'),
-                'href' => $this->url->link('account/account', '', 'SSL')
+                'href' => $this->url->link('account/account', '', true)
             );
 
             $this->data['breadcrumbs'][] = array(
                 'text' => $this->language->get('heading_title'),
-                'href' => $this->url->link('account/invoice', '', 'SSL')
+                'href' => $this->url->link('account/invoice', '', true)
             );
 
             $this->data['breadcrumbs'][] = array(
                 'text' => $this->language->get('text_invoice_payment'),
-                'href' => $this->url->link('account/invoice/payment', 'invoice_id=' . $this->request->get['invoice_id'], 'SSL')
+                'href' => $this->url->link('account/invoice/payment', 'invoice_id=' . $this->request->get['invoice_id'], true)
             );
 
             $this->data['breadcrumbs'][] = array(
                 'text' => $this->language->get('text_invoice_success'),
-                'href' => $this->url->link('account/invoice/success', 'invoice_id=' . $this->request->get['invoice_id'], 'SSL')
+                'href' => $this->url->link('account/invoice/success', 'invoice_id=' . $this->request->get['invoice_id'], true)
             );
 
             $this->data['text_invoice_success_info'] = sprintf($this->language->get('text_invoice_success_info'), $this->request->get['invoice_id']);
 
-            $this->data['continue'] = $this->url->link('account/invoice', '', 'SSL');
+            $this->data['continue'] = $this->url->link('account/invoice', '', true);
 
             $this->data['header'] = $this->load->controller('common/header');
             $this->data['footer'] = $this->load->controller('common/footer');
@@ -345,9 +345,9 @@ class ControllerAccountInvoice extends Controller {
 
     public function view() {
         if (!$this->customer->isLogged()) {
-            $this->session->data['redirect'] = $this->url->link('account/invoice', '', 'SSL');
+            $this->session->data['redirect'] = $this->url->link('account/invoice', '', true);
 
-            $this->response->redirect($this->url->link('account/login', '', 'SSL'));
+            $this->response->redirect($this->url->link('account/login', '', true));
         }
 
         $this->data = $this->load->language('account/invoice');
@@ -368,17 +368,17 @@ class ControllerAccountInvoice extends Controller {
 
             $this->data['breadcrumbs'][] = array(
                 'text' => $this->language->get('text_account'),
-                'href' => $this->url->link('account/account', '', 'SSL')
+                'href' => $this->url->link('account/account', '', true)
             );
 
             $this->data['breadcrumbs'][] = array(
                 'text' => $this->language->get('heading_title'),
-                'href' => $this->url->link('account/invoice', '', 'SSL')
+                'href' => $this->url->link('account/invoice', '', true)
             );
 
             $this->data['breadcrumbs'][] = array(
                 'text' => sprintf($this->language->get('text_invoice'), $invoice_info['invoice_id']),
-                'href' => $this->url->link('account/invoice/view', 'invoice_id=' . $invoice_info['invoice_id'], 'SSL')
+                'href' => $this->url->link('account/invoice/view', 'invoice_id=' . $invoice_info['invoice_id'], true)
             );
 
             $this->data['text_invoice'] = sprintf($this->language->get('text_invoice'), $invoice_info['invoice_id']);
@@ -422,7 +422,7 @@ class ControllerAccountInvoice extends Controller {
             }
 
             if (in_array($invoice_info['status_id'], $this->config->get('config_pending_status')) || in_array($invoice_info['status_id'], $this->config->get('config_overdue_status'))) {
-                $this->data['payment_url'] = $this->url->link('account/invoice/payment', 'invoice_id=' . $invoice_info['invoice_id'], 'SSL');
+                $this->data['payment_url'] = $this->url->link('account/invoice/payment', 'invoice_id=' . $invoice_info['invoice_id'], true);
             } else {
                 $this->data['payment_url'] = '';
             }

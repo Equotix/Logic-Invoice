@@ -16,7 +16,7 @@ class ControllerPaymentChequeCheque extends Controller {
 
             $this->data['details'] = html_entity_decode(nl2br($details[$this->config->get('config_language_id')], ENT_QUOTES));
 
-            $this->data['action'] = $this->url->link('payment/cheque/cheque/confirm', 'invoice_id=' . $invoice_info['invoice_id'], 'SSL');
+            $this->data['action'] = $this->url->link('payment/cheque/cheque/confirm', 'invoice_id=' . $invoice_info['invoice_id'], true);
 
 			$this->response->setOutput($this->render('payment/cheque/cheque'));
         }
@@ -26,9 +26,9 @@ class ControllerPaymentChequeCheque extends Controller {
         $this->load->language('payment/cheque/cheque');
 
         if (!$this->customer->isLogged()) {
-            $this->session->data['redirect'] = $this->url->link('account/invoice', '', 'SSL');
+            $this->session->data['redirect'] = $this->url->link('account/invoice', '', true);
 
-            $this->response->redirect($this->url->link('account/login', '', 'SSL'));
+            $this->response->redirect($this->url->link('account/login', '', true));
         }
 
         if (isset($this->request->get['invoice_id'])) {
@@ -62,6 +62,6 @@ class ControllerPaymentChequeCheque extends Controller {
             $this->model_system_activity->addActivity(sprintf($this->language->get('text_updated'), $invoice_info['invoice_id'], $status['name']));
         }
 
-        $this->response->redirect($this->url->link('account/invoice/success', 'invoice_id=' . $invoice_id, 'SSL'));
+        $this->response->redirect($this->url->link('account/invoice/success', 'invoice_id=' . $invoice_id, true));
     }
 }

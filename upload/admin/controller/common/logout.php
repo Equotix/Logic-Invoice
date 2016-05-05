@@ -9,6 +9,6 @@ class ControllerCommonLogout extends Controller {
 
         $this->session->destroy();
 
-        $this->response->redirect($this->url->link('common/login', '', 'SSL'));
+        $this->response->redirect($this->url->link('common/login', '', true));
     }
 }

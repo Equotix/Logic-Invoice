@@ -13,17 +13,17 @@ class ControllerPaymentAuthorizenetAimAuthorizenetAim extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_payments'),
-            'href' => $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('extension/payment', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('payment/authorizenet_aim/authorizenet_aim', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('payment/authorizenet_aim/authorizenet_aim', 'token=' . $this->session->data['token'], true)
         );
 
         $this->load->model('system/setting');
@@ -33,11 +33,11 @@ class ControllerPaymentAuthorizenetAimAuthorizenetAim extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'));
+            $this->response->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token'], true));
         }
 
-        $this->data['action'] = $this->url->link('payment/authorizenet_aim/authorizenet_aim', 'token=' . $this->session->data['token'], 'SSL');
-        $this->data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['action'] = $this->url->link('payment/authorizenet_aim/authorizenet_aim', 'token=' . $this->session->data['token'], true);
+        $this->data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], true);
 
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
         $this->data['error_login'] = $this->build->data('login', $this->error);

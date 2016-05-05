@@ -8,7 +8,7 @@ class ControllerAccountRegister extends Controller {
         $this->load->model('billing/customer');
 
         if ($this->customer->isLogged()) {
-            $this->response->redirect($this->url->link('account/account', '', 'SSL'));
+            $this->response->redirect($this->url->link('account/account', '', true));
         }
 
         if (!$this->config->get('config_registration')) {
@@ -30,7 +30,7 @@ class ControllerAccountRegister extends Controller {
 
             $this->model_system_activity->addActivity(sprintf($this->language->get('text_register'), $this->request->post['firstname'] . ' ' . $this->request->post['lastname']));
 
-            $this->response->redirect($this->url->link('account/login', '', 'SSL'));
+            $this->response->redirect($this->url->link('account/login', '', true));
         }
 
         $this->data['breadcrumbs'] = array();
@@ -42,15 +42,15 @@ class ControllerAccountRegister extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_account'),
-            'href' => $this->url->link('account/account', '', 'SSL')
+            'href' => $this->url->link('account/account', '', true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('account/register', '', 'SSL')
+            'href' => $this->url->link('account/register', '', true)
         );
 
-        $this->data['action'] = $this->url->link('account/register', '', 'SSL');
+        $this->data['action'] = $this->url->link('account/register', '', true);
 
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
         $this->data['error_firstname'] = $this->build->data('firstname', $this->error);
@@ -65,7 +65,7 @@ class ControllerAccountRegister extends Controller {
         $this->data['email'] = $this->build->data('email', $this->request->post);
         $this->data['captcha'] = $this->build->data('captcha', $this->request->post);
 
-        $this->data['captcha_image'] = $this->url->link('tool/captcha', '', 'SSL');
+        $this->data['captcha_image'] = $this->url->link('tool/captcha', '', true);
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');

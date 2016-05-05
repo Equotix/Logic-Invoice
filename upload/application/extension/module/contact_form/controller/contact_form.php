@@ -22,7 +22,7 @@ class ControllerModuleContactFormContactForm extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('module/contact_form/contact_form', '', 'SSL')
+            'href' => $this->url->link('module/contact_form/contact_form')
         );
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
@@ -86,12 +86,12 @@ class ControllerModuleContactFormContactForm extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('module/contact_form/contact_form', '', 'SSL')
+            'href' => $this->url->link('module/contact_form/contact_form')
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('module/contact_form/contact_form/success', '', 'SSL')
+            'href' => $this->url->link('module/contact_form/contact_form/success')
         );
 
         $this->data['home'] = $this->url->link('common/home');

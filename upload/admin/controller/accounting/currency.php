@@ -19,12 +19,12 @@ class ControllerAccountingCurrency extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('accounting/currency', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('accounting/currency', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         if (isset($this->request->get['page'])) {
@@ -66,7 +66,7 @@ class ControllerAccountingCurrency extends Controller {
                 'value'         => $currency['value'],
                 'status'        => $currency['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
                 'date_modified' => date($this->language->get('datetime_format_short'), strtotime($currency['date_modified'])),
-                'edit'          => $this->url->link('accounting/currency/form', 'token=' . $this->session->data['token'] . $url . '&currency_id=' . $currency['currency_id'], 'SSL')
+                'edit'          => $this->url->link('accounting/currency/form', 'token=' . $this->session->data['token'] . $url . '&currency_id=' . $currency['currency_id'], true)
             );
         }
 
@@ -79,13 +79,13 @@ class ControllerAccountingCurrency extends Controller {
         $pagination->total = $this->model_accounting_currency->getTotalCurrencies();
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('accounting/currency', 'token=' . $this->session->data['token'] . '&page={page}' . $url, 'SSL');
+        $pagination->url = $this->url->link('accounting/currency', 'token=' . $this->session->data['token'] . '&page={page}' . $url, true);
 
         $this->data['pagination'] = $pagination->render();
 
-        $this->data['delete'] = $this->url->link('accounting/currency/delete', 'token=' . $this->session->data['token'], 'SSL');
-        $this->data['insert'] = $this->url->link('accounting/currency/form', 'token=' . $this->session->data['token'], 'SSL');
-        $this->data['refresh'] = $this->url->link('accounting/currency/refresh', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['delete'] = $this->url->link('accounting/currency/delete', 'token=' . $this->session->data['token'], true);
+        $this->data['insert'] = $this->url->link('accounting/currency/form', 'token=' . $this->session->data['token'], true);
+        $this->data['refresh'] = $this->url->link('accounting/currency/refresh', 'token=' . $this->session->data['token'], true);
 
         $this->data['success'] = $this->build->data('success', $this->session->data);
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
@@ -100,11 +100,11 @@ class ControllerAccountingCurrency extends Controller {
             $order = 'ASC';
         }
 
-        $this->data['sort_title'] = $this->url->link('accounting/currency', 'token=' . $this->session->data['token'] . '&sort=title&order=' . $order, 'SSL');
-        $this->data['sort_code'] = $this->url->link('accounting/currency', 'token=' . $this->session->data['token'] . '&sort=code&order=' . $order, 'SSL');
-        $this->data['sort_value'] = $this->url->link('accounting/currency', 'token=' . $this->session->data['token'] . '&sort=value&order=' . $order, 'SSL');
-        $this->data['sort_status'] = $this->url->link('accounting/currency', 'token=' . $this->session->data['token'] . '&sort=status&order=' . $order, 'SSL');
-        $this->data['sort_date_modified'] = $this->url->link('accounting/currency', 'token=' . $this->session->data['token'] . '&sort=date_modified&order=' . $order, 'SSL');
+        $this->data['sort_title'] = $this->url->link('accounting/currency', 'token=' . $this->session->data['token'] . '&sort=title&order=' . $order, true);
+        $this->data['sort_code'] = $this->url->link('accounting/currency', 'token=' . $this->session->data['token'] . '&sort=code&order=' . $order, true);
+        $this->data['sort_value'] = $this->url->link('accounting/currency', 'token=' . $this->session->data['token'] . '&sort=value&order=' . $order, true);
+        $this->data['sort_status'] = $this->url->link('accounting/currency', 'token=' . $this->session->data['token'] . '&sort=status&order=' . $order, true);
+        $this->data['sort_date_modified'] = $this->url->link('accounting/currency', 'token=' . $this->session->data['token'] . '&sort=date_modified&order=' . $order, true);
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
@@ -124,7 +124,7 @@ class ControllerAccountingCurrency extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('accounting/currency', 'token=' . $this->session->data['token'], 'SSL'));
+            $this->response->redirect($this->url->link('accounting/currency', 'token=' . $this->session->data['token'], true));
         }
 
         $this->index();
@@ -146,17 +146,17 @@ class ControllerAccountingCurrency extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('accounting/currency', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('accounting/currency', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('accounting/currency/form', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('accounting/currency/form', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         $this->load->model('accounting/currency');
@@ -176,7 +176,7 @@ class ControllerAccountingCurrency extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('accounting/currency', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->response->redirect($this->url->link('accounting/currency', 'token=' . $this->session->data['token'] . $url, true));
         }
 
         if (isset($this->request->get['currency_id'])) {
@@ -185,7 +185,7 @@ class ControllerAccountingCurrency extends Controller {
             $currency_info = array();
         }
 
-        $this->data['action'] = $this->url->link('accounting/currency/form', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['action'] = $this->url->link('accounting/currency/form', 'token=' . $this->session->data['token'] . $url, true);
 
         $url = $this->build->url(array(
             'sort',
@@ -193,7 +193,7 @@ class ControllerAccountingCurrency extends Controller {
             'page'
         ));
 
-        $this->data['cancel'] = $this->url->link('accounting/currency', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['cancel'] = $this->url->link('accounting/currency', 'token=' . $this->session->data['token'] . $url, true);
 
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
         $this->data['error_title'] = $this->build->data('title', $this->error);
@@ -240,7 +240,7 @@ class ControllerAccountingCurrency extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_refresh');
 
-            $this->response->redirect($this->url->link('accounting/currency', 'token=' . $this->session->data['token'], 'SSL'));
+            $this->response->redirect($this->url->link('accounting/currency', 'token=' . $this->session->data['token'], true));
         } else {
             $this->error['warning'] = $this->language->get('error_permission');
         }

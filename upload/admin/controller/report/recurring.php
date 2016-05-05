@@ -25,12 +25,12 @@ class ControllerReportRecurring extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('report/recurring', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('report/recurring', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         if (isset($this->request->get['filter_status'])) {
@@ -131,7 +131,7 @@ class ControllerReportRecurring extends Controller {
         $pagination->total = $this->model_report_recurring->getTotalRecurringsByGroup($filter_data);
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('report/recurring', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
+        $pagination->url = $this->url->link('report/recurring', 'token=' . $this->session->data['token'] . $url . '&page={page}', true);
 
         $this->data['pagination'] = $pagination->render();
 

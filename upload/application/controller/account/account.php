@@ -4,9 +4,9 @@ defined('_PATH') or die('Restricted!');
 class ControllerAccountAccount extends Controller {
     public function index() {
         if (!$this->customer->isLogged()) {
-            $this->session->data['redirect'] = $this->url->link('account/account', '', 'SSL');
+            $this->session->data['redirect'] = $this->url->link('account/account', '', true);
 
-            $this->response->redirect($this->url->link('account/login', '', 'SSL'));
+            $this->response->redirect($this->url->link('account/login', '', true));
         }
 
         $this->data = $this->load->language('account/account');
@@ -22,7 +22,7 @@ class ControllerAccountAccount extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_account'),
-            'href' => $this->url->link('account/account', '', 'SSL')
+            'href' => $this->url->link('account/account', '', true)
         );
 
         if (isset($this->session->data['success'])) {
@@ -33,11 +33,11 @@ class ControllerAccountAccount extends Controller {
             $this->data['success'] = '';
         }
 
-        $this->data['update'] = $this->url->link('account/update', '', 'SSL');
-        $this->data['password'] = $this->url->link('account/password', '', 'SSL');
-        $this->data['invoice'] = $this->url->link('account/invoice', '', 'SSL');
-        $this->data['recurring'] = $this->url->link('account/recurring', '', 'SSL');
-        $this->data['credit'] = $this->url->link('account/credit', '', 'SSL');
+        $this->data['update'] = $this->url->link('account/update', '', true);
+        $this->data['password'] = $this->url->link('account/password', '', true);
+        $this->data['invoice'] = $this->url->link('account/invoice', '', true);
+        $this->data['recurring'] = $this->url->link('account/recurring', '', true);
+        $this->data['credit'] = $this->url->link('account/credit', '', true);
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');

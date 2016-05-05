@@ -25,12 +25,12 @@ class ControllerAccountingInventory extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         if (isset($this->request->get['filter_sku'])) {
@@ -119,7 +119,7 @@ class ControllerAccountingInventory extends Controller {
                 'status'        => $inventory['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
                 'date_added'    => date($this->language->get('datetime_format_short'), strtotime($inventory['date_added'])),
                 'date_modified' => date($this->language->get('datetime_format_short'), strtotime($inventory['date_modified'])),
-                'edit'          => $this->url->link('accounting/inventory/form', 'token=' . $this->session->data['token'] . $url . '&inventory_id=' . $inventory['inventory_id'], 'SSL')
+                'edit'          => $this->url->link('accounting/inventory/form', 'token=' . $this->session->data['token'] . $url . '&inventory_id=' . $inventory['inventory_id'], true)
             );
         }
 
@@ -138,12 +138,12 @@ class ControllerAccountingInventory extends Controller {
         $pagination->total = $this->model_accounting_inventory->getTotalInventories($filter_data);
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . '&page={page}' . $url, 'SSL');
+        $pagination->url = $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . '&page={page}' . $url, true);
 
         $this->data['pagination'] = $pagination->render();
 
-        $this->data['delete'] = $this->url->link('accounting/inventory/delete', 'token=' . $this->session->data['token'], 'SSL');
-        $this->data['insert'] = $this->url->link('accounting/inventory/form', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['delete'] = $this->url->link('accounting/inventory/delete', 'token=' . $this->session->data['token'], true);
+        $this->data['insert'] = $this->url->link('accounting/inventory/form', 'token=' . $this->session->data['token'], true);
 
         $this->data['token'] = $this->session->data['token'];
 
@@ -169,14 +169,14 @@ class ControllerAccountingInventory extends Controller {
             $order = 'ASC';
         }
 
-        $this->data['sort_sku'] = $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url . '&sort=sku&order=' . $order, 'SSL');
-        $this->data['sort_name'] = $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url . '&sort=name&order=' . $order, 'SSL');
-        $this->data['sort_quantity'] = $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url . '&sort=quantity&order=' . $order, 'SSL');
-        $this->data['sort_cost'] = $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url . '&sort=cost&order=' . $order, 'SSL');
-        $this->data['sort_sell'] = $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url . '&sort=sell&order=' . $order, 'SSL');
-        $this->data['sort_status'] = $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url . '&sort=status&order=' . $order, 'SSL');
-        $this->data['sort_date_added'] = $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url . '&sort=date_added&order=' . $order, 'SSL');
-        $this->data['sort_date_modified'] = $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url . '&sort=date_modified&order=' . $order, 'SSL');
+        $this->data['sort_sku'] = $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url . '&sort=sku&order=' . $order, true);
+        $this->data['sort_name'] = $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url . '&sort=name&order=' . $order, true);
+        $this->data['sort_quantity'] = $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url . '&sort=quantity&order=' . $order, true);
+        $this->data['sort_cost'] = $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url . '&sort=cost&order=' . $order, true);
+        $this->data['sort_sell'] = $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url . '&sort=sell&order=' . $order, true);
+        $this->data['sort_status'] = $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url . '&sort=status&order=' . $order, true);
+        $this->data['sort_date_added'] = $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url . '&sort=date_added&order=' . $order, true);
+        $this->data['sort_date_modified'] = $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url . '&sort=date_modified&order=' . $order, true);
 
         $this->data['filter_sku'] = $filter_sku;
         $this->data['filter_name'] = $filter_name;
@@ -203,7 +203,7 @@ class ControllerAccountingInventory extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('accounting/inventory', 'token=' . $this->session->data['token'], 'SSL'));
+            $this->response->redirect($this->url->link('accounting/inventory', 'token=' . $this->session->data['token'], true));
         }
 
         $this->index();
@@ -231,12 +231,12 @@ class ControllerAccountingInventory extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         $this->load->model('accounting/inventory');
@@ -250,7 +250,7 @@ class ControllerAccountingInventory extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->response->redirect($this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url, true));
         }
 
         if (isset($this->request->get['inventory_id'])) {
@@ -259,9 +259,9 @@ class ControllerAccountingInventory extends Controller {
             $inventory_info = array();
         }
 
-        $this->data['action'] = $this->url->link('accounting/inventory/form', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['action'] = $this->url->link('accounting/inventory/form', 'token=' . $this->session->data['token'] . $url, true);
 
-        $this->data['cancel'] = $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['cancel'] = $this->url->link('accounting/inventory', 'token=' . $this->session->data['token'] . $url, true);
 
         $this->data['token'] = $this->session->data['token'];
 

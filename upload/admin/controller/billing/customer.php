@@ -28,12 +28,12 @@ class ControllerBillingCustomer extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('billing/customer', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('billing/customer', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         if (isset($this->request->get['filter_name'])) {
@@ -112,8 +112,8 @@ class ControllerBillingCustomer extends Controller {
                 'status'        => $customer['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
                 'date_added'    => date($this->language->get('datetime_format_short'), strtotime($customer['date_added'])),
                 'date_modified' => date($this->language->get('datetime_format_short'), strtotime($customer['date_modified'])),
-                'edit'          => $this->url->link('billing/customer/form', 'token=' . $this->session->data['token'] . $url . '&customer_id=' . $customer['customer_id'], 'SSL'),
-                'login'         => $this->url->link('billing/customer/login', 'token=' . $this->session->data['token'] . '&customer_id=' . $customer['customer_id'], 'SSL')
+                'edit'          => $this->url->link('billing/customer/form', 'token=' . $this->session->data['token'] . $url . '&customer_id=' . $customer['customer_id'], true),
+                'login'         => $this->url->link('billing/customer/login', 'token=' . $this->session->data['token'] . '&customer_id=' . $customer['customer_id'], true)
             );
         }
 
@@ -131,12 +131,12 @@ class ControllerBillingCustomer extends Controller {
         $pagination->total = $this->model_billing_customer->getTotalCustomers($filter_data);
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('billing/customer', 'token=' . $this->session->data['token'] . '&page={page}' . $url, 'SSL');
+        $pagination->url = $this->url->link('billing/customer', 'token=' . $this->session->data['token'] . '&page={page}' . $url, true);
 
         $this->data['pagination'] = $pagination->render();
 
-        $this->data['delete'] = $this->url->link('billing/customer/delete', 'token=' . $this->session->data['token'], 'SSL');
-        $this->data['insert'] = $this->url->link('billing/customer/form', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['delete'] = $this->url->link('billing/customer/delete', 'token=' . $this->session->data['token'], true);
+        $this->data['insert'] = $this->url->link('billing/customer/form', 'token=' . $this->session->data['token'], true);
 
         $this->data['token'] = $this->session->data['token'];
 
@@ -161,13 +161,13 @@ class ControllerBillingCustomer extends Controller {
             $order = 'ASC';
         }
 
-        $this->data['sort_name'] = $this->url->link('billing/customer', 'token=' . $this->session->data['token'] . $url . '&sort=name&order=' . $order, 'SSL');
-        $this->data['sort_email'] = $this->url->link('billing/customer', 'token=' . $this->session->data['token'] . $url . '&sort=email&order=' . $order, 'SSL');
-        $this->data['sort_credit'] = $this->url->link('billing/customer', 'token=' . $this->session->data['token'] . $url . '&sort=credit&order=' . $order, 'SSL');
-        $this->data['sort_invoice'] = $this->url->link('billing/customer', 'token=' . $this->session->data['token'] . $url . '&sort=invoice&order=' . $order, 'SSL');
-        $this->data['sort_status'] = $this->url->link('billing/customer', 'token=' . $this->session->data['token'] . $url . '&sort=status&order=' . $order, 'SSL');
-        $this->data['sort_date_added'] = $this->url->link('billing/customer', 'token=' . $this->session->data['token'] . $url . '&sort=date_added&order=' . $order, 'SSL');
-        $this->data['sort_date_modified'] = $this->url->link('billing/customer', 'token=' . $this->session->data['token'] . $url . '&sort=date_modified&order=' . $order, 'SSL');
+        $this->data['sort_name'] = $this->url->link('billing/customer', 'token=' . $this->session->data['token'] . $url . '&sort=name&order=' . $order, true);
+        $this->data['sort_email'] = $this->url->link('billing/customer', 'token=' . $this->session->data['token'] . $url . '&sort=email&order=' . $order, true);
+        $this->data['sort_credit'] = $this->url->link('billing/customer', 'token=' . $this->session->data['token'] . $url . '&sort=credit&order=' . $order, true);
+        $this->data['sort_invoice'] = $this->url->link('billing/customer', 'token=' . $this->session->data['token'] . $url . '&sort=invoice&order=' . $order, true);
+        $this->data['sort_status'] = $this->url->link('billing/customer', 'token=' . $this->session->data['token'] . $url . '&sort=status&order=' . $order, true);
+        $this->data['sort_date_added'] = $this->url->link('billing/customer', 'token=' . $this->session->data['token'] . $url . '&sort=date_added&order=' . $order, true);
+        $this->data['sort_date_modified'] = $this->url->link('billing/customer', 'token=' . $this->session->data['token'] . $url . '&sort=date_modified&order=' . $order, true);
 
         $this->data['filter_name'] = $filter_name;
         $this->data['filter_email'] = $filter_email;
@@ -193,7 +193,7 @@ class ControllerBillingCustomer extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('billing/customer', 'token=' . $this->session->data['token'], 'SSL'));
+            $this->response->redirect($this->url->link('billing/customer', 'token=' . $this->session->data['token'], true));
         }
 
         $this->index();
@@ -220,12 +220,12 @@ class ControllerBillingCustomer extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('billing/customer', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('billing/customer', 'token=' . $this->session->data['token'], true)
         );
 
         $this->load->model('billing/customer');
@@ -239,7 +239,7 @@ class ControllerBillingCustomer extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('billing/customer', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->response->redirect($this->url->link('billing/customer', 'token=' . $this->session->data['token'] . $url, true));
         }
 
         if (isset($this->request->get['customer_id'])) {
@@ -248,9 +248,9 @@ class ControllerBillingCustomer extends Controller {
             $customer_info = array();
         }
 
-        $this->data['action'] = $this->url->link('billing/customer/form', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['action'] = $this->url->link('billing/customer/form', 'token=' . $this->session->data['token'] . $url, true);
 
-        $this->data['cancel'] = $this->url->link('billing/customer', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['cancel'] = $this->url->link('billing/customer', 'token=' . $this->session->data['token'] . $url, true);
 
         $this->data['token'] = $this->session->data['token'];
 
@@ -390,7 +390,7 @@ class ControllerBillingCustomer extends Controller {
             $pagination->total = $this->model_billing_customer->getTotalIPsByCustomer((int)$this->request->get['customer_id']);
             $pagination->page = $page;
             $pagination->limit = $this->config->get('config_limit_admin');
-            $pagination->url = $this->url->link('billing/customer/ip', 'token=' . $this->session->data['token'] . '&customer_id=' . (int)$this->request->get['customer_id'] . '&page={page}', 'SSL');
+            $pagination->url = $this->url->link('billing/customer/ip', 'token=' . $this->session->data['token'] . '&customer_id=' . (int)$this->request->get['customer_id'] . '&page={page}', true);
 
             $json['pagination'] = $pagination->render();
         }

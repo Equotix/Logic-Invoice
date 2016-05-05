@@ -4,9 +4,9 @@ defined('_PATH') or die('Restricted!');
 class ControllerAccountCredit extends Controller {
     public function index() {
         if (!$this->customer->isLogged()) {
-            $this->session->data['redirect'] = $this->url->link('account/credit', '', 'SSL');
+            $this->session->data['redirect'] = $this->url->link('account/credit', '', true);
 
-            $this->response->redirect($this->url->link('account/login', '', 'SSL'));
+            $this->response->redirect($this->url->link('account/login', '', true));
         }
 
         $this->data = $this->load->language('account/credit');
@@ -22,12 +22,12 @@ class ControllerAccountCredit extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_account'),
-            'href' => $this->url->link('account/account', '', 'SSL')
+            'href' => $this->url->link('account/account', '', true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('account/credit', '', 'SSL')
+            'href' => $this->url->link('account/credit', '', true)
         );
 
         if (isset($this->request->get['page'])) {
@@ -56,7 +56,7 @@ class ControllerAccountCredit extends Controller {
         $pagination->total = $this->model_billing_customer->getTotalCreditsByCustomer($this->customer->getId());
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_application');
-        $pagination->url = $this->url->link('account/credit', 'page={page}', 'SSL');
+        $pagination->url = $this->url->link('account/credit', 'page={page}', true);
 
         $this->data['pagination'] = $pagination->render();
 

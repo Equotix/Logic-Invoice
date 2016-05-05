@@ -19,12 +19,12 @@ class ControllerAccountingTaxClass extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('accounting/tax_class', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('accounting/tax_class', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         if (isset($this->request->get['page'])) {
@@ -62,7 +62,7 @@ class ControllerAccountingTaxClass extends Controller {
             $this->data['tax_classs'][] = array(
                 'tax_class_id' => $tax_class['tax_class_id'],
                 'name'         => $tax_class['name'],
-                'edit'         => $this->url->link('accounting/tax_class/form', 'token=' . $this->session->data['token'] . $url . '&tax_class_id=' . $tax_class['tax_class_id'], 'SSL')
+                'edit'         => $this->url->link('accounting/tax_class/form', 'token=' . $this->session->data['token'] . $url . '&tax_class_id=' . $tax_class['tax_class_id'], true)
             );
         }
 
@@ -75,12 +75,12 @@ class ControllerAccountingTaxClass extends Controller {
         $pagination->total = $this->model_accounting_tax_class->getTotalTaxClasses();
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('accounting/tax_class', 'token=' . $this->session->data['token'] . '&page={page}' . $url, 'SSL');
+        $pagination->url = $this->url->link('accounting/tax_class', 'token=' . $this->session->data['token'] . '&page={page}' . $url, true);
 
         $this->data['pagination'] = $pagination->render();
 
-        $this->data['delete'] = $this->url->link('accounting/tax_class/delete', 'token=' . $this->session->data['token'], 'SSL');
-        $this->data['insert'] = $this->url->link('accounting/tax_class/form', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['delete'] = $this->url->link('accounting/tax_class/delete', 'token=' . $this->session->data['token'], true);
+        $this->data['insert'] = $this->url->link('accounting/tax_class/form', 'token=' . $this->session->data['token'], true);
 
         $this->data['success'] = $this->build->data('success', $this->session->data);
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
@@ -95,7 +95,7 @@ class ControllerAccountingTaxClass extends Controller {
             $order = 'ASC';
         }
 
-        $this->data['sort_name'] = $this->url->link('accounting/tax_class', 'token=' . $this->session->data['token'] . '&sort=name&order=' . $order, 'SSL');
+        $this->data['sort_name'] = $this->url->link('accounting/tax_class', 'token=' . $this->session->data['token'] . '&sort=name&order=' . $order, true);
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
@@ -116,7 +116,7 @@ class ControllerAccountingTaxClass extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('accounting/tax_class', 'token=' . $this->session->data['token'], 'SSL'));
+            $this->response->redirect($this->url->link('accounting/tax_class', 'token=' . $this->session->data['token'], true));
         }
 
         $this->index();
@@ -138,17 +138,17 @@ class ControllerAccountingTaxClass extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('accounting/tax_class', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('accounting/tax_class', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('accounting/tax_class/form', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('accounting/tax_class/form', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         $this->load->model('accounting/tax_class');
@@ -168,7 +168,7 @@ class ControllerAccountingTaxClass extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('accounting/tax_class', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->response->redirect($this->url->link('accounting/tax_class', 'token=' . $this->session->data['token'] . $url, true));
         }
 
         if (isset($this->request->get['tax_class_id'])) {
@@ -177,7 +177,7 @@ class ControllerAccountingTaxClass extends Controller {
             $tax_class_info = array();
         }
 
-        $this->data['action'] = $this->url->link('accounting/tax_class/form', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['action'] = $this->url->link('accounting/tax_class/form', 'token=' . $this->session->data['token'] . $url, true);
 
         $url = $this->build->url(array(
             'sort',
@@ -185,7 +185,7 @@ class ControllerAccountingTaxClass extends Controller {
             'page'
         ));
 
-        $this->data['cancel'] = $this->url->link('accounting/tax_class', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['cancel'] = $this->url->link('accounting/tax_class', 'token=' . $this->session->data['token'] . $url, true);
 
         $this->data['error_warning'] = $this->build->data('warning', $this->session->data);
         $this->data['error_name'] = $this->build->data('name', $this->error);

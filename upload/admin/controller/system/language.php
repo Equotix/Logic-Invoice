@@ -19,12 +19,12 @@ class ControllerSystemLanguage extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('system/language', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('system/language', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         if (isset($this->request->get['page'])) {
@@ -65,7 +65,7 @@ class ControllerSystemLanguage extends Controller {
                 'code'        => $language['code'],
                 'sort_order'  => $language['sort_order'],
                 'status'      => $language['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-                'edit'        => $this->url->link('system/language/form', 'token=' . $this->session->data['token'] . $url . '&language_id=' . $language['language_id'], 'SSL')
+                'edit'        => $this->url->link('system/language/form', 'token=' . $this->session->data['token'] . $url . '&language_id=' . $language['language_id'], true)
             );
         }
 
@@ -78,12 +78,12 @@ class ControllerSystemLanguage extends Controller {
         $pagination->total = $this->model_system_language->getTotalLanguages();
         $pagination->page = $page;
         $pagination->limit = $this->config->get('config_limit_admin');
-        $pagination->url = $this->url->link('system/language', 'token=' . $this->session->data['token'] . '&page={page}' . $url, 'SSL');
+        $pagination->url = $this->url->link('system/language', 'token=' . $this->session->data['token'] . '&page={page}' . $url, true);
 
         $this->data['pagination'] = $pagination->render();
 
-        $this->data['delete'] = $this->url->link('system/language/delete', 'token=' . $this->session->data['token'], 'SSL');
-        $this->data['insert'] = $this->url->link('system/language/form', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['delete'] = $this->url->link('system/language/delete', 'token=' . $this->session->data['token'], true);
+        $this->data['insert'] = $this->url->link('system/language/form', 'token=' . $this->session->data['token'], true);
 
         $this->data['success'] = $this->build->data('success', $this->session->data);
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
@@ -98,10 +98,10 @@ class ControllerSystemLanguage extends Controller {
             $order = 'ASC';
         }
 
-        $this->data['sort_name'] = $this->url->link('system/language', 'token=' . $this->session->data['token'] . '&sort=name&order=' . $order, 'SSL');
-        $this->data['sort_code'] = $this->url->link('system/language', 'token=' . $this->session->data['token'] . '&sort=code&order=' . $order, 'SSL');
-        $this->data['sort_sort_order'] = $this->url->link('system/language', 'token=' . $this->session->data['token'] . '&sort=sort_order&order=' . $order, 'SSL');
-        $this->data['sort_status'] = $this->url->link('system/language', 'token=' . $this->session->data['token'] . '&sort=status&order=' . $order, 'SSL');
+        $this->data['sort_name'] = $this->url->link('system/language', 'token=' . $this->session->data['token'] . '&sort=name&order=' . $order, true);
+        $this->data['sort_code'] = $this->url->link('system/language', 'token=' . $this->session->data['token'] . '&sort=code&order=' . $order, true);
+        $this->data['sort_sort_order'] = $this->url->link('system/language', 'token=' . $this->session->data['token'] . '&sort=sort_order&order=' . $order, true);
+        $this->data['sort_status'] = $this->url->link('system/language', 'token=' . $this->session->data['token'] . '&sort=status&order=' . $order, true);
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
@@ -121,7 +121,7 @@ class ControllerSystemLanguage extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('system/language', 'token=' . $this->session->data['token'], 'SSL'));
+            $this->response->redirect($this->url->link('system/language', 'token=' . $this->session->data['token'], true));
         }
 
         $this->index();
@@ -143,17 +143,17 @@ class ControllerSystemLanguage extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('system/language', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('system/language', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('system/language/form', 'token=' . $this->session->data['token'] . $url, 'SSL')
+            'href' => $this->url->link('system/language/form', 'token=' . $this->session->data['token'] . $url, true)
         );
 
         $this->load->model('system/language');
@@ -173,7 +173,7 @@ class ControllerSystemLanguage extends Controller {
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('system/language', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+            $this->response->redirect($this->url->link('system/language', 'token=' . $this->session->data['token'] . $url, true));
         }
 
         if (isset($this->request->get['language_id'])) {
@@ -182,7 +182,7 @@ class ControllerSystemLanguage extends Controller {
             $language_info = array();
         }
 
-        $this->data['action'] = $this->url->link('system/language/form', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['action'] = $this->url->link('system/language/form', 'token=' . $this->session->data['token'] . $url, true);
 
         $url = $this->build->url(array(
             'sort',
@@ -190,7 +190,7 @@ class ControllerSystemLanguage extends Controller {
             'page'
         ));
 
-        $this->data['cancel'] = $this->url->link('system/language', 'token=' . $this->session->data['token'] . $url, 'SSL');
+        $this->data['cancel'] = $this->url->link('system/language', 'token=' . $this->session->data['token'] . $url, true);
 
         $this->data['error_warning'] = $this->build->data('warning', $this->error);
         $this->data['error_name'] = $this->build->data('name', $this->error);

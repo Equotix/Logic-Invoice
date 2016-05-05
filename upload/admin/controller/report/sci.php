@@ -17,12 +17,12 @@ class ControllerReportSCI extends Controller {
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
         );
 
         $this->data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('report/sci', 'token=' . $this->session->data['token'], 'SSL')
+            'href' => $this->url->link('report/sci', 'token=' . $this->session->data['token'], true)
         );
 
         if (isset($this->request->get['filter_date_start'])) {
@@ -116,7 +116,7 @@ class ControllerReportSCI extends Controller {
             'filter_date_end'
         ));
 
-        $this->data['print'] = $this->url->link('report/sci', 'token=' . $this->session->data['token'] . '&print_version=1' . $url, 'SSL');
+        $this->data['print'] = $this->url->link('report/sci', 'token=' . $this->session->data['token'] . '&print_version=1' . $url, true);
 
         if (isset($this->request->get['print_version'])) {
             $this->data['print_version'] = true;
