@@ -269,7 +269,7 @@ class ControllerSystemUserGroup extends Controller {
 
         if (isset($this->request->post['selected'])) {
             foreach ($this->request->post['selected'] as $user_group_id) {
-                if ($this->model_system_user->getTotalUsersByUserGroups($user_group_id)) {
+                if ($this->model_system_user->getTotalUsersByUserGroup($user_group_id)) {
                     $this->error['warning'] = $this->language->get('error_user');
 
                     break;
