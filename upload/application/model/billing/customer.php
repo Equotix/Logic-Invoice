@@ -96,7 +96,8 @@ class ModelBillingCustomer extends Model {
                 'lastname'     => $customer_info['lastname'],
                 'email'        => $customer_info['email'],
                 'password'     => $password,
-                'ip'           => $ip
+                'ip'           => $ip,
+				'to_email'     => $customer_info['email']
             );
 
             $this->model_content_email_template->send($email_data, 'forgotten_password_customer');
