@@ -68,31 +68,31 @@
           <?php foreach ($accounts as $account) { ?>
           <?php if (in_array($account['type'], $asset) && $header != 'asset') { ?>
           <tr>
-            <th class="text-left" colspan="7"><?php echo $text_assets; ?></th>
+            <th class="text-left" colspan="8"><?php echo $text_assets; ?></th>
           </tr>
           <?php $header = 'asset'; ?>
           <?php } ?>
           <?php if (in_array($account['type'], $equity) && $header != 'equity') { ?>
           <tr>
-            <th class="text-left" colspan="7"><?php echo $text_equity; ?></th>
+            <th class="text-left" colspan="8"><?php echo $text_equity; ?></th>
           </tr>
           <?php $header = 'equity'; ?>
           <?php } ?>
           <?php if (in_array($account['type'], $expense) && $header != 'expense') { ?>
           <tr>
-            <th class="text-left" colspan="7"><?php echo $text_expenses; ?></th>
+            <th class="text-left" colspan="8"><?php echo $text_expenses; ?></th>
           </tr>
           <?php $header = 'expense'; ?>
           <?php } ?>
           <?php if (in_array($account['type'], $liability) && $header != 'liability') { ?>
           <tr>
-            <th class="text-left" colspan="7"><?php echo $text_liabilities; ?></th>
+            <th class="text-left" colspan="8"><?php echo $text_liabilities; ?></th>
           </tr>
           <?php $header = 'liability'; ?>
           <?php } ?>
           <?php if (in_array($account['type'], $revenue) && $header != 'revenue') { ?>
           <tr>
-            <th class="text-left" colspan="7"><?php echo $text_revenue; ?></th>
+            <th class="text-left" colspan="8"><?php echo $text_revenue; ?></th>
           </tr>
           <?php $header = 'revenue'; ?>
           <?php } ?>
@@ -115,7 +115,7 @@
           <?php } ?>
           <?php } else { ?>
           <tr>
-            <td class="text-center" colspan="7"><?php echo $text_no_results; ?></td>
+            <td class="text-center" colspan="8"><?php echo $text_no_results; ?></td>
           </tr>
           <?php } ?>
         </table>
