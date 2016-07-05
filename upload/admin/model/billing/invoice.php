@@ -140,39 +140,6 @@ class ModelBillingInvoice extends Model {
         $this->model_content_email_template->send($email_data, 'edit_invoice_customer');
     }
 
-    public function editStatus($invoice_id, $status_id, $comment = '', $notify = false) {
-        $this->db->query("UPDATE " . DB_PREFIX . "invoice SET status_id = '" . (int)$status_id . "', date_modified = NOW() WHERE invoice_id = '" . (int)$invoice_id . "'");
-
-        if ($notify) {
-            $invoice_info = $this->getInvoice($invoice_id);
-
-            $this->load->model('content/email_template');
-
-            $email_data = array(
-                'website_name'    => $this->config->get('config_name'),
-                'website_url'     => HTTPS_APPLICATION,
-                'customer_id'     => $invoice_info['customer_id'],
-                'firstname'       => $invoice_info['firstname'],
-                'lastname'        => $invoice_info['lastname'],
-                'company'         => $invoice_info['company'],
-                'website'         => $invoice_info['website'],
-                'email'           => $invoice_info['email'],
-                'invoice_id'      => $invoice_info['invoice_id'],
-                'comment'         => $invoice_info['comment'],
-                'history_comment' => $comment,
-                'total'           => $this->currency->format($invoice_info['total'], $invoice_info['currency_code'], $invoice_info['currency_value']),
-                'status'          => $invoice_info['status'],
-                'payment_name'    => $invoice_info['payment_name'],
-                'date_issued'     => date($this->language->get('date_format_short'), strtotime($invoice_info['date_issued'])),
-                'date_due'        => date($this->language->get('date_format_short'), strtotime($invoice_info['date_due'])),
-                'date_modified'   => date($this->language->get('date_format_short'), strtotime($invoice_info['date_modified'])),
-                'to_email'        => $invoice_info['email']
-            );
-
-            $this->model_content_email_template->send($email_data, 'status_' . $status_id);
-        }
-    }
-
     public function deleteInvoice($invoice_id) {
         $this->db->query("DELETE FROM " . DB_PREFIX . "invoice WHERE invoice_id = '" . (int)$invoice_id . "'");
         $this->db->query("DELETE FROM " . DB_PREFIX . "invoice_history WHERE invoice_id = '" . (int)$invoice_id . "'");
@@ -380,9 +347,38 @@ class ModelBillingInvoice extends Model {
     }
 
     public function addHistory($invoice_id, $data, $notify = false) {
+		$this->db->query("UPDATE " . DB_PREFIX . "invoice SET status_id = '" . (int)$data['status_id'] . "', date_modified = NOW() WHERE invoice_id = '" . (int)$invoice_id . "'");
+
         $this->db->query("INSERT INTO " . DB_PREFIX . "invoice_history SET invoice_id = '" . (int)$invoice_id . "', status_id = '" . (int)$data['status_id'] . "', comment = '" . $this->db->escape($data['comment']) . "', date_added = NOW()");
 
-        $this->editStatus($invoice_id, $data['status_id'], $data['comment'], $notify);
+        if ($notify) {
+            $invoice_info = $this->getInvoice($invoice_id);
+
+            $this->load->model('content/email_template');
+
+            $email_data = array(
+                'website_name'    => $this->config->get('config_name'),
+                'website_url'     => HTTPS_APPLICATION,
+                'customer_id'     => $invoice_info['customer_id'],
+                'firstname'       => $invoice_info['firstname'],
+                'lastname'        => $invoice_info['lastname'],
+                'company'         => $invoice_info['company'],
+                'website'         => $invoice_info['website'],
+                'email'           => $invoice_info['email'],
+                'invoice_id'      => $invoice_info['invoice_id'],
+                'comment'         => $invoice_info['comment'],
+                'history_comment' => $data['comment'],
+                'total'           => $this->currency->format($invoice_info['total'], $invoice_info['currency_code'], $invoice_info['currency_value']),
+                'status'          => $invoice_info['status'],
+                'payment_name'    => $invoice_info['payment_name'],
+                'date_issued'     => date($this->language->get('date_format_short'), strtotime($invoice_info['date_issued'])),
+                'date_due'        => date($this->language->get('date_format_short'), strtotime($invoice_info['date_due'])),
+                'date_modified'   => date($this->language->get('date_format_short'), strtotime($invoice_info['date_modified'])),
+                'to_email'        => $invoice_info['email']
+            );
+
+            $this->model_content_email_template->send($email_data, 'status_' . $data['status_id']);
+        }
     }
 
     public function getHistoriesByInvoice($invoice_id, $start = 0, $limit = 20) {
