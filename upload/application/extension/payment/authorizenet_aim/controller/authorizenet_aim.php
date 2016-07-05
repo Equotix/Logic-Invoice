@@ -56,7 +56,10 @@ class ControllerPaymentAuthorizeNetAimAuthorizeNetAim extends Controller {
         $invoice_info = $this->model_billing_invoice->getInvoice($invoice_id, $this->customer->getId());
 
 		if ($invoice_info) {
-			if (!(in_array($invoice_info['status_id'], $this->config->get('config_pending_status')) || in_array($invoice_info['status_id'], $this->config->get('config_overdue_status')))) {
+			$pending_status = is_array($this->config->get('config_pending_status')) ? $this->config->get('config_pending_status') : array();
+			$overdue_status = is_array($this->config->get('config_overdue_status')) ? $this->config->get('config_overdue_status') : array();
+			
+			if (!(in_array($invoice_info['status_id'], $pending_status) || in_array($invoice_info['status_id'], $overdue_status))) {
                 $json['redirect'] = $this->url->link('account/invoice/invoice', 'invoice_id=' . $invoice_id, true);
             }
 			
