@@ -116,7 +116,9 @@ class ControllerAccountingInventory extends Controller {
                 'quantity'      => $inventory['quantity'],
                 'cost'          => $this->currency->format($inventory['cost']),
                 'sell'          => $this->currency->format($inventory['sell']),
-                'status'        => $inventory['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+				'cost_raw'      => $inventory['cost'],
+                'sell_raw'      => $inventory['sell'],
+                'status'        => $inventory['status'],
                 'date_added'    => date($this->language->get('datetime_format_short'), strtotime($inventory['date_added'])),
                 'date_modified' => date($this->language->get('datetime_format_short'), strtotime($inventory['date_modified'])),
                 'edit'          => $this->url->link('accounting/inventory/form', 'token=' . $this->session->data['token'] . $url . '&inventory_id=' . $inventory['inventory_id'], true)
@@ -358,4 +360,45 @@ class ControllerAccountingInventory extends Controller {
 
         return !$this->error;
     }
+	
+	public function update() {
+		$this->load->language('accounting/inventory');
+		
+		$json = array();
+
+        $inventory_id = (int)$this->request->post['inventory_id'];
+        $column = $this->request->post['column'];
+        $value = $this->request->post['value'];
+
+		if (!$this->user->hasPermission('modify', 'accounting/inventory')) {
+            $json['warning'] = $this->language->get('error_permission');
+        } else {
+			if ($column == 'sku') {
+				if ((utf8_strlen($value) < 1) || (utf8_strlen($value) > 255)) {
+					$json['warning'] = $this->language->get('error_sku');
+				}
+			} elseif ($column == 'name') {
+				if ((utf8_strlen($value) < 3) || (utf8_strlen($value) > 255)) {
+					$json['warning'] = $this->language->get('error_name');
+				}
+			}
+		
+			if (!$json) {
+				$this->load->model('accounting/inventory');
+				
+				$this->model_accounting_inventory->editInventoryData($inventory_id, $column, $value);
+				
+				$json['value'] = $value;
+				
+				if ($column == 'cost' || $column == 'sell') {
+					$json['value'] = $this->currency->format($value);
+				}
+
+				$json['success'] = $this->language->get('text_success');
+			}
+        }
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+	}
 }

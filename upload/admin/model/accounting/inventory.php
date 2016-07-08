@@ -9,6 +9,21 @@ class ModelAccountingInventory extends Model {
     public function editInventory($inventory_id, $data) {
         $this->db->query("UPDATE " . DB_PREFIX . "inventory SET sku = '" . $this->db->escape($data['sku']) . "', name = '" . $this->db->escape($data['name']) . "', description = '" . $this->db->escape($data['description']) . "', image = '" . $this->db->escape($data['image']) . "', quantity = '" . (int)$data['quantity'] . "', cost = '" . (float)$data['cost'] . "', sell = '" . (float)$data['sell'] . "', status = '" . (int)$data['status'] . "', date_modified = NOW() WHERE inventory_id = '" . (int)$inventory_id . "'");
     }
+	
+	public function editInventoryData($inventory_id, $column, $value) {
+		$columns = array(
+			'sku',
+			'name',
+			'quantity',
+			'cost',
+			'sell',
+			'status'
+		);
+		
+		if (in_array($column, $columns)) {
+			$this->db->query("UPDATE " . DB_PREFIX . "inventory SET `" . $this->db->escape($column) . "` = '" . $this->db->escape($value) . "' WHERE inventory_id = '" . (int)$inventory_id . "'");
+		}
+	}
 
     public function deleteInventory($inventory_id) {
         $this->db->query("DELETE FROM " . DB_PREFIX . "inventory WHERE inventory_id = '" . (int)$inventory_id . "'");

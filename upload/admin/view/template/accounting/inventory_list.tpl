@@ -97,12 +97,15 @@
               <input type="checkbox" name="selected[]" value="<?php echo $inventory['inventory_id']; ?>" />
               <?php } ?></td>
             <td class="text-center"><img src="<?php echo $inventory['image']; ?>" alt="<?php echo $inventory['name']; ?>" /></td>
-            <td class="text-left"><?php echo $inventory['sku']; ?></td>
-            <td class="text-left"><?php echo $inventory['name']; ?></td>
-            <td class="text-left"><?php echo $inventory['quantity']; ?></td>
-            <td class="text-left"><?php echo $inventory['cost']; ?></td>
-            <td class="text-left"><?php echo $inventory['sell']; ?></td>
-            <td class="text-left"><?php echo $inventory['status']; ?></td>
+            <td class="text-left editable" data-id="<?php echo $inventory['inventory_id']; ?>" data-column="sku" data-value="<?php echo $inventory['sku']; ?>"><?php echo $inventory['sku']; ?></td>
+            <td class="text-left editable" data-id="<?php echo $inventory['inventory_id']; ?>" data-column="name" data-value="<?php echo $inventory['name']; ?>"><?php echo $inventory['name']; ?></td>
+            <td class="text-left editable" data-id="<?php echo $inventory['inventory_id']; ?>" data-column="quantity" data-value="<?php echo $inventory['quantity']; ?>"><?php echo $inventory['quantity']; ?></td>
+            <td class="text-left editable" data-id="<?php echo $inventory['inventory_id']; ?>" data-column="cost" data-value="<?php echo $inventory['cost_raw']; ?>"><?php echo $inventory['cost']; ?></td>
+            <td class="text-left editable" data-id="<?php echo $inventory['inventory_id']; ?>" data-column="sell" data-value="<?php echo $inventory['sell_raw']; ?>"><?php echo $inventory['sell']; ?></td>
+            <td class="text-left"><select name="<?php echo $inventory['inventory_id']; ?>" class="form-control input-sm status">
+			  <option value="1"<?php echo $inventory['status'] ? ' selected="selected"' : ''; ?>><?php echo $text_enabled; ?></option>
+			  <option value="0"<?php echo !$inventory['status'] ? ' selected="selected"' : ''; ?>><?php echo $text_disabled; ?></option>
+			  </select></td>
             <td class="text-right"><?php echo $inventory['date_added']; ?></td>
             <td class="text-right"><?php echo $inventory['date_modified']; ?></td>
             <td class="text-right"><a href="<?php echo $inventory['edit']; ?>" title="<?php echo $button_edit; ?>" data-toggle="tooltip" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a></td>
@@ -167,6 +170,79 @@ $(document).ready(function () {
 		if (e.keyCode == 13) {
 			filter();
 		}
+	});
+	
+	$(document).on('click', '.editable', function() {
+		var html = '<input type="text" name="' + $(this).attr('data-column') + '" value="' + $(this).attr('data-value') + '" class="form-control editing" data-id="' + $(this).attr('data-id') + '" />';
+	
+		$(this).html(html).removeClass('editable');
+	});
+	
+	$(document).on('focusout', '.editing', function () {
+		var field = $(this);
+
+		$.ajax({
+			url: 'index.php?load=accounting/inventory/update&token=<?php echo $token; ?>',
+			type: 'post',
+			data: {inventory_id: field.attr('data-id'), column: field.attr('name'), value: field.val()},
+			dataType: 'json',
+			beforeSend: function () {
+				field.after('<i class="fa fa-spinner"></i>');
+			},
+			complete: function () {
+				$('.fa-spinner').remove();
+			},
+			success: function (json) {
+				$('.alert').remove();
+
+				if (json['warning']) {
+					field.css('border', '1px solid #a94442');
+
+					$('.breadcrumb').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+				} else {
+					field.parent().addClass('editable').html(json['value']).attr('data-value', field.val());
+
+					$('.breadcrumb').after('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+				}
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		});
+	});
+	
+	$('.status').change(function () {
+		var field = $(this);
+
+		$.ajax({
+			url: 'index.php?load=accounting/inventory/update&token=<?php echo $token; ?>',
+			type: 'post',
+			data: {inventory_id: field.attr('name'), column: 'status', value: field.val()},
+			dataType: 'json',
+			beforeSend: function () {
+				field.after('<i class="fa fa-spinner"></i>');
+			},
+			complete: function () {
+				$('.fa-spinner').remove();
+			},
+			success: function (json) {
+				$('.alert-danger').remove();
+				$('.alert-success').remove();
+
+				if (json['warning']) {
+					field.css('border', '1px solid #a94442');
+
+					$('.breadcrumb').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+				} else {
+					field.css('border', '1px solid #3c763d');
+
+					$('.breadcrumb').after('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+				}
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		});
 	});
 });
 //--></script>
