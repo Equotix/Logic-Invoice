@@ -9,7 +9,7 @@ class ModelUpgrade110 extends Model {
 			if (preg_match('/^(a:)/', $result['value'])) {
 				$value = unserialize($result['value']);
 				
-				$db->query("UPDATE " . DB_PREFIX . "setting SET value = '" . $db->escape(json_encode($value)) . "' WHERE setting_id = '" . (int)$result['setting_id'] . "'");
+				$db->query("UPDATE " . DB_PREFIX . "setting SET `value` = '" . $db->escape(json_encode($value)) . "' WHERE setting_id = '" . (int)$result['setting_id'] . "'");
 			}
 		}
 		

@@ -56,15 +56,6 @@
         </div>
       </div>
       <div class="form-group">
-        <label class="required col-sm-2 control-label" for="input-directory"><?php echo $entry_directory; ?></label>
-        <div class="col-sm-10">
-          <input type="text" name="directory" value="<?php echo $directory; ?>" id="input-directory" class="form-control" placeholder="<?php echo $entry_directory; ?>" required />
-          <?php if ($error_directory) { ?>
-          <div class="text-danger"><?php echo $error_directory; ?></div>
-          <?php } ?>
-        </div>
-      </div>
-      <div class="form-group">
         <label class="col-sm-2 control-label" for="input-sort-order"><?php echo $entry_sort_order; ?></label>
         <div class="col-sm-10">
           <input type="text" name="sort_order" value="<?php echo $sort_order; ?>" id="input-sort-order" class="form-control" placeholder="<?php echo $entry_sort_order; ?>" />

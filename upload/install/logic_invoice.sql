@@ -580,7 +580,6 @@ CREATE TABLE IF NOT EXISTS `li_language` (
   `code` varchar(5) NOT NULL,
   `locale` varchar(255) NOT NULL,
   `image` varchar(64) NOT NULL,
-  `directory` varchar(32) NOT NULL,
   `sort_order` int(3) NOT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`language_id`)
@@ -590,8 +589,8 @@ CREATE TABLE IF NOT EXISTS `li_language` (
 -- Dumping data for table `li_language`
 --
 
-INSERT INTO `li_language` (`language_id`, `name`, `code`, `locale`, `image`, `directory`, `sort_order`, `status`) VALUES
-(1, 'English', 'en', 'en_US.UTF-8,en_US,en-gb,english', 'gb.png', 'english', 0, 1);
+INSERT INTO `li_language` (`language_id`, `name`, `code`, `locale`, `image`, `sort_order`, `status`) VALUES
+(1, 'English', 'en-gb', 'en_US.UTF-8,en_US,en-gb,english', 'gb.png', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -728,7 +727,7 @@ INSERT INTO `li_setting` (`setting_id`, `group`, `key`, `value`, `serialized`) V
 (235, 'config', 'config_meta_title', '{"1":"My Company Website"}', 1),
 (236, 'config', 'config_meta_description', '{"1":"My Company specialises in software and web applications. Powered by Logic Invoice."}', 1),
 (232, 'config', 'config_forgotten_admin', '1', 0),
-(231, 'config', 'config_language', 'en', 0),
+(231, 'config', 'config_language', 'en-gb', 0),
 (230, 'config', 'config_admin_language', 'en', 0),
 (54, 'pp_standard', 'pp_standard_transaction', 'sale', 0),
 (55, 'pp_standard', 'pp_standard_sandbox', '1', 0),

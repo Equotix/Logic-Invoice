@@ -140,52 +140,11 @@ $registry->set('session', $session);
 // Language
 $languages = array();
 
-$query = $db->query("SELECT * FROM " . DB_PREFIX . "language WHERE status = '1'");
+$query = $db->query("SELECT * FROM " . DB_PREFIX . "language WHERE code = '" . $db->escape($config->get('config_language')) . "' AND status = '1'");
 
-foreach ($query->rows as $result) {
-    $languages[$result['code']] = $result;
-}
+$config->set('config_language_id', $query->row['language_id']);
 
-$detect = '';
-
-if (isset($request->server['HTTP_ACCEPT_LANGUAGE']) && $request->server['HTTP_ACCEPT_LANGUAGE']) {
-    $browser_languages = explode(',', $request->server['HTTP_ACCEPT_LANGUAGE']);
-
-    foreach ($browser_languages as $browser_language) {
-        foreach ($languages as $key => $value) {
-            if ($value['status']) {
-                $locale = explode(',', $value['locale']);
-
-                if (in_array($browser_language, $locale)) {
-                    $detect = $key;
-                }
-            }
-        }
-    }
-}
-
-if (isset($session->data['language']) && array_key_exists($session->data['language'], $languages) && $languages[$session->data['language']]['status']) {
-    $code = $session->data['language'];
-} elseif (isset($request->cookie['language']) && array_key_exists($request->cookie['language'], $languages) && $languages[$request->cookie['language']]['status']) {
-    $code = $request->cookie['language'];
-} elseif ($detect) {
-    $code = $detect;
-} else {
-    $code = $config->get('config_language');
-}
-
-if (!isset($session->data['language']) || $session->data['language'] != $code) {
-    $session->data['language'] = $code;
-}
-
-if (!isset($request->cookie['language']) || $request->cookie['language'] != $code) {
-    setcookie('language', $code, time() + 60 * 60 * 24 * 30, '/', $request->server['HTTP_HOST']);
-}
-
-$config->set('config_language_id', $languages[$code]['language_id']);
-$config->set('config_language', $languages[$code]['code']);
-
-$language = new Language($languages[$code]['directory']);
+$language = new Language($config->get('config_language'));
 $language->load('default');
 $registry->set('language', $language);
 

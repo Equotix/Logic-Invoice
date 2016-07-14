@@ -197,13 +197,11 @@ class ControllerSystemLanguage extends Controller {
         $this->data['error_code'] = $this->build->data('code', $this->error);
         $this->data['error_locale'] = $this->build->data('locale', $this->error);
         $this->data['error_image'] = $this->build->data('image', $this->error);
-        $this->data['error_directory'] = $this->build->data('directory', $this->error);
 
         $this->data['name'] = $this->build->data('name', $this->request->post, $language_info);
         $this->data['code'] = $this->build->data('code', $this->request->post, $language_info);
         $this->data['locale'] = $this->build->data('locale', $this->request->post, $language_info);
         $this->data['image'] = $this->build->data('image', $this->request->post, $language_info);
-        $this->data['directory'] = $this->build->data('directory', $this->request->post, $language_info);
         $this->data['sort_order'] = $this->build->data('sort_order', $this->request->post, $language_info);
         $this->data['status'] = $this->build->data('status', $this->request->post, $language_info, '1');
 
@@ -244,10 +242,6 @@ class ControllerSystemLanguage extends Controller {
 
         if ((utf8_strlen($this->request->post['image']) < 3) || (utf8_strlen($this->request->post['image']) > 32)) {
             $this->error['image'] = $this->language->get('error_image');
-        }
-
-        if (!$this->request->post['directory']) {
-            $this->error['directory'] = $this->language->get('error_directory');
         }
 
         if ($this->error && empty($this->error['warning'])) {

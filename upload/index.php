@@ -187,7 +187,7 @@ if (!isset($request->cookie['language']) || $request->cookie['language'] != $cod
 $config->set('config_language_id', $languages[$code]['language_id']);
 $config->set('config_language', $languages[$code]['code']);
 
-$language = new Language($languages[$code]['directory']);
+$language = new Language($languages[$code]['code']);
 $language->load('default');
 $registry->set('language', $language);
 
