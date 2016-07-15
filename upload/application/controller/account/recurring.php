@@ -6,7 +6,7 @@ class ControllerAccountRecurring extends Controller {
         if (!$this->customer->isLogged()) {
             $this->session->data['redirect'] = $this->url->link('account/recurring', '', true);
 
-            $this->response->redirect($this->url->link('account/recurring', '', true));
+            $this->response->redirect($this->url->link('account/login', '', true));
         }
 
         $this->data = $this->load->language('account/recurring');
