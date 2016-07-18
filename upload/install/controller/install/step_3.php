@@ -4,8 +4,7 @@ class ControllerInstallStep3 extends Controller {
         $this->data = $this->load->language('default');
 
         $this->data['databases'] = array(
-            'mysqli',
-            'mysql'
+            'mysqli'
         );
 
         $this->data['prefix'] = substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 5) . '_';

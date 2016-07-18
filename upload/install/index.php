@@ -50,7 +50,7 @@ $session = new Session();
 $registry->set('session', $session);
 
 // Language
-$language = new Language('english');
+$language = new Language('en-gb');
 $language->load('default');
 $registry->set('language', $language);
 
