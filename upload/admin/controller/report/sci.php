@@ -64,7 +64,7 @@ class ControllerReportSCI extends Controller {
                 if (($transaction_total['credit'] - $transaction_total['debit']) != 0) {
                     $this->data['revenue_accounts'][] = array(
                         'name'  => $account['name'],
-                        'total' => $this->currency->format($transaction_total['credit'] - $transaction_total['debit'])
+                        'total' => $this->currency->format($transaction_total['credit'] - $transaction_total['debit'], $this->config->get('config_currency'))
                     );
 
                     $revenue_total += $transaction_total['credit'] - $transaction_total['debit'];
@@ -72,7 +72,7 @@ class ControllerReportSCI extends Controller {
             }
         }
 
-        $this->data['revenue_total'] = $this->currency->format($revenue_total);
+        $this->data['revenue_total'] = $this->currency->format($revenue_total, $this->config->get('config_currency'));
 
         $expense = array(
             'depreciation',
@@ -94,7 +94,7 @@ class ControllerReportSCI extends Controller {
                 if (($transaction_total['debit'] - $transaction_total['credit']) != 0) {
                     $this->data['expense_accounts'][] = array(
                         'name'  => $account['name'],
-                        'total' => $this->currency->format($transaction_total['debit'] - $transaction_total['credit'])
+                        'total' => $this->currency->format($transaction_total['debit'] - $transaction_total['credit'], $this->config->get('config_currency'))
                     );
 
                     $expense_total += $transaction_total['debit'] - $transaction_total['credit'];
@@ -102,9 +102,9 @@ class ControllerReportSCI extends Controller {
             }
         }
 
-        $this->data['expense_total'] = $this->currency->format($expense_total);
+        $this->data['expense_total'] = $this->currency->format($expense_total, $this->config->get('config_currency'));
 
-        $this->data['net_profit'] = $this->currency->format($revenue_total - $expense_total);
+        $this->data['net_profit'] = $this->currency->format($revenue_total - $expense_total, $this->config->get('config_currency'));
 
         $this->data['filter_date_start'] = $filter_date_start;
         $this->data['filter_date_end'] = $filter_date_end;

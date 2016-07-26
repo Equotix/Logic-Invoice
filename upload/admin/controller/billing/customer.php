@@ -107,8 +107,8 @@ class ControllerBillingCustomer extends Controller {
                 'customer_id'   => $customer['customer_id'],
                 'name'          => $customer['name'],
                 'email'         => $customer['email'],
-                'credit'        => $this->currency->format($customer['credit']),
-                'invoice'       => $this->currency->format($customer['invoice']),
+                'credit'        => $this->currency->format($customer['credit'], $this->config->get('config_currency')),
+                'invoice'       => $this->currency->format($customer['invoice'], $this->config->get('config_currency')),
                 'status'        => $customer['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
                 'date_added'    => date($this->language->get('datetime_format_short'), strtotime($customer['date_added'])),
                 'date_modified' => date($this->language->get('datetime_format_short'), strtotime($customer['date_modified'])),
@@ -336,7 +336,7 @@ class ControllerBillingCustomer extends Controller {
                 $page = (int)$this->request->get['page'];
             }
 
-            $json['credit'] = sprintf($this->language->get('text_credit'), $this->currency->format($this->model_billing_customer->getCustomerTotalCredits((int)$this->request->get['customer_id'])));
+            $json['credit'] = sprintf($this->language->get('text_credit'), $this->currency->format($this->model_billing_customer->getCustomerTotalCredits((int)$this->request->get['customer_id']), $this->config->get('config_currency')));
 
             $credits = $this->model_billing_customer->getCreditsByCustomer((int)$this->request->get['customer_id'], ($page - 1) * $this->config->get('config_limit_admin'), $this->config->get('config_limit_admin'));
 
@@ -344,7 +344,7 @@ class ControllerBillingCustomer extends Controller {
 
             foreach ($credits as $credit) {
                 $json['credits'][] = array(
-                    'amount'      => $this->currency->format($credit['amount']),
+                    'amount'      => $this->currency->format($credit['amount'], $this->config->get('config_currency')),
                     'description' => $credit['description'],
                     'date_added'  => date($this->language->get('datetime_format_short'), strtotime($credit['date_added']))
                 );

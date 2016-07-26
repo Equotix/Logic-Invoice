@@ -57,7 +57,7 @@ class ControllerReportSFP extends Controller {
                 if (($transaction_total['debit'] - $transaction_total['credit']) != 0) {
                     $this->data['current_asset_accounts'][] = array(
                         'name'  => $account['name'],
-                        'total' => $this->currency->format($transaction_total['debit'] - $transaction_total['credit'])
+                        'total' => $this->currency->format($transaction_total['debit'] - $transaction_total['credit'], $this->config->get('config_currency'))
                     );
 
                     $current_asset_total += $transaction_total['debit'] - $transaction_total['credit'];
@@ -65,7 +65,7 @@ class ControllerReportSFP extends Controller {
             }
         }
 
-        $this->data['current_asset_total'] = $this->currency->format($current_asset_total);
+        $this->data['current_asset_total'] = $this->currency->format($current_asset_total, $this->config->get('config_currency'));
 
         $non_current_asset = array(
             'fixed_asset',
@@ -85,7 +85,7 @@ class ControllerReportSFP extends Controller {
                 if (($transaction_total['debit'] - $transaction_total['credit']) != 0) {
                     $this->data['non_current_asset_accounts'][] = array(
                         'name'  => $account['name'],
-                        'total' => $this->currency->format($transaction_total['debit'] - $transaction_total['credit'])
+                        'total' => $this->currency->format($transaction_total['debit'] - $transaction_total['credit'], $this->config->get('config_currency'))
                     );
 
                     $non_current_asset_total += $transaction_total['debit'] - $transaction_total['credit'];
@@ -93,9 +93,9 @@ class ControllerReportSFP extends Controller {
             }
         }
 
-        $this->data['non_current_asset_total'] = $this->currency->format($non_current_asset_total);
+        $this->data['non_current_asset_total'] = $this->currency->format($non_current_asset_total, $this->config->get('config_currency'));
 
-        $this->data['asset_total'] = $this->currency->format($current_asset_total + $non_current_asset_total);
+        $this->data['asset_total'] = $this->currency->format($current_asset_total + $non_current_asset_total, $this->config->get('config_currency'));
 
         $expense = array(
             'depreciation',
@@ -152,7 +152,7 @@ class ControllerReportSFP extends Controller {
                     if ($equity_total > 0 || $equity_total < 0) {
                         $this->data['equity_accounts'][] = array(
                             'name'  => $account['name'],
-                            'total' => $this->currency->format($equity_total)
+                            'total' => $this->currency->format($equity_total, $this->config->get('config_currency'))
                         );
                     }
                 } else {
@@ -161,7 +161,7 @@ class ControllerReportSFP extends Controller {
                     if (($transaction_total['credit'] - $transaction_total['debit']) != 0) {
                         $this->data['equity_accounts'][] = array(
                             'name'  => $account['name'],
-                            'total' => $this->currency->format($transaction_total['credit'] - $transaction_total['debit'])
+                            'total' => $this->currency->format($transaction_total['credit'] - $transaction_total['debit'], $this->config->get('config_currency'))
                         );
 
                         $equity_total += $transaction_total['credit'] - $transaction_total['debit'];
@@ -170,7 +170,7 @@ class ControllerReportSFP extends Controller {
             }
         }
 
-        $this->data['equity_total'] = $this->currency->format($equity_total);
+        $this->data['equity_total'] = $this->currency->format($equity_total, $this->config->get('config_currency'));
 
         $current_liability = array(
             'current_liability',
@@ -190,7 +190,7 @@ class ControllerReportSFP extends Controller {
                 if (($transaction_total['credit'] - $transaction_total['debit']) != 0) {
                     $this->data['current_liability_accounts'][] = array(
                         'name'  => $account['name'],
-                        'total' => $this->currency->format($transaction_total['credit'] - $transaction_total['debit'])
+                        'total' => $this->currency->format($transaction_total['credit'] - $transaction_total['debit'], $this->config->get('config_currency'))
                     );
 
                     $current_liability_total += $transaction_total['credit'] - $transaction_total['debit'];
@@ -198,7 +198,7 @@ class ControllerReportSFP extends Controller {
             }
         }
 
-        $this->data['current_liability_total'] = $this->currency->format($current_liability_total);
+        $this->data['current_liability_total'] = $this->currency->format($current_liability_total, $this->config->get('config_currency'));
 
         $non_current_liability = array(
             'non_current_liability'
@@ -217,7 +217,7 @@ class ControllerReportSFP extends Controller {
 
                     $this->data['non_current_liability_accounts'][] = array(
                         'name'  => $account['name'],
-                        'total' => $this->currency->format($transaction_total['credit'] - $transaction_total['debit'])
+                        'total' => $this->currency->format($transaction_total['credit'] - $transaction_total['debit'], $this->config->get('config_currency'))
                     );
 
                     $non_current_liability_total += $transaction_total['credit'] - $transaction_total['debit'];
@@ -225,11 +225,11 @@ class ControllerReportSFP extends Controller {
             }
         }
 
-        $this->data['non_current_liability_total'] = $this->currency->format($non_current_liability_total);
+        $this->data['non_current_liability_total'] = $this->currency->format($non_current_liability_total, $this->config->get('config_currency'));
 
-        $this->data['liability_total'] = $this->currency->format($current_liability_total + $non_current_liability_total);
+        $this->data['liability_total'] = $this->currency->format($current_liability_total + $non_current_liability_total, $this->config->get('config_currency'));
 
-        $this->data['liability_equity_total'] = $this->currency->format($current_liability_total + $non_current_liability_total + $equity_total);
+        $this->data['liability_equity_total'] = $this->currency->format($current_liability_total + $non_current_liability_total + $equity_total, $this->config->get('config_currency'));
 
         $this->data['filter_date_end'] = $filter_date_end;
         $this->data['date_end'] = date('d M Y', strtotime($filter_date_end));

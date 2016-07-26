@@ -99,9 +99,9 @@ class ControllerReportChartOfAccounts extends Controller {
                         }
 
                         if (in_array($grandchild['type'], $this->data['asset']) || in_array($grandchild['type'], $this->data['expense'])) {
-                            $ytd = $this->currency->format($transaction_total['debit'] - $transaction_total['credit']);
+                            $ytd = $this->currency->format($transaction_total['debit'] - $transaction_total['credit'], $this->config->get('config_currency'));
                         } else {
-                            $ytd = $this->currency->format($transaction_total['credit'] - $transaction_total['debit']);
+                            $ytd = $this->currency->format($transaction_total['credit'] - $transaction_total['debit'], $this->config->get('config_currency'));
                         }
 
                         $grandchildren_data[] = array(
@@ -126,9 +126,9 @@ class ControllerReportChartOfAccounts extends Controller {
                         }
 
                         if (in_array($child['type'], $this->data['asset']) || in_array($child['type'], $this->data['expense'])) {
-                            $ytd = $this->currency->format($transaction_total['debit'] - $transaction_total['credit']);
+                            $ytd = $this->currency->format($transaction_total['debit'] - $transaction_total['credit'], $this->config->get('config_currency'));
                         } else {
-                            $ytd = $this->currency->format($transaction_total['credit'] - $transaction_total['debit']);
+                            $ytd = $this->currency->format($transaction_total['credit'] - $transaction_total['debit'], $this->config->get('config_currency'));
                         }
                     }
 
@@ -155,9 +155,9 @@ class ControllerReportChartOfAccounts extends Controller {
                     }
 
                     if (in_array($account['type'], $this->data['asset']) || in_array($account['type'], $this->data['expense'])) {
-                        $ytd = $this->currency->format($transaction_total['debit'] - $transaction_total['credit']);
+                        $ytd = $this->currency->format($transaction_total['debit'] - $transaction_total['credit'], $this->config->get('config_currency'));
                     } else {
-                        $ytd = $this->currency->format($transaction_total['credit'] - $transaction_total['debit']);
+                        $ytd = $this->currency->format($transaction_total['credit'] - $transaction_total['debit'], $this->config->get('config_currency'));
                     }
                 }
 
@@ -182,7 +182,7 @@ class ControllerReportChartOfAccounts extends Controller {
                         $expense += ($transaction_total['debit'] - $transaction_total['credit']);
                     }
 
-                    $ytd = $this->currency->format($revenue - $expense);
+                    $ytd = $this->currency->format($revenue - $expense, $this->config->get('config_currency'));
                 }
 
                 $this->data['accounts'][] = array(

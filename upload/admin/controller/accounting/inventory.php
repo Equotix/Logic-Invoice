@@ -114,8 +114,8 @@ class ControllerAccountingInventory extends Controller {
                 'sku'           => $inventory['sku'],
                 'name'          => $inventory['name'],
                 'quantity'      => $inventory['quantity'],
-                'cost'          => $this->currency->format($inventory['cost']),
-                'sell'          => $this->currency->format($inventory['sell']),
+                'cost'          => $this->currency->format($inventory['cost'], $this->config->get('config_currency')),
+                'sell'          => $this->currency->format($inventory['sell'], $this->config->get('config_currency')),
 				'cost_raw'      => $inventory['cost'],
                 'sell_raw'      => $inventory['sell'],
                 'status'        => $inventory['status'],
@@ -391,7 +391,7 @@ class ControllerAccountingInventory extends Controller {
 				$json['value'] = $value;
 				
 				if ($column == 'cost' || $column == 'sell') {
-					$json['value'] = $this->currency->format($value);
+					$json['value'] = $this->currency->format($value, $this->config->get('config_currency'));
 				}
 
 				$json['success'] = $this->language->get('text_success');
