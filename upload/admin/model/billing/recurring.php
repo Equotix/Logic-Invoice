@@ -396,8 +396,8 @@ class ModelBillingRecurring extends Model {
         if ($implode) {
             $sql .= " WHERE " . implode(" AND ", $implode);
         }
-		
-		$query = $this->db->query($sql);
+
+        $query = $this->db->query($sql);
 
         return $query->row['total'];
     }

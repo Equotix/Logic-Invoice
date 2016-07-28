@@ -347,7 +347,7 @@ class ModelBillingInvoice extends Model {
     }
 
     public function addHistory($invoice_id, $data, $notify = false) {
-		$this->db->query("UPDATE " . DB_PREFIX . "invoice SET status_id = '" . (int)$data['status_id'] . "', date_modified = NOW() WHERE invoice_id = '" . (int)$invoice_id . "'");
+        $this->db->query("UPDATE " . DB_PREFIX . "invoice SET status_id = '" . (int)$data['status_id'] . "', date_modified = NOW() WHERE invoice_id = '" . (int)$invoice_id . "'");
 
         $this->db->query("INSERT INTO " . DB_PREFIX . "invoice_history SET invoice_id = '" . (int)$invoice_id . "', status_id = '" . (int)$data['status_id'] . "', comment = '" . $this->db->escape($data['comment']) . "', date_added = NOW()");
 

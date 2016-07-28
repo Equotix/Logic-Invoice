@@ -53,10 +53,10 @@ $registry->set('log', $log);
 
 function error_handler($errno, $errstr, $errfile, $errline) {
     global $log, $config;
-	
-	if (error_reporting() === 0) {
-		return false;
-	}
+
+    if (error_reporting() === 0) {
+        return false;
+    }
 
     switch ($errno) {
         case E_NOTICE:
@@ -204,13 +204,13 @@ if ($query->num_rows) {
 
     if ($user_query->num_rows) {
         $session->data['api_key'] = md5(mt_rand());
-		$session->data['username'] = $user_query->row['username'];
-		
-		$request->post['api_key'] = $session->data['api_key'];
-		
-		$error = new Action('error/not_found');
-		
-		$controller->dispatch(new Action('api/recurring/check'), $error);
-		$controller->dispatch(new Action('api/invoice/check'), $error);
+        $session->data['username'] = $user_query->row['username'];
+
+        $request->post['api_key'] = $session->data['api_key'];
+
+        $error = new Action('error/not_found');
+
+        $controller->dispatch(new Action('api/recurring/check'), $error);
+        $controller->dispatch(new Action('api/invoice/check'), $error);
     }
 }

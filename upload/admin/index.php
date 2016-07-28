@@ -60,10 +60,10 @@ $registry->set('log', $log);
 
 function error_handler($errno, $errstr, $errfile, $errline) {
     global $log, $config;
-	
-	if (error_reporting() === 0) {
-		return false;
-	}
+
+    if (error_reporting() === 0) {
+        return false;
+    }
 
     switch ($errno) {
         case E_NOTICE:

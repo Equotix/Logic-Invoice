@@ -9,21 +9,21 @@ class ModelAccountingInventory extends Model {
     public function editInventory($inventory_id, $data) {
         $this->db->query("UPDATE " . DB_PREFIX . "inventory SET sku = '" . $this->db->escape($data['sku']) . "', name = '" . $this->db->escape($data['name']) . "', description = '" . $this->db->escape($data['description']) . "', image = '" . $this->db->escape($data['image']) . "', quantity = '" . (int)$data['quantity'] . "', cost = '" . (float)$data['cost'] . "', sell = '" . (float)$data['sell'] . "', status = '" . (int)$data['status'] . "', date_modified = NOW() WHERE inventory_id = '" . (int)$inventory_id . "'");
     }
-	
-	public function editInventoryData($inventory_id, $column, $value) {
-		$columns = array(
-			'sku',
-			'name',
-			'quantity',
-			'cost',
-			'sell',
-			'status'
-		);
-		
-		if (in_array($column, $columns)) {
-			$this->db->query("UPDATE " . DB_PREFIX . "inventory SET `" . $this->db->escape($column) . "` = '" . $this->db->escape($value) . "' WHERE inventory_id = '" . (int)$inventory_id . "'");
-		}
-	}
+
+    public function editInventoryData($inventory_id, $column, $value) {
+        $columns = array(
+            'sku',
+            'name',
+            'quantity',
+            'cost',
+            'sell',
+            'status'
+        );
+
+        if (in_array($column, $columns)) {
+            $this->db->query("UPDATE " . DB_PREFIX . "inventory SET `" . $this->db->escape($column) . "` = '" . $this->db->escape($value) . "' WHERE inventory_id = '" . (int)$inventory_id . "'");
+        }
+    }
 
     public function deleteInventory($inventory_id) {
         $this->db->query("DELETE FROM " . DB_PREFIX . "inventory WHERE inventory_id = '" . (int)$inventory_id . "'");
@@ -32,7 +32,7 @@ class ModelAccountingInventory extends Model {
     public function getInventory($inventory_id) {
         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "inventory WHERE inventory_id = '" . (int)$inventory_id . "'");
 
-		return $query->row;
+        return $query->row;
     }
 
     public function getInventories($data = array()) {
@@ -43,24 +43,24 @@ class ModelAccountingInventory extends Model {
         if (!empty($data['filter_sku'])) {
             $implode[] = "LOWER(sku) = '" . $this->db->escape(utf8_strtolower($data['filter_sku'])) . "'";
         }
-		
-		if (!empty($data['filter_name'])) {
+
+        if (!empty($data['filter_name'])) {
             $implode[] = "LOWER(name) LIKE '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "%'";
         }
 
         if (isset($data['filter_quantity']) && !is_null($data['filter_quantity'])) {
             $implode[] = "quantity = '" . (int)$data['filter_quantity'] . "'";
         }
-		
-		if (isset($data['filter_cost']) && !is_null($data['filter_cost'])) {
+
+        if (isset($data['filter_cost']) && !is_null($data['filter_cost'])) {
             $implode[] = "cost = '" . (float)$data['filter_cost'] . "'";
         }
-		
-		if (isset($data['filter_sell']) && !is_null($data['filter_sell'])) {
+
+        if (isset($data['filter_sell']) && !is_null($data['filter_sell'])) {
             $implode[] = "sell = '" . (float)$data['filter_sell'] . "'";
         }
-		
-		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
+
+        if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
             $implode[] = "status = '" . (int)$data['filter_status'] . "'";
         }
 
@@ -72,11 +72,11 @@ class ModelAccountingInventory extends Model {
             'sku',
             'name',
             'quantity',
-			'cost',
-			'sell',
-			'status',
-			'date_added',
-			'date_modified'
+            'cost',
+            'sell',
+            'status',
+            'date_added',
+            'date_modified'
         );
 
         if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
@@ -116,24 +116,24 @@ class ModelAccountingInventory extends Model {
         if (!empty($data['filter_sku'])) {
             $implode[] = "LOWER(sku) = '" . $this->db->escape(utf8_strtolower($data['filter_sku'])) . "'";
         }
-		
-		if (!empty($data['filter_name'])) {
+
+        if (!empty($data['filter_name'])) {
             $implode[] = "LOWER(name) LIKE '" . $this->db->escape(utf8_strtolower($data['name'])) . "%'";
         }
 
         if (isset($data['filter_quantity']) && !is_null($data['filter_quantity'])) {
             $implode[] = "quantity = '" . (int)$data['filter_quantity'] . "'";
         }
-		
-		if (isset($data['filter_cost']) && !is_null($data['filter_cost'])) {
+
+        if (isset($data['filter_cost']) && !is_null($data['filter_cost'])) {
             $implode[] = "cost = '" . (float)$data['filter_cost'] . "'";
         }
-		
-		if (isset($data['filter_sell']) && !is_null($data['filter_sell'])) {
+
+        if (isset($data['filter_sell']) && !is_null($data['filter_sell'])) {
             $implode[] = "sell = '" . (float)$data['filter_sell'] . "'";
         }
-		
-		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
+
+        if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
             $implode[] = "status = '" . (int)$data['filter_status'] . "'";
         }
 

@@ -74,8 +74,8 @@ class ModelContentBlogPost extends Model {
 
         return $query->row['total'];
     }
-	
-	public function increaseView($blog_post_id) {
-		$this->db->query("UPDATE " . DB_PREFIX . "blog_post SET view = view + 1 WHERE blog_post_id = '" . (int)$blog_post_id . "'");
-	}
+
+    public function increaseView($blog_post_id) {
+        $this->db->query("UPDATE " . DB_PREFIX . "blog_post SET view = view + 1 WHERE blog_post_id = '" . (int)$blog_post_id . "'");
+    }
 }

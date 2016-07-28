@@ -1,6 +1,6 @@
 <?php
 class ControllerInstallStep4 extends Controller {
-	public function index() {
+    public function index() {
         $this->data = $this->load->language('default');
 
         $this->load->model('install/install');
@@ -29,7 +29,7 @@ class ControllerInstallStep4 extends Controller {
 
         $this->response->setOutput($this->render('install/step_4'));
     }
-	
+
     public function remove() {
         $iterator = new RecursiveDirectoryIterator(DIR_APPLICATION, RecursiveDirectoryIterator::SKIP_DOTS);
 

@@ -73,7 +73,7 @@ class ModelContentEmailTemplate extends Model {
             $template_data['subject'] = $subject;
             $template_data['message'] = $message;
 
-			$html = $this->load->view('mail/general', $template_data);
+            $html = $this->load->view('mail/general', $template_data);
 
             $text = str_replace($search, $replace, html_entity_decode($template_info['description'][$language_id]['text'], ENT_QUOTES));
 

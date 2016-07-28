@@ -7,25 +7,25 @@ class ModelAccountingTransaction extends Model {
 
         $transaction_id = $this->db->getLastId();
 
-		if (isset($data['transaction_accounts'])) {
-			foreach ($data['transaction_accounts'] as $transaction_account) {
-				if ($transaction_account['debit'] || $transaction_account['credit']) {
-					if (preg_match('/^\(.+\)$/', $transaction_account['debit'])) {
-						$transaction_account['debit'] = preg_replace('/[^\d.-]/', '', $transaction_account['debit']);
+        if (isset($data['transaction_accounts'])) {
+            foreach ($data['transaction_accounts'] as $transaction_account) {
+                if ($transaction_account['debit'] || $transaction_account['credit']) {
+                    if (preg_match('/^\(.+\)$/', $transaction_account['debit'])) {
+                        $transaction_account['debit'] = preg_replace('/[^\d.-]/', '', $transaction_account['debit']);
 
-						$transaction_account['debit'] = '-' . (float)$transaction_account['debit'];
-					}
+                        $transaction_account['debit'] = '-' . (float)$transaction_account['debit'];
+                    }
 
-					if (preg_match('/^\(.+\)$/', $transaction_account['credit'])) {
-						$transaction_account['credit'] = preg_replace('/[^\d.-]/', '', $transaction_account['credit']);
+                    if (preg_match('/^\(.+\)$/', $transaction_account['credit'])) {
+                        $transaction_account['credit'] = preg_replace('/[^\d.-]/', '', $transaction_account['credit']);
 
-						$transaction_account['credit'] = '-' . (float)$transaction_account['credit'];
-					}
+                        $transaction_account['credit'] = '-' . (float)$transaction_account['credit'];
+                    }
 
-					$this->db->query("INSERT INTO " . DB_PREFIX . "transaction_account SET transaction_id = '" . (int)$transaction_id . "', account_id = '" . (int)$transaction_account['account_id'] . "', debit = '" . (float)$transaction_account['debit'] . "', credit = '" . (float)$transaction_account['credit'] . "'");
-				}
-			}
-		}
+                    $this->db->query("INSERT INTO " . DB_PREFIX . "transaction_account SET transaction_id = '" . (int)$transaction_id . "', account_id = '" . (int)$transaction_account['account_id'] . "', debit = '" . (float)$transaction_account['debit'] . "', credit = '" . (float)$transaction_account['credit'] . "'");
+                }
+            }
+        }
 
         $this->db->query("UPDATE " . DB_PREFIX . "invoice SET transaction = '1' WHERE invoice_id = '" . (int)$data['invoice_id'] . "'");
 
@@ -51,25 +51,25 @@ class ModelAccountingTransaction extends Model {
 
         $this->db->query("DELETE FROM " . DB_PREFIX . "transaction_account WHERE transaction_id = '" . (int)$transaction_id . "'");
 
-		if (isset($data['transaction_accounts'])) {
-			foreach ($data['transaction_accounts'] as $transaction_account) {
-				if ($transaction_account['debit'] || $transaction_account['credit']) {
-					if (preg_match('/^\(.+\)$/', $transaction_account['debit'])) {
-						$transaction_account['debit'] = preg_replace('/[^\d.-]/', '', $transaction_account['debit']);
+        if (isset($data['transaction_accounts'])) {
+            foreach ($data['transaction_accounts'] as $transaction_account) {
+                if ($transaction_account['debit'] || $transaction_account['credit']) {
+                    if (preg_match('/^\(.+\)$/', $transaction_account['debit'])) {
+                        $transaction_account['debit'] = preg_replace('/[^\d.-]/', '', $transaction_account['debit']);
 
-						$transaction_account['debit'] = '-' . (float)$transaction_account['debit'];
-					}
+                        $transaction_account['debit'] = '-' . (float)$transaction_account['debit'];
+                    }
 
-					if (preg_match('/^\(.+\)$/', $transaction_account['credit'])) {
-						$transaction_account['credit'] = preg_replace('/[^\d.-]/', '', $transaction_account['credit']);
+                    if (preg_match('/^\(.+\)$/', $transaction_account['credit'])) {
+                        $transaction_account['credit'] = preg_replace('/[^\d.-]/', '', $transaction_account['credit']);
 
-						$transaction_account['credit'] = '-' . (float)$transaction_account['credit'];
-					}
+                        $transaction_account['credit'] = '-' . (float)$transaction_account['credit'];
+                    }
 
-					$this->db->query("INSERT INTO " . DB_PREFIX . "transaction_account SET transaction_id = '" . (int)$transaction_id . "', account_id = '" . (int)$transaction_account['account_id'] . "', debit = '" . (float)$transaction_account['debit'] . "', credit = '" . (float)$transaction_account['credit'] . "'");
-				}
-			}
-		}
+                    $this->db->query("INSERT INTO " . DB_PREFIX . "transaction_account SET transaction_id = '" . (int)$transaction_id . "', account_id = '" . (int)$transaction_account['account_id'] . "', debit = '" . (float)$transaction_account['debit'] . "', credit = '" . (float)$transaction_account['credit'] . "'");
+                }
+            }
+        }
 
         $this->db->query("UPDATE " . DB_PREFIX . "invoice SET transaction = '1' WHERE invoice_id = '" . (int)$data['invoice_id'] . "'");
 
