@@ -75,7 +75,7 @@ class ControllerContentBlog extends Controller {
             'start'            => $this->config->get('config_limit_application') * ($page - 1),
             'limit'            => $this->config->get('config_limit_application'),
             'blog_category_id' => $blog_category_id,
-			'order'            => 'DESC'
+            'order'            => 'DESC'
         );
 
         $this->load->model('content/blog_post');
@@ -159,8 +159,8 @@ class ControllerContentBlog extends Controller {
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
-		
-		$this->response->setOutput($this->render('content/blog'));
+
+        $this->response->setOutput($this->render('content/blog'));
     }
 
     public function info() {
@@ -252,8 +252,8 @@ class ControllerContentBlog extends Controller {
             $this->data['date_added'] = date($this->language->get('date_format_long'), strtotime($blog_post_info['date_added']));
             $this->data['user'] = $blog_post_info['user'];
             $this->data['tag'] = $blog_post_info['tag'];
-			
-			$this->model_content_blog_post->increaseView($blog_post_info['blog_post_id']);
+
+            $this->model_content_blog_post->increaseView($blog_post_info['blog_post_id']);
         } else {
             return new Action('error/not_found');
         }

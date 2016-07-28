@@ -18,7 +18,7 @@ class ControllerPaymentChequeCheque extends Controller {
 
             $this->data['action'] = $this->url->link('payment/cheque/cheque/confirm', 'invoice_id=' . $invoice_info['invoice_id'], true);
 
-			$this->response->setOutput($this->render('payment/cheque/cheque'));
+            $this->response->setOutput($this->render('payment/cheque/cheque'));
         }
     }
 
@@ -43,9 +43,9 @@ class ControllerPaymentChequeCheque extends Controller {
 
         if ($invoice_info) {
             $pending_status = is_array($this->config->get('config_pending_status')) ? $this->config->get('config_pending_status') : array();
-			$overdue_status = is_array($this->config->get('config_overdue_status')) ? $this->config->get('config_overdue_status') : array();
-			
-			if (!(in_array($invoice_info['status_id'], $pending_status) || in_array($invoice_info['status_id'], $overdue_status))) {
+            $overdue_status = is_array($this->config->get('config_overdue_status')) ? $this->config->get('config_overdue_status') : array();
+
+            if (!(in_array($invoice_info['status_id'], $pending_status) || in_array($invoice_info['status_id'], $overdue_status))) {
                 return new Action('error/not_found');
             }
 

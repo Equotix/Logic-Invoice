@@ -75,7 +75,7 @@ class ControllerCommonHeader extends Controller {
             $this->data['register'] = $this->config->get('config_registration') ? $this->url->link('account/register', '', true) : false;
             $this->data['login'] = $this->url->link('account/login', '', true);
         }
-		
-		return $this->render('common/header');
+
+        return $this->render('common/header');
     }
 }

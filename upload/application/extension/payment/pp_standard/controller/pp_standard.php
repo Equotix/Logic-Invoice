@@ -65,7 +65,7 @@ class ControllerPaymentPPStandardPPStandard extends Controller {
 
             $this->data['custom'] = $invoice_info['invoice_id'];
 
-			$this->response->setOutput($this->render('payment/pp_standard/pp_standard'));
+            $this->response->setOutput($this->render('payment/pp_standard/pp_standard'));
         }
     }
 
@@ -114,8 +114,8 @@ class ControllerPaymentPPStandardPPStandard extends Controller {
             }
 
             $status_id = $this->config->get('pp_standard_denied');
-			
-			$message = '';
+
+            $message = '';
 
             if ((strcmp($response, 'VERIFIED') == 0 || strcmp($response, 'UNVERIFIED') == 0) && isset($this->request->post['payment_status'])) {
                 switch ($this->request->post['payment_status']) {

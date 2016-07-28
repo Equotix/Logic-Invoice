@@ -50,25 +50,25 @@ class ControllerAccountingInventory extends Controller {
         } else {
             $filter_quantity = null;
         }
-		
-		if (isset($this->request->get['filter_cost'])) {
+
+        if (isset($this->request->get['filter_cost'])) {
             $filter_cost = $this->request->get['filter_cost'];
         } else {
             $filter_cost = null;
         }
-		
-		if (isset($this->request->get['filter_sell'])) {
+
+        if (isset($this->request->get['filter_sell'])) {
             $filter_sell = $this->request->get['filter_sell'];
         } else {
             $filter_sell = null;
         }
-		
-		if (isset($this->request->get['filter_status'])) {
+
+        if (isset($this->request->get['filter_status'])) {
             $filter_status = $this->request->get['filter_status'];
         } else {
             $filter_status = null;
         }
-		
+
         if (isset($this->request->get['page'])) {
             $page = (int)$this->request->get['page'];
         } else {
@@ -116,7 +116,7 @@ class ControllerAccountingInventory extends Controller {
                 'quantity'      => $inventory['quantity'],
                 'cost'          => $this->currency->format($inventory['cost'], $this->config->get('config_currency')),
                 'sell'          => $this->currency->format($inventory['sell'], $this->config->get('config_currency')),
-				'cost_raw'      => $inventory['cost'],
+                'cost_raw'      => $inventory['cost'],
                 'sell_raw'      => $inventory['sell'],
                 'status'        => $inventory['status'],
                 'date_added'    => date($this->language->get('datetime_format_short'), strtotime($inventory['date_added'])),
@@ -279,24 +279,24 @@ class ControllerAccountingInventory extends Controller {
         $this->data['cost'] = $this->build->data('cost', $this->request->post, $inventory_info);
         $this->data['sell'] = $this->build->data('sell', $this->request->post, $inventory_info);
         $this->data['status'] = $this->build->data('status', $this->request->post, $inventory_info, '1');
-		
-		$this->load->model('tool/image');
-		
-		if ($this->data['image']) {
-			$this->data['thumb'] = $this->model_tool_image->resize($this->data['image'], 100, 100);
-		} else {
-			$this->data['thumb'] = $this->model_tool_image->resize('placeholder.png', 100, 100);
-		}
-		
-		$this->data['placeholder'] = $this->model_tool_image->resize('placeholder.png', 100, 100);
+
+        $this->load->model('tool/image');
+
+        if ($this->data['image']) {
+            $this->data['thumb'] = $this->model_tool_image->resize($this->data['image'], 100, 100);
+        } else {
+            $this->data['thumb'] = $this->model_tool_image->resize('placeholder.png', 100, 100);
+        }
+
+        $this->data['placeholder'] = $this->model_tool_image->resize('placeholder.png', 100, 100);
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
 
         $this->response->setOutput($this->render('accounting/inventory_form'));
     }
-	
-	public function autocomplete() {
+
+    public function autocomplete() {
         $json = array();
 
         if (isset($this->request->get['filter_name']) || isset($this->request->get['filter_sku'])) {
@@ -315,9 +315,9 @@ class ControllerAccountingInventory extends Controller {
             $filter_data = array(
                 'filter_sku'  => $filter_sku,
                 'filter_name' => $filter_name,
-				'sort'        => 'name',
-				'start'       => 0,
-				'limit'       => $this->config->get('config_limit_admin')
+                'sort'        => 'name',
+                'start'       => 0,
+                'limit'       => $this->config->get('config_limit_admin')
             );
 
             $this->load->model('accounting/inventory');
@@ -345,8 +345,8 @@ class ControllerAccountingInventory extends Controller {
         if (!$this->user->hasPermission('modify', 'accounting/inventory')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
-		
-		if ((utf8_strlen($this->request->post['sku']) < 1) || (utf8_strlen($this->request->post['sku']) > 255)) {
+
+        if ((utf8_strlen($this->request->post['sku']) < 1) || (utf8_strlen($this->request->post['sku']) > 255)) {
             $this->error['sku'] = $this->language->get('error_sku');
         }
 
@@ -360,45 +360,45 @@ class ControllerAccountingInventory extends Controller {
 
         return !$this->error;
     }
-	
-	public function update() {
-		$this->load->language('accounting/inventory');
-		
-		$json = array();
+
+    public function update() {
+        $this->load->language('accounting/inventory');
+
+        $json = array();
 
         $inventory_id = (int)$this->request->post['inventory_id'];
         $column = $this->request->post['column'];
         $value = $this->request->post['value'];
 
-		if (!$this->user->hasPermission('modify', 'accounting/inventory')) {
+        if (!$this->user->hasPermission('modify', 'accounting/inventory')) {
             $json['warning'] = $this->language->get('error_permission');
         } else {
-			if ($column == 'sku') {
-				if ((utf8_strlen($value) < 1) || (utf8_strlen($value) > 255)) {
-					$json['warning'] = $this->language->get('error_sku');
-				}
-			} elseif ($column == 'name') {
-				if ((utf8_strlen($value) < 3) || (utf8_strlen($value) > 255)) {
-					$json['warning'] = $this->language->get('error_name');
-				}
-			}
-		
-			if (!$json) {
-				$this->load->model('accounting/inventory');
-				
-				$this->model_accounting_inventory->editInventoryData($inventory_id, $column, $value);
-				
-				$json['value'] = $value;
-				
-				if ($column == 'cost' || $column == 'sell') {
-					$json['value'] = $this->currency->format($value, $this->config->get('config_currency'));
-				}
+            if ($column == 'sku') {
+                if ((utf8_strlen($value) < 1) || (utf8_strlen($value) > 255)) {
+                    $json['warning'] = $this->language->get('error_sku');
+                }
+            } elseif ($column == 'name') {
+                if ((utf8_strlen($value) < 3) || (utf8_strlen($value) > 255)) {
+                    $json['warning'] = $this->language->get('error_name');
+                }
+            }
 
-				$json['success'] = $this->language->get('text_success');
-			}
+            if (!$json) {
+                $this->load->model('accounting/inventory');
+
+                $this->model_accounting_inventory->editInventoryData($inventory_id, $column, $value);
+
+                $json['value'] = $value;
+
+                if ($column == 'cost' || $column == 'sell') {
+                    $json['value'] = $this->currency->format($value, $this->config->get('config_currency'));
+                }
+
+                $json['success'] = $this->language->get('text_success');
+            }
         }
 
         $this->response->addHeader('Content-Type: application/json');
         $this->response->setOutput(json_encode($json));
-	}
+    }
 }

@@ -64,8 +64,8 @@ class ControllerModuleContactFormContactForm extends Controller {
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
-		
-		$this->response->setOutput($this->render('module/contact_form/contact_form'));
+
+        $this->response->setOutput($this->render('module/contact_form/contact_form'));
     }
 
     public function success() {
@@ -98,8 +98,8 @@ class ControllerModuleContactFormContactForm extends Controller {
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
-		
-		$this->response->setOutput($this->render('module/contact_form/contact_form_success'));
+
+        $this->response->setOutput($this->render('module/contact_form/contact_form_success'));
     }
 
     protected function validate() {

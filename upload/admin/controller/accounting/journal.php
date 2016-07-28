@@ -47,7 +47,7 @@ class ControllerAccountingJournal extends Controller {
         } else {
             $filter_invoice_id = null;
         }
-		
+
         if (isset($this->request->get['filter_date'])) {
             $filter_date = $this->request->get['filter_date'];
         } else {
@@ -109,7 +109,7 @@ class ControllerAccountingJournal extends Controller {
                 'invoice_id'     => $transaction['invoice_id'],
                 'invoice'        => $transaction['invoice_id'] ? $this->url->link('billing/invoice/view', 'token=' . $this->session->data['token'] . '&invoice_id=' . $transaction['invoice_id'], true) : false,
                 'amount'         => $this->currency->format($transaction['amount'], $transaction['currency_code'], $transaction['currency_value']),
-				'date'           => date($this->language->get('date_format_short'), strtotime($transaction['date'])),
+                'date'           => date($this->language->get('date_format_short'), strtotime($transaction['date'])),
                 'date_added'     => date($this->language->get('datetime_format_short'), strtotime($transaction['date_added'])),
                 'date_modified'  => date($this->language->get('datetime_format_short'), strtotime($transaction['date_modified'])),
                 'edit'           => $this->url->link('accounting/journal/form', 'token=' . $this->session->data['token'] . $url . '&transaction_id=' . $transaction['transaction_id'], true)
@@ -392,26 +392,26 @@ class ControllerAccountingJournal extends Controller {
         $debit = 0;
         $credit = 0;
 
-		if (isset($this->request->post['transaction_accounts'])) {
-			foreach ($this->request->post['transaction_accounts'] as $account) {
-				if (preg_match('/^\(.+\)$/', $account['debit'])) {
-					$account['debit'] = preg_replace('/[^\d.-]/', '', $account['debit']);
+        if (isset($this->request->post['transaction_accounts'])) {
+            foreach ($this->request->post['transaction_accounts'] as $account) {
+                if (preg_match('/^\(.+\)$/', $account['debit'])) {
+                    $account['debit'] = preg_replace('/[^\d.-]/', '', $account['debit']);
 
-					$account['debit'] = '-' . (float)$account['debit'];
-				}
+                    $account['debit'] = '-' . (float)$account['debit'];
+                }
 
-				if (preg_match('/^\(.+\)$/', $account['credit'])) {
-					$account['credit'] = preg_replace('/[^\d.-]/', '', $account['credit']);
+                if (preg_match('/^\(.+\)$/', $account['credit'])) {
+                    $account['credit'] = preg_replace('/[^\d.-]/', '', $account['credit']);
 
-					$account['credit'] = '-' . (float)$account['credit'];
-				}
+                    $account['credit'] = '-' . (float)$account['credit'];
+                }
 
-				$debit += $account['debit'];
-				$credit += $account['credit'];
-			}
-		} else {
-			 $this->error['warning'] = $this->language->get('error_form');
-		}
+                $debit += $account['debit'];
+                $credit += $account['credit'];
+            }
+        } else {
+            $this->error['warning'] = $this->language->get('error_form');
+        }
 
         if (round($debit, 4) != round($credit, 4)) {
             $this->error['warning'] = $this->language->get('error_account');

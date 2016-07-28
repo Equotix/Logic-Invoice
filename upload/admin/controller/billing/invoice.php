@@ -555,11 +555,11 @@ class ControllerBillingInvoice extends Controller {
             $json['warning'] = $this->language->get('error_permission');
         } else {
             $this->load->model('billing/invoice');
-			
-			$data = array(
-				'status_id'	=> $status_id,
-				'comment'	=> ''
-			);
+
+            $data = array(
+                'status_id' => $status_id,
+                'comment'   => ''
+            );
 
             $this->model_billing_invoice->addHistory($invoice_id, $data, true);
 

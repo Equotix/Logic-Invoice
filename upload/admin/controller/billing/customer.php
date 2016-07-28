@@ -301,8 +301,8 @@ class ControllerBillingCustomer extends Controller {
             $filter_data = array(
                 'filter_name'  => $filter_name,
                 'filter_email' => $filter_email,
-				'start'        => 0,
-				'limit'        => $this->config->get('config_limit_admin')
+                'start'        => 0,
+                'limit'        => $this->config->get('config_limit_admin')
             );
 
             $this->load->model('billing/customer');

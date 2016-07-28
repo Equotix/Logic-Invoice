@@ -21,13 +21,13 @@ class ControllerApiInvoice extends Controller {
 
             foreach ($invoices as $invoice) {
                 if (strtotime($invoice['date_due']) <= time()) {
-					$data = array(
-						'status_id'	=> $this->config->get('config_default_overdue_status'),
-						'comment'	=> ''
-					);
-				
+                    $data = array(
+                        'status_id' => $this->config->get('config_default_overdue_status'),
+                        'comment'   => ''
+                    );
+
                     $this->model_billing_invoice->addHistory($invoice['invoice_id'], $data, true);
-					
+
                     $this->model_system_activity->addActivity(sprintf($this->language->get('text_updated'), $invoice['invoice_id'], $status['name'], $this->session->data['username']));
                 }
             }
@@ -39,11 +39,11 @@ class ControllerApiInvoice extends Controller {
 
             foreach ($invoices as $invoice) {
                 if (strtotime($invoice['date_due'] . ' +' . $this->config->get('config_invoice_void_days') . ' days') <= time()) {
-					$data = array(
-						'status_id'	=> $this->config->get('config_default_void_status'),
-						'comment'	=> ''
-					);
-				
+                    $data = array(
+                        'status_id' => $this->config->get('config_default_void_status'),
+                        'comment'   => ''
+                    );
+
                     $this->model_billing_invoice->addHistory($invoice['invoice_id'], $data, true);
 
                     $this->model_system_activity->addActivity(sprintf($this->language->get('text_updated'), $invoice['invoice_id'], $status['name'], $this->session->data['username']));
@@ -294,14 +294,14 @@ class ControllerApiInvoice extends Controller {
         if (!isset($this->request->post['status'])) {
             $json['error'][] = $this->language->get('error_status');
         } else {
-			$status_info = $this->model_system_status->getStatusByName($this->request->post['status']);
-			
-			if ($status_info) {
-				$this->request->post['status_id'] = $status_info['status_id'];
-			} else {
-				$json['error'][] = $this->language->get('error_status');
-			}
-		}
+            $status_info = $this->model_system_status->getStatusByName($this->request->post['status']);
+
+            if ($status_info) {
+                $this->request->post['status_id'] = $status_info['status_id'];
+            } else {
+                $json['error'][] = $this->language->get('error_status');
+            }
+        }
 
         if (!isset($this->request->post['date_due'])) {
             $json['error'][] = $this->language->get('error_date_due');

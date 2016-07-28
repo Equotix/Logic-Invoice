@@ -16,7 +16,7 @@ class ControllerPaymentBankTransferBankTransfer extends Controller {
 
             $this->data['action'] = $this->url->link('payment/bank_transfer/bank_transfer/confirm', 'invoice_id=' . $invoice_info['invoice_id'], true);
 
-			$this->response->setOutput($this->render('payment/bank_transfer/bank_transfer'));
+            $this->response->setOutput($this->render('payment/bank_transfer/bank_transfer'));
         }
     }
 
@@ -40,10 +40,10 @@ class ControllerPaymentBankTransferBankTransfer extends Controller {
         $invoice_info = $this->model_billing_invoice->getInvoice($invoice_id, $this->customer->getId());
 
         if ($invoice_info) {
-			$pending_status = is_array($this->config->get('config_pending_status')) ? $this->config->get('config_pending_status') : array();
-			$overdue_status = is_array($this->config->get('config_overdue_status')) ? $this->config->get('config_overdue_status') : array();
-			
-			if (!(in_array($invoice_info['status_id'], $pending_status) || in_array($invoice_info['status_id'], $overdue_status))) {
+            $pending_status = is_array($this->config->get('config_pending_status')) ? $this->config->get('config_pending_status') : array();
+            $overdue_status = is_array($this->config->get('config_overdue_status')) ? $this->config->get('config_overdue_status') : array();
+
+            if (!(in_array($invoice_info['status_id'], $pending_status) || in_array($invoice_info['status_id'], $overdue_status))) {
                 return new Action('error/not_found');
             }
 

@@ -256,14 +256,14 @@ class ControllerAccountingCurrency extends Controller {
         if (count($this->request->post['selected']) >= $this->model_accounting_currency->getTotalCurrencies()) {
             $this->error['warning'] = $this->language->get('error_currency');
         }
-		
-		foreach ($this->request->post['selected'] as $currency_id) {
-			$currency_info = $this->model_accounting_currency->getCurrency($currency_id);
-			
-			if ($currency_info['code'] == $this->config->get('config_currency')) {
-				$this->error['warning'] = $this->language->get('error_default_currency');
-			}
-		}
+
+        foreach ($this->request->post['selected'] as $currency_id) {
+            $currency_info = $this->model_accounting_currency->getCurrency($currency_id);
+
+            if ($currency_info['code'] == $this->config->get('config_currency')) {
+                $this->error['warning'] = $this->language->get('error_default_currency');
+            }
+        }
 
         return !$this->error;
     }

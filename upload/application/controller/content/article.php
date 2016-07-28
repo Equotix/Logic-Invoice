@@ -5,11 +5,11 @@ class ControllerContentArticle extends Controller {
     public function index() {
         $this->load->model('content/article');
 
-		if (isset($this->request->get['article_id'])) {
-			$article_info = $this->model_content_article->getArticle((int)$this->request->get['article_id']);
-		} else {
-			$article_info = false;
-		}
+        if (isset($this->request->get['article_id'])) {
+            $article_info = $this->model_content_article->getArticle((int)$this->request->get['article_id']);
+        } else {
+            $article_info = false;
+        }
 
         if ($article_info) {
             $this->document->setTitle($article_info['title']);
@@ -34,7 +34,7 @@ class ControllerContentArticle extends Controller {
 
         $this->data['header'] = $this->load->controller('common/header');
         $this->data['footer'] = $this->load->controller('common/footer');
-		
-		$this->response->setOutput($this->render('content/article'));
+
+        $this->response->setOutput($this->render('content/article'));
     }
 }

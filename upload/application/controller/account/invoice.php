@@ -162,9 +162,9 @@ class ControllerAccountInvoice extends Controller {
                     'text'  => $this->currency->format($total['value'], $invoice_info['currency_code'], $invoice_info['currency_value'])
                 );
             }
-			
-			$pending_status = is_array($this->config->get('config_pending_status')) ? $this->config->get('config_pending_status') : array();
-			$overdue_status = is_array($this->config->get('config_overdue_status')) ? $this->config->get('config_overdue_status') : array();
+
+            $pending_status = is_array($this->config->get('config_pending_status')) ? $this->config->get('config_pending_status') : array();
+            $overdue_status = is_array($this->config->get('config_overdue_status')) ? $this->config->get('config_overdue_status') : array();
 
             if (in_array($invoice_info['status_id'], $pending_status) || in_array($invoice_info['status_id'], $overdue_status)) {
                 $this->data['payment_url'] = $this->url->link('account/invoice/payment', 'invoice_id=' . $invoice_info['invoice_id'], true);
@@ -192,9 +192,9 @@ class ControllerAccountInvoice extends Controller {
         $invoice_info = $this->model_billing_invoice->getInvoice((int)$this->request->get['invoice_id'], $this->customer->getId());
 
         if ($invoice_info) {
-			$pending_status = is_array($this->config->get('config_pending_status')) ? $this->config->get('config_pending_status') : array();
-			$overdue_status = is_array($this->config->get('config_overdue_status')) ? $this->config->get('config_overdue_status') : array();
-			
+            $pending_status = is_array($this->config->get('config_pending_status')) ? $this->config->get('config_pending_status') : array();
+            $overdue_status = is_array($this->config->get('config_overdue_status')) ? $this->config->get('config_overdue_status') : array();
+
             if (!(in_array($invoice_info['status_id'], $pending_status) || in_array($invoice_info['status_id'], $overdue_status))) {
                 return new Action('error/not_found');
             }
@@ -426,9 +426,9 @@ class ControllerAccountInvoice extends Controller {
                     'text'  => $this->currency->format($total['value'], $invoice_info['currency_code'], $invoice_info['currency_value'])
                 );
             }
-			
-			$pending_status = is_array($this->config->get('config_pending_status')) ? $this->config->get('config_pending_status') : array();
-			$overdue_status = is_array($this->config->get('config_overdue_status')) ? $this->config->get('config_overdue_status') : array();
+
+            $pending_status = is_array($this->config->get('config_pending_status')) ? $this->config->get('config_pending_status') : array();
+            $overdue_status = is_array($this->config->get('config_overdue_status')) ? $this->config->get('config_overdue_status') : array();
 
             if (in_array($invoice_info['status_id'], $pending_status) || in_array($invoice_info['status_id'], $overdue_status)) {
                 $this->data['payment_url'] = $this->url->link('account/invoice/payment', 'invoice_id=' . $invoice_info['invoice_id'], true);

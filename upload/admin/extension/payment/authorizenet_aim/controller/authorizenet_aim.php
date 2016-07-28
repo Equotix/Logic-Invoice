@@ -74,8 +74,8 @@ class ControllerPaymentAuthorizenetAimAuthorizenetAim extends Controller {
         if (empty($this->request->post['authorizenet_aim_login'])) {
             $this->error['login'] = $this->language->get('error_login');
         }
-		
-		if (empty($this->request->post['authorizenet_aim_key'])) {
+
+        if (empty($this->request->post['authorizenet_aim_key'])) {
             $this->error['key'] = $this->language->get('error_key');
         }
 

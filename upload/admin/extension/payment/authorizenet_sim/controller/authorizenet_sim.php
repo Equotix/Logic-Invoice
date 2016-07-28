@@ -76,8 +76,8 @@ class ControllerPaymentAuthorizenetSimAuthorizenetSim extends Controller {
         if (empty($this->request->post['authorizenet_sim_merchant'])) {
             $this->error['merchant'] = $this->language->get('error_merchant');
         }
-		
-		if (empty($this->request->post['authorizenet_sim_key'])) {
+
+        if (empty($this->request->post['authorizenet_sim_key'])) {
             $this->error['key'] = $this->language->get('error_key');
         }
 
