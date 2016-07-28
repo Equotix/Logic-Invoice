@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension>
+    <name>Credits</name>
+    <version>1.0.0</version>
+    <author>Logic Invoice</author>
+    <email>contact@logicinvoice.com</email>
+    <url>http://www.logicinvoice.com</url>
+    <copyright>(C) 2015 Logic Invoice. All rights reserved</copyright>
+    <license>GNU General Public License version 3</license>
+    <description>Default Credit Payment Extension</description>
+</extension>

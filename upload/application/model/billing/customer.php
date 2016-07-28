@@ -136,6 +136,10 @@ class ModelBillingCustomer extends Model {
         return $query->row['total'];
     }
 
+    public function addCredit($data) {
+        $this->db->query("INSERT INTO " . DB_PREFIX . "customer_credit SET customer_id = '" . (int)$data['customer_id'] . "', amount = '" . (float)$data['amount'] . "', description = '" . $this->db->escape($data['description']) . "', date_added = NOW()");
+    }
+
     public function getCreditsByCustomer($customer_id, $start = 0, $limit = 20) {
         if ($start < 0) {
             $start = 0;
