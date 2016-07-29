@@ -421,7 +421,7 @@ class ControllerBillingCustomer extends Controller {
         $customer_info = $this->model_billing_customer->getCustomer($customer_id);
 
         if ($customer_info) {
-            $token = md5(mt_rand());
+            $token = sha1(uniqid(mt_rand(), true));
 
             $this->model_billing_customer->editToken($customer_id, $token);
 
