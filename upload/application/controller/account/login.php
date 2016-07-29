@@ -100,10 +100,6 @@ class ControllerAccountLogin extends Controller {
             $this->error['warning'] = $this->language->get('error_login');
         }
 
-        if (!$this->error) {
-            return true;
-        } else {
-            return false;
-        }
+        return !$this->error;
     }
 }
