@@ -433,10 +433,10 @@
         </div>
         <div class="tab-pane" id="tab-server">
           <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-ssl"><?php echo $entry_ssl; ?></label>
-            <div class="col-sm-10"><select name="config_ssl" id="input-ssl" class="form-control">
-                <option value="1"<?php echo $config_ssl ? ' selected="selected"' : ''; ?>><?php echo $text_yes; ?></option>
-                <option value="0"<?php echo $config_ssl ? '' : ' selected="selected"'; ?>><?php echo $text_no; ?></option>
+            <label class="col-sm-2 control-label" for="input-secure"><?php echo $entry_secure; ?></label>
+            <div class="col-sm-10"><select name="config_secure" id="input-secure" class="form-control">
+                <option value="1"<?php echo $config_secure ? ' selected="selected"' : ''; ?>><?php echo $text_yes; ?></option>
+                <option value="0"<?php echo $config_secure ? '' : ' selected="selected"'; ?>><?php echo $text_no; ?></option>
               </select>
             </div>
           </div>

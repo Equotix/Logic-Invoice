@@ -697,7 +697,7 @@ INSERT INTO `li_setting` (`setting_id`, `group`, `key`, `value`, `serialized`) V
 (260, 'config', 'config_error_display', '0', 0),
 (259, 'config', 'config_cache', 'file', 0),
 (258, 'config', 'config_compression', '0', 0),
-(255, 'config', 'config_ssl', '0', 0),
+(255, 'config', 'config_secure', '0', 0),
 (44, 'cheque', 'cheque_details', '{"1":"Please send cheque to\\r\\n\\r\\n1 Test Street\\r\\nSingapore 123456"}', 1),
 (45, 'cheque', 'cheque_payable', 'My Company Ltd', 0),
 (46, 'tax', 'tax_status', '1', 0),

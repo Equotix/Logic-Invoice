@@ -93,7 +93,7 @@ class ControllerSystemSetting extends Controller {
         $this->data['config_recurring_default_status'] = $this->build->data('config_recurring_default_status', $this->request->post, $setting);
         $this->data['config_mail'] = $this->build->data('config_mail', $this->request->post, $setting);
         $this->data['config_mail_alert'] = $this->build->data('config_mail_alert', $this->request->post, $setting);
-        $this->data['config_ssl'] = $this->build->data('config_ssl', $this->request->post, $setting);
+        $this->data['config_secure'] = $this->build->data('config_secure', $this->request->post, $setting);
         $this->data['config_seo_url'] = $this->build->data('config_seo_url', $this->request->post, $setting);
         $this->data['config_maintenance'] = $this->build->data('config_maintenance', $this->request->post, $setting);
         $this->data['config_compression'] = $this->build->data('config_compression', $this->request->post, $setting);
