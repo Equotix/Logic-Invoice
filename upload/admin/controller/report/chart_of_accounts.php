@@ -181,6 +181,10 @@ class ControllerReportChartOfAccounts extends Controller {
 
                         $expense += ($transaction_total['debit'] - $transaction_total['credit']);
                     }
+					
+					$transaction_total = $this->model_report_transaction->getTotalByAccount($account['account_id'], $unrestricted);
+
+					$expense += ($transaction_total['debit'] - $transaction_total['credit']);
 
                     $ytd = $this->currency->format($revenue - $expense, $this->config->get('config_currency'));
                 }

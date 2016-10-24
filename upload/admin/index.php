@@ -173,7 +173,7 @@ $controller->addPreAction(new Action('common/permission/check'));
 if (isset($request->get['load'])) {
     $action = new Action($request->get['load']);
 } else {
-    $action = new Action('common/home');
+    $action = new Action('common/dashboard');
 }
 
 // Dispatch
