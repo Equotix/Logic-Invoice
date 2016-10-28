@@ -11,6 +11,10 @@ class ModelSystemUrlAlias extends Model {
             }
         }
     }
+	
+	public function deleteUrlAlias($query) {
+        $this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query = '" . $this->db->escape($query) . "'");
+	}
 
     public function getUrlAliasByQuery($query) {
         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE query = '" . $this->db->escape($query) . "'");

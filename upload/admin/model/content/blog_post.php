@@ -57,6 +57,10 @@ class ModelContentBlogPost extends Model {
         $this->db->query("DELETE FROM " . DB_PREFIX . "blog_post_description WHERE blog_post_id = '" . (int)$blog_post_id . "'");
         $this->db->query("DELETE FROM " . DB_PREFIX . "blog_post_to_blog_category WHERE blog_post_id = '" . (int)$blog_post_id . "'");
 
+		$this->load->model('system/url_alias');
+
+		$this->model_system_url_alias->deleteUrlAlias('blog_post_id=' . $article_id);
+		
         $this->cache->delete('blog_post');
     }
 

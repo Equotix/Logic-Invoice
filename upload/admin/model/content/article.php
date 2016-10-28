@@ -41,6 +41,10 @@ class ModelContentArticle extends Model {
     public function deleteArticle($article_id) {
         $this->db->query("DELETE FROM " . DB_PREFIX . "article WHERE article_id = '" . (int)$article_id . "'");
         $this->db->query("DELETE FROM " . DB_PREFIX . "article_description WHERE article_id = '" . (int)$article_id . "'");
+		
+		$this->load->model('system/url_alias');
+
+		$this->model_system_url_alias->deleteUrlAlias('article_id=' . $article_id);
 
         $this->cache->delete('article');
     }

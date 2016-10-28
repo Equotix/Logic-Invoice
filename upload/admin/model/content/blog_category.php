@@ -42,6 +42,10 @@ class ModelContentBlogCategory extends Model {
         $this->db->query("DELETE FROM " . DB_PREFIX . "blog_category WHERE blog_category_id = '" . (int)$blog_category_id . "'");
         $this->db->query("DELETE FROM " . DB_PREFIX . "blog_category_description WHERE blog_category_id = '" . (int)$blog_category_id . "'");
 
+		$this->load->model('system/url_alias');
+
+		$this->model_system_url_alias->deleteUrlAlias('blog_category_id=' . $article_id);
+		
         $this->cache->delete('blog_category');
     }
 
