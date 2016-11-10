@@ -51,7 +51,7 @@
           <div class="form-group">
             <label class="required col-sm-2 control-label" for="input-html-<?php echo $language['language_id']; ?>"><?php echo $entry_html; ?></label>
             <div class="col-sm-10">
-              <textarea name="description[<?php echo $language['language_id']; ?>][html]" id="input-html-<?php echo $language['language_id']; ?>"><?php echo !empty($description[$language['language_id']]['html']) ? html_entity_decode($description[$language['language_id']]['html'], ENT_QUOTES) : ''; ?></textarea>
+              <textarea name="description[<?php echo $language['language_id']; ?>][html]" id="input-html-<?php echo $language['language_id']; ?>" class="summernote"><?php echo !empty($description[$language['language_id']]['html']) ? html_entity_decode($description[$language['language_id']]['html'], ENT_QUOTES) : ''; ?></textarea>
               <div class="variables"></div>
               <?php if (!empty($error_html[$language['language_id']])) { ?>
               <div class="text-danger"><?php echo $error_html[$language['language_id']]; ?></div>
@@ -105,12 +105,6 @@ $('select[name=\'type\']').on('change', function() {
 });
 
 $('select[name=\'type\']').trigger('change');
-
-<?php foreach ($languages as $language) { ?>
-$('#input-html-<?php echo $language['language_id']; ?>').summernote({
-	height: 300
-});
-<?php } ?>
 
 $('.nav-tabs li :first').trigger('click');
 //--></script> 

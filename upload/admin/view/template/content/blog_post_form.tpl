@@ -79,7 +79,7 @@
 		  <div class="form-group">
             <label class="required col-sm-2 control-label" for="input-short-description-<?php echo $language['language_id']; ?>"><?php echo $entry_short_description; ?></label>
             <div class="col-sm-10">
-              <textarea name="description[<?php echo $language['language_id']; ?>][short_description]" id="input-short-description-<?php echo $language['language_id']; ?>"><?php echo !empty($description[$language['language_id']]['short_description']) ? html_entity_decode($description[$language['language_id']]['short_description'], ENT_QUOTES) : ''; ?></textarea>
+              <textarea name="description[<?php echo $language['language_id']; ?>][short_description]" id="input-short-description-<?php echo $language['language_id']; ?>" class="summernote"><?php echo !empty($description[$language['language_id']]['short_description']) ? html_entity_decode($description[$language['language_id']]['short_description'], ENT_QUOTES) : ''; ?></textarea>
               <?php if (!empty($error_short_description[$language['language_id']])) { ?>
               <div class="text-danger"><?php echo $error_short_description[$language['language_id']]; ?></div>
               <?php } ?>
@@ -88,7 +88,7 @@
 		  <div class="form-group">
             <label class="required col-sm-2 control-label" for="input-description-<?php echo $language['language_id']; ?>"><?php echo $entry_description; ?></label>
             <div class="col-sm-10">
-              <textarea name="description[<?php echo $language['language_id']; ?>][description]" id="input-description-<?php echo $language['language_id']; ?>"><?php echo !empty($description[$language['language_id']]['description']) ? html_entity_decode($description[$language['language_id']]['description'], ENT_QUOTES) : ''; ?></textarea>
+              <textarea name="description[<?php echo $language['language_id']; ?>][description]" id="input-description-<?php echo $language['language_id']; ?>" class="summernote"><?php echo !empty($description[$language['language_id']]['description']) ? html_entity_decode($description[$language['language_id']]['description'], ENT_QUOTES) : ''; ?></textarea>
               <?php if (!empty($error_description[$language['language_id']])) { ?>
               <div class="text-danger"><?php echo $error_description[$language['language_id']]; ?></div>
               <?php } ?>
@@ -158,16 +158,6 @@
   </div>
 </div>
 <script type="text/javascript"><!--
-<?php foreach ($languages as $language) { ?>
-$('#input-description-<?php echo $language['language_id']; ?>').summernote({
-	height: 300
-});
-
-$('#input-short-description-<?php echo $language['language_id']; ?>').summernote({
-	height: 200
-});
-<?php } ?>
-
 $('.nav-tabs li :first').trigger('click');
 //--></script> 
 <?php echo $footer; ?>

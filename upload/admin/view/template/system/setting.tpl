@@ -190,7 +190,7 @@
               <div class="form-group">
                 <label class="required col-sm-2 control-label" for="input-home-<?php echo $language['language_id']; ?>"><?php echo $entry_home; ?></label>
                 <div class="col-sm-10">
-                  <textarea name="config_home[<?php echo $language['language_id']; ?>]" id="input-home-<?php echo $language['language_id']; ?>"><?php echo !empty($config_home[$language['language_id']]) ? html_entity_decode($config_home[$language['language_id']], ENT_QUOTES) : ''; ?></textarea>
+                  <textarea name="config_home[<?php echo $language['language_id']; ?>]" id="input-home-<?php echo $language['language_id']; ?>" class="summernote"><?php echo !empty($config_home[$language['language_id']]) ? html_entity_decode($config_home[$language['language_id']], ENT_QUOTES) : ''; ?></textarea>
                 </div>
               </div>
             </div>
@@ -516,13 +516,7 @@
 </div>
 <script type="text/javascript"><!--
 $(document).ready(function() {
-<?php foreach ($languages as $language) { ?>
-$('#input-home-<?php echo $language['language_id']; ?>').summernote({
-	height: 300
-});
-<?php } ?>
-
-$('#home li :first').trigger('click');
+	$('#home li :first').trigger('click');
 });
 //--></script>
 <?php echo $footer; ?>
