@@ -66,6 +66,7 @@ $_['text_updated']				= 'Updated:';
 $_['text_issued']				= 'Issued:';
 $_['text_item']					= 'Items';
 $_['text_payment']				= 'Payment';
+$_['text_inventory_id']			= 'Inventory ID';
 
 // Tooltip
 $_['tooltip_price']             = 'Price per quantity, excluding taxes.';

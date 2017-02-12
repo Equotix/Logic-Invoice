@@ -221,6 +221,14 @@
               </select>
             </div>
           </div>
+		  <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-auto-subtract-inventory"><?php echo $entry_auto_subtract_inventory; ?></label>
+            <div class="col-sm-10"><select name="config_auto_subtract_inventory" id="input-auto-subtract-inventory" class="form-control">
+                <option value="1"<?php echo $config_auto_subtract_inventory ? ' selected="selected"' : ''; ?>><?php echo $text_yes; ?></option>
+                <option value="0"<?php echo $config_auto_subtract_inventory ? '' : ' selected="selected"'; ?>><?php echo $text_no; ?></option>
+              </select>
+            </div>
+          </div>
         </div>
         <div class="tab-pane" id="tab-billing">
           <div class="form-group">

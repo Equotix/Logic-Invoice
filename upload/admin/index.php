@@ -110,7 +110,7 @@ function fatal_handler() {
         }
 
         if ($config->get('config_error_log')) {
-            $log->write('PHP Fatal Error:  ' . $errstr . ' in ' . $errfile . ' on line ' . $errline);
+            $log->write('PHP Fatal Error: ' . $errstr . ' in ' . $errfile . ' on line ' . $errline);
         }
     }
 }

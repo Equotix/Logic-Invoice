@@ -540,6 +540,7 @@ CREATE TABLE IF NOT EXISTS `li_invoice_history` (
 CREATE TABLE IF NOT EXISTS `li_invoice_item` (
   `invoice_item_id` int(11) NOT NULL AUTO_INCREMENT,
   `invoice_id` int(11) NOT NULL,
+  `inventory_id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `tax_class_id` int(11) NOT NULL,

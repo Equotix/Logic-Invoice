@@ -32,6 +32,7 @@ $_['entry_home']							= 'Home Page';
 $_['entry_currency']						= 'Functional Currency';
 $_['entry_financial_year']					= 'Financial Year End (DD/MM)';
 $_['entry_auto_update_currency']			= 'Auto Update Currency Daily';
+$_['entry_auto_subtract_inventory']			= 'Auto Subtract Inventory';
 $_['entry_invoice_prefix']					= 'Invoice Prefix';
 $_['entry_invoice_void_days']				= 'Void Invoice After Due (days)';
 $_['entry_draft_status']					= 'Invoice Draft Status';

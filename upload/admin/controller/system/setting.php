@@ -79,6 +79,7 @@ class ControllerSystemSetting extends Controller {
         $this->data['config_currency'] = $this->build->data('config_currency', $this->request->post, $setting);
         $this->data['config_financial_year'] = $this->build->data('config_financial_year', $this->request->post, $setting);
         $this->data['config_auto_update_currency'] = $this->build->data('config_auto_update_currency', $this->request->post, $setting);
+        $this->data['config_auto_subtract_inventory'] = $this->build->data('config_auto_subtract_inventory', $this->request->post, $setting);
         $this->data['config_invoice_prefix'] = $this->build->data('config_invoice_prefix', $this->request->post, $setting);
         $this->data['config_invoice_void_days'] = $this->build->data('config_invoice_void_days', $this->request->post, $setting);
         $this->data['config_draft_status'] = $this->build->data('config_draft_status', $this->request->post, $setting, array());

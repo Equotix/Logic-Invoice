@@ -18,10 +18,25 @@ class ModelBillingInvoice extends Model {
         $this->db->query("INSERT INTO " . DB_PREFIX . "invoice SET customer_id = '" . (int)$data['customer_id'] . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', company = '" . $this->db->escape($data['company']) . "', website = '" . $this->db->escape($data['website']) . "', email = '" . $this->db->escape($data['email']) . "', payment_firstname = '" . $this->db->escape($data['payment_firstname']) . "', payment_lastname = '" . $this->db->escape($data['payment_lastname']) . "', payment_company = '" . $this->db->escape($data['payment_company']) . "', payment_address_1 = '" . $this->db->escape($data['payment_address_1']) . "', payment_address_2 = '" . $this->db->escape($data['payment_address_2']) . "', payment_city = '" . $this->db->escape($data['payment_city']) . "', payment_postcode = '" . $this->db->escape($data['payment_postcode']) . "', payment_country = '" . $this->db->escape($data['payment_country']) . "', payment_zone = '" . $this->db->escape($data['payment_zone']) . "', total = '" . (float)$data['total'] . "', payment_code = '" . $this->db->escape($data['payment_code']) . "', payment_name = '" . $this->db->escape($data['payment_name']) . "', payment_description = '" . $this->db->escape($data['payment_description']) . "', currency_code = '" . $this->db->escape($data['currency_code']) . "', currency_value = '" . (float)$data['currency_value'] . "', comment = '" . $this->db->escape($data['comment']) . "', status_id = '" . (int)$data['status_id'] . "', date_issued = NOW(), date_due = '" . $this->db->escape($data['date_due']) . "', date_modified = NOW()");
 
         $invoice_id = $this->db->getLastId();
+		
+		$this->load->model('accounting/inventory');
 
         foreach ($data['items'] as $item) {
-            $this->db->query("INSERT INTO " . DB_PREFIX . "invoice_item SET invoice_id = '" . (int)$invoice_id . "', title = '" . $this->db->escape($item['title']) . "', description = '" . $this->db->escape($item['description']) . "', tax_class_id = '" . (int)$item['tax_class_id'] . "', quantity = '" . (int)$item['quantity'] . "', price = '" . (float)$item['price'] . "', tax = '" . (float)$item['tax'] . "', discount = '" . (float)$item['discount'] . "'");
-        }
+            $this->db->query("INSERT INTO " . DB_PREFIX . "invoice_item SET invoice_id = '" . (int)$invoice_id . "', inventory_id = '" . (int)$item['inventory_id'] . "', title = '" . $this->db->escape($item['title']) . "', description = '" . $this->db->escape($item['description']) . "', tax_class_id = '" . (int)$item['tax_class_id'] . "', quantity = '" . (int)$item['quantity'] . "', price = '" . (float)$item['price'] . "', tax = '" . (float)$item['tax'] . "', discount = '" . (float)$item['discount'] . "'");
+        
+			// Deduct inventory
+			if ($this->config->get('config_auto_subtract_inventory')) {
+				if ($item['inventory_id']) {
+					$inventory_info = $this->model_accounting_inventory->getInventory($item['inventory_id']);
+					
+					if ($inventory_info) {
+						$quantity = $inventory_info['quantity'] - $item['quantity'];
+						
+						$this->model_accounting_inventory->editInventoryData($item['inventory_id'], 'quantity', $quantity);
+					}
+				}
+			}
+		}
 
         foreach ($data['totals'] as $total) {
             $this->db->query("INSERT INTO " . DB_PREFIX . "invoice_total SET invoice_id = '" . (int)$invoice_id . "', code = '" . $this->db->escape($total['code']) . "', title = '" . $this->db->escape($total['title']) . "', value = '" . (float)$total['value'] . "', sort_order = '" . (int)$total['sort_order'] . "'");
@@ -79,11 +94,43 @@ class ModelBillingInvoice extends Model {
     public function editInvoice($invoice_id, $data) {
         $this->db->query("UPDATE " . DB_PREFIX . "invoice SET customer_id = '" . (int)$data['customer_id'] . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', company = '" . $this->db->escape($data['company']) . "', website = '" . $this->db->escape($data['website']) . "', email = '" . $this->db->escape($data['email']) . "', payment_firstname = '" . $this->db->escape($data['payment_firstname']) . "', payment_lastname = '" . $this->db->escape($data['payment_lastname']) . "', payment_company = '" . $this->db->escape($data['payment_company']) . "', payment_address_1 = '" . $this->db->escape($data['payment_address_1']) . "', payment_address_2 = '" . $this->db->escape($data['payment_address_2']) . "', payment_city = '" . $this->db->escape($data['payment_city']) . "', payment_postcode = '" . $this->db->escape($data['payment_postcode']) . "', payment_country = '" . $this->db->escape($data['payment_country']) . "', payment_zone = '" . $this->db->escape($data['payment_zone']) . "', total = '" . (float)$data['total'] . "', payment_code = '" . $this->db->escape($data['payment_code']) . "', payment_name = '" . $this->db->escape($data['payment_name']) . "', payment_description = '" . $this->db->escape($data['payment_description']) . "', currency_code = '" . $this->db->escape($data['currency_code']) . "', currency_value = '" . (float)$data['currency_value'] . "', comment = '" . $this->db->escape($data['comment']) . "', status_id = '" . (int)$data['status_id'] . "', transaction = '0', date_due = '" . $this->db->escape($data['date_due']) . "', date_modified = NOW() WHERE invoice_id = '" . (int)$invoice_id . "'");
 
+		$this->load->model('accounting/inventory');
+		
+		// Restore inventory
+		if ($this->config->get('config_auto_subtract_inventory')) {
+			$item_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "invoice_item WHERE invoice_id = '" . (int)$invoice_id . "'");
+			
+			foreach ($item_query->rows as $item) {
+				if ($item['inventory_id']) {
+					$inventory_info = $this->model_accounting_inventory->getInventory($item['inventory_id']);
+					
+					if ($inventory_info) {
+						$quantity = $inventory_info['quantity'] + $item['quantity'];
+						
+						$this->model_accounting_inventory->editInventoryData($item['inventory_id'], 'quantity', $quantity);
+					}
+				}
+			}
+		}
+		
         $this->db->query("DELETE FROM " . DB_PREFIX . "invoice_item WHERE invoice_id = '" . (int)$invoice_id . "'");
 
         foreach ($data['items'] as $item) {
-            $this->db->query("INSERT INTO " . DB_PREFIX . "invoice_item SET invoice_id = '" . (int)$invoice_id . "', title = '" . $this->db->escape($item['title']) . "', description = '" . $this->db->escape($item['description']) . "', tax_class_id = '" . (int)$item['tax_class_id'] . "', quantity = '" . (int)$item['quantity'] . "', price = '" . (float)$item['price'] . "', tax = '" . (float)$item['tax'] . "', discount = '" . (float)$item['discount'] . "'");
-        }
+            $this->db->query("INSERT INTO " . DB_PREFIX . "invoice_item SET invoice_id = '" . (int)$invoice_id . "', inventory_id = '" . (int)$item['inventory_id'] . "', title = '" . $this->db->escape($item['title']) . "', description = '" . $this->db->escape($item['description']) . "', tax_class_id = '" . (int)$item['tax_class_id'] . "', quantity = '" . (int)$item['quantity'] . "', price = '" . (float)$item['price'] . "', tax = '" . (float)$item['tax'] . "', discount = '" . (float)$item['discount'] . "'");
+        
+			// Deduct inventory
+			if ($this->config->get('config_auto_subtract_inventory')) {
+				if ($item['inventory_id']) {
+					$inventory_info = $this->model_accounting_inventory->getInventory($item['inventory_id']);
+					
+					if ($inventory_info) {
+						$quantity = $inventory_info['quantity'] - $item['quantity'];
+						
+						$this->model_accounting_inventory->editInventoryData($item['inventory_id'], 'quantity', $quantity);
+					}
+				}
+			}
+		}
 
         $this->db->query("DELETE FROM " . DB_PREFIX . "invoice_total WHERE invoice_id = '" . (int)$invoice_id . "'");
 
@@ -159,6 +206,7 @@ class ModelBillingInvoice extends Model {
                 $items[] = array(
                     'invoice_item_id'    => $item['invoice_item_id'],
                     'invoice_id'         => $item['invoice_id'],
+                    'inventory_id'       => $item['inventory_id'],
                     'title'              => $item['title'],
                     'description'        => $item['description'],
                     'tax_class_id'       => $item['tax_class_id'],
