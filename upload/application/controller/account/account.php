@@ -36,6 +36,7 @@ class ControllerAccountAccount extends Controller {
         $this->data['update'] = $this->url->link('account/update', '', true);
         $this->data['password'] = $this->url->link('account/password', '', true);
         $this->data['invoice'] = $this->url->link('account/invoice', '', true);
+		$this->data['quotation'] = $this->url->link('account/quotation', '', true);
         $this->data['recurring'] = $this->url->link('account/recurring', '', true);
         $this->data['credit'] = $this->url->link('account/credit', '', true);
 

@@ -87,7 +87,9 @@ class ControllerSystemSetting extends Controller {
         $this->data['config_paid_status'] = $this->build->data('config_paid_status', $this->request->post, $setting, array());
         $this->data['config_pending_status'] = $this->build->data('config_pending_status', $this->request->post, $setting, array());
         $this->data['config_void_status'] = $this->build->data('config_void_status', $this->request->post, $setting, array());
-        $this->data['config_default_overdue_status'] = $this->build->data('config_default_overdue_status', $this->request->post, $setting, array());
+        $this->data['config_quotation_prefix'] = $this->build->data('config_quotation_prefix', $this->request->post, $setting);
+        $this->data['config_quotation_void_days'] = $this->build->data('config_quotation_void_days', $this->request->post, $setting);
+		$this->data['config_default_overdue_status'] = $this->build->data('config_default_overdue_status', $this->request->post, $setting, array());
         $this->data['config_default_void_status'] = $this->build->data('config_default_void_status', $this->request->post, $setting, array());
         $this->data['config_recurring_invoice_days'] = $this->build->data('config_recurring_invoice_days', $this->request->post, $setting);
         $this->data['config_recurring_disable_days'] = $this->build->data('config_recurring_disable_days', $this->request->post, $setting);

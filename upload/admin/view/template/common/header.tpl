@@ -58,6 +58,7 @@
           <ul>
             <li><a href="<?php echo $customer; ?>"><span><?php echo $text_customer; ?></span></a></li>
             <li><a href="<?php echo $invoice; ?>"><span><?php echo $text_invoice; ?></span></a></li>
+			<li><a href="<?php echo $quotation; ?>"><span><?php echo $text_quotation; ?></span></a></li>
             <li><a href="<?php echo $recurring; ?>"><span><?php echo $text_recurring; ?></span></a></li>
           </ul>
         </li>

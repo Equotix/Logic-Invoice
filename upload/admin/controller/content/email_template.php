@@ -242,7 +242,7 @@ class ControllerContentEmailTemplate extends Controller {
                     $this->data['email_template_types'][] = array(
                         'type'      => 'status_' . $status['status_id'],
                         'name'      => $status['name'],
-                        'variables' => '{website_name}, {website_url}, {customer_id}, {firstname}, {lastname}, {company}, {website}, {email}, {invoice_id}, {comment}, {history_comment}, {total}, {status}, {payment_name}, {date_issued}, {date_due}, {date_modified}'
+                        'variables' => '{website_name}, {website_url}, {customer_id}, {firstname}, {lastname}, {company}, {website}, {email}, {invoice_id}, {quotation_id}, {comment}, {history_comment}, {total}, {status}, {payment_name}, {date_issued}, {date_due}, {date_modified}'
                     );
                 }
             } else {

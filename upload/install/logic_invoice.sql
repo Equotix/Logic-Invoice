@@ -323,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `li_email_template` (
   `status` tinyint(1) NOT NULL,
   `email` text NOT NULL,
   PRIMARY KEY (`email_template_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
 
 --
 -- Dumping data for table `li_email_template`
@@ -348,7 +348,11 @@ INSERT INTO `li_email_template` (`email_template_id`, `type`, `priority`, `statu
 (16, 'edit_transaction_admin', 0, 1, ''),
 (17, 'forgotten_password_admin', 0, 1, ''),
 (18, 'forgotten_password_customer', 0, 1, ''),
-(19, 'status_5', 0, 1, '');
+(19, 'status_5', 0, 1, ''),
+(20, 'new_quotation_admin', 0, 1, ''),
+(21, 'new_quotation_customer', 0, 1, ''),
+(22, 'edit_quotation_admin', 0, 1, ''),
+(23, 'edit_quotation_customer', 0, 1, '');
 
 -- --------------------------------------------------------
 
@@ -364,7 +368,7 @@ CREATE TABLE IF NOT EXISTS `li_email_template_description` (
   `html` text NOT NULL,
   `text` text NOT NULL,
   PRIMARY KEY (`email_template_description_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
 
 --
 -- Dumping data for table `li_email_template_description`
@@ -389,7 +393,11 @@ INSERT INTO `li_email_template_description` (`email_template_description_id`, `e
 (16, 8, 1, '[{website_name}] New Invoice #{invoice_id}', '&lt;p&gt;Hi {firstname},&lt;/p&gt;&lt;p&gt;Invoice #{invoice_id} was recently added to your account with the following details:&lt;/p&gt;&lt;p&gt;Status: {status}&lt;br&gt;Invoice ID: {invoice_id}&lt;br&gt;Total: {total}&lt;br&gt;Date Issued: {date_issued}&lt;br&gt;Date Due: {date_due}&lt;/p&gt;&lt;p&gt;You can view all your invoices by clicking &lt;a target=&quot;_blank&quot; href=&quot;{website_url}index.php?load=account/invoice&quot;&gt;here&lt;/a&gt;.&lt;br&gt;&lt;/p&gt;&lt;p&gt;Regards,&lt;br&gt;{website_name}&lt;br&gt;&lt;/p&gt;', 'Hi {firstname},\r\n\r\nInvoice #{invoice_id} was recently added to your account with the following details:\r\n\r\nStatus: {status}\r\nInvoice ID: {invoice_id}\r\nTotal: {total}\r\nDate Issued: {date_issued}\r\nDate Due: {date_due}\r\n\r\nYou can view all your invoices by clicking on the following link: {website_url}index.php?load=account/invoice\r\n\r\nRegards,\r\n{website_name}'),
 (17, 17, 1, 'Password Change Request at {website_name}', '&lt;p&gt;Hi there,&lt;/p&gt;&lt;p&gt;Someone recently requested to change your account password. If you made the request, you can change your password by clicking &lt;a target=&quot;_blank&quot; href=&quot;{reset_link}&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;The password reset was requested from {ip}&lt;br&gt;&lt;/p&gt;&lt;p&gt;Regards,&lt;br&gt;{website_name}&lt;br&gt;&lt;/p&gt;', 'Hi there,\r\n\r\nSomeone recently requested to change your account password. If you made the request, you can change your password by clicking on the following link: {reset_link}\r\n\r\nThe password reset was requested from {ip}\r\n\r\nRegards,\r\n{website_name}'),
 (18, 18, 1, 'Password Change Request at {website_name}', '&lt;p&gt;Hi {firstname},&lt;/p&gt;&lt;p&gt;Someone recently requested to change your account password. Your account password has been changed to the following:&lt;/p&gt;&lt;p&gt;{password}&lt;/p&gt;&lt;p&gt;The password change was requested from {ip}. If you did not make the change, please inform us immediately.&lt;/p&gt;&lt;p&gt;Regards,&lt;br&gt;{website_name}&lt;br&gt;&lt;/p&gt;', 'Hi {firstname},\r\n\r\nSomeone recently requested to change your account password. Your account password has been changed to the following:\r\n\r\n{password}\r\n\r\nThe password change was requested from {ip}. If you did not make the change, please inform us immediately.\r\n\r\nRegards,\r\n{website_name}'),
-(19, 19, 1, 'Pending', '&lt;p&gt;Pending invoice&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;{history_comment}&lt;/p&gt;', 'Pending invoice');
+(19, 19, 1, 'Pending', '&lt;p&gt;Pending invoice&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;{history_comment}&lt;/p&gt;', 'Pending invoice'),
+(25, 23, 1, '[{website_name}] Quotation #{quotation_id} Updated', '&lt;p&gt;Hi {firstname},&lt;/p&gt;&lt;p&gt;Your quotation #{quotation_id} was recently updated.&lt;/p&gt;&lt;p&gt;Status: {status}&lt;br&gt;Total: {total}&lt;br&gt;Date Issued: {date_issued}&lt;br&gt;Date Due: {date_due}&lt;br&gt;Date Modified: {date_modified}&lt;/p&gt;&lt;p&gt;You can view all your quotations by clicking &lt;a target=&quot;_blank&quot; href=&quot;{website_url}index.php?load=account/quotation&quot;&gt;here&lt;/a&gt;.&lt;br&gt;&lt;/p&gt;&lt;p&gt;Regards,&lt;br&gt;{website_name}&lt;br&gt;&lt;/p&gt;', 'Hi {firstname},\r\n\r\nYour quotation #{quotation_id} was recently updated.\r\n\r\nStatus: {status}\r\nTotal: {total}\r\nDate Issued: {date_issued}\r\nDate Due: {date_due}\r\nDate Modified: {date_modified}\r\n\r\nYou can view all your invoices by clicking on the following link: {website_url}index.php?load=account/quotation\r\n\r\nRegards,\r\n{website_name}'),
+(26, 20, 1, '[{website_name}] New Quotation #{quotation_id}', '&lt;p&gt;Hi there,&lt;br&gt;&lt;/p&gt;&lt;p&gt;Quotation #{quotation_id} was recently added with the following details:&lt;/p&gt;&lt;p&gt;Status: {status}&lt;br&gt;Quotation ID: {quotation_id}&lt;br&gt;Total: {total}&lt;br&gt;Customer ID: {customer_id}&lt;br&gt;First Name: {firstname}&lt;br&gt;Date Added: {date_issued}&lt;br&gt;Date Due: {date_due}&lt;br&gt;&lt;/p&gt;&lt;p&gt;Regards,&lt;br&gt;{website_name}&lt;br&gt;&lt;/p&gt;', 'Hi there,\r\n\r\nQuotation #{quotation_id} was recently added with the following details:\r\n\r\nStatus: {status}\r\nQuotation ID: {quotation_id}\r\nTotal: {total}\r\nCustomer ID: {customer_id}\r\nFirst Name: {firstname}\r\nDate Added: {date_issued}\r\nDate Due: {date_due}\r\n\r\nRegards,\r\n{website_name}'),
+(28, 22, 1, '[{website_name}] Quotation #{quotation_id} Updated', '&lt;p&gt;Hi there,&lt;/p&gt;&lt;p&gt;Invoice #{quotation_id} was recently updated.&lt;/p&gt;&lt;p&gt;Status: {status}&lt;br&gt;Total: {total}&lt;br&gt;Date Issued: {date_issued}&lt;br&gt;Date Due: {date_due}&lt;br&gt;Date Modified: {date_modified}&lt;/p&gt;&lt;p&gt;Regards,&lt;br&gt;{website_name}&lt;br&gt;&lt;/p&gt;', 'Hi there,\r\n\r\nQuotation #{quotation_id} was recently updated.\r\n\r\nStatus: {status}\r\nTotal: {total}\r\nDate Issued: {date_issued}\r\nDate Due: {date_due}\r\nDate Modified: {date_modified}\r\n\r\nRegards,\r\n{website_name}'),
+(29, 21, 1, '[{website_name}] New Invoice #{invoice_id}', '&lt;p&gt;Hi {firstname},&lt;/p&gt;&lt;p&gt;Invoice #{invoice_id} was recently added to your account with the following details:&lt;/p&gt;&lt;p&gt;Status: {status}&lt;br&gt;Invoice ID: {invoice_id}&lt;br&gt;Total: {total}&lt;br&gt;Date Issued: {date_issued}&lt;br&gt;Date Due: {date_due}&lt;/p&gt;&lt;p&gt;You can view all your invoices by clicking &lt;a target=&quot;_blank&quot; href=&quot;{website_url}index.php?load=account/invoice&quot;&gt;here&lt;/a&gt;.&lt;br&gt;&lt;/p&gt;&lt;p&gt;Regards,&lt;br&gt;{website_name}&lt;br&gt;&lt;/p&gt;', 'Hi {firstname},\r\n\r\nInvoice #{invoice_id} was recently added to your account with the following details:\r\n\r\nStatus: {status}\r\nInvoice ID: {invoice_id}\r\nTotal: {total}\r\nDate Issued: {date_issued}\r\nDate Due: {date_due}\r\n\r\nYou can view all your invoices by clicking on the following link: {website_url}index.php?load=account/invoice\r\n\r\nRegards,\r\n{website_name}');
 
 -- --------------------------------------------------------
 
@@ -427,7 +435,11 @@ INSERT INTO `li_email_template_type` (`email_template_type_id`, `type`, `variabl
 (16, 'edit_transaction_admin', 'website_name, website_url, invoice_id, date, date_added, date_modified'),
 (17, 'forgotten_password_admin', 'website_name, website_url, email, reset_link, ip'),
 (18, 'forgotten_password_customer', 'website_name, website_url, firstname, lastname, email, password, ip'),
-(19, 'status', 'website_name, website_url, customer_id, firstname, lastname, company, website, email, invoice_id, comment, history_comment, total, status, payment_name, date_issued, date_due, date_modified');
+(19, 'status', 'website_name, website_url, customer_id, firstname, lastname, company, website, email, invoice_id, comment, history_comment, total, status, payment_name, date_issued, date_due, date_modified'),
+(20, 'new_quotation_admin', 'website_name, website_url, customer_id, firstname, lastname, company, website, email, quotation_id, comment, total, status, payment_name, date_issued, date_due, date_modified'),
+(21, 'new_quotation_customer', 'website_name, website_url, customer_id, firstname, lastname, company, website, email, quotation_id, comment, total, status, payment_name, date_issued, date_due, date_modified'),
+(22, 'edit_quotation_admin', 'website_name, website_url, customer_id, firstname, lastname, company, website, email, quotation_id, comment, total, status, payment_name, date_issued, date_due, date_modified'),
+(23, 'edit_quotation_customer', 'website_name, website_url, customer_id, firstname, lastname, company, website, email, quotation_id, comment, total, status, payment_name, date_issued, date_due, date_modified');
 
 -- --------------------------------------------------------
 
@@ -596,6 +608,85 @@ INSERT INTO `li_language` (`language_id`, `name`, `code`, `locale`, `image`, `so
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `li_quotation`
+--
+
+CREATE TABLE `li_quotation` (
+  `quotation_id` int(11) NOT NULL,
+  `recurring_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `firstname` varchar(32) NOT NULL,
+  `lastname` varchar(32) NOT NULL,
+  `company` varchar(255) NOT NULL,
+  `website` varchar(255) NOT NULL,
+  `email` varchar(96) NOT NULL,
+  `total` decimal(15,4) NOT NULL,
+  `currency_code` varchar(3) NOT NULL,
+  `currency_value` decimal(15,8) NOT NULL DEFAULT '1.00000000',
+  `comment` text NOT NULL,
+  `status_id` int(11) NOT NULL DEFAULT '0',
+  `date_due` date NOT NULL,
+  `date_issued` datetime NOT NULL,
+  `date_modified` datetime NOT NULL,
+  PRIMARY KEY (`quotation_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `li_quotation_history`
+--
+
+CREATE TABLE `li_quotation_history` (
+  `quotation_history_id` int(11) NOT NULL,
+  `quotation_id` int(11) NOT NULL,
+  `status_id` int(11) NOT NULL,
+  `comment` text NOT NULL,
+  `date_added` datetime NOT NULL,
+  PRIMARY KEY (`quotation_history_id`),
+  KEY `quotation_id` (`quotation_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `li_quotation_item`
+--
+
+CREATE TABLE `li_quotation_item` (
+  `quotation_item_id` int(11) NOT NULL,
+  `quotation_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `tax_class_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` decimal(15,4) NOT NULL,
+  `tax` decimal(15,4) NOT NULL,
+  `discount` decimal(15,4) NOT NULL,
+  PRIMARY KEY (`quotation_item_id`),
+  KEY `quotation_id` (`quotation_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `li_quotation_total`
+--
+
+CREATE TABLE `li_quotation_total` (
+  `quotation_total_id` int(11) NOT NULL,
+  `quotation_id` int(11) NOT NULL,
+  `code` varchar(32) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `value` decimal(15,4) NOT NULL,
+  `sort_order` int(3) NOT NULL,
+  PRIMARY KEY (`quotation_total_id`),
+  KEY `quotation_id` (`quotation_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `li_recurring`
 --
 
@@ -753,7 +844,9 @@ INSERT INTO `li_setting` (`setting_id`, `group`, `key`, `value`, `serialized`) V
 (77, 'contact_form', 'contact_form_receiving_email', 'test@example.com', 0),
 (78, 'contact_form', 'contact_form_description', '{"1":""}', 1),
 (79, 'contact_form', 'contact_form_status', '1', 0),
-(220, 'config', 'config_registered_name', 'My Company Ltd', 0);
+(220, 'config', 'config_registered_name', 'My Company Ltd', 0),
+(265, 'config', 'config_quotation_void_days', '7', 0),
+(266, 'config', 'config_quotation_prefix', 'QT-', 0),
 
 -- --------------------------------------------------------
 
@@ -956,5 +1049,5 @@ CREATE TABLE IF NOT EXISTS `li_user_group` (
 --
 
 INSERT INTO `li_user_group` (`user_group_id`, `name`, `permission`) VALUES
-(1, 'Top Administrator', '{"access":["accounting\\/account","accounting\\/currency","accounting\\/inventory","accounting\\/journal","accounting\\/tax_class","accounting\\/tax_rate","billing\\/customer","billing\\/invoice","billing\\/recurring","common\\/dashboard","content\\/article","content\\/blog_category","content\\/blog_post","content\\/email_template","extension\\/module","extension\\/payment","extension\\/total","report\\/chart_of_accounts","report\\/invoice","report\\/recurring","report\\/sci","report\\/sfp","system\\/activity","system\\/error","system\\/filemanager","system\\/language","system\\/setting","system\\/status","system\\/user","system\\/user_group","module\\/contact_form","payment\\/bank_transfer","payment\\/cheque","payment\\/pp_standard","total\\/sub_total","total\\/tax","total\\/total"],"modify":["accounting\\/account","accounting\\/currency","accounting\\/inventory","accounting\\/journal","accounting\\/tax_class","accounting\\/tax_rate","billing\\/customer","billing\\/invoice","billing\\/recurring","common\\/dashboard","content\\/article","content\\/blog_category","content\\/blog_post","content\\/email_template","extension\\/module","extension\\/payment","extension\\/total","report\\/chart_of_accounts","report\\/invoice","report\\/recurring","report\\/sci","report\\/sfp","system\\/activity","system\\/error","system\\/filemanager","system\\/language","system\\/setting","system\\/status","system\\/user","system\\/user_group","module\\/contact_form","payment\\/bank_transfer","payment\\/cheque","payment\\/pp_standard","total\\/sub_total","total\\/tax","total\\/total"]}'),
+(1, 'Top Administrator', '{"access":["accounting\\/account","accounting\\/currency","accounting\\/inventory","accounting\\/journal","accounting\\/tax_class","accounting\\/tax_rate","billing\\/customer","billing\\/invoice","billing\\/quotation","billing\\/recurring","common\\/dashboard","content\\/article","content\\/blog_category","content\\/blog_post","content\\/email_template","extension\\/module","extension\\/payment","extension\\/total","report\\/chart_of_accounts","report\\/invoice","report\\/recurring","report\\/sci","report\\/sfp","system\\/activity","system\\/error","system\\/filemanager","system\\/language","system\\/setting","system\\/status","system\\/user","system\\/user_group","module\\/contact_form","payment\\/bank_transfer","payment\\/cheque","payment\\/pp_standard","total\\/sub_total","total\\/tax","total\\/total"],"modify":["accounting\\/account","accounting\\/currency","accounting\\/inventory","accounting\\/journal","accounting\\/tax_class","accounting\\/tax_rate","billing\\/customer","billing\\/invoice","billing\\/recurring","common\\/dashboard","content\\/article","content\\/blog_category","content\\/blog_post","content\\/email_template","extension\\/module","extension\\/payment","extension\\/total","report\\/chart_of_accounts","report\\/invoice","report\\/recurring","report\\/sci","report\\/sfp","system\\/activity","system\\/error","system\\/filemanager","system\\/language","system\\/setting","system\\/status","system\\/user","system\\/user_group","module\\/contact_form","payment\\/bank_transfer","payment\\/cheque","payment\\/pp_standard","total\\/sub_total","total\\/tax","total\\/total"]}'),
 (2, 'System', '');

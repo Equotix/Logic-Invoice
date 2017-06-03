@@ -11,6 +11,7 @@ $_['text_tax_rate'] 			= 'Tax Rates';
 $_['text_billing']				= 'Billing';
 $_['text_customer']				= 'Customers';
 $_['text_invoice']				= 'Invoices';
+$_['text_quotation']	    	= 'Quotations';
 $_['text_recurring']			= 'Recurring Payments';
 $_['text_content']				= 'Content';
 $_['text_article']				= 'Articles';

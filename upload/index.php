@@ -165,8 +165,9 @@ if (isset($request->server['HTTP_ACCEPT_LANGUAGE']) && $request->server['HTTP_AC
         }
     }
 }
-
-if (isset($session->data['language']) && array_key_exists($session->data['language'], $languages) && $languages[$session->data['language']]['status']) {
+if (isset($request->get['language']) && array_key_exists($request->get['language'], $languages) && $languages[$request->get['language']]['status']) {
+	$code = $request->get['language'];
+} elseif (isset($session->data['language']) && array_key_exists($session->data['language'], $languages) && $languages[$session->data['language']]['status']) {
     $code = $session->data['language'];
 } elseif (isset($request->cookie['language']) && array_key_exists($request->cookie['language'], $languages) && $languages[$request->cookie['language']]['status']) {
     $code = $request->cookie['language'];

@@ -349,6 +349,18 @@
             </div>
           </div>
           <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-quotation-prefix"><?php echo $entry_quotation_prefix; ?></label>
+            <div class="col-sm-10">
+              <input type="text" name="config_quotation_prefix" value="<?php echo $config_quotation_prefix; ?>" id="input-quotation-prefix" class="form-control" placeholder="<?php echo $entry_quotation_prefix; ?>" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-quotation-void-days"><?php echo $entry_quotation_void_days; ?></label>
+            <div class="col-sm-10">
+              <input type="text" name="config_quotation_void_days" value="<?php echo $config_quotation_void_days; ?>" id="input-quotation-void-days" class="form-control" placeholder="<?php echo $entry_quotation_void_days; ?>" />
+            </div>
+          </div> 
+          <div class="form-group">
             <label class="col-sm-2 control-label" for="input-default-overdue-status"><?php echo $entry_default_overdue_status; ?></label>
             <div class="col-sm-10">
               <select name="config_default_overdue_status" id="input-default-overdue-status" class="form-control">

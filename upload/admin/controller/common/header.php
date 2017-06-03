@@ -32,7 +32,8 @@ class ControllerCommonHeader extends Controller {
             $this->data['tax_rate'] = $this->url->link('accounting/tax_rate', 'token=' . $this->session->data['token'], true);
             $this->data['customer'] = $this->url->link('billing/customer', 'token=' . $this->session->data['token'], true);
             $this->data['invoice'] = $this->url->link('billing/invoice', 'token=' . $this->session->data['token'], true);
-            $this->data['recurring'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'], true);
+            $this->data['quotation'] = $this->url->link('billing/quotation', 'token=' . $this->session->data['token'], true);
+			$this->data['recurring'] = $this->url->link('billing/recurring', 'token=' . $this->session->data['token'], true);
             $this->data['article'] = $this->url->link('content/article', 'token=' . $this->session->data['token'], true);
             $this->data['blog_category'] = $this->url->link('content/blog_category', 'token=' . $this->session->data['token'], true);
             $this->data['blog_post'] = $this->url->link('content/blog_post', 'token=' . $this->session->data['token'], true);
