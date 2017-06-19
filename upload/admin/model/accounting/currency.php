@@ -121,23 +121,24 @@ class ModelAccountingCurrency extends Model {
 
         $curl = curl_init();
 
-        curl_setopt($curl, CURLOPT_URL, 'http://download.finance.yahoo.com/d/quotes.csv?s=' . implode(',', $data) . '&f=sl1&e=.csv');
+        curl_setopt($curl, CURLOPT_URL, 'http://api.fixer.io/latest?base='.$this->config->get('config_currency'));
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
-        $content = curl_exec($curl);
+        $result = curl_exec($curl);
 
-        curl_close($curl);
-
-        $lines = explode("\n", trim($content));
-
-        foreach ($lines as $line) {
-            $currency = utf8_substr($line, 4, 3);
-            $value = utf8_substr($line, 11, 6);
-
-            if ((float)$value) {
-                $this->db->query("UPDATE " . DB_PREFIX . "currency SET value = '" . (float)$value . "', date_modified = '" . $this->db->escape(date('Y-m-d H:i:s')) . "' WHERE code = '" . $this->db->escape($currency) . "'");
+        if(curl_errno($curl) == 0){
+            $json = json_decode($result);
+            foreach($json->rates as $currency => $value){
+                if ((float)$value) {
+                    $this->db->query("UPDATE " . DB_PREFIX . "currency SET value = '" . (float)$value . "', date_modified = '" . $this->db->escape(date('Y-m-d H:i:s')) . "' WHERE code = '" . $this->db->escape($currency) . "'");
+                }
             }
         }
+        else{
+            error_log('Unable to update currency => '.curl_error($curl));
+        }
+        
+        curl_close($curl);
 
         $this->db->query("UPDATE " . DB_PREFIX . "currency SET value = '1.00000', date_modified = '" . $this->db->escape(date('Y-m-d H:i:s')) . "' WHERE code = '" . $this->db->escape($this->config->get('config_currency')) . "'");
 
