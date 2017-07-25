@@ -268,7 +268,9 @@ $(document).ready(function () {
 	$('.date').datetimepicker({
 		format: 'YYYY-MM-DD'
 	});
-
+$("#input-customer").bind("change paste keyup", function() {
+   $('input[name=\'customer_id\']').val('');
+});
 	$('#input-customer').autocomplete({
 		'source': function (request, response) {
 			$.ajax({
