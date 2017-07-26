@@ -194,7 +194,7 @@ class ModelBillingRecurring extends Model {
             'to_email'      => $this->config->get('config_email')
         );
 
-        $this->model_content_email_template->send($email_data, 'new_recurring_admin');
+        $this->model_content_email_template->send($email_data, 'edit_recurring_admin');
 
         $email_data = array(
             'website_name'  => $this->config->get('config_name'),
@@ -217,7 +217,7 @@ class ModelBillingRecurring extends Model {
             'to_email'      => $customer_info['email']
         );
 
-        $this->model_content_email_template->send($email_data, 'new_recurring_customer');
+        $this->model_content_email_template->send($email_data, 'edit_recurring_customer');
     }
 
     public function deleteRecurring($recurring_id) {
