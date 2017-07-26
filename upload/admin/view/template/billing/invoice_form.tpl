@@ -270,6 +270,8 @@ $(document).ready(function () {
 	});
 $("#input-customer").bind("change paste keyup", function() {
    $('input[name=\'customer_id\']').val('');
+   $('input[name=\'email\']').val('');
+   
 });
 	$('#input-customer').autocomplete({
 		'source': function (request, response) {
