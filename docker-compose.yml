@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+    web:
+        build: .
+        ports:
+          - 8000:80
+        volumes:
+          - /tmp/cache:/var/www/html/system/cache
+          - /tmp/logs:/var/www/html/system/logs
+
+    database:
+        image: mariadb
+        environment:
+          - MYSQL_ROOT_PASSWORD=helloworld123
+          - MYSQL_DATABASE=database
