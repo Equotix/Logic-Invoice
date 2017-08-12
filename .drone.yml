@@ -2,6 +2,8 @@ pipeline:
     deploy:
         image: docker/compose:1.14.0
         secrets:
+          - LI_URL
+          - LI_SURL
           - MYSQL_DATABASE
           - MYSQL_PASSWORD
           - MYSQL_USER
