@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+    web:
+        build: .
+        dockerfile: Dockerfile.prod
+        ports:
+          - 10000:80
+
+    db:
+        image: mariadb
+        environment:
+          - MYSQL_RANDOM_ROOT_PASSWORD=yes
+        volumes:
+          - /data/logic-invoice/db:/var/lib/mysql
+
