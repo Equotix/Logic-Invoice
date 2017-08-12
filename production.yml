@@ -2,8 +2,9 @@ version: '3'
 
 services:
     web:
-        build: .
-        dockerfile: Dockerfile.prod
+        build:
+          context: .
+          dockerfile: Dockerfile.prod
         ports:
           - 10000:80
 
