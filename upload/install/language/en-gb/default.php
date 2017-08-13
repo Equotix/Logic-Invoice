@@ -44,6 +44,7 @@ $_['text_magic_quotes_gpc']		= 'Magic Quotes GPC';
 $_['text_file_uploads']			= 'File Uploads';
 $_['text_session_auto_start']	= 'Session Auto Start';
 $_['text_curl']					= 'cURL';
+$_['text_gd']					= 'GD';
 $_['text_zlib']					= 'zlib';
 $_['text_zip']					= 'zip';
 $_['text_iconv']				= 'iconv';

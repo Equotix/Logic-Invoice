@@ -34,12 +34,17 @@ class ControllerInstallStep2 extends Controller {
                 extension_loaded('curl') ? $this->language->get('text_on') : $this->language->get('text_off'),
                 extension_loaded('curl') ? true : false
             ),
+			'gd'                => array(
+                $this->language->get('text_on'),
+                extension_loaded('gd') ? $this->language->get('text_on') : $this->language->get('text_off'),
+                extension_loaded('gd') ? true : false
+            ),
             'zlib'               => array(
                 $this->language->get('text_on'),
                 extension_loaded('zlib') ? $this->language->get('text_on') : $this->language->get('text_off'),
                 extension_loaded('zlib') ? true : false
             ),
-            'zip'                => array(
+			'zip'                => array(
                 $this->language->get('text_on'),
                 extension_loaded('zip') ? $this->language->get('text_on') : $this->language->get('text_off'),
                 extension_loaded('zip') ? true : false
