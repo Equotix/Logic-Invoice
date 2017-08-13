@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+    web:
+        build:
+          context: .
+          dockerfile: Dockerfile.prod
+        environment:
+          - LI_URL=${LI_URL}
+          - LI_SURL=${LI_SURL}
+          - MYSQL_DATABASE=${MYSQL_DATABASE}
+          - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+          - MYSQL_USER=${MYSQL_USER}
+        ports:
+          - 10000:80
+
+    db:
+        image: mariadb
+        environment:
+          - MYSQL_RANDOM_ROOT_PASSWORD=yes
+          - MYSQL_DATABASE=${MYSQL_DATABASE}
+          - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+          - MYSQL_USER=${MYSQL_USER}
+        volumes:
+          - /data/logic-invoice/db:/var/lib/mysql
+

@@ -846,7 +846,7 @@ INSERT INTO `li_setting` (`setting_id`, `group`, `key`, `value`, `serialized`) V
 (79, 'contact_form', 'contact_form_status', '1', 0),
 (220, 'config', 'config_registered_name', 'My Company Ltd', 0),
 (265, 'config', 'config_quotation_void_days', '7', 0),
-(266, 'config', 'config_quotation_prefix', 'QT-', 0),
+(266, 'config', 'config_quotation_prefix', 'QT-', 0) ;
 
 -- --------------------------------------------------------
 

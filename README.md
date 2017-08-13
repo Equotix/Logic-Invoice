@@ -25,6 +25,18 @@ Logic Invoice is an open source accounting and invoicing solution built with PHP
 
 For more information on installation and administration, do use our documentation. Documentation is available at http://docs.logicinvoice.com.
 
+## Running with docker
+
+WARNING: USE ONLY FOR DEVELOPMENT.
+```
+docker-compose up -d
+```
+
+MySQL hostname: `database`
+MySQL database: `database`
+MySQL user:     `root`
+MySQL password: `helloworld123`
+
 ## Reporting Bugs
 
 Please report bugs through github.

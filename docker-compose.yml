@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+    web:
+        build: .
+        ports:
+          - 8000:80
+
+    database:
+        image: mariadb
+        environment:
+          - MYSQL_ROOT_PASSWORD=helloworld123
+          - MYSQL_DATABASE=database

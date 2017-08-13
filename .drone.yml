@@ -1,0 +1,30 @@
+pipeline:
+    deploy:
+        image: docker/compose:1.14.0
+        secrets:
+          - LI_URL
+          - LI_SURL
+          - MYSQL_DATABASE
+          - MYSQL_PASSWORD
+          - MYSQL_USER
+        commands:
+          - docker-compose -f production.yml -p ${DRONE_REPO_NAME} build
+          - docker-compose -f production.yml -p ${DRONE_REPO_NAME} up -d
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
+
+    telegram:
+        image: appleboy/drone-telegram
+        secrets:
+          - telegram_token
+          - telegram_to
+        message: >
+            {{#success build.status}}
+                {{repo.name}} build [#{{build.number}}]({{build.link}}) on {{build.branch}} branch succeeded! GG EZ!
+            {{else}}
+                {{repo.name}} build [#{{build.number}}]({{build.link}}) on {{build.branch}} branch failed. Fix me plz :'(
+            {{/success}}
+        when:
+            status:
+              - success
+              - failure
