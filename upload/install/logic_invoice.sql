@@ -611,7 +611,7 @@ INSERT INTO `li_language` (`language_id`, `name`, `code`, `locale`, `image`, `so
 -- Table structure for table `li_quotation`
 --
 
-CREATE TABLE `li_quotation` (
+CREATE TABLE IF NOT EXISTS `li_quotation` (
   `quotation_id` int(11) NOT NULL,
   `recurring_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
@@ -637,7 +637,7 @@ CREATE TABLE `li_quotation` (
 -- Table structure for table `li_quotation_history`
 --
 
-CREATE TABLE `li_quotation_history` (
+CREATE TABLE IF NOT EXISTS `li_quotation_history` (
   `quotation_history_id` int(11) NOT NULL,
   `quotation_id` int(11) NOT NULL,
   `status_id` int(11) NOT NULL,
@@ -653,7 +653,7 @@ CREATE TABLE `li_quotation_history` (
 -- Table structure for table `li_quotation_item`
 --
 
-CREATE TABLE `li_quotation_item` (
+CREATE TABLE IF NOT EXISTS `li_quotation_item` (
   `quotation_item_id` int(11) NOT NULL,
   `quotation_id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
@@ -673,7 +673,7 @@ CREATE TABLE `li_quotation_item` (
 -- Table structure for table `li_quotation_total`
 --
 
-CREATE TABLE `li_quotation_total` (
+CREATE TABLE IF NOT EXISTS `li_quotation_total` (
   `quotation_total_id` int(11) NOT NULL,
   `quotation_id` int(11) NOT NULL,
   `code` varchar(32) NOT NULL,
