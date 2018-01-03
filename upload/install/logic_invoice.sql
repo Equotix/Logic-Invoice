@@ -612,7 +612,7 @@ INSERT INTO `li_language` (`language_id`, `name`, `code`, `locale`, `image`, `so
 --
 
 CREATE TABLE IF NOT EXISTS `li_quotation` (
-  `quotation_id` int(11) NOT NULL,
+  `quotation_id` int(11) NOT NULL AUTO_INCREMENT,
   `recurring_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `firstname` varchar(32) NOT NULL,
@@ -638,7 +638,7 @@ CREATE TABLE IF NOT EXISTS `li_quotation` (
 --
 
 CREATE TABLE IF NOT EXISTS `li_quotation_history` (
-  `quotation_history_id` int(11) NOT NULL,
+  `quotation_history_id` int(11) NOT NULL AUTO_INCREMENT,
   `quotation_id` int(11) NOT NULL,
   `status_id` int(11) NOT NULL,
   `comment` text NOT NULL,
@@ -654,7 +654,7 @@ CREATE TABLE IF NOT EXISTS `li_quotation_history` (
 --
 
 CREATE TABLE IF NOT EXISTS `li_quotation_item` (
-  `quotation_item_id` int(11) NOT NULL,
+  `quotation_item_id` int(11) NOT NULL AUTO_INCREMENT,
   `quotation_id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
@@ -674,7 +674,7 @@ CREATE TABLE IF NOT EXISTS `li_quotation_item` (
 --
 
 CREATE TABLE IF NOT EXISTS `li_quotation_total` (
-  `quotation_total_id` int(11) NOT NULL,
+  `quotation_total_id` int(11) NOT NULL AUTO_INCREMENT,
   `quotation_id` int(11) NOT NULL,
   `code` varchar(32) NOT NULL,
   `title` varchar(255) NOT NULL,
@@ -1049,5 +1049,5 @@ CREATE TABLE IF NOT EXISTS `li_user_group` (
 --
 
 INSERT INTO `li_user_group` (`user_group_id`, `name`, `permission`) VALUES
-(1, 'Top Administrator', '{"access":["accounting\\/account","accounting\\/currency","accounting\\/inventory","accounting\\/journal","accounting\\/tax_class","accounting\\/tax_rate","billing\\/customer","billing\\/invoice","billing\\/quotation","billing\\/recurring","common\\/dashboard","content\\/article","content\\/blog_category","content\\/blog_post","content\\/email_template","extension\\/module","extension\\/payment","extension\\/total","report\\/chart_of_accounts","report\\/invoice","report\\/recurring","report\\/sci","report\\/sfp","system\\/activity","system\\/error","system\\/filemanager","system\\/language","system\\/setting","system\\/status","system\\/user","system\\/user_group","module\\/contact_form","payment\\/bank_transfer","payment\\/cheque","payment\\/pp_standard","total\\/sub_total","total\\/tax","total\\/total"],"modify":["accounting\\/account","accounting\\/currency","accounting\\/inventory","accounting\\/journal","accounting\\/tax_class","accounting\\/tax_rate","billing\\/customer","billing\\/invoice","billing\\/recurring","common\\/dashboard","content\\/article","content\\/blog_category","content\\/blog_post","content\\/email_template","extension\\/module","extension\\/payment","extension\\/total","report\\/chart_of_accounts","report\\/invoice","report\\/recurring","report\\/sci","report\\/sfp","system\\/activity","system\\/error","system\\/filemanager","system\\/language","system\\/setting","system\\/status","system\\/user","system\\/user_group","module\\/contact_form","payment\\/bank_transfer","payment\\/cheque","payment\\/pp_standard","total\\/sub_total","total\\/tax","total\\/total"]}'),
+(1, 'Top Administrator', '{"access":["accounting\\/account","accounting\\/currency","accounting\\/inventory","accounting\\/journal","accounting\\/tax_class","accounting\\/tax_rate","billing\\/customer","billing\\/invoice","billing\\/quotation","billing\\/recurring","common\\/dashboard","content\\/article","content\\/blog_category","content\\/blog_post","content\\/email_template","extension\\/module","extension\\/payment","extension\\/total","report\\/chart_of_accounts","report\\/invoice","report\\/recurring","report\\/sci","report\\/sfp","system\\/activity","system\\/error","system\\/filemanager","system\\/language","system\\/setting","system\\/status","system\\/user","system\\/user_group","module\\/contact_form","payment\\/bank_transfer","payment\\/cheque","payment\\/pp_standard","total\\/sub_total","total\\/tax","total\\/total"],"modify":["accounting\\/account","accounting\\/currency","accounting\\/inventory","accounting\\/journal","accounting\\/tax_class","accounting\\/tax_rate","billing\\/customer","billing\\/invoice","billing\\/quotation","billing\\/recurring","common\\/dashboard","content\\/article","content\\/blog_category","content\\/blog_post","content\\/email_template","extension\\/module","extension\\/payment","extension\\/total","report\\/chart_of_accounts","report\\/invoice","report\\/recurring","report\\/sci","report\\/sfp","system\\/activity","system\\/error","system\\/filemanager","system\\/language","system\\/setting","system\\/status","system\\/user","system\\/user_group","module\\/contact_form","payment\\/bank_transfer","payment\\/cheque","payment\\/pp_standard","total\\/sub_total","total\\/tax","total\\/total"]}'),
 (2, 'System', '');
