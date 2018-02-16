@@ -15,11 +15,9 @@ class ControllerBillingQuotation extends Controller {
 
         $url = $this->build->url(array(
             'filter_quotation_id',
-            'filter_recurring_id',
             'filter_name',
             'filter_total',
             'filter_status_id',
-            'filter_transaction',
             'filter_date_due',
             'filter_date_issued',
             'filter_date_modified',
@@ -46,12 +44,6 @@ class ControllerBillingQuotation extends Controller {
             $filter_quotation_id = '';
         }
 
-        if (isset($this->request->get['filter_recurring_id'])) {
-            $filter_recurring_id = $this->request->get['filter_recurring_id'];
-        } else {
-            $filter_recurring_id = '';
-        }
-
         if (isset($this->request->get['filter_name'])) {
             $filter_name = $this->request->get['filter_name'];
         } else {
@@ -69,13 +61,7 @@ class ControllerBillingQuotation extends Controller {
         } else {
             $filter_status_id = null;
         }
-
-        if (isset($this->request->get['filter_transaction'])) {
-            $filter_transaction = $this->request->get['filter_transaction'];
-        } else {
-            $filter_transaction = null;
-        }
-
+		
         if (isset($this->request->get['filter_date_due'])) {
             $filter_date_due = $this->request->get['filter_date_due'];
         } else {
@@ -114,11 +100,9 @@ class ControllerBillingQuotation extends Controller {
 
         $filter_data = array(
             'filter_quotation_id'  => $filter_quotation_id,
-            'filter_recurring_id'  => $filter_recurring_id,
             'filter_name'          => $filter_name,
             'filter_total'         => $filter_total,
             'filter_status_id'     => $filter_status_id,
-            'filter_transaction'   => $filter_transaction,
             'filter_date_due'      => $filter_date_due,
             'filter_date_issued'   => $filter_date_issued,
             'filter_date_modified' => $filter_date_modified,
@@ -136,29 +120,26 @@ class ControllerBillingQuotation extends Controller {
 
         foreach ($quotations as $quotation) {
             $this->data['quotations'][] = array(
-                'quotation_id'       => $quotation['quotation_id'],
+                'quotation_id'     => $quotation['quotation_id'],
                 'customer'         => $this->url->link('billing/customer/form', 'token=' . $this->session->data['token'] . '&customer_id=' . $quotation['customer_id'], true),
                 'name'             => $quotation['name'],
                 'total'            => $this->currency->format($quotation['total'], $quotation['currency_code'], $quotation['currency_value']),
                 'status_id'        => $quotation['status_id'],
-                'transaction'      => $quotation['transaction'],
-                'transaction_href' => $this->url->link('accounting/journal', 'token=' . $this->session->data['token'] . '&filter_quotation_id=' . $quotation['quotation_id'], true),
+                'invoice_href'     => $this->url->link('billing/invoice', 'token=' . $this->session->data['token'] . '&filter_quotation_id=' . $quotation['quotation_id'], true),
                 'date_due'         => date($this->language->get('date_format_short'), strtotime($quotation['date_due'])),
                 'date_issued'      => date($this->language->get('datetime_format_short'), strtotime($quotation['date_issued'])),
                 'date_modified'    => date($this->language->get('datetime_format_short'), strtotime($quotation['date_modified'])),
                 'edit'             => $this->url->link('billing/quotation/form', 'token=' . $this->session->data['token'] . $url . '&quotation_id=' . $quotation['quotation_id'], true),
-                'quotation'          => $this->url->link('billing/quotation/quotation', 'token=' . $this->session->data['token'] . '&quotation_id=' . $quotation['quotation_id'], true),
+                'quotation'        => $this->url->link('billing/quotation/quotation', 'token=' . $this->session->data['token'] . '&quotation_id=' . $quotation['quotation_id'], true),
                 'view'             => $this->url->link('billing/quotation/view', 'token=' . $this->session->data['token'] . $url . '&quotation_id=' . $quotation['quotation_id'], true)
             );
         }
 
         $url = $this->build->url(array(
             'filter_quotation_id',
-            'filter_recurring_id',
             'filter_name',
             'filter_total',
             'filter_status_id',
-            'filter_transaction',
             'filter_date_due',
             'filter_date_issued',
             'filter_date_modified',
@@ -174,7 +155,7 @@ class ControllerBillingQuotation extends Controller {
 
         $this->data['pagination'] = $pagination->render();
 
-        $this->data['transaction'] = $this->url->link('billing/quotation/transaction', 'token=' . $this->session->data['token'], true);
+        $this->data['generate'] = $this->url->link('billing/quotation/generate', 'token=' . $this->session->data['token'], true);
         $this->data['delete'] = $this->url->link('billing/quotation/delete', 'token=' . $this->session->data['token'], true);
         $this->data['insert'] = $this->url->link('billing/quotation/form', 'token=' . $this->session->data['token'], true);
 
@@ -186,11 +167,9 @@ class ControllerBillingQuotation extends Controller {
 
         $url = $this->build->url(array(
             'filter_quotation_id',
-            'filter_recurring_id',
             'filter_name',
             'filter_total',
             'filter_status_id',
-            'filter_transaction',
             'filter_date_due',
             'filter_date_issued',
             'filter_date_modified'
@@ -212,13 +191,11 @@ class ControllerBillingQuotation extends Controller {
         $this->data['sort_date_issued'] = $this->url->link('billing/quotation', 'token=' . $this->session->data['token'] . $url . '&sort=date_issued&order=' . $order, true);
         $this->data['sort_date_due'] = $this->url->link('billing/quotation', 'token=' . $this->session->data['token'] . $url . '&sort=date_due&order=' . $order, true);
         $this->data['sort_date_modified'] = $this->url->link('billing/quotation', 'token=' . $this->session->data['token'] . $url . '&sort=date_modified&order=' . $order, true);
-        $this->data['sort_transaction'] = $this->url->link('billing/quotation', 'token=' . $this->session->data['token'] . $url . '&sort=transaction&order=' . $order, true);
 
         $this->data['filter_quotation_id'] = $filter_quotation_id;
         $this->data['filter_name'] = $filter_name;
         $this->data['filter_total'] = $filter_total;
         $this->data['filter_status_id'] = $filter_status_id;
-        $this->data['filter_transaction'] = $filter_transaction;
         $this->data['filter_date_due'] = $filter_date_due;
         $this->data['filter_date_issued'] = $filter_date_issued;
         $this->data['filter_date_modified'] = $filter_date_modified;
@@ -262,11 +239,9 @@ class ControllerBillingQuotation extends Controller {
 
         $url = $this->build->url(array(
             'filter_quotation_id',
-            'filter_recurring_id',
             'filter_name',
             'filter_total',
             'filter_status_id',
-            'filter_transaction',
             'filter_date_due',
             'filter_date_issued',
             'filter_date_modified',
@@ -324,6 +299,9 @@ class ControllerBillingQuotation extends Controller {
         $this->data['company'] = $this->build->data('company', $this->request->post, $quotation_info);
         $this->data['website'] = $this->build->data('website', $this->request->post, $quotation_info);
         $this->data['email'] = $this->build->data('email', $this->request->post, $quotation_info);
+        $this->data['payment_code'] = $this->build->data('payment_code', $this->request->post, $quotation_info);
+        $this->data['payment_name'] = $this->build->data('payment_name', $this->request->post, $quotation_info);
+        $this->data['payment_description'] = $this->build->data('payment_description', $this->request->post, $quotation_info);
         $this->data['currency_code'] = $this->build->data('currency_code', $this->request->post, $quotation_info, $this->config->get('config_currency'));
         $this->data['currency_value'] = $this->build->data('currency_value', $this->request->post, $quotation_info, '1.00');
         $this->data['comment'] = $this->build->data('comment', $this->request->post, $quotation_info);
@@ -503,19 +481,19 @@ class ControllerBillingQuotation extends Controller {
         }
     }
 
-    public function transaction() {
+    public function generate() {
         $this->load->language('billing/quotation');
 
         $this->load->model('billing/quotation');
 
-        if (isset($this->request->post['selected']) && $this->validateTransaction()) {
+        if (isset($this->request->post['selected']) && $this->validateGenerate()) {
             foreach ($this->request->post['selected'] as $quotation_id) {
-                $this->model_billing_quotation->transactionQuotation($quotation_id);
+                $this->model_billing_quotation->generateInvoice($quotation_id);
             }
 
             $this->session->data['success'] = $this->language->get('text_success');
 
-            $this->response->redirect($this->url->link('billing/quotation', 'token=' . $this->session->data['token'], true));
+            $this->response->redirect($this->url->link('billing/invoice', 'token=' . $this->session->data['token'], true));
         }
 
         $this->index();
@@ -555,11 +533,9 @@ class ControllerBillingQuotation extends Controller {
 
         $url = $this->build->url(array(
             'filter_quotation_id',
-            'filter_recurring_id',
             'filter_name',
             'filter_total',
             'filter_status_id',
-            'filter_transaction',
             'filter_date_due',
             'filter_date_issued',
             'filter_date_modified',
@@ -694,7 +670,7 @@ class ControllerBillingQuotation extends Controller {
         return !$this->error;
     }
 
-    protected function validateTransaction() {
+    protected function validateGenerate() {
         if (!$this->user->hasPermission('modify', 'billing/quotation')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
@@ -853,20 +829,5 @@ class ControllerBillingQuotation extends Controller {
 
         $this->response->addHeader('Content-Type: application/json');
         $this->response->setOutput(json_encode($json));
-    }
-    
-    public function download(){
-        $html = $this->request->post['pdfHTML'];
-        $dompdf = new $Dompdf();
-        $dompdf->loadHtml('hello world');
-
-        // (Optional) Setup the paper size and orientation
-        $dompdf->setPaper('A4', 'landscape');
-
-        // Render the HTML as PDF
-        $dompdf->render();
-
-        // Output the generated PDF to Browser
-        $dompdf->stream();
     }
 }

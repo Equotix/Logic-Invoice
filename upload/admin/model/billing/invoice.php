@@ -195,7 +195,7 @@ class ModelBillingInvoice extends Model {
     }
 
     public function getInvoice($invoice_id) {
-        $query = $this->db->query("SELECT *, CONCAT(c.firstname, ' ', c.lastname) AS customer, i.firstname AS firstname, i.lastname AS lastname, i.company AS company, i.website AS website, i.email AS email, i.date_modified AS date_modified, (SELECT name FROM " . DB_PREFIX . "status s WHERE s.status_id = i.status_id) AS status FROM " . DB_PREFIX . "invoice i LEFT JOIN " . DB_PREFIX . "customer c ON c.customer_id = i.customer_id WHERE invoice_id = '" . (int)$invoice_id . "'");
+        $query = $this->db->query("SELECT *, CONCAT(c.firstname, ' ', c.lastname) AS customer, i.firstname AS firstname, i.lastname AS lastname, i.company AS company, i.website AS website, i.email AS email, i.date_modified AS date_modified, (SELECT name FROM " . DB_PREFIX . "status s WHERE s.status_id = i.status_id AND s.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status FROM " . DB_PREFIX . "invoice i LEFT JOIN " . DB_PREFIX . "customer c ON c.customer_id = i.customer_id WHERE invoice_id = '" . (int)$invoice_id . "'");
 
         if ($query->num_rows) {
             $invoice_item_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "invoice_item WHERE invoice_id = '" . (int)$query->row['invoice_id'] . "'");

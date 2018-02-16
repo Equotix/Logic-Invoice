@@ -8,7 +8,7 @@ class ModelBillingInvoice extends Model {
         $invoice_id = $this->db->getLastId();
 
         foreach ($data['items'] as $item) {
-            $this->db->query("INSERT INTO " . DB_PREFIX . "invoice_item SET invoice_id = '" . (int)$invoice_id . "', title = '" . $this->db->escape($item['title']) . "', description = '" . $this->db->escape($item['description']) . "', tax_class_id = '" . (int)$item['tax_class_id'] . "', quantity = '" . (int)$item['quantity'] . "', price = '" . (float)$item['price'] . "', tax = '" . (float)$item['tax'] . "', discount = '" . (float)$item['discount'] . "'");
+            $this->db->query("INSERT INTO " . DB_PREFIX . "invoice_item SET invoice_id = '" . (int)$invoice_id . "', inventory_id = '" . (int)$item['inventory_id'] . "', title = '" . $this->db->escape($item['title']) . "', description = '" . $this->db->escape($item['description']) . "', tax_class_id = '" . (int)$item['tax_class_id'] . "', quantity = '" . (int)$item['quantity'] . "', price = '" . (float)$item['price'] . "', tax = '" . (float)$item['tax'] . "', discount = '" . (float)$item['discount'] . "'");
         }
 
         foreach ($data['totals'] as $total) {
@@ -73,7 +73,7 @@ class ModelBillingInvoice extends Model {
 
         foreach ($data['items'] as $item) {
             if (isset($item['invoice_item_id'])) {
-                $this->db->query("INSERT INTO " . DB_PREFIX . "invoice_item SET invoice_item_id = '" . (int)$item['invoice_item_id'] . "', invoice_id = '" . (int)$invoice_id . "', title = '" . $this->db->escape($item['title']) . "', description = '" . $this->db->escape($item['description']) . "', tax_class_id = '" . (int)$item['tax_class_id'] . "', quantity = '" . (int)$item['quantity'] . "', price = '" . (float)$item['price'] . "', tax = '" . (float)$item['tax'] . "', discount = '" . (float)$item['discount'] . "'");
+                $this->db->query("INSERT INTO " . DB_PREFIX . "invoice_item SET invoice_item_id = '" . (int)$item['invoice_item_id'] . "', invoice_id = '" . (int)$invoice_id . "', inventory_id = '" . (int)$item['inventory_id'] . "', title = '" . $this->db->escape($item['title']) . "', description = '" . $this->db->escape($item['description']) . "', tax_class_id = '" . (int)$item['tax_class_id'] . "', quantity = '" . (int)$item['quantity'] . "', price = '" . (float)$item['price'] . "', tax = '" . (float)$item['tax'] . "', discount = '" . (float)$item['discount'] . "'");
             } else {
                 $this->db->query("INSERT INTO " . DB_PREFIX . "invoice_item SET invoice_id = '" . (int)$invoice_id . "', title = '" . $this->db->escape($item['title']) . "', description = '" . $this->db->escape($item['description']) . "', tax_class_id = '" . (int)$item['tax_class_id'] . "', quantity = '" . (int)$item['quantity'] . "', price = '" . (float)$item['price'] . "', tax = '" . (float)$item['tax'] . "', discount = '" . (float)$item['discount'] . "'");
             }
@@ -141,7 +141,7 @@ class ModelBillingInvoice extends Model {
     }
 
     public function getInvoice($invoice_id, $customer_id = false) {
-        $sql = "SELECT *, CONCAT(c.firstname, ' ', c.lastname) AS customer, i.firstname AS firstname, i.lastname AS lastname, i.company AS company, i.website AS website, i.email AS email, i.date_modified AS date_modified, (SELECT name FROM " . DB_PREFIX . "status s WHERE s.status_id = i.status_id) AS status FROM " . DB_PREFIX . "invoice i LEFT JOIN " . DB_PREFIX . "customer c ON c.customer_id = i.customer_id WHERE i.invoice_id = '" . (int)$invoice_id . "' AND i.status_id > 0";
+        $sql = "SELECT *, CONCAT(c.firstname, ' ', c.lastname) AS customer, i.firstname AS firstname, i.lastname AS lastname, i.company AS company, i.website AS website, i.email AS email, i.date_modified AS date_modified, (SELECT name FROM " . DB_PREFIX . "status s WHERE s.status_id = i.status_id AND s.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status FROM " . DB_PREFIX . "invoice i LEFT JOIN " . DB_PREFIX . "customer c ON c.customer_id = i.customer_id WHERE i.invoice_id = '" . (int)$invoice_id . "' AND i.status_id > 0";
 
         if ($customer_id) {
             $sql .= " AND i.customer_id = '" . (int)$this->customer->getId() . "'";

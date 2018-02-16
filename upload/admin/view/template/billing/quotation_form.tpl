@@ -92,8 +92,30 @@
           </div>
           <div class="pull-right"><button type="button" id="button-forward-step-1" class="btn btn-primary"><i class="fa fa-arrow-circle-o-right"></i></button></div>
         </div>
-
         <div class="tab-pane" id="tab-payment-method">
+		  <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-payment-code"><?php echo $entry_payment_code; ?></label>
+            <div class="col-sm-10">
+              <select name="payment_code" id="input-payment-code" class="form-control">
+                <option value=""><?php echo $text_select; ?></option>
+                <?php foreach ($payments as $payment) { ?>
+                <option value="<?php echo $payment['code']; ?>"<?php echo $payment['code'] == $payment_code ? ' selected="selected"' : ''; ?>><?php echo $payment['name']; ?></option>
+                <?php } ?>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="required col-sm-2 control-label" for="input-payment-name"><?php echo $entry_payment_name; ?></label>
+            <div class="col-sm-10">
+              <input type="text" name="payment_name" value="<?php echo $payment_name; ?>" id="input-payment-name" class="form-control" placeholder="<?php echo $entry_payment_name; ?>" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-payment-description"><?php echo $entry_payment_description; ?></label>
+            <div class="col-sm-10">
+              <textarea name="payment_description" id="input-payment-description" class="form-control" rows="5" placeholder="<?php echo $entry_payment_description; ?>"><?php echo $payment_description; ?></textarea>
+            </div>
+          </div>
           <div class="form-group">
             <label class="required col-sm-2 control-label" for="input-currency-code"><?php echo $entry_currency_code; ?></label>
             <div class="col-sm-10">
@@ -130,7 +152,11 @@
               <?php $item_row = 0; ?>
               <?php foreach ($items as $item) { ?>
               <tr>
-                <td class="text-left"><input type="text" name="items[<?php echo $item_row; ?>][title]" value="<?php echo $item['title']; ?>" class="form-control" /></td>
+                <td class="text-left"><input type="text" name="items[<?php echo $item_row; ?>][title]" value="<?php echo $item['title']; ?>" class="form-control" /><br />
+                  <div class="input-group">
+				    <span class="input-group-addon"><?php echo $text_inventory_id; ?></span><input type="text" name="items[<?php echo $item_row; ?>][inventory_id]" value="<?php echo $item['inventory_id'] ? $item['inventory_id'] : ''; ?>" class="form-control" readonly />
+				  </div>
+                </td>
                 <td class="text-left"><textarea name="items[<?php echo $item_row; ?>][description]" class="form-control" rows="5"><?php echo $item['description']; ?></textarea></td>
                 <td class="text-left"><input type="text" name="items[<?php echo $item_row; ?>][quantity]" value="<?php echo $item['quantity']; ?>" class="form-control" /></td>
                 <td class="text-right">
@@ -484,7 +510,11 @@ var item_row = <?php echo $item_row; ?>;
 function addRow() {
 	html = '';
 	html += '<tr>';
-	html += '  <td><input type="text" name="items[' + item_row + '][title]" value="" class="form-control" /></td>';
+	html += '  <td><input type="text" name="items[' + item_row + '][title]" value="" class="form-control" /><br />';
+    html += '    <div class="input-group">';
+	html += '      <span class="input-group-addon"><?php echo $text_inventory_id; ?></span><input type="text" name="items[' + item_row + '][inventory_id]" value="" class="form-control" readonly />';
+	html += '    </div>';
+	html += '  </td>';
 	html += '  <td><textarea name="items[' + item_row + '][description]" class="form-control" rows="5"></textarea></td>';
 	html += '  <td><input type="text" name="items[' + item_row + '][quantity]" value="1" class="form-control" /></td>';
 	html += '  <td class="text-right">';
@@ -531,7 +561,7 @@ function itemAutocomplete(item_row) {
 					response($.map(json, function (item) {
 						return {
 							label: item['name'] + ' (' + item['sku'] + ')',
-							value: item['name'],
+							value: item['inventory_id'],
 							sell: item['sell']
 						}
 					}));
@@ -540,6 +570,7 @@ function itemAutocomplete(item_row) {
 		},
 		'select': function (item) {
 			$('input[name=\'items[' + item_row + '][title]\']').val(item['label']);
+            $('input[name=\'items[' + item_row + '][inventory_id]\']').val(item['value']);
 			$('input[name=\'items[' + item_row + '][price]\']').val(item['sell']).trigger('keyup');
 		}
 	});

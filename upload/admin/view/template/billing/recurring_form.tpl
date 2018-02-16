@@ -134,7 +134,11 @@
               <?php $item_row = 0; ?>
               <?php foreach ($items as $item) { ?>
               <tr>
-                <td class="text-left"><input type="text" name="items[<?php echo $item_row; ?>][title]" value="<?php echo $item['title']; ?>" class="form-control" /></td>
+                <td class="text-left"><input type="text" name="items[<?php echo $item_row; ?>][title]" value="<?php echo $item['title']; ?>" class="form-control" /><br />
+                  <div class="input-group">
+				    <span class="input-group-addon"><?php echo $text_inventory_id; ?></span><input type="text" name="items[<?php echo $item_row; ?>][inventory_id]" value="<?php echo $item['inventory_id'] ? $item['inventory_id'] : ''; ?>" class="form-control" readonly />
+				  </div>
+                </td>
                 <td class="text-left"><textarea name="items[<?php echo $item_row; ?>][description]" class="form-control" rows="5"><?php echo $item['description']; ?></textarea></td>
                 <td class="text-left"><input type="text" name="items[<?php echo $item_row; ?>][quantity]" value="<?php echo $item['quantity']; ?>" class="form-control" /></td>
                 <td class="text-right">
@@ -480,7 +484,11 @@ var item_row = <?php echo $item_row; ?>;
 function addRow() {
 	html = '';
 	html += '<tr>';
-	html += '  <td><input type="text" name="items[' + item_row + '][title]" value="" class="form-control" /></td>';
+	html += '  <td><input type="text" name="items[' + item_row + '][title]" value="" class="form-control" /><br />';
+    html += '    <div class="input-group">';
+	html += '      <span class="input-group-addon"><?php echo $text_inventory_id; ?></span><input type="text" name="items[' + item_row + '][inventory_id]" value="" class="form-control" readonly />';
+	html += '    </div>';
+	html += '  </td>';
 	html += '  <td><textarea name="items[' + item_row + '][description]" class="form-control" rows="5"></textarea></td>';
 	html += '  <td><input type="text" name="items[' + item_row + '][quantity]" value="1" class="form-control" /></td>';
 	html += '  <td class="text-right">';
@@ -527,7 +535,7 @@ function itemAutocomplete(item_row) {
 					response($.map(json, function (item) {
 						return {
 							label: item['name'] + ' (' + item['sku'] + ')',
-							value: item['name'],
+							value: item['inventory_id'],
 							sell: item['sell']
 						}
 					}));
@@ -536,6 +544,7 @@ function itemAutocomplete(item_row) {
 		},
 		'select': function (item) {
 			$('input[name=\'items[' + item_row + '][title]\']').val(item['label']);
+			$('input[name=\'items[' + item_row + '][inventory_id]\']').val(item['value']);
 			$('input[name=\'items[' + item_row + '][price]\']').val(item['sell']).trigger('keyup');
 		}
 	});

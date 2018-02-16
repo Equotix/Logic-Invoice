@@ -43,6 +43,7 @@ $_['tab_total']					= '4. Totals';
 // Text
 $_['text_no_results']			= 'There is no recurring to list.';
 $_['text_success']				= 'You have successfully modified recurring payments.';
+$_['text_inventory_id']			= 'Inventory ID';
 
 // Tooltip
 $_['tooltip_price']				= 'Price per quantity, excluding taxes.';

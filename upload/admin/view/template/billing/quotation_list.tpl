@@ -17,7 +17,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <div class="pull-right">
-      <button type="button" title="<?php echo $button_transaction; ?>" data-toggle="tooltip" class="btn btn-primary" onclick="$('#form-quotation').attr('action', '<?php echo $transaction; ?>');
+      <button type="button" title="<?php echo $button_generate_invoice; ?>" data-toggle="tooltip" class="btn btn-primary" onclick="$('#form-quotation').attr('action', '<?php echo $generate; ?>');
               confirm('<?php echo $text_confirm; ?>') ? $('#form-quotation').submit() : false;"><i class="fa fa-check"></i></button>
       <a href="<?php echo $insert; ?>" title="<?php echo $button_add; ?>" data-toggle="tooltip" class="btn btn-success"><i class="fa fa-plus"></i></a>
       <button type="button" title="<?php echo $button_delete; ?>" data-toggle="tooltip" class="btn btn-danger" onclick="$('#form-quotation').attr('action', '<?php echo $delete; ?>');
@@ -51,11 +51,6 @@
               <?php } else { ?>
               <a href="<?php echo $sort_status; ?>"><?php echo $column_status; ?></a>
               <?php } ?></th>
-            <th class="text-center"><?php if ($sort == 'transaction') { ?>
-              <a href="<?php echo $sort_transaction; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_journal_entry; ?></a>
-              <?php } else { ?>
-              <a href="<?php echo $sort_transaction; ?>"><?php echo $column_journal_entry; ?></a>
-              <?php } ?></th>
             <th class="text-right"><?php if ($sort == 'date_due') { ?>
               <a href="<?php echo $sort_date_due; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_date_due; ?></a>
               <?php } else { ?>
@@ -75,7 +70,7 @@
           </tr>
           <tr class="filter">
             <td></td>
-            <td class="text-left col-sm-1"><input type="text" name="filter_quotation_id" value="<?php echo $filter_quotation_id; ?>" class="form-control input-sm" /></td>-
+            <td class="text-left col-sm-1"><input type="text" name="filter_quotation_id" value="<?php echo $filter_quotation_id; ?>" class="form-control input-sm" /></td>
             <td class="text-left col-sm-3"><input type="text" name="filter_name" value="<?php echo $filter_name; ?>" class="form-control input-sm" /></td>
             <td class="text-left col-sm-1"><input type="text" name="filter_total" value="<?php echo $filter_total; ?>" class="form-control input-sm" /></td>
             <td class="text-right col-sm-2"><select name="filter_status_id" class="form-control input-sm">
@@ -83,11 +78,6 @@
                 <?php foreach ($statuses as $status) { ?>
                 <option value="<?php echo $status['status_id']; ?>"<?php echo $filter_status_id == $status['status_id'] ? ' selected="selected"' : ''; ?>><?php echo $status['name']; ?></option>
                 <?php } ?>
-              </select></td>
-            <td class="text-right col-sm-1"><select name="filter_transaction" class="form-control input-sm">
-                <option value=""></option>
-                <option value="1"<?php echo $filter_transaction ? ' selected="selected"' : ''; ?>><?php echo $text_yes; ?></option>
-                <option value="0"<?php echo (!$filter_transaction && !is_null($filter_transaction)) ? ' selected="selected"' : ''; ?>><?php echo $text_no; ?></option>
               </select></td>
             <td class="text-right col-sm-1"><input type="text" name="filter_date_due" value="<?php echo $filter_date_due; ?>" class="form-control input-sm date" /></td>
             <td class="text-right col-sm-1"><input type="text" name="filter_date_issued" value="<?php echo $filter_date_issued; ?>" class="form-control input-sm date" /></td>
@@ -108,11 +98,6 @@
             <td class="text-left"><select name="<?php echo $quotation['quotation_id']; ?>" class="form-control input-sm status"><?php foreach ($statuses as $status) { ?>
                 <option value="<?php echo $status['status_id']; ?>"<?php echo $status['status_id'] == $quotation['status_id'] ? ' selected="selected"' : ''; ?>><?php echo $status['name']; ?></option>
                 <?php } ?></select></td>
-            <td class="text-center"><a href="<?php echo $quotation['transaction_href']; ?>"><?php if ($quotation['transaction']) { ?>
-                <i class="fa fa-check-circle success"></i>
-                <?php } else { ?>
-                <i class="fa fa-exclamation-circle warning"></i>
-                <?php } ?></a></td>
             <td class="text-right"><?php echo $quotation['date_due']; ?></td>
             <td class="text-right"><?php echo $quotation['date_issued']; ?></td>
             <td class="text-right"><?php echo $quotation['date_modified']; ?></td>
@@ -121,7 +106,7 @@
           <?php } ?>
           <?php } else { ?>
           <tr>
-            <td class="text-center" colspan="10"><?php echo $text_no_results; ?></td>
+            <td class="text-center" colspan="9"><?php echo $text_no_results; ?></td>
           </tr>
           <?php } ?>
         </table>
@@ -156,12 +141,6 @@ function filter() {
 
 	if (filter_status_id) {
 		url += '&filter_status_id=' + encodeURIComponent(filter_status_id);
-	}
-
-	var filter_transaction = $('select[name=\'filter_transaction\']').val();
-
-	if (filter_transaction) {
-		url += '&filter_transaction=' + encodeURIComponent(filter_transaction);
 	}
 
 	var filter_date_due = $('input[name=\'filter_date_due\']').val();

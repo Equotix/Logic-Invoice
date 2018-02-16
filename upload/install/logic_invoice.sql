@@ -621,6 +621,9 @@ CREATE TABLE IF NOT EXISTS `li_quotation` (
   `website` varchar(255) NOT NULL,
   `email` varchar(96) NOT NULL,
   `total` decimal(15,4) NOT NULL,
+  `payment_code` varchar(255) NOT NULL,
+  `payment_name` varchar(255) NOT NULL,
+  `payment_description` text NOT NULL,
   `currency_code` varchar(3) NOT NULL,
   `currency_value` decimal(15,8) NOT NULL DEFAULT '1.00000000',
   `comment` text NOT NULL,
@@ -656,6 +659,7 @@ CREATE TABLE IF NOT EXISTS `li_quotation_history` (
 CREATE TABLE IF NOT EXISTS `li_quotation_item` (
   `quotation_item_id` int(11) NOT NULL AUTO_INCREMENT,
   `quotation_id` int(11) NOT NULL,
+  `inventory_id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `tax_class_id` int(11) NOT NULL,
@@ -717,6 +721,7 @@ CREATE TABLE IF NOT EXISTS `li_recurring` (
 CREATE TABLE IF NOT EXISTS `li_recurring_item` (
   `recurring_item_id` int(11) NOT NULL AUTO_INCREMENT,
   `recurring_id` int(11) NOT NULL,
+  `inventory_id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `tax_class_id` int(11) NOT NULL,

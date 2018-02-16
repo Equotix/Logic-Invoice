@@ -24,7 +24,7 @@ class ModelBillingRecurring extends Model {
         $recurring_id = $this->db->getLastId();
 
         foreach ($data['items'] as $item) {
-            $this->db->query("INSERT INTO " . DB_PREFIX . "recurring_item SET recurring_id = '" . (int)$recurring_id . "', title = '" . $this->db->escape($item['title']) . "', description = '" . $this->db->escape($item['description']) . "', tax_class_id = '" . (int)$item['tax_class_id'] . "', quantity = '" . (int)$item['quantity'] . "', price = '" . (float)$item['price'] . "', tax = '" . (float)$item['tax'] . "', discount = '" . (float)$item['discount'] . "'");
+            $this->db->query("INSERT INTO " . DB_PREFIX . "recurring_item SET recurring_id = '" . (int)$recurring_id . "', inventory_id = '" . (int)$item['inventory_id'] . "', title = '" . $this->db->escape($item['title']) . "', description = '" . $this->db->escape($item['description']) . "', tax_class_id = '" . (int)$item['tax_class_id'] . "', quantity = '" . (int)$item['quantity'] . "', price = '" . (float)$item['price'] . "', tax = '" . (float)$item['tax'] . "', discount = '" . (float)$item['discount'] . "'");
         }
 
         foreach ($data['totals'] as $total) {
@@ -94,7 +94,7 @@ class ModelBillingRecurring extends Model {
         $this->db->query("DELETE FROM " . DB_PREFIX . "recurring_item WHERE recurring_id = '" . (int)$recurring_id . "'");
 
         foreach ($data['items'] as $item) {
-            $this->db->query("INSERT INTO " . DB_PREFIX . "recurring_item SET recurring_id = '" . (int)$recurring_id . "', title = '" . $this->db->escape($item['title']) . "', description = '" . $this->db->escape($item['description']) . "', tax_class_id = '" . (int)$item['tax_class_id'] . "', quantity = '" . (int)$item['quantity'] . "', price = '" . (float)$item['price'] . "', tax = '" . (float)$item['tax'] . "', discount = '" . (float)$item['discount'] . "'");
+            $this->db->query("INSERT INTO " . DB_PREFIX . "recurring_item SET recurring_id = '" . (int)$recurring_id . "', inventory_id = '" . (int)$item['inventory_id'] . "', title = '" . $this->db->escape($item['title']) . "', description = '" . $this->db->escape($item['description']) . "', tax_class_id = '" . (int)$item['tax_class_id'] . "', quantity = '" . (int)$item['quantity'] . "', price = '" . (float)$item['price'] . "', tax = '" . (float)$item['tax'] . "', discount = '" . (float)$item['discount'] . "'");
         }
 
         $this->db->query("DELETE FROM " . DB_PREFIX . "recurring_total WHERE recurring_id = '" . (int)$recurring_id . "'");
@@ -238,6 +238,7 @@ class ModelBillingRecurring extends Model {
                 $items[] = array(
                     'recurring_item_id'  => $item['recurring_item_id'],
                     'recurring_id'       => $item['recurring_id'],
+                    'inventory_id'       => $item['inventory_id'],
                     'title'              => $item['title'],
                     'description'        => $item['description'],
                     'tax_class_id'       => $item['tax_class_id'],

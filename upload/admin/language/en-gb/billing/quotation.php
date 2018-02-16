@@ -32,6 +32,9 @@ $_['entry_lastname']			= 'Last Name';
 $_['entry_company']				= 'Company';
 $_['entry_website']				= 'Website';
 $_['entry_email']				= 'Email Address';
+$_['entry_payment_code']		= 'Payment Method';
+$_['entry_payment_name']		= 'Payment Name';
+$_['entry_payment_description']	= 'Payment Description';
 $_['entry_currency_code']		= 'Currency';
 $_['entry_currency_value']		= 'Currency Value';
 $_['entry_comment']				= 'Comment';
@@ -40,7 +43,7 @@ $_['entry_date_due']			= 'Date Due';
 
 // Tab
 $_['tab_general']				= '1. General';
-$_['tab_payment_method']		= '2. Currency';
+$_['tab_payment_method']		= '2. Payment Method';
 $_['tab_item']					= '3. Items';
 $_['tab_total']					= '4. Review';
 $_['tab_history']				= '4. History';
@@ -53,6 +56,7 @@ $_['text_updated']				= 'Updated:';
 $_['text_issued']				= 'Issued:';
 $_['text_item']					= 'Items';
 $_['text_payment']				= 'Payment';
+$_['text_inventory_id']			= 'Inventory ID';
 
 // Tooltip
 $_['tooltip_price']             = 'Price per quantity, excluding taxes.';

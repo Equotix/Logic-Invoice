@@ -15,12 +15,12 @@ class ModelBillingQuotation extends Model {
             }
         }
 
-        $this->db->query("INSERT INTO " . DB_PREFIX . "quotation SET customer_id = '" . (int)$data['customer_id'] . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', company = '" . $this->db->escape($data['company']) . "', website = '" . $this->db->escape($data['website']) . "', email = '" . $this->db->escape($data['email']) . "', total = '" . (float)$data['total'] . "', currency_code = '" . $this->db->escape($data['currency_code']) . "', currency_value = '" . (float)$data['currency_value'] . "', comment = '" . $this->db->escape($data['comment']) . "', status_id = '" . (int)$data['status_id'] . "', date_issued = NOW(), date_due = '" . $this->db->escape($data['date_due']) . "', date_modified = NOW()");
+        $this->db->query("INSERT INTO " . DB_PREFIX . "quotation SET customer_id = '" . (int)$data['customer_id'] . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', company = '" . $this->db->escape($data['company']) . "', website = '" . $this->db->escape($data['website']) . "', email = '" . $this->db->escape($data['email']) . "', total = '" . (float)$data['total'] . "', payment_code = '" . $this->db->escape($data['payment_code']) . "', payment_name = '" . $this->db->escape($data['payment_name']) . "', payment_description = '" . $this->db->escape($data['payment_description']) . "', currency_code = '" . $this->db->escape($data['currency_code']) . "', currency_value = '" . (float)$data['currency_value'] . "', comment = '" . $this->db->escape($data['comment']) . "', status_id = '" . (int)$data['status_id'] . "', date_issued = NOW(), date_due = '" . $this->db->escape($data['date_due']) . "', date_modified = NOW()");
 
         $quotation_id = $this->db->getLastId();
 
         foreach ($data['items'] as $item) {
-            $this->db->query("INSERT INTO " . DB_PREFIX . "quotation_item SET quotation_id = '" . (int)$quotation_id . "', title = '" . $this->db->escape($item['title']) . "', description = '" . $this->db->escape($item['description']) . "', tax_class_id = '" . (int)$item['tax_class_id'] . "', quantity = '" . (int)$item['quantity'] . "', price = '" . (float)$item['price'] . "', tax = '" . (float)$item['tax'] . "', discount = '" . (float)$item['discount'] . "'");
+            $this->db->query("INSERT INTO " . DB_PREFIX . "quotation_item SET quotation_id = '" . (int)$quotation_id . "', inventory_id = '" . (int)$item['inventory_id'] . "', title = '" . $this->db->escape($item['title']) . "', description = '" . $this->db->escape($item['description']) . "', tax_class_id = '" . (int)$item['tax_class_id'] . "', quantity = '" . (int)$item['quantity'] . "', price = '" . (float)$item['price'] . "', tax = '" . (float)$item['tax'] . "', discount = '" . (float)$item['discount'] . "'");
         }
 
         foreach ($data['totals'] as $total) {
@@ -40,7 +40,7 @@ class ModelBillingQuotation extends Model {
             'company'       => $quotation_info['company'],
             'website'       => $quotation_info['website'],
             'email'         => $quotation_info['email'],
-            'quotation_id'    => $quotation_info['quotation_id'],
+            'quotation_id'  => $quotation_info['quotation_id'],
             'comment'       => $quotation_info['comment'],
             'total'         => $this->currency->format($quotation_info['total'], $quotation_info['currency_code'], $quotation_info['currency_value']),
             'status'        => $quotation_info['status'],
@@ -61,7 +61,7 @@ class ModelBillingQuotation extends Model {
             'company'       => $quotation_info['company'],
             'website'       => $quotation_info['website'],
             'email'         => $quotation_info['email'],
-            'quotation_id'    => $quotation_info['quotation_id'],
+            'quotation_id'  => $quotation_info['quotation_id'],
             'comment'       => $quotation_info['comment'],
             'total'         => $this->currency->format($quotation_info['total'], $quotation_info['currency_code'], $quotation_info['currency_value']),
             'status'        => $quotation_info['status'],
@@ -75,12 +75,12 @@ class ModelBillingQuotation extends Model {
     }
 
     public function editQuotation($quotation_id, $data) {
-        $this->db->query("UPDATE " . DB_PREFIX . "quotation SET customer_id = '" . (int)$data['customer_id'] . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', company = '" . $this->db->escape($data['company']) . "', website = '" . $this->db->escape($data['website']) . "', email = '" . $this->db->escape($data['email']) . "', total = '" . (float)$data['total'] . "', currency_code = '" . $this->db->escape($data['currency_code']) . "', currency_value = '" . (float)$data['currency_value'] . "', comment = '" . $this->db->escape($data['comment']) . "', status_id = '" . (int)$data['status_id'] . "', transaction = '0', date_due = '" . $this->db->escape($data['date_due']) . "', date_modified = NOW() WHERE quotation_id = '" . (int)$quotation_id . "'");
+        $this->db->query("UPDATE " . DB_PREFIX . "quotation SET customer_id = '" . (int)$data['customer_id'] . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', company = '" . $this->db->escape($data['company']) . "', website = '" . $this->db->escape($data['website']) . "', email = '" . $this->db->escape($data['email']) . "', total = '" . (float)$data['total'] . "', payment_code = '" . $this->db->escape($data['payment_code']) . "', payment_name = '" . $this->db->escape($data['payment_name']) . "', payment_description = '" . $this->db->escape($data['payment_description']) . "', currency_code = '" . $this->db->escape($data['currency_code']) . "', currency_value = '" . (float)$data['currency_value'] . "', comment = '" . $this->db->escape($data['comment']) . "', status_id = '" . (int)$data['status_id'] . "', transaction = '0', date_due = '" . $this->db->escape($data['date_due']) . "', date_modified = NOW() WHERE quotation_id = '" . (int)$quotation_id . "'");
 
         $this->db->query("DELETE FROM " . DB_PREFIX . "quotation_item WHERE quotation_id = '" . (int)$quotation_id . "'");
 
         foreach ($data['items'] as $item) {
-            $this->db->query("INSERT INTO " . DB_PREFIX . "quotation_item SET quotation_id = '" . (int)$quotation_id . "', title = '" . $this->db->escape($item['title']) . "', description = '" . $this->db->escape($item['description']) . "', tax_class_id = '" . (int)$item['tax_class_id'] . "', quantity = '" . (int)$item['quantity'] . "', price = '" . (float)$item['price'] . "', tax = '" . (float)$item['tax'] . "', discount = '" . (float)$item['discount'] . "'");
+            $this->db->query("INSERT INTO " . DB_PREFIX . "quotation_item SET quotation_id = '" . (int)$quotation_id . "', inventory_id = '" . (int)$item['inventory_id'] . "', title = '" . $this->db->escape($item['title']) . "', description = '" . $this->db->escape($item['description']) . "', tax_class_id = '" . (int)$item['tax_class_id'] . "', quantity = '" . (int)$item['quantity'] . "', price = '" . (float)$item['price'] . "', tax = '" . (float)$item['tax'] . "', discount = '" . (float)$item['discount'] . "'");
         }
 
         $this->db->query("DELETE FROM " . DB_PREFIX . "quotation_total WHERE quotation_id = '" . (int)$quotation_id . "'");
@@ -102,7 +102,7 @@ class ModelBillingQuotation extends Model {
             'company'       => $quotation_info['company'],
             'website'       => $quotation_info['website'],
             'email'         => $quotation_info['email'],
-            'quotation_id'    => $quotation_info['quotation_id'],
+            'quotation_id'  => $quotation_info['quotation_id'],
             'comment'       => $quotation_info['comment'],
             'total'         => $this->currency->format($quotation_info['total'], $quotation_info['currency_code'], $quotation_info['currency_value']),
             'status'        => $quotation_info['status'],
@@ -123,7 +123,7 @@ class ModelBillingQuotation extends Model {
             'company'       => $quotation_info['company'],
             'website'       => $quotation_info['website'],
             'email'         => $quotation_info['email'],
-            'quotation_id'    => $quotation_info['quotation_id'],
+            'quotation_id'  => $quotation_info['quotation_id'],
             'comment'       => $quotation_info['comment'],
             'total'         => $this->currency->format($quotation_info['total'], $quotation_info['currency_code'], $quotation_info['currency_value']),
             'status'        => $quotation_info['status'],
@@ -153,8 +153,9 @@ class ModelBillingQuotation extends Model {
 
             foreach ($quotation_item_query->rows as $item) {
                 $items[] = array(
-                    'quotation_item_id'    => $item['quotation_item_id'],
-                    'quotation_id'         => $item['quotation_id'],
+                    'quotation_item_id'  => $item['quotation_item_id'],
+                    'quotation_id'       => $item['quotation_id'],
+                    'inventory_id'       => $item['inventory_id'],
                     'title'              => $item['title'],
                     'description'        => $item['description'],
                     'tax_class_id'       => $item['tax_class_id'],
@@ -179,6 +180,9 @@ class ModelBillingQuotation extends Model {
                 'website'             => $query->row['website'],
                 'email'               => $query->row['email'],
                 'total'               => $query->row['total'],
+                'payment_code'        => $query->row['payment_code'],
+                'payment_name'        => $query->row['payment_name'],
+                'payment_description' => $query->row['payment_description'],
                 'currency_code'       => $query->row['currency_code'],
                 'currency_value'      => $query->row['currency_value'],
                 'comment'             => $query->row['comment'],
@@ -204,10 +208,6 @@ class ModelBillingQuotation extends Model {
             $implode[] = "quotation_id = '" . (int)$data['filter_quotation_id'] . "'";
         }
 
-        if (!empty($data['filter_recurring_id'])) {
-            $implode[] = "recurring_id = '" . (int)$data['filter_recurring_id'] . "'";
-        }
-
         if (!empty($data['filter_name'])) {
             $implode[] = "CONCAT(firstname, ' ', lastname) LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
         }
@@ -218,10 +218,6 @@ class ModelBillingQuotation extends Model {
 
         if (isset($data['filter_status_id']) && !is_null($data['filter_status_id'])) {
             $implode[] = "status_id = '" . (int)$data['filter_status_id'] . "'";
-        }
-
-        if (isset($data['filter_transaction']) && !is_null($data['filter_transaction'])) {
-            $implode[] = "transaction = '" . (int)$data['filter_transaction'] . "'";
         }
 
         if (!empty($data['filter_date_due'])) {
@@ -247,8 +243,7 @@ class ModelBillingQuotation extends Model {
             'status',
             'date_issued',
             'date_due',
-            'date_modified',
-            'transaction'
+            'date_modified'
         );
 
         if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
@@ -289,10 +284,6 @@ class ModelBillingQuotation extends Model {
             $implode[] = "quotation_id = '" . (int)$data['filter_quotation_id'] . "'";
         }
 
-        if (!empty($data['filter_recurring_id'])) {
-            $implode[] = "recurring_id = '" . (int)$data['filter_recurring_id'] . "'";
-        }
-
         if (!empty($data['filter_name'])) {
             $implode[] = "CONCAT(firstname, ' ', lastname) LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
         }
@@ -303,10 +294,6 @@ class ModelBillingQuotation extends Model {
 
         if (isset($data['filter_status_id']) && !is_null($data['filter_status_id'])) {
             $implode[] = "status_id = '" . (int)$data['filter_status_id'] . "'";
-        }
-
-        if (isset($data['filter_transaction']) && !is_null($data['filter_transaction'])) {
-            $implode[] = "transaction = '" . (int)$data['filter_transaction'] . "'";
         }
 
         if (!empty($data['filter_date_due'])) {
@@ -384,7 +371,41 @@ class ModelBillingQuotation extends Model {
         return $query->row['total'];
     }
 
-    public function transactionQuotation($quotation_id) {
-        $this->db->query("UPDATE " . DB_PREFIX . "quotation SET transaction = '1' WHERE quotation_id = '" . (int)$quotation_id . "'");
+    public function generateInvoice($quotation_id) {
+        $quotation_info = $this->getQuotation($quotation_id);
+        
+        $this->load->model('billing/invoice');
+        
+        $data = array(
+            'quotation_id'          => $quotation_info['quotation_id'],
+            'customer_id'           => $quotation_info['customer_id'],
+            'firstname'             => $quotation_info['firstname'],
+            'lastname'              => $quotation_info['lastname'],
+            'company'               => $quotation_info['company'],
+            'website'               => $quotation_info['website'],
+            'email'                 => $quotation_info['email'],
+            'payment_firstname'     => $quotation_info['firstname'],
+            'payment_lastname'      => $quotation_info['lastname'],
+            'payment_company'       => $quotation_info['company'],
+            'payment_address_1'     => '',
+            'payment_address_2'     => '',
+            'payment_city'          => '',
+            'payment_postcode'      => '',
+            'payment_country'       => '',
+            'payment_zone'          => '',
+            'total'                 => $quotation_info['total'],
+            'payment_code'          => $quotation_info['payment_code'],
+            'payment_name'          => $quotation_info['payment_name'],
+            'payment_description'   => $quotation_info['payment_description'],
+            'currency_code'         => $quotation_info['currency_code'],
+            'currency_value'        => $quotation_info['currency_value'],
+            'comment'               => $quotation_info['comment'],
+            'status_id'             => $quotation_info['status_id'],
+            'date_due'              => $quotation_info['date_due'],
+            'items'                 => $quotation_info['items'],
+            'totals'                => $quotation_info['totals']
+        );
+        
+        $this->model_billing_invoice->addInvoice($data);
     }
 }

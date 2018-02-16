@@ -16,7 +16,23 @@ class ModelUpgrade130 extends Model {
         }
 
         if (!$exists) {
-            $db->query("ALTER TABLE " . DB_PREFIX . "invoice_item ADD inventory_id int(11) NOT NULL");
+            $db->query("ALTER TABLE " . DB_PREFIX . "quotation_item ADD inventory_id int(11) NOT NULL");
+        }
+        
+        $query = $db->query("SHOW COLUMNS FROM " . DB_PREFIX . "quotation_item");
+
+        $exists = false;
+
+        foreach ($query->rows as $result) {
+            if ($result['Field'] == 'inventory_id') {
+                $exists = true;
+
+                break;
+            }
+        }
+
+        if (!$exists) {
+            $db->query("ALTER TABLE " . DB_PREFIX . "quotation_item ADD inventory_id int(11) NOT NULL");
         }
 
 		// Add missing settings config
@@ -60,6 +76,7 @@ class ModelUpgrade130 extends Model {
 		$db->query("CREATE TABLE `" . DB_PREFIX . "quotation_item` (
 		  `quotation_item_id` int(11) NOT NULL,
 		  `quotation_id` int(11) NOT NULL,
+		  `inventory_id` int(11) NOT NULL,
 		  `title` varchar(255) NOT NULL,
 		  `description` text NOT NULL,
 		  `tax_class_id` int(11) NOT NULL,
